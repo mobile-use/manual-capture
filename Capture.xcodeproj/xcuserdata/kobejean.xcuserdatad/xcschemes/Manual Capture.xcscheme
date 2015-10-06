@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3D4F179E1B73883500D4D74F"
-               BuildableName = "Manual Capture.app"
+               BuildableName = "Capture.app"
                BlueprintName = "Manual Capture"
-               ReferencedContainer = "container:Manual Capture.xcodeproj">
+               ReferencedContainer = "container:Capture.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3D4F17B21B73883500D4D74F"
-               BuildableName = "Manual CaptureTests.xctest"
+               BuildableName = "Capture.xctest"
                BlueprintName = "Manual CaptureTests"
-               ReferencedContainer = "container:Manual Capture.xcodeproj">
+               ReferencedContainer = "container:Capture.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3D4F17BD1B73883500D4D74F"
-               BuildableName = "Manual CaptureUITests.xctest"
+               BuildableName = "Capture.xctest"
                BlueprintName = "Manual CaptureUITests"
-               ReferencedContainer = "container:Manual Capture.xcodeproj">
+               ReferencedContainer = "container:Capture.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3D4F179E1B73883500D4D74F"
-            BuildableName = "Manual Capture.app"
+            BuildableName = "Capture.app"
             BlueprintName = "Manual Capture"
-            ReferencedContainer = "container:Manual Capture.xcodeproj">
+            ReferencedContainer = "container:Capture.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,16 +76,16 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3D4F179E1B73883500D4D74F"
-            BuildableName = "Manual Capture.app"
+            BuildableName = "Capture.app"
             BlueprintName = "Manual Capture"
-            ReferencedContainer = "container:Manual Capture.xcodeproj">
+            ReferencedContainer = "container:Capture.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3D4F179E1B73883500D4D74F"
-            BuildableName = "Manual Capture.app"
+            BuildableName = "Capture.app"
             BlueprintName = "Manual Capture"
-            ReferencedContainer = "container:Manual Capture.xcodeproj">
+            ReferencedContainer = "container:Capture.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
