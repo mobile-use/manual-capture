@@ -35,3 +35,24 @@ class VPFloatHandler : VPHandler<Float> {
         super.init(pfv: pfv, vfp: vfp)
     }
 }
+
+class VPExponentialCGFloatHandler : VPHandler<CGFloat> {
+    var start: CGFloat {didSet{updateConversion(start, end)}}
+    var end: CGFloat {didSet{updateConversion(start, end)}}
+    let power: CGFloat //didSet{updateConversion(start, end)}}
+    
+    private func updateConversion(start:CGFloat, _ end:CGFloat){
+        let p = power
+        progressForValue = { Float(pow( (max(start, min(end, $0)) - start)/(end - start), 1 / p)) }
+        valueForProgress = { start + (pow( CGFloat($0), p ) * (end - start)) }
+    }
+    
+    init(start: CGFloat, end: CGFloat, power: CGFloat = 2) {
+        self.start = start
+        self.end = end
+        self.power = power
+        let pfv = { Float(pow( (max(start, min(end, $0)) - start)/(end - start), 1 / power)) }
+        let vfp = { (p:Float) in  start + (pow( CGFloat(p), power ) * (end - start)) }
+        super.init(pfv: pfv, vfp: vfp)
+    }
+}

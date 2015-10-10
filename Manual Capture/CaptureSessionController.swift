@@ -76,22 +76,22 @@ enum CSCSet {
     case cropAspectRatio(CSCAspectRatio)
 }
 
-// value set type
-enum CSCValueType {
-    enum Exposure {
-        case bias, ISO, targetOffset, duration
-    }
-    case cameraLensPosition
-    case cameraExposure(Exposure)
-    case cameraWhiteBalanceGains
-    case cameraZoomFactor
+/// value type key path is raw value
+enum CSCValueType : String {
+    case cameraLensPosition = "camera.lensPosition"
+    case cameraExposureBias = "camera.exposureTargetBias"
+    case cameraExposureISO = "camera.ISO"
+    case cameraExposureTargetOffset = "camera.exposureTargetOffset"
+    case cameraExposureDuation = "camera.exposureDuration"
+    case cameraWhiteBalanceGains = "camera.deviceWhiteBalanceGains"
+    case cameraZoomFactor = "camera.videoZoomFactor"
     
+    case cameraFocusMode = "camera.focusMode"
+    case cameraExposureMode = "camera.exposureMode"
+    case cameraWhiteBalanceMode = "camera.whiteBalanceMode"
     
-    case cameraFocusMode
-    case cameraExposureMode
-    case cameraWhiteBalanceMode
-    
-    case cropAspectRatio
+    case cropAspectRatio = "cropAspectRatio"
+
 }
 
 // notification type
@@ -116,7 +116,7 @@ func != (left: CSCAspectRatio, right: CSCAspectRatio) -> Bool {
     return !(left == right)
 }
 
-struct CSCAspectRatio {
+struct CSCAspectRatio : Equatable {
     var w: CGFloat
     var h: CGFloat
     var value: CGFloat {return w / h}
@@ -141,17 +141,38 @@ class CaptureSessionController: NSObject {
     var stillImageOutput: AVCaptureStillImageOutput!
     
     //typealias AspectRatio = (w:CGFloat, h:CGFloat)
-    var cropAspectRatio = CSCAspectRatio(16,9) { didSet{ previewLayer.cropAspectRatio = cropAspectRatio.value } }
+    var cropAspectRatio = CSCAspectRatio(16,9) {
+        didSet{
+            previewLayer.cropAspectRatio = cropAspectRatio.value
+            sendNotification(.change(.cropAspectRatio(cropAspectRatio)), keyPath: "cropAspectRatio")
+        }
+    }
     var volumeButtonHandler: JPSVolumeButtonHandler!
     
     var delegate: CaptureSessionControllerDelegate?
+    
+    typealias ValueObserverBlock = (CSCValue) -> ()
+    typealias KeyPath = String
+    var valueObservingBlocks: [KeyPath : [String : ValueObserverBlock]] = [:]
+    
+    func setValueObservingBlockFor(type: CSCValueType, key: String, block: ValueObserverBlock) {
+        let keypath = type.rawValue
+        var blocks = valueObservingBlocks[keypath] ?? [:]
+        blocks[key] = block
+        valueObservingBlocks[keypath] = blocks
+    }
+    
+    func removeValueObservingBlockFor(type: CSCValueType, key: String) {
+        let keypath = type.rawValue
+        valueObservingBlocks[keypath]?[key] = nil
+    }
     
     
     override init(/*notificationTypes:[CSCNotificationType]*/) {
         //self.notificationTypes = notificationTypes
         session = AVCaptureSession()
         switch UIDevice.currentDevice().modelName {
-            case "iPhone 4", "iPhone 4s": session.sessionPreset = AVCaptureSessionPresetHigh
+            //case "iPhone 4", "iPhone 4s": session.sessionPreset = AVCaptureSessionPresetHigh
             default: session.sessionPreset = AVCaptureSessionPresetPhoto
         }
         sessionQueue = dispatch_queue_create("Capture Session", DISPATCH_QUEUE_SERIAL)
@@ -225,46 +246,62 @@ class CaptureSessionController: NSObject {
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         guard let newValue = change![NSKeyValueChangeNewKey], kp = keyPath /*where !_isChanging/*where context == &self.context[kp]!*/*/ else { return }
+        
+        var notification: CSCNotification?
+        switch kp {
+        case "stillImageOutput.capturingStillImage":
+            guard let capturing = newValue.boolValue else { fatalError() }
+            notification = .capturingStillImage(capturing)
+        case "camera.adjustingFocus": break
+        case "camera.adjustingExposure": break
+            
+        case "camera.focusMode":
+            guard let intValue = newValue.integerValue, focusMode = AVCaptureFocusMode(rawValue: intValue) else { fatalError() }
+            notification = .change(.cameraFocusMode(focusMode))
+        case "camera.exposureMode":
+            guard let intValue = newValue.integerValue, exposureMode = AVCaptureExposureMode(rawValue: intValue) else { fatalError() }
+            notification = .change(.cameraExposureMode(exposureMode))
+        case "camera.whiteBalanceMode":
+            guard let intValue = newValue.integerValue, whiteBalanceMode = AVCaptureWhiteBalanceMode(rawValue: intValue) else { fatalError() }
+            notification = .change(.cameraWhiteBalanceMode(whiteBalanceMode))
+            
+        case "camera.ISO":
+            guard let iso = newValue.floatValue else { fatalError() }
+            notification = .change(.cameraExposure(.ISO(iso)))
+        case "camera.exposureTargetOffset":
+            guard let exposureTargetOffset = newValue.floatValue else { fatalError() }
+            notification = .change(.cameraExposure(.targetOffset(exposureTargetOffset)))
+        case "camera.exposureDuration":
+            guard let exposureDuration = newValue.CMTimeValue else { fatalError() }
+            notification = .change(.cameraExposure(.duration(exposureDuration)))
+        case "camera.deviceWhiteBalanceGains":
+            guard let nsvalue = newValue as? NSValue else { fatalError() }
+            var wbgains = self.camera.deviceWhiteBalanceGains
+            nsvalue.getValue(&wbgains)
+            notification = .change(.cameraWhiteBalanceGains(wbgains))
+        case "camera.lensPosition":
+            guard let lensPosition = newValue.floatValue else { fatalError() }
+            notification = .change(.cameraLensPosition(lensPosition))
+        default: break
+        }
+        
+        guard let notif = notification else { return }
+        sendNotification(notif, keyPath: kp)
+    }
+    
+    private func sendNotification(notification: CSCNotification, keyPath: KeyPath? = nil) {
         dispatch_async( dispatch_get_main_queue(), {
-            switch kp {
-            case "stillImageOutput.capturingStillImage":
-                guard let capturing = newValue.boolValue else { fatalError() }
-                self.delegate?.sessionControllerNotification(.capturingStillImage(capturing))
-            case "camera.adjustingFocus": break
-            case "camera.adjustingExposure": break
-                
-            case "camera.focusMode":
-                guard let intValue = newValue.integerValue, focusMode = AVCaptureFocusMode(rawValue: intValue) else { fatalError() }
-                self.delegate?.sessionControllerNotification(.change(.cameraFocusMode(focusMode)))
-            case "camera.exposureMode":
-                guard let intValue = newValue.integerValue, exposureMode = AVCaptureExposureMode(rawValue: intValue) else { fatalError() }
-                self.delegate?.sessionControllerNotification(.change(.cameraExposureMode(exposureMode)))
-            case "camera.whiteBalanceMode":
-                guard let intValue = newValue.integerValue, whiteBalanceMode = AVCaptureWhiteBalanceMode(rawValue: intValue) else { fatalError() }
-                self.delegate?.sessionControllerNotification(.change(.cameraWhiteBalanceMode(whiteBalanceMode)))
-                
-            case "camera.ISO":
-                guard let iso = newValue.floatValue else { fatalError() }
-                self.delegate?.sessionControllerNotification(.change(.cameraExposure(.ISO(iso))))
-            case "camera.exposureTargetOffset":
-                guard let exposureTargetOffset = newValue.floatValue else { fatalError() }
-                self.delegate?.sessionControllerNotification(.change(.cameraExposure(.targetOffset(exposureTargetOffset))))
-            case "camera.exposureDuration":
-                guard let exposureDuration = newValue.CMTimeValue else { fatalError() }
-                self.delegate?.sessionControllerNotification(.change(.cameraExposure(.duration(exposureDuration))))
-            case "camera.deviceWhiteBalanceGains":
-                guard let nsvalue = newValue as? NSValue else { fatalError() }
-                var wbgains = self.camera.deviceWhiteBalanceGains
-                nsvalue.getValue(&wbgains)
-                self.delegate?.sessionControllerNotification(.change(.cameraWhiteBalanceGains(wbgains)))
-            case "camera.lensPosition":
-                guard let lensPosition = newValue.floatValue else { fatalError() }
-                self.delegate?.sessionControllerNotification(.change(.cameraLensPosition(lensPosition)))
-            default: break
+            self.delegate?.sessionControllerNotification(notification)
+            if let kp = keyPath {
+                switch notification {
+                case .change(let value):
+                    self.valueObservingBlocks[kp]?.forEach {$1(value)}
+                default: break
+                }
             }
         })
     }
-//    
+//
 //    func beginChange(){self._isChanging = true}
 //    func endChange(){self._isChanging = false}
     
@@ -298,7 +335,9 @@ class CaptureSessionController: NSObject {
             
         case .cameraZoomFactor(let zFactor): deviceConfig(){ self.camera.videoZoomFactor = zFactor }
         case .cameraZoomFactorRamp(let zFactor, let rate): deviceConfig(){ self.camera.rampToVideoZoomFactor(zFactor, withRate: rate) }
-        default: break
+            
+        case .cropAspectRatio(let aspectRatio): cropAspectRatio = aspectRatio
+            
         }
     }
     

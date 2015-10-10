@@ -16,7 +16,16 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     override var bounds: CGRect {
         didSet {
             guard bounds != oldValue else { return }
+            
+                line.regularLine.removeAnimationForKey("pathAnimation")
+                knobLayer.removeAnimationForKey("positionXAnimation")
+                knobLayer.removeAnimationForKey("positionYAnimation")
+            CATransaction.begin()
+            CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+            
             line.frame = bounds
+            layoutSublayersOfLayer(layer)
+            CATransaction.commit()
         }
     }
     
@@ -93,7 +102,17 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     }
     
     let labelTextMinWidth: CGFloat
-    var labelTextForValue: (V, Bool) -> String = { $0;$1;return "Slider" }
+    var labelTextForValue: (V, Bool) -> String = { $0;$1;return "Slider" } {
+        didSet { updateLabelText() }
+    }
+    override var vpHandler: VPHandler<V>? {
+        didSet { updateLabelText() }
+    }
+    
+    func updateLabelText(){
+        guard let v = value else { return }
+        knobLayer.text = labelTextForValue(v, false)
+    }
     
     var travelDistance: CGFloat = 0
     var totalDistance: CGFloat = 0
@@ -119,7 +138,7 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
             return (direction.axis == .Horizontal) ? 50 : 75
         }
     }
-    private var transitionStartDistance: CGFloat = 30.0
+    private var transitionStartDistance: CGFloat = 35.0
     
     /// progress values for tracking under finger
     private var fingerProgress: Float = 0
@@ -319,7 +338,8 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     }
 
     override func didMoveToSuperview() {
-        superview!.addGestureRecognizer(gesture)
+        guard let sv = superview else { return }
+        sv.addGestureRecognizer(gesture)
     }
     override func layoutSublayersOfLayer(layer: CALayer) {
         guard self.layer.isEqual(layer) else{super.layoutSublayersOfLayer(layer);return}

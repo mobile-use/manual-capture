@@ -191,3 +191,23 @@ extension AVCaptureVideoOrientation {
         }
     }
 }
+
+import UIKit.UIGestureRecognizerSubclass
+
+class UIShortTapGestureRecognizer: UITapGestureRecognizer {
+    var tapMaxDelay: Double = 0.3
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent) {
+        super.touchesBegan(touches, withEvent: event)
+        delay(tapMaxDelay) {
+            // Enough time has passed and the gesture was not recognized -> It has failed.
+            if  self.state != UIGestureRecognizerState.Ended {
+                self.state = UIGestureRecognizerState.Failed
+            }
+        }
+    }
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
+    }
+}

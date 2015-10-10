@@ -83,7 +83,6 @@ class PDGestureBased<G:UIGestureRecognizer>: PDHandler {
         guard let gesture = sender as? G else {
             fatalError("{[\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)} sender does not match type constraint.")
         }
-        
         switch gesture.state {
         case .Began: startDisplacing()
         case .Changed:
@@ -99,24 +98,25 @@ class PDScale: PDGestureBased<UIPinchGestureRecognizer> {
     private var lastScale: CGFloat = 1.0
     var currentScale: (() -> CGFloat)?
     var maxScale: CGFloat = 2.0
-    init(_ gestureView:UIView) {
+    let vpHandler: VPHandler<CGFloat>
+    init(_ gestureView:UIView, vpHandler: VPHandler<CGFloat>) {
+        self.vpHandler = vpHandler
         let g = UIPinchGestureRecognizer()
         gestureView.addGestureRecognizer(g)
         super.init(gesture: g){ Float($0.scale - 1.0) }
         gestureChangeHandler = {
             let maxChange = self.maxScale - 1.0
             guard maxChange != 0 else { return 0 }
-            let f = Float($0.scale - self.lastScale) / Float(maxChange)
+            let scaleChange = vpHandler.progressForValue($0.scale) - vpHandler.progressForValue(self.lastScale)
             self.lastScale = $0.scale
-            return f
+            return scaleChange
         }
     }
     
     override func startDisplacing() {
-        if let cScale = currentScale?() {
+        guard let cScale = currentScale?() else {return}
             lastScale = cScale
             gesture.scale = cScale
-        }
     }
     
 }

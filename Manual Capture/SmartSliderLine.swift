@@ -188,15 +188,15 @@ class SmartSliderLine: CALayer {
             let absTD = abs(travelDistance)
             let sabsTD = absTD * scale //* dashSpeedMag
             let rsabsTD = r(sabsTD)
-            let scaleCenter = r(absTD * CGFloat(fingerProgress))
+            let scaleCenter = r(absTD * 0.5)//CGFloat(fingerProgress))
             
             /// dash pattern lengths in in travel distance
             //let dplCount = rsabsTD / dpl1
             
             /// offset resulting from rounding dash space
             //let difT = dplCount * drsDS
-            
-            let leadingLength = rsabsTD + scaleCenter //+ difT
+            let maxLeadingLength = max(bounds.width, bounds.height) * scale
+            let leadingLength = min(rsabsTD, maxLeadingLength) + scaleCenter //+ difT
             
             dashLineLayer1.lineDashPattern = [lineWidth1, rsDS]
             dashLineLayer1.lineDashPhase = CGFloat(-leadingLength)
