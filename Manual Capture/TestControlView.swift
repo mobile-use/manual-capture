@@ -28,11 +28,10 @@ class TestControlView: UIView, CaptureSessionControllerDelegate, UIGestureRecogn
         
         sessionController.delegate = self
         sessionController.previewLayer.backgroundColor = UIColor.blackColor().CGColor
-        //sessionController.previewLayer.opacity = 0.0
-        layer.addSublayer(sessionController.previewLayer)
+        sessionController.previewLayer.opacity = 0.0
         sessionController.previewLayer.frame = bounds
-        
-        self.layer.opacity = 0.0
+        layer.addSublayer(sessionController.previewLayer)
+
         self.backgroundColor = UIColor.blackColor()
         
         initControls()
@@ -149,40 +148,55 @@ class TestControlView: UIView, CaptureSessionControllerDelegate, UIGestureRecogn
 
     // MARK: UI
     // MARK: |-- Buttons
-    var shutterButton = UIButton.shutterButton()
+    let shutterButton = UIButton.shutterButton()
+    let galleryButton = UIButton.galleryButton()
     
     // MARK: Actions
     
     func shutterPressed() {
         sessionController.captureStillPhoto()
     }
+    func galleryPressed() {
+        delegate?.showPhotoBrowser()
+    }
     
     // MARK: CaptureSessionControllerDelegate
     
     func sessionControllerError(error: ErrorType) {
-        print(error)
+        switchToLayout(.Error)
+        switch error {
+        case SessionError.CameraAccessDenied:
+            UIAlertView(
+                title: "I can't see anything :(",
+                message: "\(kAppName) was denied access to the camera. To fix it go to:\n\nSettings > Privacy > Camera\nThen switch \(kAppName) to On",
+                delegate: nil, cancelButtonTitle: nil
+                ).show()
+        default:
+            UIAlertView(
+                title: "Error",
+                message: (error as NSError).description,
+                delegate: nil, cancelButtonTitle: "Ok"
+                ).show()
+        }
     }
     func sessionControllerNotification(notification: CSCNotification) {
         switch notification {
         case .capturingStillImage(true):
             
             CATransaction.disableActions {
-                self.layer.opacity = 0.0
+                CATransaction.setAnimationDuration(0.0)
+                self.sessionController.previewLayer.opacity = 0.0
             }
-            UIView.animateWithDuration(0.25, animations: {
-                self.layer.opacity = 1.0
-            })
+            CATransaction.performBlock {
+                CATransaction.setDisableActions(false)
+                CATransaction.setAnimationDuration(0.3)
+                self.sessionController.previewLayer.opacity = 1.0
+            }
             
         case .sessionRunning(true):
-            
-            configControls()
-            UIView.animateWithDuration(0.6, animations: {
-                //self.sessionController.previewLayer.opacity = 1.0
-                self.layer.opacity = 1.0
-                }){$0; if(self.layoutInfo.currentMode == .Initial){ self.switchToLayout(.Normal, 0.2) }}
-            
+            switchToLayout(.Controls, 1.6)
         case .sessionRunning(false):
-            
+            //break
             switchToLayout(.Initial)
             
         // camera properties
@@ -389,18 +403,24 @@ class TestControlView: UIView, CaptureSessionControllerDelegate, UIGestureRecogn
         shutterButton.alpha = 0.0
         addSubview(shutterButton)
         
+        galleryButton.addTarget(self, action: "galleryPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        galleryButton.translatesAutoresizingMaskIntoConstraints = false
+        //galleryButton.enabled = false
+        galleryButton.alpha = 0.0
+        addSubview(galleryButton)
+        
         for (key, slider) in mainSliders {
             slider.translatesAutoresizingMaskIntoConstraints = false
             addSubview(slider)
             addConstraints(createConstraintsForKey(.Slider(key)))
         }
         
-        addConstraintsForKeys([.MenuControl, .ShutterButton])
+        addConstraintsForKeys([.MenuControl, .ShutterButton, .GalleryButton])
         
         // switchToLayout(.Normal)
     }
     func configControls(){
-        sessionController.set(.cameraExposure(.bias(-0.5)))
+        //sessionController.set(.cameraExposure(.bias(0)))
         
         
         let zoomMax = min(sessionController.camera.activeFormat.videoMaxZoomFactor, 25)
@@ -457,7 +477,7 @@ class TestControlView: UIView, CaptureSessionControllerDelegate, UIGestureRecogn
     
     // MARK: Layout Related
     private enum LayoutMode {
-        case Initial, Normal, Focus, Exposure, WhiteBalance, Zoom, AspectRatio, Options, Fullscreen
+        case Initial, Error, Controls, Normal, Focus, Exposure, WhiteBalance, Zoom, AspectRatio, Options, Fullscreen
     }
     private func setUpLayoutInfoForMode(mode:LayoutMode) -> Void {
         var me: TestControlView {unowned let me = self; return me}
@@ -469,20 +489,18 @@ class TestControlView: UIView, CaptureSessionControllerDelegate, UIGestureRecogn
             return { first($0);second($0) }
         }
         func setUpControlPanelEntranceExit(rows:[CaptureControlPanelRow], inout _ layoutInfo: LayoutInfo) {
-            
-            CATransaction.begin()
-            CATransaction.disableActions()
-            
             let cp = CaptureControlPanel(
                 rows: rows,
                 frame: CGRectMake(0, 20, self.bounds.width, 50)
             )
             cp.translatesAutoresizingMaskIntoConstraints = false
             cp.alpha = 0.0
-            self.addSubview(cp)
-            self.currentControlPanel = cp
-            self.addConstraintsForKeys([.ControlPanel])
-            CATransaction.commit()
+            
+            CATransaction.disableActions{
+                self.addSubview(cp)
+                self.currentControlPanel = cp
+                self.addConstraintsForKeys([.ControlPanel])
+            }
             
             layoutInfo.entrancePerformer = fuseLayoutPerformers(layoutInfo.entrancePerformer){ //[unowned self] in
                 guard let controlPanel = me.currentControlPanel where controlPanel == cp else { return }
@@ -495,49 +513,80 @@ class TestControlView: UIView, CaptureSessionControllerDelegate, UIGestureRecogn
             layoutInfo.exitCompleter = fuseLayoutCompleters(layoutInfo.exitCompleter){ (_) in
                 guard let controlPanel = me.currentControlPanel where controlPanel == cp else { return }
                 controlPanel.removeFromSuperview()
-                //guard let controlPanel = me.currentControlPanel where controlPanel == cp else { return }
                 me.currentControlPanel = nil
             }
         }
         
-        var info: LayoutInfo = layoutInfo ?? (
+        var oldSavedMode = menuControl.items.first!.value
+        var newSavedMode = menuControl.items.first!.value
+        if let oldInfo = layoutInfo {
+            oldSavedMode = oldInfo.savedMode
+            if let existingItem = menuControl.itemWithValue(oldInfo.currentMode) {
+                newSavedMode = existingItem.value
+            }
+        }
+        var info: LayoutInfo = (
             {},
             {},
             {$0},
             {},
             {$0},
-            .Focus,
-            .Initial
+            newSavedMode,
+            mode
         )
-        
-        info.entranceStarter = {}
-        info.entrancePerformer = {}
-        info.entranceCompleter = {$0}
-        info.exitPerformer = {}
-        info.exitCompleter = {$0}
-        let oldSaveMode = info.savedMode
-        info.savedMode = info.currentMode
-        info.currentMode = mode
         
         switch mode {
         case .Initial:
-            info.exitPerformer = {
+            info = (
+                {},
+                {},
+                {$0},
+                {},
+                {$0},
+                .Focus,
+                .Initial
+            )
+            
+            me.sliders.focus.alpha = 0.0
+            me.sliders.temperature.alpha = 0.0
+            me.sliders.iso.alpha = 0.0
+            me.sliders.exposureDuration.alpha = 0.0
+            me.menuControl.alpha = 0.0
+        case .Error:
+            info.entrancePerformer = {
+                me.sessionController.previewLayer.opacity = 0.0
                 me.sliders.focus.alpha = 0.0
                 me.sliders.temperature.alpha = 0.0
                 me.sliders.iso.alpha = 0.0
                 me.sliders.exposureDuration.alpha = 0.0
-                me.shutterButton.enabled = true
-                me.shutterButton.alpha = 1.0
+                me.menuControl.alpha = 0.0
+                me.shutterButton.enabled = false
+                me.shutterButton.alpha = 0
+                me.galleryButton.enabled = false
+                me.galleryButton.alpha = 0
+            }
+        case .Controls:
+            me.configControls()
+            info.entrancePerformer = {
+                me.sessionController.previewLayer.opacity = 1.0
+            }
+            info.entranceCompleter = { (_) in
+                me.switchToLayout(.Normal, 0.2)
+                // me.switchToLayout(.Options, 0.2)
             }
         case .Normal:
             info.entrancePerformer = {
                 me.shutterButton.enabled = true
                 me.shutterButton.alpha = 1.0
                 me.menuControl.alpha = 0.0
+                me.galleryButton.alpha = 0.0
+                me.galleryButton.enabled = false
             }
             info.exitPerformer = {
                 me.shutterButton.enabled = false
                 me.shutterButton.alpha = 0.15
+                me.galleryButton.alpha = 1.0
+                me.galleryButton.enabled = true
             }
         case .Focus:
             let modeVO: VO = ("FocusModeControl", .cameraFocusMode)
@@ -586,15 +635,18 @@ class TestControlView: UIView, CaptureSessionControllerDelegate, UIGestureRecogn
                 default: return
                 }
             }
-            
+            let oldGAlpha = me.galleryButton.alpha
             info.entrancePerformer = {
                 me.sliders.iso.hidden = false
                 me.sliders.iso.alpha = 1.0
-                me.sliders.exposureDuration.hidden = false; me.sliders.exposureDuration.alpha = 1.0
+                me.sliders.exposureDuration.hidden = false
+                me.sliders.exposureDuration.alpha = 1.0
+                me.galleryButton.alpha = 0.15
             }
             info.exitPerformer = {
                 me.sliders.iso.alpha = 0.0
                 me.sliders.exposureDuration.alpha = 0.0
+                me.galleryButton.alpha = oldGAlpha
             }
             info.exitCompleter = { (_) in
                 me.sliders.iso.hidden = true
@@ -675,13 +727,15 @@ class TestControlView: UIView, CaptureSessionControllerDelegate, UIGestureRecogn
         case .Options:
             info.entranceStarter = {
                 let i = OptionControl.indexOfItemWithValue(
-                    oldSaveMode,
+                    oldSavedMode,
                     items: me.menuControl.items
                     ) ?? 0
                 me.menuControl.selectedIndex = i
             }
             info.entrancePerformer = {
                 me.menuControl.alpha = 1.0
+                me.galleryButton.alpha = 1.0
+                me.galleryButton.enabled = true
             }
         case .Fullscreen: break
         }
@@ -704,17 +758,32 @@ class TestControlView: UIView, CaptureSessionControllerDelegate, UIGestureRecogn
     
     private func switchToLayout(layoutMode:LayoutMode, _ duration: NSTimeInterval = 0.2) {
         guard layoutInfo.currentMode != layoutMode else {return}
+        CATransaction.begin()
+        CATransaction.setDisableActions(false)
+        CATransaction.setAnimationDuration(duration)
+        
         UIView.animateWithDuration(
             duration,
             animations: layoutInfo.exitPerformer,
             completion: layoutInfo.exitCompleter
         )
+        
+        CATransaction.commit()
+        
         setUpLayoutInfoForMode(layoutMode)
         menuControl.selectItemWithValue(layoutMode)
+        
+        CATransaction.begin()
+        CATransaction.setDisableActions(false)
+        CATransaction.setAnimationDuration(duration)
+        
         UIView.animateWithDuration(duration,
             animations: layoutInfo.entrancePerformer,
             completion: layoutInfo.entranceCompleter
         )
+        
+        CATransaction.commit()
+        
         layoutInfo.entranceStarter()
     }
 
@@ -739,12 +808,13 @@ class TestControlView: UIView, CaptureSessionControllerDelegate, UIGestureRecogn
                 case .Left: return "Slider(Left)"
                 }
             case .ShutterButton: return "ShutterButton"
+            case .GalleryButton: return "GalleryButton"
             case .ControlPanel: return "ControlPanel"
             case .MenuControl: return "MenuControl"
             }
         }
         case Slider(MainSliderPositionType)
-        case ShutterButton
+        case ShutterButton, GalleryButton
         case ControlPanel
         case MenuControl
     }
@@ -789,6 +859,13 @@ class TestControlView: UIView, CaptureSessionControllerDelegate, UIGestureRecogn
             let sWidth = xMargin
             let centerYConstraint = NSLayoutConstraint(item: shutterButton, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
             let centerXConstraint = NSLayoutConstraint(item: shutterButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: -sWidth)
+            constraints.appendContentsOf([centerXConstraint])
+            constraints.appendContentsOf([centerYConstraint])
+        case .GalleryButton:
+            let sHeight = my + 15
+            let sWidth = xMargin
+            let centerYConstraint = NSLayoutConstraint(item: galleryButton, attribute: NSLayoutAttribute.BottomMargin, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: -sHeight)
+            let centerXConstraint = NSLayoutConstraint(item: galleryButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: -sWidth)
             constraints.appendContentsOf([centerXConstraint])
             constraints.appendContentsOf([centerYConstraint])
             

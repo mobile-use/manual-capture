@@ -50,7 +50,7 @@ class TestCaptureViewController: UIViewController, MWPhotoBrowserDelegate, Contr
             subtype: PHAssetCollectionSubtype.SmartAlbumUserLibrary,
             options: nil
         )
-        guard let cameraRoll = result.firstObject as? PHAssetCollection else { fatalError() }
+        guard let cameraRoll = result.firstObject as? PHAssetCollection else { print(result); return }
         
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -178,7 +178,7 @@ class TestCaptureViewController: UIViewController, MWPhotoBrowserDelegate, Contr
                 self.view.layer.setValue(oldRotation, forKeyPath: "transform.rotation.z")
                 
                 let orient = UIApplication.sharedApplication().statusBarOrientation
-                self.controlView.sessionController.previewLayer.connection.videoOrientation = AVCaptureVideoOrientation(ui:orient)
+                self.controlView.sessionController.previewLayer.connection?.videoOrientation = AVCaptureVideoOrientation(ui:orient)
                 
                 pLayer.removeFromSuperlayer()
                 oldSuperlayer?.addSublayer(pLayer)

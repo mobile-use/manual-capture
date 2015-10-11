@@ -432,7 +432,7 @@ class CaptureSessionController: NSObject {
                         //                        self.delegate?.didCaptureImage(CGImageOrientation(image.CGImage!, orientation: orientation))
                         ALAssetsLibrary().writeImageToSavedPhotosAlbum(croppedImage, orientation: ALAssetOrientation(rawValue: image.imageOrientation.rawValue)!, completionBlock: { (path:NSURL!, error:NSError!) -> Void in
                             if error != nil {
-                                captureError("Couldn't save photo.\n\(error.localizedRecoverySuggestion ?? error.localizedFailureReason ?? error.localizedDescription)")
+                                captureError("Couldn't save photo.\n\(error.localizedRecoverySuggestion ?? error.localizedFailureReason ?? error.localizedDescription) \n\n Try going to Settings > Privacy > Photos\n Then switch \(kAppName) to On")
                             }
                             //self.setFeedbackButtonHidden(false, delay: 60.0)
                             // photo saved
@@ -440,10 +440,10 @@ class CaptureSessionController: NSObject {
                             print("\(path)")
                         })
                     }
-                    else{print("imageSampleBuffer == nil \n could not complete captureStillPhoto() \n captureStillPhoto()");captureError("Sample Buffer was nil")}
+                    else{print("imageSampleBuffer == nil \n could not complete captureStillPhoto() \n captureStillPhoto()");captureError("Sample Buffer was nil. Try retaking photo.")}
                 }
             }
-            else{print("connection or self.previewView.connection == nil \n could not complete captureStillPhoto() \n captureStillPhoto()");captureError("Connection was nil")}
+            else{print("connection or self.previewView.connection == nil \n could not complete captureStillPhoto() \n captureStillPhoto()");captureError("Connection was nil. Try retaking photo.")}
         })
     }
     

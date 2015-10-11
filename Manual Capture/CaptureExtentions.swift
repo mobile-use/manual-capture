@@ -214,10 +214,10 @@ class UIShortTapGestureRecognizer: UITapGestureRecognizer {
 
 extension CATransaction {
     class func disableActions(block: ()->Void ) {
-        CATransaction.performBlock() {() -> Void in
-            CATransaction.disableActions()
-            block()
-        }
+        CATransaction.begin()
+        CATransaction.disableActions()
+        block()
+        CATransaction.commit()
     }
     class func performBlock(block: () -> Void) {
         CATransaction.begin()

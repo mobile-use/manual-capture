@@ -22,7 +22,7 @@ class OptionControl<V: Equatable>: Control {
         didSet{ selectionChanged(oldValue) }
     }
     
-    static func indexOfItemWithValue(value: V, items:[Item]) -> Int? {
+    class func indexOfItemWithValue(value: V, items:[Item]) -> Int? {
         for (i, item) in items.enumerate() {
             if item.value == value {
                 return i
@@ -30,6 +30,13 @@ class OptionControl<V: Equatable>: Control {
         }
         return nil
     }
+    func itemWithValue(value: V) -> Item? {
+        guard let i = OptionControl<V>.indexOfItemWithValue(value, items: items) else {
+            return nil
+        }
+        return items[i]
+    }
+    
     func selectItemWithValue(value:V) -> Void? {
         selectedIndex = OptionControl.indexOfItemWithValue(value, items: items) ?? -1
         // return normally if found
