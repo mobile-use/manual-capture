@@ -47,18 +47,17 @@ class CaptureModeControl: Control {
         newSize.height = 20
         if !(items.indices ~= oldIndex) {
             // had no selection so dont animate movement
-            CATransaction.begin()
-            CATransaction.disableActions()
-            layer.addSublayer(selectionIndicator)
-            selectionIndicator.bounds.size = newSize
-            textLayer.foregroundColor = kCaptureTintColor.CGColor
-            CATransaction.commit()
+            CATransaction.disableActions {
+                self.layer.addSublayer(self.selectionIndicator)
+                self.selectionIndicator.bounds.size = newSize
+                textLayer.foregroundColor = kCaptureTintColor.CGColor
+            }
             selectionIndicator.opacity = 1.0
         }else{
-            CATransaction.begin()
-            CATransaction.setAnimationDuration(CATransaction.animationDuration() * 2)
+            CATransaction.performBlock {
+                CATransaction.setAnimationDuration(CATransaction.animationDuration() * 2)
                 textLayer.foregroundColor = kCaptureTintColor.CGColor
-            CATransaction.commit()
+            }
             selectionIndicator.bounds.size = newSize
         }
         
@@ -145,11 +144,7 @@ class CaptureModeControl: Control {
             layer.addSublayer(selectionIndicator)
         }
         
-//        CATransaction.begin()
-//        CATransaction.disableActions()
-        layoutIfNeeded()
         selectionChanged(-1)
-//        CATransaction.commit()
     }
     
     required init?(coder aDecoder: NSCoder) {

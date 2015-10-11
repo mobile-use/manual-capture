@@ -16,16 +16,13 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     override var bounds: CGRect {
         didSet {
             guard bounds != oldValue else { return }
-            
-                line.regularLine.removeAnimationForKey("pathAnimation")
-                knobLayer.removeAnimationForKey("positionXAnimation")
-                knobLayer.removeAnimationForKey("positionYAnimation")
-            CATransaction.begin()
-            CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
-            
-            line.frame = bounds
-            layoutSublayersOfLayer(layer)
-            CATransaction.commit()
+            line.regularLine.removeAnimationForKey("pathAnimation")
+            knobLayer.removeAnimationForKey("positionXAnimation")
+            knobLayer.removeAnimationForKey("positionYAnimation")
+            CATransaction.disableActions {
+                self.line.frame = self.bounds
+                self.layoutSublayersOfLayer(self.layer)
+            }
         }
     }
     

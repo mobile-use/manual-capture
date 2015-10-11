@@ -166,10 +166,9 @@ class TestControlView: UIView, CaptureSessionControllerDelegate, UIGestureRecogn
         switch notification {
         case .capturingStillImage(true):
             
-            CATransaction.begin()
-            CATransaction.setDisableActions(true)
-            self.layer.opacity = 0.0
-            CATransaction.commit()
+            CATransaction.disableActions {
+                self.layer.opacity = 0.0
+            }
             UIView.animateWithDuration(0.25, animations: {
                 self.layer.opacity = 1.0
             })
@@ -185,11 +184,6 @@ class TestControlView: UIView, CaptureSessionControllerDelegate, UIGestureRecogn
         case .sessionRunning(false):
             
             switchToLayout(.Initial)
-            //self.layer.opacity = 0.0
-//            UIView.animateWithDuration(1.0, animations: {
-//                //self.sessionController.previewLayer.opacity = 0.0
-//                self.layer.opacity = 0.0
-//            })
             
         // camera properties
         case .change(.cameraExposure(.ISO(let ISO))):

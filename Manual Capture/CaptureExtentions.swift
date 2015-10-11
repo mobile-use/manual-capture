@@ -211,3 +211,23 @@ class UIShortTapGestureRecognizer: UITapGestureRecognizer {
         dispatch_after(dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
     }
 }
+
+extension CATransaction {
+    class func disableActions(block: ()->Void ) {
+        CATransaction.performBlock() {() -> Void in
+            CATransaction.disableActions()
+            block()
+        }
+    }
+    class func performBlock(block: () -> Void) {
+        CATransaction.begin()
+        block()
+        CATransaction.commit()
+    }
+    class func performBlockWithCompletion(block: () -> Void, completion: () -> Void) {
+        CATransaction.performBlock() {() -> Void in
+            CATransaction.setCompletionBlock(completion)
+            block()
+        }
+    }
+}
