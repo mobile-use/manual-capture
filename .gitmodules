@@ -1,0 +1,4 @@
+
+[submodule "ExSwift"]
+	path = ExSwift
+	url = git://github.com/pNre/ExSwift.git
