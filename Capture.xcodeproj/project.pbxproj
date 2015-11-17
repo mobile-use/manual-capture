@@ -7,20 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F10EDF21BA0EC49007E722A /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F10EDF11BA0EC49007E722A /* Slider.swift */; settings = {ASSET_TAGS = (); }; };
-		0F10EDF41BA1404B007E722A /* VPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F10EDF31BA1404B007E722A /* VPHandler.swift */; settings = {ASSET_TAGS = (); }; };
-		0F2ED8D61BA92E1200F9332D /* TestControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2ED8D51BA92E1200F9332D /* TestControlView.swift */; settings = {ASSET_TAGS = (); }; };
-		0F3FC7BB1BABCA77004A350B /* SmartSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3FC7BA1BABCA77004A350B /* SmartSlider.swift */; settings = {ASSET_TAGS = (); }; };
-		0F46E4481B9D7DD0000E32D1 /* CaptureSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F46E4471B9D7DD0000E32D1 /* CaptureSessionController.swift */; settings = {ASSET_TAGS = (); }; };
-		0F46E44A1B9D84C7000E32D1 /* CaptureExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F46E4491B9D84C7000E32D1 /* CaptureExtentions.swift */; settings = {ASSET_TAGS = (); }; };
-		0F46E44C1B9DACAE000E32D1 /* TestCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F46E44B1B9DACAE000E32D1 /* TestCaptureViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		0FB784161B9ECFC300C7FDA7 /* PDHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB784151B9ECFC300C7FDA7 /* PDHandler.swift */; settings = {ASSET_TAGS = (); }; };
+		0F10EDF21BA0EC49007E722A /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F10EDF11BA0EC49007E722A /* Slider.swift */; };
+		0F10EDF41BA1404B007E722A /* VPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F10EDF31BA1404B007E722A /* VPHandler.swift */; };
+		0F2ED8D61BA92E1200F9332D /* CaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2ED8D51BA92E1200F9332D /* CaptureView.swift */; };
+		0F3FC7BB1BABCA77004A350B /* SmartSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3FC7BA1BABCA77004A350B /* SmartSlider.swift */; };
+		0F46E4481B9D7DD0000E32D1 /* CSController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F46E4471B9D7DD0000E32D1 /* CSController.swift */; };
+		0F46E44A1B9D84C7000E32D1 /* CaptureExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F46E4491B9D84C7000E32D1 /* CaptureExtentions.swift */; };
+		0F46E44C1B9DACAE000E32D1 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F46E44B1B9DACAE000E32D1 /* CaptureViewController.swift */; };
+		0FB784161B9ECFC300C7FDA7 /* PDHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB784151B9ECFC300C7FDA7 /* PDHandler.swift */; };
 		0FC4DC561B95BD630009B4A7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC4DC551B95BD630009B4A7 /* StoreKit.framework */; };
-		0FC510E31BBD13EE00E4D0D8 /* CapturePreviewLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC510E21BBD13EE00E4D0D8 /* CapturePreviewLayer.swift */; settings = {ASSET_TAGS = (); }; };
-		0FD828C81BB7A05F004162F0 /* ManualCaptureGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD828C71BB7A05F004162F0 /* ManualCaptureGlyph.swift */; settings = {ASSET_TAGS = (); }; };
-		0FD828CA1BB7C630004162F0 /* SmartSliderLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD828C91BB7C630004162F0 /* SmartSliderLine.swift */; settings = {ASSET_TAGS = (); }; };
-		0FE500B71BB50ECA00D5B13D /* SmartSliderKnobLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE500B61BB50ECA00D5B13D /* SmartSliderKnobLayer.swift */; settings = {ASSET_TAGS = (); }; };
+		0FC510E31BBD13EE00E4D0D8 /* CapturePreviewLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC510E21BBD13EE00E4D0D8 /* CapturePreviewLayer.swift */; };
+		0FD828C81BB7A05F004162F0 /* ManualCaptureGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD828C71BB7A05F004162F0 /* ManualCaptureGlyph.swift */; };
+		0FD828CA1BB7C630004162F0 /* SmartSliderLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD828C91BB7C630004162F0 /* SmartSliderLine.swift */; };
+		0FE500B71BB50ECA00D5B13D /* SmartSliderKnobLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE500B61BB50ECA00D5B13D /* SmartSliderKnobLayer.swift */; };
 		0FEA847F1B944781002135DE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FEA847E1B944781002135DE /* AVFoundation.framework */; };
+		20BE3B89BAA83CFB0D112495 /* libPods-Manual Capture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9B3A91C0C6F3E54AF939C6 /* libPods-Manual Capture.a */; };
+		3D3AA9CE1BCB5FAF00EF2B84 /* SampleImage.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */; };
 		3D4EAB191B8410CC00C2F110 /* CaptureControlLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4EAB181B8410CB00C2F110 /* CaptureControlLabel.swift */; };
 		3D4F17A31B73883500D4D74F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4F17A21B73883500D4D74F /* AppDelegate.swift */; };
 		3D4F17A81B73883500D4D74F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D4F17A61B73883500D4D74F /* Main.storyboard */; };
@@ -28,11 +30,10 @@
 		3D4F17AD1B73883500D4D74F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D4F17AB1B73883500D4D74F /* LaunchScreen.storyboard */; };
 		3D5111C71B7E031000FCF97F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5111C61B7E031000FCF97F /* QuartzCore.framework */; };
 		3D5111C91B7EC12F00FCF97F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5111C81B7EC12F00FCF97F /* CoreGraphics.framework */; };
-		3D5416B81BC79EAE00922A2B /* OptionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5416B71BC79EAE00922A2B /* OptionControl.swift */; settings = {ASSET_TAGS = (); }; };
+		3D5416B81BC79EAE00922A2B /* OptionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5416B71BC79EAE00922A2B /* OptionControl.swift */; };
 		3D70987A1B85502500AA49C2 /* CaptureShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7098791B85502500AA49C2 /* CaptureShutterButton.swift */; };
-		3DADC33C1BC4D4C000A74BC2 /* CaptureModeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */; settings = {ASSET_TAGS = (); }; };
-		3DADC33E1BC4D97D00A74BC2 /* CaptureControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33D1BC4D97D00A74BC2 /* CaptureControlPanel.swift */; settings = {ASSET_TAGS = (); }; };
-		BAE36E6FCBDD65600879D4AE /* libPods-Manual Capture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB259D2CA7C0EB1187046BB /* libPods-Manual Capture.a */; };
+		3DADC33C1BC4D4C000A74BC2 /* CaptureModeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */; };
+		3DADC33E1BC4D97D00A74BC2 /* CaptureControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33D1BC4D97D00A74BC2 /* CaptureControlPanel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,11 +56,11 @@
 /* Begin PBXFileReference section */
 		0F10EDF11BA0EC49007E722A /* Slider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Slider.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0F10EDF31BA1404B007E722A /* VPHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPHandler.swift; sourceTree = "<group>"; };
-		0F2ED8D51BA92E1200F9332D /* TestControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TestControlView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		0F2ED8D51BA92E1200F9332D /* CaptureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CaptureView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0F3FC7BA1BABCA77004A350B /* SmartSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SmartSlider.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		0F46E4471B9D7DD0000E32D1 /* CaptureSessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureSessionController.swift; sourceTree = "<group>"; };
+		0F46E4471B9D7DD0000E32D1 /* CSController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSController.swift; sourceTree = "<group>"; };
 		0F46E4491B9D84C7000E32D1 /* CaptureExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureExtentions.swift; sourceTree = "<group>"; };
-		0F46E44B1B9DACAE000E32D1 /* TestCaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCaptureViewController.swift; sourceTree = "<group>"; };
+		0F46E44B1B9DACAE000E32D1 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		0FB784151B9ECFC300C7FDA7 /* PDHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PDHandler.swift; path = "Manual Capture/PDHandler.swift"; sourceTree = SOURCE_ROOT; };
 		0FC4DC541B95BBA40009B4A7 /* Capture.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Capture.entitlements; sourceTree = "<group>"; };
 		0FC4DC551B95BD630009B4A7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -69,6 +70,8 @@
 		0FE500B61BB50ECA00D5B13D /* SmartSliderKnobLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartSliderKnobLayer.swift; sourceTree = "<group>"; };
 		0FEA847E1B944781002135DE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0FFFDDB11BA7F35A002432FB /* ObjcBridgeHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcBridgeHeader.h; sourceTree = "<group>"; };
+		3C9B3A91C0C6F3E54AF939C6 /* libPods-Manual Capture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Manual Capture.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SampleImage.JPG; sourceTree = "<group>"; };
 		3D4EAB181B8410CB00C2F110 /* CaptureControlLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CaptureControlLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3D4F179F1B73883500D4D74F /* Capture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D4F17A21B73883500D4D74F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,7 +89,6 @@
 		3DADC33D1BC4D97D00A74BC2 /* CaptureControlPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureControlPanel.swift; sourceTree = "<group>"; };
 		B0E08305CA5C18E1A0E27AF1 /* Pods-Manual Capture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture.release.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture.release.xcconfig"; sourceTree = "<group>"; };
 		E7DC703AD333ED3A815C8109 /* Pods-Manual Capture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture.debug.xcconfig"; sourceTree = "<group>"; };
-		EAB259D2CA7C0EB1187046BB /* libPods-Manual Capture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Manual Capture.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +100,7 @@
 				3D5111C91B7EC12F00FCF97F /* CoreGraphics.framework in Frameworks */,
 				3D5111C71B7E031000FCF97F /* QuartzCore.framework in Frameworks */,
 				0FC4DC561B95BD630009B4A7 /* StoreKit.framework in Frameworks */,
-				BAE36E6FCBDD65600879D4AE /* libPods-Manual Capture.a in Frameworks */,
+				20BE3B89BAA83CFB0D112495 /* libPods-Manual Capture.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,7 +124,7 @@
 		0FB784171BA0229C00C7FDA7 /* UI Classes */ = {
 			isa = PBXGroup;
 			children = (
-				0F2ED8D51BA92E1200F9332D /* TestControlView.swift */,
+				0F2ED8D51BA92E1200F9332D /* CaptureView.swift */,
 				0FC510E21BBD13EE00E4D0D8 /* CapturePreviewLayer.swift */,
 				3DADC33D1BC4D97D00A74BC2 /* CaptureControlPanel.swift */,
 				3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */,
@@ -185,9 +187,10 @@
 				0FFFDDB11BA7F35A002432FB /* ObjcBridgeHeader.h */,
 				3D4F17A21B73883500D4D74F /* AppDelegate.swift */,
 				3D4F17A61B73883500D4D74F /* Main.storyboard */,
-				0F46E44B1B9DACAE000E32D1 /* TestCaptureViewController.swift */,
-				0F46E4471B9D7DD0000E32D1 /* CaptureSessionController.swift */,
+				0F46E44B1B9DACAE000E32D1 /* CaptureViewController.swift */,
+				0F46E4471B9D7DD0000E32D1 /* CSController.swift */,
 				0F46E4491B9D84C7000E32D1 /* CaptureExtentions.swift */,
+				3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */,
 				0FB784171BA0229C00C7FDA7 /* UI Classes */,
 				3D4F17A91B73883500D4D74F /* Assets.xcassets */,
 				3D4F17AB1B73883500D4D74F /* LaunchScreen.storyboard */,
@@ -203,7 +206,7 @@
 				0FEA847E1B944781002135DE /* AVFoundation.framework */,
 				3D5111C81B7EC12F00FCF97F /* CoreGraphics.framework */,
 				3D5111C61B7E031000FCF97F /* QuartzCore.framework */,
-				EAB259D2CA7C0EB1187046BB /* libPods-Manual Capture.a */,
+				3C9B3A91C0C6F3E54AF939C6 /* libPods-Manual Capture.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				3D4F179D1B73883500D4D74F /* Resources */,
 				0FEA84801B944D6F002135DE /* ShellScript */,
 				4AB1611EEF1901D5B8F03E93 /* Copy Pods Resources */,
+				9A1E9E9808521955CFDB6001 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -273,7 +277,7 @@
 		3D4F17971B73883500D4D74F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftMigration = 0700;
+				LastSwiftMigration = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = mobileuse;
 				TargetAttributes = {
@@ -327,6 +331,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D3AA9CE1BCB5FAF00EF2B84 /* SampleImage.JPG in Resources */,
 				3D4F17AD1B73883500D4D74F /* LaunchScreen.storyboard in Resources */,
 				3D4F17AA1B73883500D4D74F /* Assets.xcassets in Resources */,
 				3D4F17A81B73883500D4D74F /* Main.storyboard in Resources */,
@@ -378,6 +383,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9A1E9E9808521955CFDB6001 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B3972F209C4A8664888906C7 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -402,12 +422,12 @@
 			files = (
 				0FD828CA1BB7C630004162F0 /* SmartSliderLine.swift in Sources */,
 				0FB784161B9ECFC300C7FDA7 /* PDHandler.swift in Sources */,
-				0F2ED8D61BA92E1200F9332D /* TestControlView.swift in Sources */,
+				0F2ED8D61BA92E1200F9332D /* CaptureView.swift in Sources */,
 				0F3FC7BB1BABCA77004A350B /* SmartSlider.swift in Sources */,
 				0F10EDF21BA0EC49007E722A /* Slider.swift in Sources */,
 				3D5416B81BC79EAE00922A2B /* OptionControl.swift in Sources */,
-				0F46E44C1B9DACAE000E32D1 /* TestCaptureViewController.swift in Sources */,
-				0F46E4481B9D7DD0000E32D1 /* CaptureSessionController.swift in Sources */,
+				0F46E44C1B9DACAE000E32D1 /* CaptureViewController.swift in Sources */,
+				0F46E4481B9D7DD0000E32D1 /* CSController.swift in Sources */,
 				0FD828C81BB7A05F004162F0 /* ManualCaptureGlyph.swift in Sources */,
 				0FE500B71BB50ECA00D5B13D /* SmartSliderKnobLayer.swift in Sources */,
 				3D70987A1B85502500AA49C2 /* CaptureShutterButton.swift in Sources */,
