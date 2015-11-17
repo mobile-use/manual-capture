@@ -10,6 +10,26 @@
 import UIKit
 
 let kAppName = "Capture"
+let kIsDemoMode = false
+//private(set) var kLastVersion: Version? = nil
+
+extension NSBundle {
+    
+    class var applicationVersionNumber: String {
+        if let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
+            return version
+        }
+        return "Version Number Not Available"
+    }
+    
+    class var applicationBuildNumber: String {
+        if let build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String {
+            return build
+        }
+        return "Build Number Not Available"
+    }
+    
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
         return true
     }
 

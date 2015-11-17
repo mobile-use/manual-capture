@@ -9,6 +9,8 @@
 #import "JPSVolumeButtonHandler.h"
 #import "MWPhotoBrowser.h"
 
+#import "EAIntroView.h"
+
 #ifndef ObjcBridgeHeader_h
 #define ObjcBridgeHeader_h
 

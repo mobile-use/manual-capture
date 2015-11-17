@@ -28,6 +28,10 @@ class Control: UIView {
         Control.currentControl = nil
     }
     
+    var actionDidStateChange: ((add: State, remove: State) -> Void)?
+    var actionWillStateChange: ((add: State, remove: State) -> Void)?
+    
+    
     struct State: OptionSetType {
         let rawValue: Int
         static var Normal = State(rawValue: 0)
@@ -57,10 +61,20 @@ class Control: UIView {
         didSet{
             guard state != oldValue else { return }
             didChangeState(oldValue)
+            
+            actionDidStateChange?(
+                add: state.subtract(oldValue),
+                remove: oldValue.subtract(state)
+            )
         }
         willSet{
             guard state != newValue else { return }
             willChangeState(newValue)
+            
+            actionWillStateChange?(
+                add: newValue.subtract(state),
+                remove: state.subtract(newValue)
+            )
         }
     }
     func didChangeState(oldState:State){}
@@ -75,6 +89,8 @@ let kSliderKnobDisabeledOpacity:Float = 0.4
 let kSliderLineDisabledOpacity:Float = 0.4
 
 class Slider : Control {
+    var actionStarted:(() -> Void)?
+    var actionEnded:(() -> Void)?
     
     enum Direction {
         case Right, Left, Down, Up

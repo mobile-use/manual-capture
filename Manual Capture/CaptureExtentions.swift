@@ -9,6 +9,21 @@
 import UIKit
 import AVFoundation
 
+extension String {
+    
+    subscript (i: Int) -> Character {
+        return self[self.startIndex.advancedBy(i)]
+    }
+    
+    subscript (i: Int) -> String {
+        return String(self[i] as Character)
+    }
+    
+    subscript (r: Range<Int>) -> String {
+        return substringWithRange(Range(start: startIndex.advancedBy(r.startIndex), end: startIndex.advancedBy(r.endIndex)))
+    }
+}
+
 public extension UIDevice {
     
     var modelName: String {
@@ -215,17 +230,18 @@ class UIShortTapGestureRecognizer: UITapGestureRecognizer {
 extension CATransaction {
     class func disableActions(block: ()->Void ) {
         CATransaction.begin()
-        CATransaction.disableActions()
+        CATransaction.setDisableActions(true)
         block()
         CATransaction.commit()
     }
-    class func performBlock(block: () -> Void) {
+    class func performBlock(duration: CFTimeInterval = CATransaction.animationDuration(), _ block: () -> Void) {
         CATransaction.begin()
+        CATransaction.setAnimationDuration(duration)
         block()
         CATransaction.commit()
     }
-    class func performBlockWithCompletion(block: () -> Void, completion: () -> Void) {
-        CATransaction.performBlock() {() -> Void in
+    class func performBlockWithCompletion(duration: CFTimeInterval = CATransaction.animationDuration(), block: () -> Void, completion: () -> Void) {
+        CATransaction.performBlock(duration) {() -> Void in
             CATransaction.setCompletionBlock(completion)
             block()
         }

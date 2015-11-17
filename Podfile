@@ -5,6 +5,7 @@ target 'Manual Capture' do
 
     pod 'JPSVolumeButtonHandler'
     pod 'MWPhotoBrowser'
+    pod 'EAIntroView', '~> 2.7.0'
 
 end
 

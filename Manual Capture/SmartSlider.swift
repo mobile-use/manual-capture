@@ -128,11 +128,11 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     /// displacement of progress so that the knob will position right under finger
     private var transitionDistance: CGFloat {
         if !warpSpeedReverses {
-            //return (direction.axis == .Horizontal) ? 120.0 : 180.0
-            return (direction.axis == .Horizontal) ? 50 : 75
+            return (direction.axis == .Horizontal) ? 120.0 : 180.0
+            //return (direction.axis == .Horizontal) ? 50 : 75
         }else {
-            //return (direction.axis == .Horizontal) ? 100.0 : 150.0
-            return (direction.axis == .Horizontal) ? 50 : 75
+            return (direction.axis == .Horizontal) ? 100.0 : 150.0
+            //return (direction.axis == .Horizontal) ? 50 : 75
         }
     }
     private var transitionStartDistance: CGFloat = 35.0
@@ -161,6 +161,7 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
                 state.getUpdateTransform(true, .Active)?(&state)
                 state.getUpdateTransform(false, .ComputerControlled)?(&state)
                 actionProgressStarted?(self)
+                actionStarted?()
             }
             
         case .Changed:
@@ -203,6 +204,7 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
                     // last to deactivate
                     state.subtractInPlace(.Active)
                     actionProgressEnded?(self)
+                    actionEnded?()
                 }
             }
         }
@@ -262,19 +264,23 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
             return p
         }
     }
-    
-    convenience init(glyph: CALayer, direction:Direction, startBounds: (() -> CGRect)?, sliderBounds: (() -> CGRect)?){
-        self.init(glyph: glyph, direction:direction, startBounds: startBounds, sliderBounds: sliderBounds, 35)
+        
+    convenience init(glyph: CALayer, direction:Direction, _ labelTextMinWidth: CGFloat = 35){
+        self.init(glyph: glyph, direction:direction, startBounds: nil, sliderBounds: nil, labelTextMinWidth)
     }
     
-    convenience init(glyph: CALayer, direction:Direction){
-        self.init(glyph: glyph, direction:direction, startBounds: nil, sliderBounds: nil, 35)
-    }
-    
-    init(glyph: CALayer, direction:Direction, startBounds: (() -> CGRect)?, sliderBounds: (() -> CGRect)?, _ labelTextMinWidth:CGFloat){
+    init(glyph: CALayer, direction:Direction, startBounds: (() -> CGRect)?, sliderBounds: (() -> CGRect)?, _ labelTextMinWidth:CGFloat = 35){
+        
+        
+        
         gesture = SmartSliderGesture(direction: direction)
         self.labelTextMinWidth = labelTextMinWidth
+        
         super.init(knobLayer: SmartSliderKnobLayer(glyph: glyph), direction: direction)
+        
+        /// prevent strong ownership in closures
+        unowned let me = self
+        
         knobLayer.labelTextMinWidth = labelTextMinWidth
         
         gesture.sensitivity = initialSensitivity
@@ -283,25 +289,35 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
         lineLayer.removeFromSuperlayer()
         layer.addSublayer(line)
         
+        
+        
         if sliderBounds == nil {
+            
+            
             switch direction.axis {
             case .Horizontal:
-                gesture.sliderBounds = {[unowned self] in
-                    guard !self.hidden || self.layer.opacity != 0.0 else { return CGRectZero }
+                gesture.sliderBounds = {
+                    guard !me.hidden || me.layer.opacity != 0.0 else { return CGRectZero }
                     return CGRectInset(
-                        self.convertRect(
-                        CGRectMake(0, self.knobLayer.frame.origin.y, self.bounds.width, self.knobLayer.bounds.height),
-                        toView: self.gesture.view
-                    ), 0, min(self.knobLayer.bounds.height/2 - 30, 0))
+                        me.convertRect(
+                            CGRectMake(0, me.knobLayer.frame.origin.y, me.bounds.width, me.knobLayer.bounds.height),
+                            toView: me.gesture.view
+                        ),
+                        0,
+                        min( me.knobLayer.bounds.height / 2 - 30, 0 )
+                    )
                 }
             case .Vertical:
-                gesture.sliderBounds = {[unowned self] in
-                    guard !self.hidden || self.layer.opacity != 0.0 else { return CGRectZero }
+                gesture.sliderBounds = {
+                    guard !me.hidden || me.layer.opacity != 0.0 else { return CGRectZero }
                     return CGRectInset(
-                        self.convertRect(
-                        CGRectMake(self.knobLayer.frame.origin.x, 0, self.knobLayer.bounds.width, self.bounds.height),
-                        toView: self.gesture.view
-                    ), min(self.knobLayer.bounds.width/2 - 30, 0), 0)
+                        me.convertRect(
+                            CGRectMake(me.knobLayer.frame.origin.x, 0, me.knobLayer.bounds.width, me.bounds.height),
+                            toView: me.gesture.view
+                        ),
+                        min( me.knobLayer.bounds.width / 2 - 30, 0),
+                        0
+                    )
                 }
             }
         }
@@ -312,20 +328,20 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
             
             switch direction.axis {
             case .Horizontal:
-                gesture.startBounds = {[unowned self] in
+                gesture.startBounds = {
                     return CGRectInset(
-                        self.convertRect(
-                            CGRectMake(0, self.knobLayer.frame.origin.y, self.bounds.width, self.knobLayer.bounds.height),
-                            toView: self.gesture.view
-                        ), 0, min(self.knobLayer.bounds.height/2 - 30, 0))
+                        me.convertRect(
+                            CGRectMake(0, me.knobLayer.frame.origin.y, me.bounds.width, me.knobLayer.bounds.height),
+                            toView: me.gesture.view
+                        ), 0, min(me.knobLayer.bounds.height/2 - 30, 0))
                 }
             case .Vertical:
-                gesture.startBounds = {[unowned self] in
+                gesture.startBounds = {
                     return CGRectInset(
-                        self.convertRect(
-                            CGRectMake(self.knobLayer.frame.origin.x, 0, self.knobLayer.bounds.width, self.bounds.height),
-                            toView: self.gesture.view
-                        ), min(self.knobLayer.bounds.width/2 - 30, 0), 0)
+                        me.convertRect(
+                            CGRectMake(me.knobLayer.frame.origin.x, 0, me.knobLayer.bounds.width, me.bounds.height),
+                            toView: me.gesture.view
+                        ), min(me.knobLayer.bounds.width/2 - 30, 0), 0)
                 }
             }
         }
@@ -340,9 +356,6 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     }
     override func layoutSublayersOfLayer(layer: CALayer) {
         guard self.layer.isEqual(layer) else{super.layoutSublayersOfLayer(layer);return}
-//        if let sb = self.gesture.sliderBounds {
-//            print("\(sb()) \(frame)")
-//        }
         
         func setLinePathFor(sp:CGPoint, _ ep:CGPoint) {
             let lp = CGPathCreateMutable()

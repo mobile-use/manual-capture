@@ -12,13 +12,14 @@ class OptionControl<V: Equatable>: Control {
     private typealias SelectionIndicator = OptionControlSelectionIndicator
     private var selectionIndicator = SelectionIndicator()
     
-    typealias Value = V
-    typealias SetValueAction = (V)->()
+    typealias SetValueAction = (V) -> Void
     var setValueAction: SetValueAction?
+    private(set) var value: V? = nil
     
-    typealias Item = (title: String, value: Value)
+    typealias Item = (title: String, value: V)
     var items: [Item] {didSet{ setupItems() }}
-    var selectedIndex: Int = -1 {
+    typealias Index = Int
+    var selectedIndex: Index = -1 {
         didSet{ selectionChanged(oldValue) }
     }
     
@@ -43,69 +44,59 @@ class OptionControl<V: Equatable>: Control {
         return (selectedIndex != -1) ? () : nil
     }
     
-    func selectionChanged(oldIndex: Int){
+    func selectionChanged(oldIndex: Index){
         guard selectedIndex != oldIndex else { return }
         
         // reset old selected item
         if items.indices ~= oldIndex {
-            let oldTextLayer = textLayers[oldIndex]
-            oldTextLayer.foregroundColor = UIColor.whiteColor().CGColor
+            let oldText = textLayers[oldIndex]
+            oldText.foregroundColor = UIColor.whiteColor().CGColor
         }
         
         // fade away if out of range
         guard items.indices ~= selectedIndex else {
-            CATransaction.setCompletionBlock { [weak self] in
-                guard let me = self else {return}
-                if !(me.items.indices ~= me.selectedIndex){
-                    me.selectionIndicator.removeFromSuperlayer()
-                }
-            }
             selectionIndicator.opacity = 0.0
+            value = nil
             return
         }
         
-        // make sure layers are there
-        if !(textLayers.indices ~= selectedIndex) {
-            setupItems()
-        }
-        if selectionIndicator.superlayer == nil {
-            layer.addSublayer(selectionIndicator)
-        }
+        // selection changed and is visible so must need layout
+        layer.setNeedsLayout()
         
-        let textLayer = textLayers[selectedIndex]
+        let text = textLayers[selectedIndex]
         
-        var newSize = textLayer.preferredFrameSize()
-        newSize.width += 10
-        newSize.height = 20
         if !(items.indices ~= oldIndex) {
             // had no selection so dont animate movement
             CATransaction.disableActions {
-                self.updateIndicatorFrame()
                 self.layer.layoutIfNeeded()
-                textLayer.foregroundColor = kCaptureTintColor.CGColor
+                text.foregroundColor = kCaptureTintColor.CGColor
             }
             selectionIndicator.opacity = 1.0
         }else{
-            CATransaction.performBlock{
-                CATransaction.setAnimationDuration(CATransaction.animationDuration() * 2)
-                textLayer.foregroundColor = kCaptureTintColor.CGColor
+            layer.layoutIfNeeded()
+            CATransaction.performBlock(CATransaction.animationDuration() * 2) {
+                text.foregroundColor = kCaptureTintColor.CGColor
             }
-            updateIndicatorFrame()
         }
         
         // trigger action
+        value = items[selectedIndex].value
         setValueAction?(items[selectedIndex].value)
     }
     
+    private var touchBounds = [CGRect]()
     private let tapGesture = UITapGestureRecognizer()
     func handleTapGesture(gesture: UITapGestureRecognizer){
         let tapCoords = gesture.locationInView(self)
-        guard CGRectContainsPoint(bounds, tapCoords) else { return }
-        let itemLength = bounds.width / CGFloat(items.count)
-        selectedIndex = Int( floor( tapCoords.x / itemLength ) )
+        for (i, touchBound) in touchBounds.enumerate() {
+            if touchBound.contains(tapCoords) {
+                selectedIndex = i
+                break
+            }
+        }
     }
     
-    private var textLayers: [CATextLayer] = []
+    private var textLayers = [CATextLayer]()
     private func setupItems() {
         textLayers.forEach { $0.removeFromSuperlayer() }
         textLayers = []
@@ -128,22 +119,27 @@ class OptionControl<V: Equatable>: Control {
     
     override func layoutSublayersOfLayer(layer: CALayer) {
         super.layoutSublayersOfLayer(layer)
+        let extraSpace = textLayers.reduce(bounds.width) {
+            $0 - $1.preferredFrameSize().width
+        }
+        let space = extraSpace / CGFloat(textLayers.count + 1)
         
-        var nextXPosition: CGFloat = 0
+        var nextX: CGFloat = space
+        touchBounds = []
         
-        textLayers.forEach {
-            let textLayer = $0
+        textLayers.forEach { (textLayer) in
+            var textRect = CGRectZero
+            textRect.size = textLayer.preferredFrameSize()
+            textRect.origin.x = nextX
+            textRect.origin.y = (bounds.height - textRect.height) * 0.5
             
-            let pSize = textLayer.preferredFrameSize()
-            var itemRect = bounds
-            itemRect.origin.x = nextXPosition
-            itemRect.origin.y = (bounds.height - pSize.height) * 0.5
-            itemRect.size.width /= CGFloat(items.count)
-            itemRect.size.height = pSize.height
+            textLayer.frame = textRect
             
-            textLayer.frame = itemRect
-            
-            nextXPosition += itemRect.width
+            nextX += textRect.width + space
+            var touchBound = CGRectInset(textRect, -(space / 2), 0)
+            touchBound.origin.y = 0
+            touchBound.size.height = bounds.height
+            touchBounds.append(touchBound)
         }
         updateIndicatorFrame()
     }
@@ -175,13 +171,13 @@ class OptionControl<V: Equatable>: Control {
         selectionIndicator.opacity = 0.0
         selectionIndicator.frame = CGRectMake(0, 0, 40, 20)
         selectionIndicator.zPosition = -100
+        layer.addSublayer(selectionIndicator)
         
         setupItems()
         
         let indexRange = items.startIndex ..< items.endIndex
         if(indexRange ~= selectedIndex){
             selectionIndicator.opacity = 1.0
-            layer.addSublayer(selectionIndicator)
             selectionChanged(-1)
         }
     }
