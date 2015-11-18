@@ -204,6 +204,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         sessionController.captureStillPhoto()
     }
     func galleryPressed() {
+        switchToLayout(.Normal)
         delegate?.showPhotoBrowser()
     }
     
@@ -232,6 +233,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
     }
     
     func sessionControllerNotification(notification: CSNotification) {
+        var hideTimerCount = 0
         switch notification {
         case .capturingStillImage(true):
             
@@ -254,6 +256,20 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         case .sessionRunning(false):
             
             switchToLayout(.DisassembleControls)
+            
+        case .imageSaved:
+        
+            UIView.animateWithDuration(0.2,
+                delay: 0.0,
+                options: .BeginFromCurrentState, animations: {
+                    self.galleryButton.alpha = 1.0
+                }, completion: nil)
+
+//            UIView.animateWithDuration(0.2,
+//                delay: 1.2,
+//                options: .BeginFromCurrentState, animations: {
+//                    self.galleryButton.alpha = 0.0
+//                }, completion: nil)
             
         default:  break
         }

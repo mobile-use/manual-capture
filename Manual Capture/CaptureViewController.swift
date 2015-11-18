@@ -199,50 +199,50 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
 //    }
 
     
-//    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-//        controlView.backgroundColor = UIColor.clearColor()
-//        let oldSuperlayer = controlView.sessionController.previewLayer.superlayer
-//        let pLayer = controlView.sessionController.previewLayer
-//        pLayer.removeFromSuperlayer()
-//        pLayer.zPosition = -100
-//        view.layer.addSublayer(pLayer)
-//        
-//        let dur = coordinator.transitionDuration()
-//        
-//        let deltaTransform = coordinator.targetTransform()
-//        let deltaAngle = atan2(deltaTransform.b, deltaTransform.a)
-//        
-//        var currentRotation = CGFloat( view.layer.valueForKeyPath("transform.rotation.z")?.floatValue ?? 0 )
-//        let oldRotation = currentRotation
-//        
-//        currentRotation += -1 * deltaAngle + 0.0001
-//        
-//        let options: UIViewAnimationOptions = [.CurveLinear, .BeginFromCurrentState]
-//        UIView.animateWithDuration(0.3, delay: 0, options: options, animations: { self.controlView.alpha = 0.0 }) { (_) in
-//            
-//            self.controlView.layer.setValue(deltaAngle, forKeyPath: "transform.rotation.z")
-//            
-//            UIView.animateWithDuration(0.3, delay: dur*0.02, options: options, animations: { self.controlView.alpha = 1.0 }) { (_) in
-//            }
-//        }
-//        
-//        coordinator.animateAlongsideTransition({(_) in
-//            self.view.layer.setValue(currentRotation, forKeyPath: "transform.rotation.z")
-//            }, completion: { (_) in
-//                self.controlView.layer.setValue(oldRotation, forKeyPath: "transform.rotation.z")
-//                self.view.layer.setValue(oldRotation, forKeyPath: "transform.rotation.z")
-//                
-//                let orient = UIApplication.sharedApplication().statusBarOrientation
-//                self.controlView.sessionController.previewLayer.connection?.videoOrientation = AVCaptureVideoOrientation(ui:orient)
-//                
-//                pLayer.removeFromSuperlayer()
-//                oldSuperlayer?.addSublayer(pLayer)
-//        })
-//        
-//        
-//        
-//        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-//    }
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        controlView.backgroundColor = UIColor.clearColor()
+        let oldSuperlayer = controlView.sessionController.previewLayer.superlayer
+        let pLayer = controlView.sessionController.previewLayer
+        pLayer.removeFromSuperlayer()
+        pLayer.zPosition = -100
+        view.layer.addSublayer(pLayer)
+        
+        let dur = coordinator.transitionDuration()
+        
+        let deltaTransform = coordinator.targetTransform()
+        let deltaAngle = atan2(deltaTransform.b, deltaTransform.a)
+        
+        var currentRotation = CGFloat( view.layer.valueForKeyPath("transform.rotation.z")?.floatValue ?? 0 )
+        let oldRotation = currentRotation
+        
+        currentRotation += -1 * deltaAngle + 0.0001
+        
+        let options: UIViewAnimationOptions = [.CurveLinear, .BeginFromCurrentState]
+        UIView.animateWithDuration(0.3, delay: 0, options: options, animations: { self.controlView.alpha = 0.0 }) { (_) in
+            
+            self.controlView.layer.setValue(deltaAngle, forKeyPath: "transform.rotation.z")
+            
+            UIView.animateWithDuration(0.3, delay: dur*0.02, options: options, animations: { self.controlView.alpha = 1.0 }) { (_) in
+            }
+        }
+        
+        coordinator.animateAlongsideTransition({(_) in
+            self.view.layer.setValue(currentRotation, forKeyPath: "transform.rotation.z")
+            }, completion: { (_) in
+                self.controlView.layer.setValue(oldRotation, forKeyPath: "transform.rotation.z")
+                self.view.layer.setValue(oldRotation, forKeyPath: "transform.rotation.z")
+                
+                let orient = UIApplication.sharedApplication().statusBarOrientation
+                self.controlView.sessionController.previewLayer.connection?.videoOrientation = AVCaptureVideoOrientation(ui:orient)
+                
+                pLayer.removeFromSuperlayer()
+                oldSuperlayer?.addSublayer(pLayer)
+        })
+        
+        
+        
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    }
     
     
     override func prefersStatusBarHidden() -> Bool {return true}

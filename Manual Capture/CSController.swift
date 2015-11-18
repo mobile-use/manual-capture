@@ -76,6 +76,7 @@ enum CSSet {
 // notification type
 enum CSNotification {
     case capturingStillImage(Bool)
+    case imageSaved
     case cameraSubjectAreaChange
     case sessionRunning(Bool)
 }
@@ -631,6 +632,8 @@ class CSController: NSObject {
                 
                 ALAssetsLibrary().writeImageToSavedPhotosAlbum(croppedImage, orientation: orientation) {
                     (path, error) in
+                    
+                    self.notify(.imageSaved)
                     
                     guard error == nil else {
                         
