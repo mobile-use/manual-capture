@@ -117,6 +117,14 @@ class OptionControl<V: Equatable>: Control {
         }
     }
     
+    override func intrinsicContentSize() -> CGSize {
+        let minSpacing: CGFloat = 15.0
+        let width = textLayers.reduce(minSpacing) { (widthSum, textLayer) -> CGFloat in
+            return widthSum + textLayer.preferredFrameSize().width + minSpacing
+        }
+        return CGSizeMake(width, 30.0)
+    }
+    
     override func layoutSublayersOfLayer(layer: CALayer) {
         super.layoutSublayersOfLayer(layer)
         let extraSpace = textLayers.reduce(bounds.width) {
@@ -186,10 +194,10 @@ class OptionControl<V: Equatable>: Control {
         self.init(items: items, selectedIndex: sIndex, frame: frame)
     }
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    override func intrinsicContentSize() -> CGSize { return CGSizeMake(100, 60) }
+    
     override func contentCompressionResistancePriorityForAxis(axis: UILayoutConstraintAxis) -> UILayoutPriority {
         switch axis {
-        case .Horizontal: return UILayoutPriorityDefaultLow
+        case .Horizontal: return UILayoutPriorityDefaultHigh
         case .Vertical: return UILayoutPriorityDefaultHigh
         }
     }

@@ -31,9 +31,10 @@
 		3D5111C71B7E031000FCF97F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5111C61B7E031000FCF97F /* QuartzCore.framework */; };
 		3D5111C91B7EC12F00FCF97F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5111C81B7EC12F00FCF97F /* CoreGraphics.framework */; };
 		3D5416B81BC79EAE00922A2B /* OptionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5416B71BC79EAE00922A2B /* OptionControl.swift */; };
+		3D5598FF1BFB070800C65CA6 /* VolumeButtonHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5598FE1BFB070800C65CA6 /* VolumeButtonHandler.swift */; };
 		3D70987A1B85502500AA49C2 /* CaptureShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7098791B85502500AA49C2 /* CaptureShutterButton.swift */; };
 		3DADC33C1BC4D4C000A74BC2 /* CaptureModeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */; };
-		3DADC33E1BC4D97D00A74BC2 /* CaptureControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33D1BC4D97D00A74BC2 /* CaptureControlPanel.swift */; };
+		3DADC33E1BC4D97D00A74BC2 /* ControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,9 +85,10 @@
 		3D5111C61B7E031000FCF97F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3D5111C81B7EC12F00FCF97F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3D5416B71BC79EAE00922A2B /* OptionControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionControl.swift; sourceTree = "<group>"; };
+		3D5598FE1BFB070800C65CA6 /* VolumeButtonHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeButtonHandler.swift; sourceTree = "<group>"; };
 		3D7098791B85502500AA49C2 /* CaptureShutterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureShutterButton.swift; sourceTree = "<group>"; };
 		3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureModeControl.swift; sourceTree = "<group>"; };
-		3DADC33D1BC4D97D00A74BC2 /* CaptureControlPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureControlPanel.swift; sourceTree = "<group>"; };
+		3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlPanel.swift; sourceTree = "<group>"; };
 		B0E08305CA5C18E1A0E27AF1 /* Pods-Manual Capture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture.release.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture.release.xcconfig"; sourceTree = "<group>"; };
 		E7DC703AD333ED3A815C8109 /* Pods-Manual Capture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,7 +128,7 @@
 			children = (
 				0F2ED8D51BA92E1200F9332D /* CaptureView.swift */,
 				0FC510E21BBD13EE00E4D0D8 /* CapturePreviewLayer.swift */,
-				3DADC33D1BC4D97D00A74BC2 /* CaptureControlPanel.swift */,
+				3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */,
 				3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */,
 				3D5416B71BC79EAE00922A2B /* OptionControl.swift */,
 				3D7098791B85502500AA49C2 /* CaptureShutterButton.swift */,
@@ -189,6 +191,7 @@
 				3D4F17A61B73883500D4D74F /* Main.storyboard */,
 				0F46E44B1B9DACAE000E32D1 /* CaptureViewController.swift */,
 				0F46E4471B9D7DD0000E32D1 /* CSController.swift */,
+				3D5598FE1BFB070800C65CA6 /* VolumeButtonHandler.swift */,
 				0F46E4491B9D84C7000E32D1 /* CaptureExtentions.swift */,
 				3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */,
 				0FB784171BA0229C00C7FDA7 /* UI Classes */,
@@ -428,13 +431,14 @@
 				3D5416B81BC79EAE00922A2B /* OptionControl.swift in Sources */,
 				0F46E44C1B9DACAE000E32D1 /* CaptureViewController.swift in Sources */,
 				0F46E4481B9D7DD0000E32D1 /* CSController.swift in Sources */,
+				3D5598FF1BFB070800C65CA6 /* VolumeButtonHandler.swift in Sources */,
 				0FD828C81BB7A05F004162F0 /* ManualCaptureGlyph.swift in Sources */,
 				0FE500B71BB50ECA00D5B13D /* SmartSliderKnobLayer.swift in Sources */,
 				3D70987A1B85502500AA49C2 /* CaptureShutterButton.swift in Sources */,
 				0F46E44A1B9D84C7000E32D1 /* CaptureExtentions.swift in Sources */,
 				0F10EDF41BA1404B007E722A /* VPHandler.swift in Sources */,
 				3D4EAB191B8410CC00C2F110 /* CaptureControlLabel.swift in Sources */,
-				3DADC33E1BC4D97D00A74BC2 /* CaptureControlPanel.swift in Sources */,
+				3DADC33E1BC4D97D00A74BC2 /* ControlPanel.swift in Sources */,
 				3DADC33C1BC4D4C000A74BC2 /* CaptureModeControl.swift in Sources */,
 				0FC510E31BBD13EE00E4D0D8 /* CapturePreviewLayer.swift in Sources */,
 				3D4F17A31B73883500D4D74F /* AppDelegate.swift in Sources */,

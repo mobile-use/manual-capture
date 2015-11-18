@@ -131,7 +131,7 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
             return (direction.axis == .Horizontal) ? 120.0 : 180.0
             //return (direction.axis == .Horizontal) ? 50 : 75
         }else {
-            return (direction.axis == .Horizontal) ? 100.0 : 150.0
+            return (direction.axis == .Horizontal) ? 90.0 : 135.0
             //return (direction.axis == .Horizontal) ? 50 : 75
         }
     }

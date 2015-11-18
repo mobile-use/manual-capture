@@ -156,9 +156,7 @@ class CSController: NSObject {
         super.init()
         
         unowned let me = self
-        let captureBlock = { me.captureStillPhoto() }
-        volumeButtonHandler.downBlock = captureBlock
-        volumeButtonHandler.upBlock = captureBlock
+        volumeButtonHandler.action = { me.captureStillPhoto() }
         
         
         requestCameraAccess(){
@@ -654,7 +652,7 @@ class CSController: NSObject {
     
     
     
-    private func _normalizeGains(var g:AVCaptureWhiteBalanceGains) -> AVCaptureWhiteBalanceGains{
+    func _normalizeGains(var g:AVCaptureWhiteBalanceGains) -> AVCaptureWhiteBalanceGains{
         
         let maxGain = camera.maxWhiteBalanceGain - 0.001
         

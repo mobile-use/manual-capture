@@ -95,6 +95,14 @@ class CaptureModeControl: Control {
         }
     }
     
+    override func intrinsicContentSize() -> CGSize {
+        let spacing: CGFloat = 5.0
+        let width = textLayers.reduce(spacing) { (width, textLayer) -> CGFloat in
+            return width + textLayer.preferredFrameSize().width + spacing
+        }
+        return CGSizeMake(width, 30.0)
+    }
+    
     override func layoutSublayersOfLayer(layer: CALayer) {
         super.layoutSublayersOfLayer(layer)
         

@@ -1,5 +1,5 @@
 //
-//  CaptureControlPanel.swift
+//  ControlPanel.swift
 //  Capture
 //
 //  Created by Jean Flaherty on 10/7/15.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class CaptureControlPanel: UIView {
+class ControlPanel: UIView {
 
-    let rows: [CaptureControlPanelRow]
+    let rows: [Row]
     
-    init(rows: [CaptureControlPanelRow], frame: CGRect){
+    init(rows: [Row], frame: CGRect){
         self.rows = rows
         super.init(frame: frame)
         
@@ -39,7 +39,6 @@ class CaptureControlPanel: UIView {
         case .Vertical: return UILayoutPriorityDefaultHigh
         }
     }
-    
     override func contentHuggingPriorityForAxis(axis: UILayoutConstraintAxis) -> UILayoutPriority {
         switch axis {
         case .Horizontal: return UILayoutPriorityDefaultLow
@@ -49,7 +48,7 @@ class CaptureControlPanel: UIView {
     
     func initRows() {
         contentHeight = 0
-        var nextTopConstraint = { (row:CaptureControlPanelRow) -> NSLayoutConstraint in
+        var nextTopConstraint = { (row:Row) -> NSLayoutConstraint in
             return NSLayoutConstraint(
                 item: row.view,
                     attribute: .Top, relatedBy: .Equal,
@@ -98,7 +97,7 @@ class CaptureControlPanel: UIView {
             
             // Prepare For Next Row
             contentHeight += row.height
-            nextTopConstraint = { (nextRow:CaptureControlPanelRow) -> NSLayoutConstraint in
+            nextTopConstraint = { (nextRow: Row) -> NSLayoutConstraint in
                 return NSLayoutConstraint(
                     item: nextRow.view,
                         attribute: .Top, relatedBy: .Equal,
@@ -112,34 +111,57 @@ class CaptureControlPanel: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    struct Row {
+        let height: CGFloat
+        let view: UIView
+        var hConstraintsFormat: String?
+        
+        init(view: UIView, height: CGFloat = 50){
+            self.view = view
+            self.height = height
+        }
+        
+        init(view: UIView, height: CGFloat, hConstraintsFormat: String){
+            self.view = view
+            self.height = height
+            self.hConstraintsFormat = hConstraintsFormat
+        }
+        
+        init(view: UIView, type: Type){
+            let settings = ControlPanel.Row.settings(type)
+            self.init(view: view,
+                height: settings.height,
+                hConstraintsFormat: settings.hConstraintsFormat)
+        }
+        
+        init(_ modeControl: CaptureModeControl) {
+            self.init(view: modeControl, type: .ModeControl)
+        }
+        
+        init<V: Equatable>(_ optionControl: OptionControl<V>) {
+            self.init(view: optionControl, type: .OptionControl)
+        }
+        
+        init(_ slider: Slider) {
+            self.init(view: slider, type: .Slider)
+        }
+        
+        typealias Settings = (height: CGFloat, hConstraintsFormat: String)
+        
+        enum Type {
+            case Slider, OptionControl, ModeControl
+        }
+        
+        private static func settings(type:Type) -> Settings {
+            switch type {
+            case .Slider:
+                return (40, "|-20-[Row(<=250)]-20-|")
+            case .OptionControl, .ModeControl:
+                return (30, "|->=10-[Row(>=150)]->=10-|")
+            }
+        }
+        
+    }
 
-}
-
-struct CaptureControlPanelRow {
-    let height: CGFloat
-    let view: UIView
-    var hConstraintsFormat: String?
-    
-    init(view: UIView, height: CGFloat = 50){
-        self.view = view
-        self.height = height
-    }
-    
-    init(view: UIView, height: CGFloat, hConstraintsFormat: String){
-        self.view = view
-        self.height = height
-        self.hConstraintsFormat = hConstraintsFormat
-    }
-    
-    static func fromModeControl(modeControl: CaptureModeControl) -> CaptureControlPanelRow {
-        return self.init(view: modeControl, height: 30, hConstraintsFormat: "|->=10-[Row(==150)]->=10-|")
-    }
-    
-    static func fromOptionControl<V: Equatable>(optionControl: OptionControl<V>) -> CaptureControlPanelRow {
-        return self.init(view: optionControl, height: 30, hConstraintsFormat: "|->=10-[Row(==150)]->=10-|")
-    }
-    
-    static func fromSlider<S: Slider>(slider: S) -> CaptureControlPanelRow {
-        return self.init(view: slider, height: 40, hConstraintsFormat: "|-20-[Row(<=250)]-20-|")
-    }
 }

@@ -9,7 +9,8 @@
 import UIKit
 import AVFoundation
 
-let kExposureDurationPower: Double = 6
+private let kExposureDurationPower: Double = 6
+private let kMainSliderHideDelay: Double = 1.0
 
 protocol CaptureViewDelegate {
     func showPhotoBrowser()
@@ -19,7 +20,6 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
     
     var delegate: CaptureViewDelegate?
     var sessionController: CSController
-    var volumeButtonHandler: JPSVolumeButtonHandler!
     
     override init(frame:CGRect) {
         sessionController = CSController()
@@ -70,7 +70,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         if let controlPanel = currentControlPanel where touch.view!.isDescendantOfView(controlPanel) {
             return false
         }
-        if touch.view!.isKindOfClass(UIButton) || touch.view!.isKindOfClass(CaptureControlPanel) {
+        if touch.view!.isKindOfClass(UIButton) || touch.view!.isKindOfClass(ControlPanel) {
             return false// allows button to recieve touch down for button pressed look
         }
         
@@ -286,7 +286,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         ("Aspect Ratio", .AspectRatio) ]
     )
     
-    private var currentControlPanel: CaptureControlPanel?
+    private var currentControlPanel: ControlPanel?
     
     // MARK: Layout Related
     
@@ -294,9 +294,9 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         
         unowned let me = self
         
-        func setUpControlPanel(rows:[CaptureControlPanelRow], inout _ layout: Layout) {
+        func setUpControlPanel(rows:[ControlPanel.Row], inout _ layout: Layout) {
             
-            let controlPanel = CaptureControlPanel(
+            let controlPanel = ControlPanel(
                 
                 rows: rows,
                 
@@ -718,7 +718,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                     
                     sliderBounds: nil,
                     
-                    52
+                    42
                     
                 )
                 
@@ -855,8 +855,8 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                         }
                         
                         if removed.contains(.Current) && shouldHide {
-                            
-                            UIView.animateWithDuration(0.2) {
+                            let duration: NSTimeInterval = (Control.currentControl != nil) ? 0.2 : 0.4
+                            UIView.animateWithDuration(duration) {
                                 slider.alpha = 0.0
                             }
                         }
@@ -874,7 +874,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                     
                     slider.actionEnded = { [unowned slider] in
                         
-                        let delayNSEC = 3 * Double(NSEC_PER_SEC)
+                        let delayNSEC = kMainSliderHideDelay * Double(NSEC_PER_SEC)
                         
                         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayNSEC))
                         
@@ -1132,6 +1132,10 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
             }
             
+            sessionController.set(.cameraExposureMode(.ContinuousAutoExposure))
+            sessionController.set(.cameraFocusMode(.ContinuousAutoFocus))
+            sessionController.set(.cameraWhiteBalanceMode(.ContinuousAutoWhiteBalance))
+            
         case .Normal: // MARK: Normal
             
             
@@ -1183,7 +1187,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             setUpControlPanel([
                 
-                CaptureControlPanelRow.fromOptionControl(modeControl)
+                ControlPanel.Row(modeControl)
                 
                 ], &newLayout)
             
@@ -1215,9 +1219,9 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             newLayout.temp(&sessionController.voBlocks.exposureMode[voKey])
             
             
-            let rows: [CaptureControlPanelRow] = [
+            let rows: [ControlPanel.Row] = [
                 
-                CaptureControlPanelRow.fromOptionControl(modeControl)
+                ControlPanel.Row(modeControl)
                 
             ]
             
@@ -1248,13 +1252,11 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             newLayout.temp(&sessionController.voBlocks.whiteBalanceMode[voKey])
             
-            
-            
-            let rows: [CaptureControlPanelRow] = [
+            let rows: [ControlPanel.Row] = [
                 
-                CaptureControlPanelRow.fromOptionControl(modeControl),
+                ControlPanel.Row(modeControl),
                 
-                CaptureControlPanelRow.fromSlider(sliders.tint)
+                ControlPanel.Row(sliders.tint)
                 
             ]
             
@@ -1268,7 +1270,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             setUpControlPanel([
                 
-                CaptureControlPanelRow.fromSlider(me.sliders.zoom)
+                ControlPanel.Row(me.sliders.zoom)
                 
                 ], &newLayout)
             
@@ -1287,7 +1289,9 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                     
                     ("3:2", CSAspectRatioMake(3,2)),
                     
-                    ("Square", CSAspectRatioMake(1,1))
+                    ("Square", CSAspectRatioMake(1,1)),
+                    
+                    ("Portrait", CSAspectRatioMake(3,4))
                     
                 ],
                 
@@ -1313,7 +1317,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             setUpControlPanel([
                 
-                CaptureControlPanelRow.fromOptionControl(optionControl)
+                ControlPanel.Row(optionControl)
                 
                 ], &newLayout)
             
@@ -1360,17 +1364,11 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         
         CATransaction.setAnimationDuration(duration)
         
-        
-        
-        UIView.animateWithDuration(
-            
-            duration,
-            
+        UIView.animateWithDuration(duration,
+            delay: 0.0,
+            options: .BeginFromCurrentState,
             animations: layout.exitPerformer,
-            
-            completion: layout.exitCompleter
-            
-        )
+            completion: layout.exitCompleter)
         
         
         
@@ -1395,12 +1393,10 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         
         
         UIView.animateWithDuration(duration,
-            
+            delay: 0.0,
+            options: .BeginFromCurrentState,
             animations: layout.entrancePerformer,
-            
-            completion: layout.entranceCompleter
-            
-        )
+            completion: layout.entranceCompleter)
         
         
         
@@ -1668,13 +1664,22 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
                 
-                "V:|-m-[S]-m-|",
+                "V:|->=m-[S(==450@250)]->=m-|",
                 options: .DirectionLeftToRight,
                 metrics: [ "m" : my ],
                 views: [ "S" : slider ]
             
             )
             
+            let lowPriorityCenterYConstraint = NSLayoutConstraint(
+                item: slider,
+                attribute: .CenterY, relatedBy: .Equal,
+                toItem: self,
+                attribute: .CenterY, multiplier: 1, constant: 0
+            )
+            lowPriorityCenterYConstraint.priority = UILayoutPriorityDefaultLow
+            
+            constraints.append(lowPriorityCenterYConstraint)
             constraints.appendContentsOf(hConstraints)
             constraints.appendContentsOf(vConstraints)
             
@@ -1699,13 +1704,22 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
                 
-                "V:|-m-[S]-m-|",
+                "V:|->=m-[S(==450@250)]->=m-|",
                 options: .DirectionLeftToRight,
                 metrics: [ "m" : my ],
                 views: [ "S" : slider ]
             
             )
             
+            let lowPriorityCenterYConstraint = NSLayoutConstraint(
+                item: slider,
+                attribute: .CenterY, relatedBy: .Equal,
+                toItem: self,
+                attribute: .CenterY, multiplier: 1, constant: 0
+            )
+            lowPriorityCenterYConstraint.priority = UILayoutPriorityDefaultLow
+            
+            constraints.append(lowPriorityCenterYConstraint)
             constraints.appendContentsOf(hConstraints)
             constraints.appendContentsOf(vConstraints)
             
@@ -1728,13 +1742,22 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
                 
-                "H:|-m-[S]-m-|",
+                "H:|->=m-[S(==450@250)]->=m-|",
                 options: .DirectionLeftToRight,
                 metrics: [ "m" : mx ],
                 views: [ "S" : slider ]
             
             )
             
+            let lowPriorityCenterXConstraint = NSLayoutConstraint(
+                item: slider,
+                attribute: .CenterX, relatedBy: .Equal,
+                toItem: self,
+                attribute: .CenterX, multiplier: 1, constant: 0
+            )
+            lowPriorityCenterXConstraint.priority = UILayoutPriorityDefaultLow
+            
+            constraints.append(lowPriorityCenterXConstraint)
             constraints.appendContentsOf(hConstraints)
             constraints.appendContentsOf(vConstraints)
             
@@ -1758,13 +1781,22 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
                 
-                "H:|-m-[S]-m-|",
+                "H:|->=m-[S(==450@250)]->=m-|",
                 options: .DirectionLeftToRight,
                 metrics: ["m": mx],
                 views: ["S":slider]
             
             )
             
+            let lowPriorityCenterXConstraint = NSLayoutConstraint(
+                item: slider,
+                attribute: .CenterX, relatedBy: .Equal,
+                toItem: self,
+                attribute: .CenterX, multiplier: 1, constant: 0
+            )
+            lowPriorityCenterXConstraint.priority = UILayoutPriorityDefaultLow
+            
+            constraints.append(lowPriorityCenterXConstraint)
             constraints.appendContentsOf(hConstraints)
             constraints.appendContentsOf(vConstraints)
          
