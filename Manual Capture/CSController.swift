@@ -616,11 +616,30 @@ class CSController: NSObject {
                     width: min( image.size.height * self.cropAspectRatio, image.size.width),
                     height: min( image.size.width / self.cropAspectRatio, image.size.height)
                 )
-                let cropRect = CGRectInset(
+                var cropRect = CGRectInset(
                     CGRectMake(0, 0, image.size.width, image.size.height), // original rect
                     (image.size.width - scaled.width) / 2 , // clipped width
                     (image.size.height - scaled.height) / 2 // clipped height
                 )
+                
+                var cropTransForm: CGAffineTransform {
+                    func rad(deg:Double)-> CGFloat {
+                        return CGFloat(deg / 180.0 * M_PI)
+                    }
+                    switch (image.imageOrientation)
+                    {
+                    case .Left:
+                        return CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(90)), 0, -image.size.height)
+                    case .Right:
+                        return CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(-90)), -image.size.width, 0)
+                    case .Down:
+                        return CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(-180)), -image.size.width, -image.size.height)
+                    default:
+                        return CGAffineTransformIdentity
+                    }
+                }
+                
+                cropRect = CGRectApplyAffineTransform(cropRect, cropTransForm)
                 
                 guard let croppedImage = CGImageCreateWithImageInRect(image.CGImage, cropRect) else {
                     

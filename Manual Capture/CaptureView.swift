@@ -141,10 +141,10 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         }
     }
     
-    private func startBoundsForType(sbType:StartBoundType, edgeDistance: CGFloat, gestureView: UIView) -> CGRect {
+    private func startBoundsForType(sbType:StartBoundType, gestureView: UIView) -> CGRect {
         let W = gestureView.frame.width
         let H = gestureView.frame.height
-        let E = edgeDistance
+        let E = (sbType.edge == .AlongTop || sbType.edge == .AlongBottom) ? H/2 : W/2
         switch sbType.edge {
         case .AlongTop: return CGRectMake(0, 0, W, E)
         case .AlongRight: return CGRectMake(W - E, 0, E, H)
@@ -233,7 +233,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
     }
     
     func sessionControllerNotification(notification: CSNotification) {
-        var hideTimerCount = 0
+
         switch notification {
         case .capturingStillImage(true):
             
@@ -484,8 +484,6 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                             
                             .RightAlongBottom,
                             
-                            edgeDistance: 160,
-                            
                             gestureView: me
                             
                         )
@@ -543,8 +541,6 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                         me.startBoundsForType(
                             
                             .RightAlongTop,
-                            
-                            edgeDistance: 160,
                             
                             gestureView: self
                         
@@ -662,7 +658,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                     
                     startBounds: {
                         
-                        me.startBoundsForType(.UpAlongLeft, edgeDistance: 240, gestureView: me)
+                        me.startBoundsForType(.UpAlongLeft, gestureView: me)
                     
                     },
                     
@@ -723,8 +719,6 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                         me.startBoundsForType (
                             
                             .UpAlongRight,
-                            
-                            edgeDistance: 240,
                             
                             gestureView: self
                         
@@ -1299,6 +1293,8 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
                 items: [
                     
+                    ("21:9", CSAspectRatioMake(21,9)),
+                    
                     ("16:9", CSAspectRatioMake(16,9)),
                     
                     ("4:3", CSAspectRatioMake(4,3)),
@@ -1433,7 +1429,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             guard bounds != oldValue else { return }
             
-            sessionController.previewLayer.frame = bounds
+            //sessionController.previewLayer.frame = layer.bounds
             
             updateConstraintsForKeys(
                 [
@@ -1680,7 +1676,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
                 
-                "V:|->=m-[S(==450@250)]->=m-|",
+                "V:|->=m-[S(==280@250)]->=m-|",
                 options: .DirectionLeftToRight,
                 metrics: [ "m" : my ],
                 views: [ "S" : slider ]
@@ -1720,7 +1716,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
                 
-                "V:|->=m-[S(==450@250)]->=m-|",
+                "V:|->=m-[S(==280@250)]->=m-|",
                 options: .DirectionLeftToRight,
                 metrics: [ "m" : my ],
                 views: [ "S" : slider ]
@@ -1758,7 +1754,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
                 
-                "H:|->=m-[S(==450@250)]->=m-|",
+                "H:|->=m-[S(==280@250)]->=m-|",
                 options: .DirectionLeftToRight,
                 metrics: [ "m" : mx ],
                 views: [ "S" : slider ]
@@ -1797,7 +1793,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
                 
-                "H:|->=m-[S(==450@250)]->=m-|",
+                "H:|->=m-[S(==280@250)]->=m-|",
                 options: .DirectionLeftToRight,
                 metrics: ["m": mx],
                 views: ["S":slider]
