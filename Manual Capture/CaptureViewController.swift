@@ -22,18 +22,54 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
         view.backgroundColor = UIColor.blackColor()
         view.addSubview(controlView)
         
-        let triggerTime = (Int64(NSEC_PER_SEC) * 2)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue()){
+        delay(2.4) {
             self.allowPortrait = true
             UIViewController.attemptRotationToDeviceOrientation()
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+//        print(view.frame, view.bounds)
+//        print(controlView.frame, controlView.bounds)
+//        print(controlView.sessionController.previewLayer.frame, controlView.sessionController.previewLayer.bounds)
+        
+        controlView.frame = view.superview!.convertRect(view.superview!.bounds, toView: controlView)
+        controlView.frame.origin = CGPointZero
+        controlView.sessionController.previewLayer.frame.size = controlView.bounds.size
+        controlView.sessionController.previewLayer.position = CGPointMake(controlView.bounds.midX, controlView.bounds.midY)
+        previousOrient = UIApplication.sharedApplication().statusBarOrientation
+        UIView.animateWithDuration(0.2){
+             self.controlView.alpha = 1.0
+        }
+        //controlView.sessionController.cropAspectRatio = controlView.sessionController.cropAspectRatio
+        
+//        print(view.frame, view.bounds)
+//        print(controlView.frame, controlView.bounds)
+//        print(controlView.sessionController.previewLayer.frame, controlView.sessionController.previewLayer.bounds)
 
     }
     
-//    override func viewWillLayoutSubviews() {
-//        controlView.frame = view.frame
-//        super.viewWillLayoutSubviews()
-//    }
+    override func viewWillAppear(animated: Bool) {
+        controlView.sessionController.volumeButtonHandler.active = true
+        UIView.animateWithDuration(0){
+            self.controlView.updateConstraintsForKeys(
+                [
+                    .Slider(.Top),
+                    .Slider(.Bottom),
+                    .Slider(.Left),
+                    .Slider(.Right),
+                    .ShutterButton,
+                    .MenuControl,
+                    .GalleryButton,
+                    .ControlPanel
+                ]
+            )
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        controlView.sessionController.volumeButtonHandler.active = false
+    }
     
     
     var allowPortrait = false
@@ -256,77 +292,115 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
     
     var previousOrient: UIInterfaceOrientation? = nil
     var previousCropAspectRatio: CSAspectRatio? = nil
-
+    
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        controlView.backgroundColor = UIColor.clearColor()
+//        controlView.backgroundColor = UIColor.clearColor()
 //        let oldSuperlayer = controlView.sessionController.previewLayer.superlayer
 //        let pLayer = controlView.sessionController.previewLayer
 //        pLayer.removeFromSuperlayer()
 //        pLayer.zPosition = -100
 //        view.layer.addSublayer(pLayer)
         
-        let dur = coordinator.transitionDuration()
+//        let dur = coordinator.transitionDuration()
         
         let oldTransform = (view: view.transform, controlView: controlView.transform)
         let deltaTransform = coordinator.targetTransform()
-        
         let invertTransform = CGAffineTransformInvert(deltaTransform)
-        print(deltaTransform, invertTransform)
-        print(oldTransform)
+        
         
         coordinator.animateAlongsideTransition({(_) in
-            self.view.transform = CGAffineTransformConcat(self.view.transform, invertTransform).rotate(0.0001)
-            print("viewTransform", self.controlView.transform)
-            let angle = atan2(invertTransform.b, invertTransform.a)
-            self.controlView.transform = CGAffineTransformConcat(self.controlView.transform, invertTransform).rotate(-angle)
-            print("controlViewTransform", self.controlView.transform)
-            self.controlView.frame.offsetInPlace(dx: self.view.bounds.midX - self.controlView.frame.midX ,
-                dy: self.view.bounds.midY - self.controlView.frame.midY)
+            UIView.animateWithDuration(0){
+                self.view.frame = coordinator.containerView().bounds
+            }
+            
+            // counter rotate
+            self.view.transform = CGAffineTransformConcat(self.view.transform, invertTransform)
+                .rotate(0.000001)
+            // correct position
+            
+//            self.view.bounds.size = self.view.convertRect(coordinator.containerView().bounds, toView: self.view).size
+//            
+//            self.controlView.frame = self.view.bounds
+            
+            self.controlView.frame.offsetInPlace(dx: (size.width - self.view.frame.width)/2 ,
+                dy: (size.height - self.view.frame.height)/2)
             }, completion: nil)
         
         let options: UIViewAnimationOptions = [.CurveLinear, .BeginFromCurrentState]
         let fadeSpeed = 0.4
-        UIView.animateWithDuration(fadeSpeed/2, delay: 0, options: options, animations: { self.controlView.alpha = 0.0 }) { (_) in
+        UIView.animateWithDuration(fadeSpeed/2, delay: 0, options: options, animations: { self.controlView.alpha = 0.0 }) { _ in
             
             self.view.transform = oldTransform.view
-            self.controlView.transform = oldTransform.controlView
+            
             self.controlView.frame.insetInPlace(dx: (self.controlView.frame.width - size.width)/2,
                 dy: (self.controlView.frame.height - size.height)/2)
             
             let orient = UIApplication.sharedApplication().statusBarOrientation
             self.controlView.sessionController.previewLayer.connection?.videoOrientation = AVCaptureVideoOrientation(ui:orient)
             
+            let currentCropAspectRatio = self.controlView.sessionController.cropAspectRatio
+            
+            guard let previousOrient = self.previousOrient where orient != previousOrient else {
+                self.previousOrient = orient
+                return
+            }
+            self.previousOrient = orient
+            
             CATransaction.disableActions {
-                self.controlView.sessionController.previewLayer.frame = self.controlView.bounds
-                
-                let currentCropAspectRatio = self.controlView.sessionController.cropAspectRatio
-                
-                guard let previousOrient = self.previousOrient where orient != previousOrient else {
-                    self.previousOrient = orient
-                    return
+                self.controlView.sessionController.previewLayer.frame.size = self.controlView.bounds.size
+                self.controlView.sessionController.previewLayer.position = CGPointMake(self.controlView.bounds.midX, self.controlView.bounds.midY)
+            }
+            
+            self.controlView.updateConstraintsForKeys(
+                [
+                    .Slider(.Top),
+                    .Slider(.Bottom),
+                    .Slider(.Left),
+                    .Slider(.Right),
+                    .ShutterButton,
+                    .MenuControl,
+                    .GalleryButton,
+                    .ControlPanel
+                ]
+            )
+            
+            UIView.animateWithDuration(fadeSpeed/2, delay: 0, options: options, animations: { self.controlView.alpha = 1.0 }) { (_) in
+                func teaseAspectRatio() {
+                    let oldLayout = self.controlView.layout.currentMode
+                    self.controlView.menuControl.selectItemWithValue(.AspectRatio)
+                    self.controlView.switchToLayout(.AspectRatio)
+                    delay(0.5){
+                        if self.controlView.layout.currentMode == .AspectRatio {
+                            self.controlView.switchToLayout(oldLayout)
+                        }
+                    }
                 }
-                
                 switch orient {
                 case .LandscapeLeft, .LandscapeRight :
                     switch previousOrient {
-                    case .Portrait, .PortraitUpsideDown where currentCropAspectRatio == CSAspectRatioMake(3, 4) :
-                        self.controlView.sessionController.cropAspectRatio = self.previousCropAspectRatio ?? CSAspectRatioMake(16, 9)
+                    case .Portrait, .PortraitUpsideDown:
+                        if currentCropAspectRatio < 1.0 {
+                            teaseAspectRatio()
+                            delay(0.1){
+                                self.controlView.sessionController.cropAspectRatio = self.previousCropAspectRatio ?? CSAspectRatioMake(16, 9)
+                            }
+                        }
                     default: break
                     }
                 case .Portrait, .PortraitUpsideDown:
                     switch previousOrient {
-                    case .LandscapeLeft, .LandscapeRight where currentCropAspectRatio != CSAspectRatioMake(3, 4):
-                        self.previousCropAspectRatio = self.controlView.sessionController.cropAspectRatio
-                        self.controlView.sessionController.cropAspectRatio = CSAspectRatioMake(3, 4)
+                    case .LandscapeLeft, .LandscapeRight:
+                        if currentCropAspectRatio > 1.0 {
+                            teaseAspectRatio()
+                            delay(0.1) {
+                                self.previousCropAspectRatio = self.controlView.sessionController.cropAspectRatio
+                                self.controlView.sessionController.cropAspectRatio = CSAspectRatioMake(3, 4)
+                            }
+                        }
                     default: break
                     }
                 default: break
                 }
-                self.previousOrient = orient
-            }
-            
-            
-            UIView.animateWithDuration(fadeSpeed/2, delay: dur*0.02, options: options, animations: { self.controlView.alpha = 1.0 }) { (_) in
             }
         }
         

@@ -23,6 +23,10 @@
 		0FEA847F1B944781002135DE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FEA847E1B944781002135DE /* AVFoundation.framework */; };
 		20BE3B89BAA83CFB0D112495 /* libPods-Manual Capture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9B3A91C0C6F3E54AF939C6 /* libPods-Manual Capture.a */; };
 		3D3AA9CE1BCB5FAF00EF2B84 /* SampleImage.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */; };
+		3D3AD8441C01DCBF007583A7 /* CaptureViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8431C01DCBF007583A7 /* CaptureViewController2.swift */; };
+		3D3AD8461C01DF0A007583A7 /* CaptureConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8451C01DF0A007583A7 /* CaptureConstraints.swift */; };
+		3D3AD8481C037B12007583A7 /* CapturePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8471C037B12007583A7 /* CapturePreviewView.swift */; };
+		3D3AD84A1C043389007583A7 /* CSController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8491C043389007583A7 /* CSController2.swift */; };
 		3D4EAB191B8410CC00C2F110 /* CaptureControlLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4EAB181B8410CB00C2F110 /* CaptureControlLabel.swift */; };
 		3D4F17A31B73883500D4D74F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4F17A21B73883500D4D74F /* AppDelegate.swift */; };
 		3D4F17A81B73883500D4D74F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D4F17A61B73883500D4D74F /* Main.storyboard */; };
@@ -33,6 +37,13 @@
 		3D5416B81BC79EAE00922A2B /* OptionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5416B71BC79EAE00922A2B /* OptionControl.swift */; };
 		3D5598FF1BFB070800C65CA6 /* VolumeButtonHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5598FE1BFB070800C65CA6 /* VolumeButtonHandler.swift */; };
 		3D70987A1B85502500AA49C2 /* CaptureShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7098791B85502500AA49C2 /* CaptureShutterButton.swift */; };
+		3D7A9DD11C08867C007C1445 /* PagedGuideContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7A9DD01C08867C007C1445 /* PagedGuideContent.swift */; };
+		3D7A9DD31C094E9E007C1445 /* PagedGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7A9DD21C094E9E007C1445 /* PagedGuide.swift */; };
+		3D7A9DD51C097CB3007C1445 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D7A9DD41C097CB3007C1445 /* MediaPlayer.framework */; };
+		3D7A9DDE1C09DF09007C1445 /* TestFoot1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D7A9DDA1C09DF09007C1445 /* TestFoot1.mov */; };
+		3D7A9DDF1C09DF09007C1445 /* TestFoot2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D7A9DDB1C09DF09007C1445 /* TestFoot2.mov */; };
+		3D7A9DE01C09DF09007C1445 /* TestFoot3.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D7A9DDC1C09DF09007C1445 /* TestFoot3.mov */; };
+		3D7A9DE11C09DF09007C1445 /* TestFoot4.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D7A9DDD1C09DF09007C1445 /* TestFoot4.mov */; };
 		3DADC33C1BC4D4C000A74BC2 /* CaptureModeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */; };
 		3DADC33E1BC4D97D00A74BC2 /* ControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +84,10 @@
 		0FFFDDB11BA7F35A002432FB /* ObjcBridgeHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcBridgeHeader.h; sourceTree = "<group>"; };
 		3C9B3A91C0C6F3E54AF939C6 /* libPods-Manual Capture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Manual Capture.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SampleImage.JPG; sourceTree = "<group>"; };
+		3D3AD8431C01DCBF007583A7 /* CaptureViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController2.swift; sourceTree = "<group>"; };
+		3D3AD8451C01DF0A007583A7 /* CaptureConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureConstraints.swift; sourceTree = "<group>"; };
+		3D3AD8471C037B12007583A7 /* CapturePreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapturePreviewView.swift; sourceTree = "<group>"; };
+		3D3AD8491C043389007583A7 /* CSController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSController2.swift; sourceTree = "<group>"; };
 		3D4EAB181B8410CB00C2F110 /* CaptureControlLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CaptureControlLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3D4F179F1B73883500D4D74F /* Capture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D4F17A21B73883500D4D74F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +102,13 @@
 		3D5416B71BC79EAE00922A2B /* OptionControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionControl.swift; sourceTree = "<group>"; };
 		3D5598FE1BFB070800C65CA6 /* VolumeButtonHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeButtonHandler.swift; sourceTree = "<group>"; };
 		3D7098791B85502500AA49C2 /* CaptureShutterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureShutterButton.swift; sourceTree = "<group>"; };
+		3D7A9DD01C08867C007C1445 /* PagedGuideContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedGuideContent.swift; sourceTree = "<group>"; };
+		3D7A9DD21C094E9E007C1445 /* PagedGuide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedGuide.swift; sourceTree = "<group>"; };
+		3D7A9DD41C097CB3007C1445 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		3D7A9DDA1C09DF09007C1445 /* TestFoot1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = TestFoot1.mov; sourceTree = "<group>"; };
+		3D7A9DDB1C09DF09007C1445 /* TestFoot2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = TestFoot2.mov; sourceTree = "<group>"; };
+		3D7A9DDC1C09DF09007C1445 /* TestFoot3.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = TestFoot3.mov; sourceTree = "<group>"; };
+		3D7A9DDD1C09DF09007C1445 /* TestFoot4.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = TestFoot4.mov; sourceTree = "<group>"; };
 		3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureModeControl.swift; sourceTree = "<group>"; };
 		3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlPanel.swift; sourceTree = "<group>"; };
 		B0E08305CA5C18E1A0E27AF1 /* Pods-Manual Capture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture.release.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture.release.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D7A9DD51C097CB3007C1445 /* MediaPlayer.framework in Frameworks */,
 				0FEA847F1B944781002135DE /* AVFoundation.framework in Frameworks */,
 				3D5111C91B7EC12F00FCF97F /* CoreGraphics.framework in Frameworks */,
 				3D5111C71B7E031000FCF97F /* QuartzCore.framework in Frameworks */,
@@ -128,6 +151,7 @@
 			children = (
 				0F2ED8D51BA92E1200F9332D /* CaptureView.swift */,
 				0FC510E21BBD13EE00E4D0D8 /* CapturePreviewLayer.swift */,
+				3D3AD8471C037B12007583A7 /* CapturePreviewView.swift */,
 				3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */,
 				3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */,
 				3D5416B71BC79EAE00922A2B /* OptionControl.swift */,
@@ -189,11 +213,20 @@
 				0FFFDDB11BA7F35A002432FB /* ObjcBridgeHeader.h */,
 				3D4F17A21B73883500D4D74F /* AppDelegate.swift */,
 				3D4F17A61B73883500D4D74F /* Main.storyboard */,
+				3D7A9DD01C08867C007C1445 /* PagedGuideContent.swift */,
+				3D7A9DD21C094E9E007C1445 /* PagedGuide.swift */,
 				0F46E44B1B9DACAE000E32D1 /* CaptureViewController.swift */,
+				3D3AD8431C01DCBF007583A7 /* CaptureViewController2.swift */,
+				3D3AD8451C01DF0A007583A7 /* CaptureConstraints.swift */,
 				0F46E4471B9D7DD0000E32D1 /* CSController.swift */,
+				3D3AD8491C043389007583A7 /* CSController2.swift */,
 				3D5598FE1BFB070800C65CA6 /* VolumeButtonHandler.swift */,
 				0F46E4491B9D84C7000E32D1 /* CaptureExtentions.swift */,
 				3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */,
+				3D7A9DDA1C09DF09007C1445 /* TestFoot1.mov */,
+				3D7A9DDB1C09DF09007C1445 /* TestFoot2.mov */,
+				3D7A9DDC1C09DF09007C1445 /* TestFoot3.mov */,
+				3D7A9DDD1C09DF09007C1445 /* TestFoot4.mov */,
 				0FB784171BA0229C00C7FDA7 /* UI Classes */,
 				3D4F17A91B73883500D4D74F /* Assets.xcassets */,
 				3D4F17AB1B73883500D4D74F /* LaunchScreen.storyboard */,
@@ -205,6 +238,7 @@
 		8FFB1C14B6A6C64DF6AD76E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3D7A9DD41C097CB3007C1445 /* MediaPlayer.framework */,
 				0FC4DC551B95BD630009B4A7 /* StoreKit.framework */,
 				0FEA847E1B944781002135DE /* AVFoundation.framework */,
 				3D5111C81B7EC12F00FCF97F /* CoreGraphics.framework */,
@@ -335,9 +369,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D3AA9CE1BCB5FAF00EF2B84 /* SampleImage.JPG in Resources */,
+				3D7A9DE11C09DF09007C1445 /* TestFoot4.mov in Resources */,
 				3D4F17AD1B73883500D4D74F /* LaunchScreen.storyboard in Resources */,
+				3D7A9DDE1C09DF09007C1445 /* TestFoot1.mov in Resources */,
 				3D4F17AA1B73883500D4D74F /* Assets.xcassets in Resources */,
 				3D4F17A81B73883500D4D74F /* Main.storyboard in Resources */,
+				3D7A9DE01C09DF09007C1445 /* TestFoot3.mov in Resources */,
+				3D7A9DDF1C09DF09007C1445 /* TestFoot2.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,15 +469,21 @@
 				3D5416B81BC79EAE00922A2B /* OptionControl.swift in Sources */,
 				0F46E44C1B9DACAE000E32D1 /* CaptureViewController.swift in Sources */,
 				0F46E4481B9D7DD0000E32D1 /* CSController.swift in Sources */,
+				3D3AD8441C01DCBF007583A7 /* CaptureViewController2.swift in Sources */,
 				3D5598FF1BFB070800C65CA6 /* VolumeButtonHandler.swift in Sources */,
 				0FD828C81BB7A05F004162F0 /* ManualCaptureGlyph.swift in Sources */,
+				3D3AD84A1C043389007583A7 /* CSController2.swift in Sources */,
+				3D7A9DD11C08867C007C1445 /* PagedGuideContent.swift in Sources */,
 				0FE500B71BB50ECA00D5B13D /* SmartSliderKnobLayer.swift in Sources */,
+				3D3AD8461C01DF0A007583A7 /* CaptureConstraints.swift in Sources */,
 				3D70987A1B85502500AA49C2 /* CaptureShutterButton.swift in Sources */,
+				3D3AD8481C037B12007583A7 /* CapturePreviewView.swift in Sources */,
 				0F46E44A1B9D84C7000E32D1 /* CaptureExtentions.swift in Sources */,
 				0F10EDF41BA1404B007E722A /* VPHandler.swift in Sources */,
 				3D4EAB191B8410CC00C2F110 /* CaptureControlLabel.swift in Sources */,
 				3DADC33E1BC4D97D00A74BC2 /* ControlPanel.swift in Sources */,
 				3DADC33C1BC4D4C000A74BC2 /* CaptureModeControl.swift in Sources */,
+				3D7A9DD31C094E9E007C1445 /* PagedGuide.swift in Sources */,
 				0FC510E31BBD13EE00E4D0D8 /* CapturePreviewLayer.swift in Sources */,
 				3D4F17A31B73883500D4D74F /* AppDelegate.swift in Sources */,
 			);

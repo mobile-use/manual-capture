@@ -25,7 +25,7 @@
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="KKB-Cu-yia" secondAttribute="height" multiplier="16:9" id="Aor-og-PHK"/>
-                                    <constraint firstAttribute="width" priority="250" constant="600" id="Drr-HY-YuI"/>
+                                    <constraint firstAttribute="width" priority="249" constant="600" id="Drr-HY-YuI"/>
                                 </constraints>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="0.0" y="187" width="400" height="226"/>
@@ -41,6 +41,7 @@
                             <constraint firstItem="KKB-Cu-yia" firstAttribute="width" relation="lessThanOrEqual" secondItem="f0q-cb-4Jo" secondAttribute="width" id="PY1-No-Lbm"/>
                             <constraint firstItem="KKB-Cu-yia" firstAttribute="centerY" secondItem="f0q-cb-4Jo" secondAttribute="centerY" id="ZgG-zn-3HX"/>
                             <constraint firstItem="KKB-Cu-yia" firstAttribute="height" relation="lessThanOrEqual" secondItem="f0q-cb-4Jo" secondAttribute="height" id="c4C-IT-Fpq"/>
+                            <constraint firstItem="KKB-Cu-yia" firstAttribute="width" secondItem="f0q-cb-4Jo" secondAttribute="width" priority="250" id="rSF-XE-cTN"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

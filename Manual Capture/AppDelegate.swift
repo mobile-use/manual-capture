@@ -11,6 +11,7 @@ import UIKit
 
 let kAppName = "Capture"
 let kIsDemoMode = false
+let isVideoMode = true
 //private(set) var kLastVersion: Version? = nil
 
 extension NSBundle {
@@ -35,9 +36,32 @@ extension NSBundle {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var needsIntro = true
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let walkthroughNumber = NSUserDefaults.standardUserDefaults().integerForKey("WalkthroughNumber")
+        if walkthroughNumber > 0  {
+            print("Not first launch.")
+            needsIntro = false
+        }
+        else {
+            print("First launch, setting NSUserDefault.")
+            //NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "WalkthroughNumber")
+        }
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController: UIViewController
+        
+        if needsIntro {
+            initialViewController = storyBoard.instantiateViewControllerWithIdentifier("PagedGuide")
+        }else{
+            initialViewController = storyBoard.instantiateInitialViewController()!
+        }
+        
+        window?.rootViewController = initialViewController
+        window?.makeKeyAndVisible()
         
         return true
     }

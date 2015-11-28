@@ -11,7 +11,7 @@ import AVFoundation
 
 class CapturePreviewLayer: AVCaptureVideoPreviewLayer {
     var cropAspectRatio: CGFloat = 16 / 9 {
-        didSet { bounds = requestedFrame ?? bounds.standardized /* recalculate*/}
+        didSet { bounds = requestedBound ?? bounds.standardized /* recalculate*/}
     }
     
     override func preferredFrameSize() -> CGSize {
@@ -24,11 +24,17 @@ class CapturePreviewLayer: AVCaptureVideoPreviewLayer {
         return pRect.size
     }
     
-    private var requestedFrame: CGRect?
+    private var requestedBound: CGRect?
     
     override var frame: CGRect {
-        willSet(newFrame){
-            requestedFrame = newFrame
+        willSet(newFrame) {
+            if superlayer != nil {
+                requestedBound = self.convertRect(newFrame, fromLayer: self.superlayer)
+            }else{
+                var newBound = newFrame
+                newBound.origin = CGPointZero
+                requestedBound = newBound
+            }
         }
     }
     
@@ -39,6 +45,7 @@ class CapturePreviewLayer: AVCaptureVideoPreviewLayer {
             }
             let ratioW = newValue.height * cropAspectRatio
             let ratioH = newValue.width / cropAspectRatio
+            
             super.bounds = CGRectInset(newValue,
                 max(newValue.width - ratioW, 0) / 2, // clipped
                 max(newValue.height - ratioH, 0) / 2 // clipped

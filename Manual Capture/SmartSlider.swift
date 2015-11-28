@@ -485,8 +485,8 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     }
     override func intrinsicContentSize() -> CGSize {
         switch direction.axis {
-        case .Horizontal: return CGSizeMake(frame.width, knobLayer.bounds.height + (2 * kSliderKnobMargin))
-        case .Vertical: return CGSizeMake(knobLayer.bounds.width + (2 * kSliderKnobMargin), frame.height)
+        case .Horizontal: return CGSizeMake(frame.width, 2 * (kSliderKnobMargin + kSliderKnobRadius))
+        case .Vertical: return CGSizeMake(2 * (kSliderKnobMargin + kSliderKnobRadius), frame.height)
         }
     }
 }

@@ -159,7 +159,7 @@ class SmartSliderLine: CALayer {
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
         
         if (transitionScale != 1) {
-            var scale = 1 / (initialSensitivity + abs(1.0 - initialSensitivity) * CGFloat(transitionScale) * 0.5)
+            var scale = 1 / (initialSensitivity + abs(1.0 - initialSensitivity) * CGFloat(transitionScale) * 2)
             //scale = 1 / initialSensitivity
             
             // retina round
@@ -172,7 +172,7 @@ class SmartSliderLine: CALayer {
             let lineWidth2: CGFloat = 1.00
             
             /// scaled dash space
-            let sDS = dashSpace * scale
+            let sDS = dashSpace * min(6, scale / 2)
             
             /// rounded scaled dash space (not)
             let rsDS = sDS//r(sDS)

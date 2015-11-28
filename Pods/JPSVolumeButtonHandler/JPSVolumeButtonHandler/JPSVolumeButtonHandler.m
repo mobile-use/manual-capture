@@ -160,7 +160,7 @@ static CGFloat minVolume                    = 0.00001f;
             if (self.downBlock) self.downBlock();
         }
         
-        if (self.action) self.action();
+        if (self.action && self.active) self.action();
         
         // Reset volume
         [self setSystemVolume:self.initialVolume];

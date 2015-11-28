@@ -63,6 +63,10 @@ public extension UIDevice {
     
 }
 
+func delay(delay:NSTimeInterval, closure:()->()) {
+    dispatch_after(dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
+}
+
 func progressValue(progress:CGFloat, _ start:CGFloat, _ end:CGFloat) -> CGFloat {
     let d = end - start
     return start + d * progress
@@ -220,10 +224,6 @@ class UIShortTapGestureRecognizer: UITapGestureRecognizer {
                 self.state = UIGestureRecognizerState.Failed
             }
         }
-    }
-    
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
     }
 }
 

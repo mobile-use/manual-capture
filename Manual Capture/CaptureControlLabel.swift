@@ -21,9 +21,7 @@ class CaptureControlLabel: UILabel {
             }else{
                 layer.opacity = 1
                 if showAndHideEnabeled {
-                    let delayNSEC = 2 * Double(NSEC_PER_SEC)
-                    let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayNSEC))
-                    dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                    delay(2){
                         // Subtract 1 from timer count
                         self._delaysCount--
                         if self._delaysCount == 0 {
@@ -32,7 +30,7 @@ class CaptureControlLabel: UILabel {
                             self.layer.addAnimation(animation, forKey: "opacityAnimation")
                             self.layer.opacity = 0
                         }
-                    })
+                    }
                     // Add 1 to timer count
                     self._delaysCount++
                 }
