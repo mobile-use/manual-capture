@@ -8,8 +8,6 @@
 
 import UIKit
 
-var warpSpeedReverses = true
-
 class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     let line = SmartSliderLine()
     
@@ -122,13 +120,15 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
         }
     }
     
+    var warpSpeedReverses = !kIsTestingNoReverse//false//!kIsVideoMode
+    
     //var sensitivityScale: CGFloat = 1 / 0.3
     var transitionScale: Float = 0
     
     /// displacement of progress so that the knob will position right under finger
     private var transitionDistance: CGFloat {
-        if !warpSpeedReverses {
-            return (direction.axis == .Horizontal) ? 120.0 : 180.0
+        if /*!warpSpeedReverses*/kIsVideoMode {
+            return (direction.axis == .Horizontal) ? 160.0 : 240.0
             //return (direction.axis == .Horizontal) ? 50 : 75
         }else {
             return (direction.axis == .Horizontal) ? 90.0 : 135.0

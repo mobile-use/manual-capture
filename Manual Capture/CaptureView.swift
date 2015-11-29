@@ -196,7 +196,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
     // MARK: Actions
     
     func shutterPressed() {
-        if isVideoMode {
+        if kIsVideoMode {
             sessionController.captureVideo()
         }else {
             sessionController.captureStillPhoto()
@@ -789,7 +789,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                     forControlEvents: .TouchUpInside)
                 shutterButton.translatesAutoresizingMaskIntoConstraints = false
                 shutterButton.enabled = false
-                shutterButton.alpha = 0.0
+                shutterButton.alpha = 1
                 addSubview(shutterButton)
                 
                 

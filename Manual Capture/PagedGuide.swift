@@ -13,6 +13,7 @@ class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     typealias Page = PagedGuideContent
     
     @IBOutlet var pageContainer: UIView!
+    @IBOutlet var closeButton: UIButton!
     
     var pageViewController: UIPageViewController!
     let contents: [Content] = [
@@ -57,6 +58,13 @@ class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
         return 0
+    }
+    
+    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+        guard let transitionPage = pendingViewControllers.first as? Page else { return }
+        if transitionPage.index + 1 == contents.endIndex {
+            closeButton.enabled = true
+        }
     }
     
     func viewControllerAtIndex(index:Int) -> UIViewController? {

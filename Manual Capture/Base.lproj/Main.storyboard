@@ -231,6 +231,10 @@
         <scene sceneID="ZRZ-IS-sEo">
             <objects>
                 <viewController storyboardIdentifier="PagedGuide" id="c3U-3S-Pgp" customClass="PagedGuide" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BxZ-Um-AoY"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Av-Xl-LTU"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="n5E-0y-uhI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -240,10 +244,17 @@
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lpo-OS-zSr">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lpo-OS-zSr">
                                 <rect key="frame" x="543" y="10" width="37" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Done">
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" red="0.94999999999999996" green="0.94999999999999996" blue="0.94999999999999996" alpha="1" colorSpace="deviceRGB"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.94999999999999996" green="0.94999999999999996" blue="0.94999999999999996" alpha="0.14999999999999999" colorSpace="deviceRGB"/>
+                                </state>
+                                <state key="highlighted">
                                     <color key="titleColor" red="0.94999999999999996" green="0.94999999999999996" blue="0.94999999999999996" alpha="1" colorSpace="deviceRGB"/>
                                 </state>
                                 <connections>
@@ -264,6 +275,7 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="closeButton" destination="lpo-OS-zSr" id="cq0-4f-dZ6"/>
                         <outlet property="pageContainer" destination="Ra8-oj-ftg" id="i1C-fo-4Xm"/>
                     </connections>
                 </viewController>
@@ -275,6 +287,10 @@
         <scene sceneID="8xq-xM-bhM">
             <objects>
                 <viewController id="NxT-9R-H2t" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hlD-Y5-4PE"/>
+                        <viewControllerLayoutGuide type="bottom" id="YWD-Qy-ymT"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZVt-M4-ikp">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

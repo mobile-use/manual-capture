@@ -10,27 +10,10 @@
 import UIKit
 
 let kAppName = "Capture"
-let kIsDemoMode = false
-let isVideoMode = true
-//private(set) var kLastVersion: Version? = nil
-
-extension NSBundle {
-    
-    class var applicationVersionNumber: String {
-        if let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
-            return version
-        }
-        return "Version Number Not Available"
-    }
-    
-    class var applicationBuildNumber: String {
-        if let build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String {
-            return build
-        }
-        return "Build Number Not Available"
-    }
-    
-}
+var kIsDemoMode = false
+var kIsVideoMode = false
+var kIsTestingNoReverse = false
+var kIsTestingWalkthrough = false
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -42,13 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let walkthroughNumber = NSUserDefaults.standardUserDefaults().integerForKey("WalkthroughNumber")
-        if walkthroughNumber > 0  {
+        if walkthroughNumber > 0 && !kIsTestingWalkthrough  {
             print("Not first launch.")
             needsIntro = false
         }
         else {
             print("First launch, setting NSUserDefault.")
-            //NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "WalkthroughNumber")
+            NSUserDefaults.standardUserDefaults().setInteger(1, forKey: "WalkthroughNumber")
         }
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -92,7 +75,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
         return [.Landscape, .Portrait]
     }
-
+    
+    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+        let properties = url.host?.componentsSeparatedByString("/")
+        properties?.forEach { property in
+            switch property {
+            case "video": kIsVideoMode = true
+            case "demo": kIsDemoMode = true
+            case "no-reverse": kIsTestingNoReverse = true
+            case "walkthrough":
+                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+                let initialViewController = storyBoard.instantiateViewControllerWithIdentifier("PagedGuide")
+                window?.rootViewController = initialViewController
+                window?.makeKeyAndVisible()
+            default: break
+            }
+        }
+        return true
+    }
 
 }
 

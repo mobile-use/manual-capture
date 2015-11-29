@@ -152,7 +152,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
     override init() {
         
         session = AVCaptureSession()
-        session.sessionPreset = isVideoMode ? AVCaptureSessionPresetHigh : AVCaptureSessionPresetPhoto
+        session.sessionPreset = kIsVideoMode ? AVCaptureSessionPresetHigh : AVCaptureSessionPresetPhoto
         
         sessionQueue = dispatch_queue_create("Capture Session", DISPATCH_QUEUE_SERIAL)
         
@@ -287,7 +287,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                 if photoOutput == nil {
                     try addPhotoOutput()
                 }
-                if isVideoMode {
+                if kIsVideoMode {
                     if audioInput == nil {
                         try addAudioInput()
                     }

@@ -20,12 +20,20 @@
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KKB-Cu-yia">
                                 <rect key="frame" x="0.0" y="131" width="600" height="338"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.14999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlanckShutterButton" translatesAutoresizingMaskIntoConstraints="NO" id="S6J-64-2b1">
+                                        <rect key="frame" x="525" y="139" width="60" height="60"/>
+                                        <animations/>
+                                    </imageView>
+                                </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstItem="S6J-64-2b1" firstAttribute="centerY" secondItem="KKB-Cu-yia" secondAttribute="centerY" id="3EP-QP-64B"/>
                                     <constraint firstAttribute="width" secondItem="KKB-Cu-yia" secondAttribute="height" multiplier="16:9" id="Aor-og-PHK"/>
                                     <constraint firstAttribute="width" priority="249" constant="600" id="Drr-HY-YuI"/>
+                                    <constraint firstAttribute="trailing" secondItem="S6J-64-2b1" secondAttribute="trailing" constant="15" id="g3t-nB-yGn"/>
                                 </constraints>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="0.0" y="187" width="400" height="226"/>
@@ -60,4 +68,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="BlanckShutterButton" width="60" height="60"/>
+    </resources>
 </document>
