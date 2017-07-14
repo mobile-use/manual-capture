@@ -41,7 +41,7 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
         UIView.animateWithDuration(0.2){
              self.controlView.alpha = 1.0
         }
-        //controlView.sessionController.cropAspectRatio = controlView.sessionController.cropAspectRatio
+        //controlView.sessionController.aspectRatio = controlView.sessionController.aspectRatio
         
 //        print(view.frame, view.bounds)
 //        print(controlView.frame, controlView.bounds)
@@ -50,7 +50,7 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
     }
     
     override func viewWillAppear(animated: Bool) {
-        controlView.sessionController.volumeButtonHandler.active = true
+        controlView.sessionController.volumeButtonHandler?.active = true
         UIView.animateWithDuration(0){
             self.controlView.updateConstraintsForKeys(
                 [
@@ -61,20 +61,22 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
                     .ShutterButton,
                     .MenuControl,
                     .GalleryButton,
+                    .UndoButton,
                     .ControlPanel
                 ]
             )
         }
+        controlView.sessionController.updateAspectRatio()
     }
     
     override func viewWillDisappear(animated: Bool) {
-        controlView.sessionController.volumeButtonHandler.active = false
+        controlView.sessionController.volumeButtonHandler?.active = false
     }
     
     
     var allowPortrait = false
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return (allowPortrait) ? [.Landscape, .Portrait] : UIInterfaceOrientationMask.Landscape
+        return (allowPortrait) ? [.Landscape, .Portrait] : [.Landscape, .Portrait]//UIInterfaceOrientationMask.Landscape
     }
     
     func showPhotoBrowser() {
@@ -291,7 +293,7 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
 //    }
     
     var previousOrient: UIInterfaceOrientation? = nil
-    var previousCropAspectRatio: CSAspectRatio? = nil
+    var previousaspectRatio: CSAspectRatio? = nil
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
 //        controlView.backgroundColor = UIColor.clearColor()
@@ -328,7 +330,15 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
         
         let options: UIViewAnimationOptions = [.CurveLinear, .BeginFromCurrentState]
         let fadeSpeed = 0.4
-        UIView.animateWithDuration(fadeSpeed/2, delay: 0, options: options, animations: { self.controlView.alpha = 0.0 }) { _ in
+        
+        var oldAlphas: [Int : CGFloat] = [:]
+        
+        UIView.animateWithDuration(fadeSpeed/2, delay: 0, options: options, animations: {
+            self.controlView.subviews.forEach { subview in
+                oldAlphas[subview.hash] = subview.alpha
+                subview.alpha = (subview == self.controlView.shutterButton) ? subview.alpha : 0.0
+            }
+            }) { _ in
             
             self.view.transform = oldTransform.view
             
@@ -336,19 +346,27 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
                 dy: (self.controlView.frame.height - size.height)/2)
             
             let orient = UIApplication.sharedApplication().statusBarOrientation
+                
+                CATransaction.disableActions {
+                
             self.controlView.sessionController.previewLayer.connection?.videoOrientation = AVCaptureVideoOrientation(ui:orient)
+                    
+                }
             
-            let currentCropAspectRatio = self.controlView.sessionController.cropAspectRatio
+            let currentaspectRatio = self.controlView.sessionController.aspectRatio
             
             guard let previousOrient = self.previousOrient where orient != previousOrient else {
                 self.previousOrient = orient
                 return
             }
             self.previousOrient = orient
-            
+                
             CATransaction.disableActions {
                 self.controlView.sessionController.previewLayer.frame.size = self.controlView.bounds.size
                 self.controlView.sessionController.previewLayer.position = CGPointMake(self.controlView.bounds.midX, self.controlView.bounds.midY)
+                
+                self.controlView.sessionController.updateAspectRatio()
+                
             }
             
             self.controlView.updateConstraintsForKeys(
@@ -360,48 +378,85 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
                     .ShutterButton,
                     .MenuControl,
                     .GalleryButton,
+                    .UndoButton,
                     .ControlPanel
                 ]
             )
             
-            UIView.animateWithDuration(fadeSpeed/2, delay: 0, options: options, animations: { self.controlView.alpha = 1.0 }) { (_) in
-                func teaseAspectRatio() {
-                    let oldLayout = self.controlView.layout.currentMode
-                    self.controlView.menuControl.selectItemWithValue(.AspectRatio)
-                    self.controlView.switchToLayout(.AspectRatio)
-                    delay(0.5){
-                        if self.controlView.layout.currentMode == .AspectRatio {
-                            self.controlView.switchToLayout(oldLayout)
-                        }
-                    }
+//            
+//            let isTempAR = self.controlView.menuControl.alpha != 1 && self.controlView.layout.currentMode == .AspectRatio
+//            if isTempAR {
+//                self.controlView.switchToLayout(.Normal, 0)
+//            }
+//            
+//            func teaseAspectRatio() {
+//                let oldLayout = self.controlView.layout.currentMode
+//                self.controlView.menuControl.selectItemWithValue(.AspectRatio)
+//                self.controlView.switchToLayout(.AspectRatio, 0)
+//            }
+//            switch orient {
+//            case .LandscapeLeft, .LandscapeRight :
+//                switch previousOrient {
+//                case .Portrait, .PortraitUpsideDown:
+//                    if currentaspectRatio < 1.0 {
+//                        teaseAspectRatio()
+//                    }
+//                default: break
+//                }
+//            case .Portrait, .PortraitUpsideDown:
+//                switch previousOrient {
+//                case .LandscapeLeft, .LandscapeRight:
+//                    if currentaspectRatio > 1.0 {
+//                        teaseAspectRatio()
+//                    }
+//                default: break
+//                }
+//            default: break
+//            }
+    
+            UIView.animateWithDuration(fadeSpeed/2, delay: 0, options: options, animations: {
+                self.controlView.subviews.forEach { subview in
+                    subview.alpha = oldAlphas[subview.hash] ?? 1.0
                 }
-                switch orient {
-                case .LandscapeLeft, .LandscapeRight :
-                    switch previousOrient {
-                    case .Portrait, .PortraitUpsideDown:
-                        if currentCropAspectRatio < 1.0 {
-                            teaseAspectRatio()
-                            delay(0.1){
-                                self.controlView.sessionController.cropAspectRatio = self.previousCropAspectRatio ?? CSAspectRatioMake(16, 9)
-                            }
-                        }
-                    default: break
-                    }
-                case .Portrait, .PortraitUpsideDown:
-                    switch previousOrient {
-                    case .LandscapeLeft, .LandscapeRight:
-                        if currentCropAspectRatio > 1.0 {
-                            teaseAspectRatio()
-                            delay(0.1) {
-                                self.previousCropAspectRatio = self.controlView.sessionController.cropAspectRatio
-                                self.controlView.sessionController.cropAspectRatio = CSAspectRatioMake(3, 4)
-                            }
-                        }
-                    default: break
-                    }
-                default: break
+                }) { (_) in
+//                
+//                func teaseAspectRatio() {
+//                    let oldLayout = self.controlView.layout.currentMode
+//                    self.controlView.menuControl.selectItemWithValue(.AspectRatio)
+//                    self.controlView.switchToLayout(.AspectRatio)
+////                    delay(0.5){
+////                        if self.controlView.layout.currentMode == .AspectRatio {
+////                            self.controlView.switchToLayout(oldLayout)
+////                        }
+////                    }
+//                }
+//                switch orient {
+//                case .LandscapeLeft, .LandscapeRight :
+//                    switch previousOrient {
+//                    case .Portrait, .PortraitUpsideDown:
+//                        if currentaspectRatio < 1.0 {
+//                            teaseAspectRatio()
+////                            delay(0.1){
+////                                self.controlView.sessionController.aspectRatio = self.previousaspectRatio ?? CSAspectRatioMake(16, 9)
+////                            }
+//                        }
+//                    default: break
+//                    }
+//                case .Portrait, .PortraitUpsideDown:
+//                    switch previousOrient {
+//                    case .LandscapeLeft, .LandscapeRight:
+//                        if currentaspectRatio > 1.0 {
+//                            teaseAspectRatio()
+////                            delay(0.1) {
+////                                self.previousaspectRatio = self.controlView.sessionController.aspectRatio
+////                                self.controlView.sessionController.aspectRatio = CSAspectRatioMake(3, 4)
+////                            }
+//                        }
+//                    default: break
+//                    }
+//                default: break
+                //}
                 }
-            }
         }
         
         

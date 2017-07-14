@@ -36,56 +36,60 @@ protocol CSControllerDelegate {
 
 // change type
 enum CSChange {
-    enum Exposure {
-        case ISO(Float), targetOffset(Float), duration(CMTime)
-        case bias(Float)
+    enum ExposureType {
+        case ISO(Float), TargetOffset(Float), Duration(CMTime)
+        case Bias(Float)
         
-        case minISO(Float), maxISO(Float)
-        case minDuration(CMTime), maxDuration(CMTime)
+        case MinISO(Float), MaxISO(Float)
+        case MinDuration(CMTime), MaxDuration(CMTime)
     }
-    case cameraLensPosition(Float)
-    case cameraExposure(Exposure)
-    case cameraWhiteBalanceGains(AVCaptureWhiteBalanceGains)
-    case cameraZoomFactor(CGFloat)
+    case LensPosition(Float)
+    case Exposure(ExposureType)
+    case WhiteBalanceGains(AVCaptureWhiteBalanceGains)
+    case ZoomFactor(CGFloat)
+    case AspectRatio(CSAspectRatio)
     
     
-    case cameraFocusMode(AVCaptureFocusMode)
-    case cameraExposureMode(AVCaptureExposureMode)
-    case cameraWhiteBalanceMode(AVCaptureWhiteBalanceMode)
-    
-    case cropAspectRatio(CSAspectRatio)
+    case FocusMode(AVCaptureFocusMode)
+    case ExposureMode(AVCaptureExposureMode)
+    case WhiteBalanceMode(AVCaptureWhiteBalanceMode)
+    case AspectRatioMode(CSAspectRatioMode)
 }
 
 // value set type
 enum CSSet {
-    enum Exposure {
-        case bias(Float)
-        case durationAndISO(CMTime, Float)
+    enum ExposureType {
+        case Bias(Float)
+        case DurationAndISO(CMTime, Float)
     }
-    case cameraLensPosition(Float)
-    case cameraExposure(Exposure)
-    case cameraWhiteBalanceGains(AVCaptureWhiteBalanceGains)
-    case cameraZoomFactor(CGFloat), cameraZoomFactorRamp(CGFloat, Float)
+    case LensPosition(Float)
+    case Exposure(ExposureType)
+    case WhiteBalanceGains(AVCaptureWhiteBalanceGains)
+    case ZoomFactor(CGFloat), ZoomFactorRamp(CGFloat, Float)
+    case AspectRatio(CSAspectRatio)
     
     
-    case cameraFocusMode(AVCaptureFocusMode)
-    case cameraExposureMode(AVCaptureExposureMode)
-    case cameraWhiteBalanceMode(AVCaptureWhiteBalanceMode)
-    
-    case cropAspectRatio(CSAspectRatio)
+    case FocusMode(AVCaptureFocusMode)
+    case ExposureMode(AVCaptureExposureMode)
+    case WhiteBalanceMode(AVCaptureWhiteBalanceMode)
+    case AspectRatioMode(CSAspectRatioMode)
 }
 
 // notification type
 enum CSNotification {
-    case capturingStillImage(Bool)
-    case imageSaved
-    case cameraSubjectAreaChange
-    case sessionRunning(Bool)
+    case CapturingPhoto(Bool)
+    case PhotoSaved
+    case SubjectAreaChange
+    case SessionRunning(Bool)
 }
 
 typealias CSAspectRatio = CGFloat
 func CSAspectRatioMake(width: CGFloat, _ height: CGFloat) -> CSAspectRatio {
     return width / height
+}
+
+enum CSAspectRatioMode: Int {
+    case Lock, Fullscreen, Sensor
 }
 
 class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
@@ -104,15 +108,36 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
     var videoOutput: AVCaptureMovieFileOutput!
     var backgroundRecordingID: UIBackgroundTaskIdentifier!
     
-    var cropAspectRatio = CSAspectRatioMake(16,9) {
+    var aspectRatio = CSAspectRatioMake(16,9) {
         didSet{
             
-            previewLayer.cropAspectRatio = cropAspectRatio
-            notify( .cropAspectRatio(cropAspectRatio) )
+            previewLayer.aspectRatio = aspectRatio
+            notify( .AspectRatio(aspectRatio) )
             
         }
     }
-    var volumeButtonHandler = JPSVolumeButtonHandler()
+    var aspectRatioMode: CSAspectRatioMode = .Fullscreen {
+        didSet{
+            updateAspectRatio()
+            notify( .AspectRatioMode(aspectRatioMode) )
+        }
+    }
+    func updateAspectRatio() {
+        guard previewLayer.connection != nil else { return }
+        switch aspectRatioMode {
+        case .Lock:
+            let aspectRatio = self.aspectRatio
+            self.aspectRatio = aspectRatio
+        case .Fullscreen:
+            let size = previewLayer.requestedBound?.size ?? UIScreen.mainScreen().bounds.size
+            self.aspectRatio = CSAspectRatioMake(size.width, size.height)
+        case .Sensor:
+            let size = previewLayer.rectForMetadataOutputRectOfInterest(CGRectMake(0,0,1,1)).size
+            self.aspectRatio = CSAspectRatioMake(size.width, size.height)
+        }
+    }
+    
+    var volumeButtonHandler: JPSVolumeButtonHandler?
     
     var delegate: CSControllerDelegate?
     
@@ -125,12 +150,12 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
         typealias TargetBiasBlock = (Float) -> ()
         typealias WhiteBalanceGainsBlock = (AVCaptureWhiteBalanceGains) -> ()
         typealias ZoomFactorBlock = (CGFloat) -> ()
+        typealias AspectRatioBlock = (CSAspectRatio) -> ()
         
         typealias FocusModeBlock = (AVCaptureFocusMode) -> ()
         typealias ExposureModeBlock = (AVCaptureExposureMode) -> ()
         typealias WhiteBalanceModeBlock = (AVCaptureWhiteBalanceMode) -> ()
-        
-        typealias AspectRatioBlock = (CSAspectRatio) -> ()
+        typealias AspectRatioModeBlock = (CSAspectRatioMode) -> ()
         
         var lensPosition        = [ String : LensPositionBlock ]()
         var iso                 = [ String : ISOBlock ]()
@@ -139,34 +164,35 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
         var targetBias          = [ String : TargetOffsetBlock ]()
         var whiteBalance        = [ String : WhiteBalanceGainsBlock ]()
         var zoomFactor          = [ String : ZoomFactorBlock ]()
+        var aspectRatio         = [ String : AspectRatioBlock ]()
         
         var focusMode           = [ String : FocusModeBlock ]()
         var exposureMode        = [ String : ExposureModeBlock ]()
         var whiteBalanceMode    = [ String : WhiteBalanceModeBlock ]()
-        
-        var aspectRatio         = [ String : AspectRatioBlock ]()
+        var aspectRatioMode     = [ String : AspectRatioModeBlock ]()
         
     }
     var voBlocks = VOBlocks()
     
     override init() {
-        
         session = AVCaptureSession()
         session.sessionPreset = kIsVideoMode ? AVCaptureSessionPresetHigh : AVCaptureSessionPresetPhoto
         
         sessionQueue = dispatch_queue_create("Capture Session", DISPATCH_QUEUE_SERIAL)
         
         previewLayer = CapturePreviewLayer(session: session)
-        previewLayer.cropAspectRatio = cropAspectRatio
+        previewLayer.aspectRatio = aspectRatio
+        
+        volumeButtonHandler = !kIsVideoMode ? JPSVolumeButtonHandler() : nil
         
         super.init()
         
         unowned let me = self
-        volumeButtonHandler.action = { me.captureStillPhoto() }
-        
-        
-        requestCameraAccess(){
-            self.startCamera()
+        volumeButtonHandler?.action = { me.captureStillPhoto() }
+        if !kIsDemoMode {
+            requestCameraAccess(){
+                self.startCamera()
+            }
         }
     }
     
@@ -331,55 +357,55 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
             
             let capturing = new.boolValue
             
-            notify( .capturingStillImage(capturing) )
+            notify( .CapturingPhoto(capturing) )
             
         case "camera.focusMode":
             
             let focusMode = AVCaptureFocusMode(rawValue: new.integerValue)!
             
-            notify( .cameraFocusMode(focusMode) )
+            notify( .FocusMode(focusMode) )
             
         case "camera.exposureMode":
             
             let exposureMode = AVCaptureExposureMode(rawValue: new.integerValue)!
             
-            notify( .cameraExposureMode(exposureMode) )
+            notify( .ExposureMode(exposureMode) )
             
         case "camera.whiteBalanceMode":
             
             let whiteBalanceMode = AVCaptureWhiteBalanceMode(rawValue: new.integerValue)!
             
-            notify (.cameraWhiteBalanceMode(whiteBalanceMode) )
+            notify (.WhiteBalanceMode(whiteBalanceMode) )
             
         case "camera.ISO":
             
             let iso = new.floatValue
-            notify( .cameraExposure(.ISO(iso)) )
+            notify( .Exposure(.ISO(iso)) )
             
         case "camera.exposureTargetOffset":
             
             let exposureTargetOffset = new.floatValue
             
-            notify(.cameraExposure(.targetOffset(exposureTargetOffset)) )
+            notify(.Exposure(.TargetOffset(exposureTargetOffset)) )
             
         case "camera.exposureDuration":
             
             let exposureDuration = new.CMTimeValue
             
-            notify( .cameraExposure(.duration(exposureDuration)) )
+            notify( .Exposure(.Duration(exposureDuration)) )
             
         case "camera.deviceWhiteBalanceGains":
             
             var whiteBalanceGains = AVCaptureWhiteBalanceGains() // Empty
             (new as! NSValue).getValue( &whiteBalanceGains ) // Convert
             
-            notify( .cameraWhiteBalanceGains( whiteBalanceGains ) )
+            notify( .WhiteBalanceGains( whiteBalanceGains ) )
             
         case "camera.lensPosition":
             
             let lensPosition = new.floatValue
             
-            notify( .cameraLensPosition(lensPosition) )
+            notify( .LensPosition(lensPosition) )
             
             
         case "camera.adjustingFocus": return
@@ -410,20 +436,21 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
     
     private func notify(change: CSChange) {
         switch change {
-        case .cameraLensPosition(let v): self.voBlocks.lensPosition.forEach { $1(v) }
-        case .cameraExposure(.ISO(let v)): self.voBlocks.iso.forEach { $1(v) }
-        case .cameraExposure(.duration(let v)): self.voBlocks.exposureDuration.forEach { $1(v) }
-        case .cameraExposure(.targetOffset(let v)): self.voBlocks.targetOffset.forEach { $1(v) }
-        case .cameraExposure(.bias(let v)): self.voBlocks.targetBias.forEach { $1(v) }
-        case .cameraWhiteBalanceGains(let v): self.voBlocks.whiteBalance.forEach { $1(v) }
-        case .cameraZoomFactor(let v): self.voBlocks.zoomFactor.forEach { $1(v) }
+        case .LensPosition(let v): self.voBlocks.lensPosition.forEach { $1(v) }
+        case .Exposure(.ISO(let v)): self.voBlocks.iso.forEach { $1(v) }
+        case .Exposure(.Duration(let v)): self.voBlocks.exposureDuration.forEach { $1(v) }
+        case .Exposure(.TargetOffset(let v)): self.voBlocks.targetOffset.forEach { $1(v) }
+        case .Exposure(.Bias(let v)): self.voBlocks.targetBias.forEach { $1(v) }
+        case .WhiteBalanceGains(let v): self.voBlocks.whiteBalance.forEach { $1(v) }
+        case .ZoomFactor(let v): self.voBlocks.zoomFactor.forEach { $1(v) }
+            case .AspectRatio(let v): self.voBlocks.aspectRatio.forEach { $1(v) }
             
-        case .cameraFocusMode(let v): self.voBlocks.focusMode.forEach { $1(v) }
-        case .cameraExposureMode(let v): self.voBlocks.exposureMode.forEach { $1(v) }
-        case .cameraWhiteBalanceMode(let v): self.voBlocks.whiteBalanceMode.forEach { $1(v) }
+        case .FocusMode(let v): self.voBlocks.focusMode.forEach { $1(v) }
+        case .ExposureMode(let v): self.voBlocks.exposureMode.forEach { $1(v) }
+        case .WhiteBalanceMode(let v): self.voBlocks.whiteBalanceMode.forEach { $1(v) }
+        case .AspectRatioMode(let v): self.voBlocks.aspectRatioMode.forEach { $1(v) }
             
-        case .cropAspectRatio(let v): self.voBlocks.aspectRatio.forEach { $1(v) }
-        default: break
+        default : break
         }
     }
     
@@ -477,7 +504,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
             object: camera,
             queue: NSOperationQueue.mainQueue(),
             usingBlock: { (_) in
-                me.delegate?.sessionControllerNotification(.cameraSubjectAreaChange)
+                me.delegate?.sessionControllerNotification(.SubjectAreaChange)
             }
         )
         
@@ -485,7 +512,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
             AVCaptureSessionDidStartRunningNotification,
             object: session, queue: NSOperationQueue.mainQueue(),
             usingBlock: { (_) in
-                me.delegate?.sessionControllerNotification( .sessionRunning(true) )
+                me.delegate?.sessionControllerNotification( .SessionRunning(true) )
             }
         )
         
@@ -494,7 +521,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
             object: session,
             queue: NSOperationQueue.mainQueue(),
             usingBlock: { (_) in
-                me.delegate?.sessionControllerNotification( .sessionRunning(false) )
+                me.delegate?.sessionControllerNotification( .SessionRunning(false) )
             }
         )
     }
@@ -535,7 +562,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
         
         switch set {
             
-        case .cameraFocusMode( let focusMode ):
+        case .FocusMode( let focusMode ):
             
             cameraConfig(){
                 
@@ -543,7 +570,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                 
             }
             
-        case .cameraExposureMode( let exposureMode ):
+        case .ExposureMode( let exposureMode ):
             
             cameraConfig(){
                 
@@ -551,7 +578,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                 
             }
             
-        case .cameraWhiteBalanceMode( let whiteBalanceMode ):
+        case .WhiteBalanceMode( let whiteBalanceMode ):
             
             cameraConfig(){
                 
@@ -559,7 +586,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                 
             }
             
-        case .cameraExposure( .durationAndISO( let duration , let ISO ) ):
+        case .Exposure( .DurationAndISO( let duration , let ISO ) ):
             
             cameraConfig(){
                 
@@ -567,7 +594,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                 
             }
 
-        case .cameraExposure( .bias( let bias ) ):
+        case .Exposure( .Bias( let bias ) ):
             
             cameraConfig(){
                 
@@ -575,7 +602,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                 
             }
             
-        case .cameraLensPosition( let lensPosition ):
+        case .LensPosition( let lensPosition ):
             
             cameraConfig(){
                 
@@ -583,7 +610,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                 
             }
             
-        case .cameraWhiteBalanceGains( let wbgains ):
+        case .WhiteBalanceGains( let wbgains ):
             
             cameraConfig(){
                 
@@ -591,7 +618,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                 
             }
             
-        case .cameraZoomFactor(let zFactor):
+        case .ZoomFactor(let zFactor):
             
             cameraConfig(){
                 
@@ -599,7 +626,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                 
             }
             
-        case .cameraZoomFactorRamp(let zFactor, let rate):
+        case .ZoomFactorRamp(let zFactor, let rate):
             
             cameraConfig(){
                 
@@ -607,10 +634,15 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                 
             }
             
-        case .cropAspectRatio(let aspectRatio):
+        case .AspectRatio(let aspectRatio):
             
-            cropAspectRatio = aspectRatio
-            
+            self.aspectRatioMode = .Lock
+            self.aspectRatio = aspectRatio
+        
+        case .AspectRatioMode(let mode):
+        
+            self.aspectRatioMode = mode
+        
         }
         
     }
@@ -657,8 +689,8 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                 }
                 
                 let scaled = (
-                    width: min( image.size.height * self.cropAspectRatio, image.size.width),
-                    height: min( image.size.width / self.cropAspectRatio, image.size.height)
+                    width: min( image.size.height * self.aspectRatio, image.size.width),
+                    height: min( image.size.width / self.aspectRatio, image.size.height)
                 )
                 var cropRect = CGRectInset(
                     CGRectMake(0, 0, image.size.width, image.size.height), // original rect
@@ -696,7 +728,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                 ALAssetsLibrary().writeImageToSavedPhotosAlbum(croppedImage, orientation: orientation) {
                     (path, error) in
                     
-                    self.notify(.imageSaved)
+                    self.notify(.PhotoSaved)
                     
                     guard error == nil else {
                         
@@ -718,18 +750,54 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
         
         dispatch_async(sessionQueue){
             if !self.videoOutput.recording {
-                if UIDevice.currentDevice().multitaskingSupported {
-                    self.backgroundRecordingID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler(nil)
-                }
                 
-                let recordingConnection = self.videoOutput.connectionWithMediaType(AVMediaTypeVideo)
-                recordingConnection.videoOrientation = self.previewLayer.connection.videoOrientation
+//                var record = {
+//                    if UIDevice.currentDevice().multitaskingSupported {
+//                        self.backgroundRecordingID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler(nil)
+//                    }
+//                    
+//                    let recordingConnection = self.videoOutput.connectionWithMediaType(AVMediaTypeVideo)
+//                    recordingConnection.videoOrientation = self.previewLayer.connection.videoOrientation
+//                    
+//                    let videoFileName = NSProcessInfo.processInfo().globallyUniqueString
+//                    let videoFilePath = NSTemporaryDirectory().stringByAppendingString(videoFileName + ".mov")
+//                    
+//                    self.videoOutput.startRecordingToOutputFileURL(
+//                        NSURL(fileURLWithPath: videoFilePath), recordingDelegate: self)
+//                }
+                var me = self
+                let unsafeMe = UnsafeMutablePointer<CSController>.alloc(1)
+                unsafeMe.initialize(me)
                 
-                let videoFileName = NSProcessInfo.processInfo().globallyUniqueString
-                let videoFilePath = NSTemporaryDirectory().stringByAppendingString(videoFileName + ".mov")
-
-                self.videoOutput.startRecordingToOutputFileURL(
-                    NSURL(fileURLWithPath: videoFilePath), recordingDelegate: self)
+                AudioServicesAddSystemSoundCompletion(1117, nil, nil, { _, userData in
+                    let unsafeMe = unsafeBitCast(userData, UnsafeMutablePointer<CSController>.self)
+                    var me: CSController { return unsafeMe.memory }
+                    
+                    // start recording
+                    if UIDevice.currentDevice().multitaskingSupported {
+                        me.backgroundRecordingID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler(nil)
+                    }
+                    
+                    let recordingConnection = me.videoOutput.connectionWithMediaType(AVMediaTypeVideo)
+                    recordingConnection.videoOrientation = me.previewLayer.connection.videoOrientation
+                    
+                    let videoFileName = NSProcessInfo.processInfo().globallyUniqueString
+                    let videoFilePath = NSTemporaryDirectory().stringByAppendingString(videoFileName + ".mov")
+                    
+                    me.videoOutput.startRecordingToOutputFileURL(
+                        NSURL(fileURLWithPath: videoFilePath), recordingDelegate: me)
+                    
+                    
+                    AudioServicesRemoveSystemSoundCompletion(1117)
+                    
+                    unsafeMe.destroy()
+                    unsafeMe.dealloc(1)
+                    userData.destroy()
+                    
+                }, unsafeMe)
+                
+                AudioServicesPlaySystemSound(1117)
+                
             }else{
                 self.videoOutput.stopRecording()
             }
@@ -737,7 +805,15 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
     
     }
     
+    func captureOutput(captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAtURL fileURL: NSURL!, fromConnections connections: [AnyObject]!) {
+        
+        //AudioServicesPlaySystemSound(1117)
+    }
+    
     func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
+        
+        AudioServicesPlaySystemSound(1118)
+        
         let currentBackgroundRecordingID = backgroundRecordingID
         backgroundRecordingID = UIBackgroundTaskInvalid
         

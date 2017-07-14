@@ -13,7 +13,7 @@ private let kExposureDurationPower: Double = 6
 private let kMainSliderHideDelay: Double = 1.0
 private let kAspectRatiosControlItems: [OptionControl<CSAspectRatio>.Item] = [
     
-    ("21:9", CSAspectRatioMake(21,9)),
+    //("21:9", CSAspectRatioMake(21,9)),
     
     ("16:9", CSAspectRatioMake(16,9)),
     
@@ -23,7 +23,10 @@ private let kAspectRatiosControlItems: [OptionControl<CSAspectRatio>.Item] = [
     
     ("Square", CSAspectRatioMake(1,1)),
     
-    ("Portrait", CSAspectRatioMake(3,4))
+    ("Portrait", CSAspectRatioMake(3,4)),
+    
+    ("Tall", CSAspectRatioMake(9,16))
+    
     
 ]
 
@@ -38,19 +41,23 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
     var sessionController: CSController
     
     override init(frame:CGRect) {
+        
         sessionController = CSController()
         
         super.init(frame:frame)
         
         sessionController.delegate = self
         
+        self.backgroundColor = UIColor.blackColor()
+        
         if kIsDemoMode { // For screen shots
-            let sampleImageLayer = CALayer()
-            sampleImageLayer.contentsGravity = kCAGravityResizeAspect
-            sampleImageLayer.contents = UIImage(named: "SampleImage.JPG")?.CGImage
-            sampleImageLayer.frame = bounds
-            
-            layer.addSublayer(sampleImageLayer)
+//            let sampleImageLayer = CALayer()
+//            sampleImageLayer.contentsGravity = kCAGravityResizeAspect
+//            sampleImageLayer.contents = UIImage(named: "SampleImage.JPG")?.CGImage
+//            sampleImageLayer.frame = bounds
+//            
+//            layer.addSublayer(sampleImageLayer)
+            backgroundColor = UIColor.greenColor()
         }else{
             sessionController.previewLayer.backgroundColor = UIColor.blackColor().CGColor
             sessionController.previewLayer.opacity = 0.0
@@ -58,8 +65,6 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             layer.addSublayer(sessionController.previewLayer)
         }
-
-        self.backgroundColor = UIColor.blackColor()
         
         setUpLayoutForMode(.Initial)
     }
@@ -119,12 +124,12 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             switchToLayout(.AspectRatio)
             
-            var i = kAspectRatiosControlItems.indexOf { $0.value == sessionController.cropAspectRatio } ?? -1
+            var i = kAspectRatiosControlItems.indexOf { $0.value == sessionController.aspectRatio } ?? -1
             i++
             i = kAspectRatiosControlItems.indices ~= i ? i : 0
     
             
-            sessionController.cropAspectRatio = kAspectRatiosControlItems[i].value
+            sessionController.set(.AspectRatio( kAspectRatiosControlItems[i].value ) )
 
             
         case 1 where tapGesture.numberOfTouchesRequired == 2 : delegate?.showPhotoBrowser()
@@ -192,6 +197,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
     // MARK: |-- Buttons
     let shutterButton = UIButton.shutterButton()
     let galleryButton = UIButton.galleryButton()
+    let undoButton = UIButton.undoButton()
     
     // MARK: Actions
     
@@ -205,6 +211,15 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
     func galleryPressed() {
         switchToLayout(.Normal)
         delegate?.showPhotoBrowser()
+    }
+    func undoPressed() {
+        sessionController.set(.ExposureMode(.ContinuousAutoExposure))
+        sessionController.set(.FocusMode(.ContinuousAutoFocus))
+        sessionController.set(.WhiteBalanceMode(.ContinuousAutoWhiteBalance))
+        guard layout.currentMode == .Normal else {return}
+        UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+            self.undoButton.alpha = 0.0
+            }, completion: nil)
     }
     
     // MARK: CSControllerDelegate
@@ -233,7 +248,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
     func sessionControllerNotification(notification: CSNotification) {
 
         switch notification {
-        case .capturingStillImage(true):
+        case .CapturingPhoto(true):
             
             CATransaction.disableActions {
                 
@@ -247,15 +262,15 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
             }
             
-        case .sessionRunning(true):
+        case .SessionRunning(true):
             
             switchToLayout(.AssembleControls, 1.6)
             
-        case .sessionRunning(false):
+        case .SessionRunning(false):
             //break
             switchToLayout(.DisassembleControls)
             
-        case .imageSaved:
+        case .PhotoSaved:
         
             UIView.animateWithDuration(0.2,
                 delay: 0.0,
@@ -301,6 +316,8 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
     )
     
     private var currentControlPanel: ControlPanel?
+    
+    var magnifyForFocus = true
     
     // MARK: Layout Related
     
@@ -463,7 +480,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
                 sliders.zoom.actionProgressChanged = { (slider) in
                     
-                    me.sessionController.set( .cameraZoomFactor( slider.value ) )
+                    me.sessionController.set( .ZoomFactor( slider.value ) )
                     
                 }
                 sliders.zoom.actionProgressStarted = { (slider) in
@@ -520,7 +537,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
                 sliders.focus.actionProgressChanged = { (slider) in
                     
-                    me.sessionController.set(.cameraLensPosition(slider.value))
+                    me.sessionController.set(.LensPosition(slider.value))
                     
                 }
                 
@@ -530,17 +547,19 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                     
                     me.menuControl.selectItemWithValue(.Focus)
                     
-                    previousZoom = me.sessionController.camera.videoZoomFactor ?? 1.0
+                    previousZoom = me.sessionController.camera?.videoZoomFactor ?? 1.0
                     
-                    let newZoom = min(previousZoom * 3.5, 50, me.sessionController.camera.activeFormat.videoMaxZoomFactor)
+                    let mag: CGFloat = me.magnifyForFocus ? 3.2 : 1
                     
-                    me.sessionController.set(CSSet.cameraZoomFactor(newZoom))
-                    //me.sessionController.set(CSSet.cameraZoomFactorRamp(newZoom, MAXFLOAT))
+                    let newZoom = min(previousZoom * mag, 50, me.sessionController.camera?.activeFormat?.videoMaxZoomFactor ?? 1.0)
+                    
+                    me.sessionController.set(CSSet.ZoomFactor(newZoom))
+                    //me.sessionController.set(CSSet.ZoomFactorRamp(newZoom, MAXFLOAT))
                     
                 }
                 
                 sliders.focus.actionProgressEnded = { (_) in
-                    me.sessionController.set(CSSet.cameraZoomFactor(previousZoom))
+                    me.sessionController.set(CSSet.ZoomFactor(previousZoom))
                 }
                 
                 
@@ -599,7 +618,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                     
                     let whiteBalanceGains = me.sessionController._normalizeGainsForTemperatureAndTint(temperatureAndTint)
                     
-                    me.sessionController.set( .cameraWhiteBalanceGains( whiteBalanceGains ) )
+                    me.sessionController.set( .WhiteBalanceGains( whiteBalanceGains ) )
                     
                 }
                 
@@ -653,7 +672,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                     
                     let whiteBalanceGains = me.sessionController._normalizeGainsForTemperatureAndTint(temperatureAndTint)
                     
-                    me.sessionController.set( .cameraWhiteBalanceGains( whiteBalanceGains ) )
+                    me.sessionController.set( .WhiteBalanceGains( whiteBalanceGains ) )
                     
                 }
                 
@@ -709,7 +728,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                     
                     let iso = me.sliders.iso.value
                     
-                    me.sessionController.set( .cameraExposure( .durationAndISO( exposureDuration, iso ) ) )
+                    me.sessionController.set( .Exposure( .DurationAndISO( exposureDuration, iso ) ) )
                     
                 }
                 
@@ -762,7 +781,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 sliders.exposureDuration.actionProgressChanged = { (_) in
                     let exposureDuration = me.sliders.exposureDuration.value
                     let iso = me.sliders.iso.value
-                    me.sessionController.set( .cameraExposure( .durationAndISO( exposureDuration, iso ) ) )
+                    me.sessionController.set( .Exposure( .DurationAndISO( exposureDuration, iso ) ) )
                 }
                 sliders.exposureDuration.actionProgressStarted = { (_) in
                     me.menuControl.selectItemWithValue(.Exposure)
@@ -803,6 +822,13 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 galleryButton.alpha = 0.0
                 addSubview(galleryButton)
                 
+                // MARK: undo button
+                undoButton.addTarget(self, action: "undoPressed",
+                    forControlEvents: .TouchUpInside)
+                undoButton.translatesAutoresizingMaskIntoConstraints = false
+                undoButton.alpha = 0.0
+                addSubview(undoButton)
+                
                 
                 
                 
@@ -832,16 +858,24 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                         }
                         
                         if added.contains(.Current) && slider.alpha != 1.0{
-                            UIView.animateWithDuration(0.2) {
+                            UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
                                 slider.alpha = 1.0
-                            }
+                                me.layout.tempShow(slider)
+                            }, completion: nil)
+                            UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+                                me.undoButton.alpha = 1.0
+                                me.layout.tempShow(me.undoButton)
+                                }, completion: nil)
                         }
                         
                         if removed.contains(.Current) && shouldHide {
                             let duration: NSTimeInterval = (Control.currentControl != nil) ? 0.2 : 0.4
-                            UIView.animateWithDuration(duration) {
+                            UIView.animateWithDuration(duration, delay: 0, options: UIViewAnimationOptions.BeginFromCurrentState, animations:  {
                                 slider.alpha = 0.0
-                            }
+                            }, completion: nil)
+                            UIView.animateWithDuration(duration, delay: 0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+                                //me.undoButton.alpha = 0.0
+                                }, completion: nil)
                         }
                         
                     }
@@ -867,7 +901,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 }
                 
                 
-                addConstraintsForKeys( [ .MenuControl, .ShutterButton, .GalleryButton ] )
+                addConstraintsForKeys( [ .MenuControl, .ShutterButton, .GalleryButton, .UndoButton ] )
                 
             }
             
@@ -894,7 +928,8 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                     sliders.exposureDuration,
                     menuControl,
                     shutterButton,
-                    galleryButton
+                    galleryButton,
+                    undoButton
                 )
             )
 
@@ -947,8 +982,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         case .AssembleControls: // MARK: AssembleControls
             
             func assembleControls(){
-                
-                let zoomMax = min(sessionController.camera.activeFormat.videoMaxZoomFactor, 25)
+                let zoomMax = min(sessionController.camera?.activeFormat.videoMaxZoomFactor ?? 1, 25)
                 
                 let zVPHandler = VPExponentialCGFloatHandler(start: 1.0, end: zoomMax) as VPHandler<CGFloat>
                 
@@ -960,7 +994,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 /// prevent strong ownership in closures
                 unowned let me = self
                 
-                pdscale.currentScale = { me.sessionController.camera.videoZoomFactor }
+                pdscale.currentScale = { me.sessionController.camera?.videoZoomFactor ?? 1.0 }
                 
                 pdscale.maxScale = zoomMax
                 
@@ -976,7 +1010,12 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
                 sliders.tint.vpHandler = VPFloatHandler(start: -150, end: 150)
                 
-                sliders.iso.vpHandler = VPFloatHandler(start: sessionController.camera.activeFormat.minISO, end: sessionController.camera.activeFormat.maxISO)
+                sliders.iso.vpHandler = VPFloatHandler(start: sessionController.camera?.activeFormat?.minISO ?? 0, end: sessionController.camera?.activeFormat?.maxISO ?? 0)
+                
+                
+                
+                guard !kIsDemoMode else { return }
+                
                 
                 
                 
@@ -1106,9 +1145,9 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
             }
             
-            sessionController.set(.cameraExposureMode(.ContinuousAutoExposure))
-            sessionController.set(.cameraFocusMode(.ContinuousAutoFocus))
-            sessionController.set(.cameraWhiteBalanceMode(.ContinuousAutoWhiteBalance))
+            sessionController.set(.ExposureMode(.ContinuousAutoExposure))
+            sessionController.set(.FocusMode(.ContinuousAutoFocus))
+            sessionController.set(.WhiteBalanceMode(.ContinuousAutoWhiteBalance))
             
         case .Normal: // MARK: Normal
             
@@ -1125,13 +1164,19 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             }
             newLayout.tempAlpha(shutterButton, 1.0, 0.15)
             newLayout.tempHide(galleryButton)
+            let showReset = (
+                sessionController.camera.focusMode == .Locked ||
+                sessionController.camera.exposureMode == .Locked ||
+                sessionController.camera.exposureMode == .Custom ||
+                sessionController.camera.whiteBalanceMode == .Locked
+            )
+            showReset ? newLayout.tempShow(undoButton) : newLayout.tempHide(undoButton)
             
             
         case .Focus: // MARK: Focus
             
-            
-            sliders.focus.alpha = 0.0
             newLayout.tempShow(sliders.focus)
+            //newLayout.tempShow(undoButton)
             
 //            if UIApplication.sharedApplication().statusBarOrientation == .Portrait {
 //                newLayout.tempAlpha(galleryButton, 0.15)
@@ -1151,7 +1196,25 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
             )
             
-            modeControl.setValueAction = { me.sessionController.set(.cameraFocusMode($0)) }
+            let magSwitchControl = OptionControl<Bool>(
+                
+                items: [
+                    
+                    ("Magnify Preview", true),
+                    ("On", true),
+                    ("Off", false)
+                    
+                ],
+                
+                selectedIndex:  magnifyForFocus ? 1 : 2
+                
+            )
+            magSwitchControl.minWidth = 35
+            magSwitchControl.setValueAction = {
+                guard magSwitchControl.selectedIndex != 0 else { magSwitchControl.selectedIndex = me.magnifyForFocus ? 1 : 2; return }
+                me.magnifyForFocus = $0 }
+            
+            modeControl.setValueAction = { me.sessionController.set(.FocusMode($0)) }
             
             let voKey = "FocusModeControl"
             
@@ -1163,7 +1226,8 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             setUpControlPanel([
                 
-                ControlPanel.Row(modeControl)
+                ControlPanel.Row(modeControl),
+                ControlPanel.Row(magSwitchControl)
                 
                 ], &newLayout)
             
@@ -1173,9 +1237,8 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 newLayout.tempAlpha(galleryButton, 0.15)
             }
             
-            sliders.iso.alpha = 0.0
-            sliders.exposureDuration.alpha = 0.0
             newLayout.tempShow(sliders.iso, sliders.exposureDuration)
+            //newLayout.tempShow(undoButton)
             
             
             
@@ -1187,7 +1250,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
             )
             
-            modeControl.setValueAction = { me.sessionController.set(.cameraExposureMode($0)) }
+            modeControl.setValueAction = { me.sessionController.set(.ExposureMode($0)) }
             
             let voKey = "ExposureModeControl"
             
@@ -1208,8 +1271,8 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
         case .WhiteBalance: // MARK: WhiteBalance
             
-            sliders.temperature.alpha = 0.0
             newLayout.tempShow(sliders.temperature)
+            //newLayout.tempShow(undoButton)
             
             
             
@@ -1221,7 +1284,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
             )
             
-            modeControl.setValueAction = { me.sessionController.set(.cameraWhiteBalanceMode($0)) }
+            modeControl.setValueAction = { me.sessionController.set(.WhiteBalanceMode($0)) }
             
             let voKey = "WhiteBalanceModeControl"
             
@@ -1255,37 +1318,65 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             let voKey = "AspectRatioOptionControl"
             
+            let modeItems: [OptionControl<CSAspectRatioMode>.Item] = [
+                ("Lock", .Lock),
+                ("Fullscreen", .Fullscreen),
+                ("Sensor", .Sensor)]
+            let modeControl = OptionControl<CSAspectRatioMode>(items: modeItems, selectedValue: sessionController.aspectRatioMode)
+
+            modeControl.setValueAction = {
+                guard me.sessionController.aspectRatioMode != $0 else { return }
+                me.sessionController.set(.AspectRatioMode($0))
+            }
             
             let optionControl = OptionControl<CSAspectRatio>(
                 
                 items: kAspectRatiosControlItems,
                 
-                selectedValue: sessionController.cropAspectRatio
+                selectedValue: sessionController.aspectRatio
                 
             )
             
-            optionControl.setValueAction = { me.sessionController.set(.cropAspectRatio($0)) }
+            let isTemp = me.menuControl.alpha != 1
+            optionControl.setValueAction = {
+                guard me.sessionController.aspectRatio != $0 else { return }
+                me.sessionController.set(.AspectRatio($0))
+                if isTemp { me.switchToLayout(.Normal) }
+            }
             
             me.sessionController.voBlocks.aspectRatio[voKey] = { optionControl.selectItemWithValue($0) }
+            me.sessionController.voBlocks.aspectRatioMode[voKey] = { modeControl.selectItemWithValue($0) }
             
             newLayout.temp(&me.sessionController.voBlocks.aspectRatio[voKey])
+            newLayout.temp(&me.sessionController.voBlocks.aspectRatioMode[voKey])
             
+            let showReset = (
+                sessionController.camera.focusMode == .Locked ||
+                    sessionController.camera.exposureMode == .Locked ||
+                    sessionController.camera.exposureMode == .Custom ||
+                    sessionController.camera.whiteBalanceMode == .Locked
+            ) && isTemp
             
-            
+            showReset ? newLayout.tempShow(undoButton) : ()
+        
+            let ep = newLayout.entrancePerformer
+            let exp = newLayout.exitPerformer
             newLayout.entrancePerformer = {
+                ep()
                 me.shutterButton.alpha = 0.15 + (1-0.15) * (1 - me.menuControl.alpha)
                 me.galleryButton.alpha = me.menuControl.alpha
             }
             
             newLayout.exitPerformer = {
+                exp()
                 me.shutterButton.alpha = 0.15 + (1-0.15) * (1 - me.menuControl.alpha)
                 me.galleryButton.alpha = me.menuControl.alpha
             }
             
             
-            
             setUpControlPanel([
                 
+                ControlPanel.Row(modeControl),
                 ControlPanel.Row(optionControl)
                 
                 ], &newLayout)
@@ -1420,12 +1511,13 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 }
             case .ShutterButton: return "ShutterButton"
             case .GalleryButton: return "GalleryButton"
+            case .UndoButton: return "UndoButton"
             case .ControlPanel: return "ControlPanel"
             case .MenuControl: return "MenuControl"
             }
         }
         case Slider(MainSliderPositionType)
-        case ShutterButton, GalleryButton
+        case ShutterButton, GalleryButton, UndoButton
         case ControlPanel
         case MenuControl
     }
@@ -1590,7 +1682,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             let offsetToAttribute: NSLayoutAttribute
             let offsetAmount: CGFloat
             let alignAttribute: NSLayoutAttribute
-            let distance: CGFloat = 30
+            let distance: CGFloat = 20
             switch orientation {
             case .LandscapeLeft:
                 offsetAttribute = .Bottom
@@ -1621,6 +1713,16 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             constraints.appendContentsOf([align, offset])
             
             
+            
+            
+            
+        case .UndoButton: // MARK: UndoButton
+            
+            let v = NSLayoutConstraint.constraintsWithVisualFormat("V:[U]-15-|", options: .DirectionLeftToRight, metrics: nil, views: ["U":undoButton])
+            
+            let h = NSLayoutConstraint.constraintsWithVisualFormat("H:[U]-15-|", options: .DirectionLeftToRight, metrics: nil, views: ["U":undoButton])
+            
+            constraints += h + v
             
             
             
@@ -1888,7 +1990,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         
         mutating func tempShow(views: UIView...) {
             views.forEach { (view: UIView) in
-                self.tempAlpha(view, 1.0)
+                self.tempAlpha(view, 1.0, 0.0)
             }
         }
         

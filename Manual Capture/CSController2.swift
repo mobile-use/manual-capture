@@ -35,50 +35,50 @@ import AssetsLibrary
 //// change type
 //enum CSChange {
 //    enum Exposure {
-//        case ISO(Float), targetOffset(Float), duration(CMTime)
-//        case bias(Float)
+//        case ISO(Float), TargetOffset(Float), Duration(CMTime)
+//        case Bias(Float)
 //        
-//        case minISO(Float), maxISO(Float)
-//        case minDuration(CMTime), maxDuration(CMTime)
+//        case MinISO(Float), MaxISO(Float)
+//        case MinDuration(CMTime), MaxDuration(CMTime)
 //    }
-//    case cameraLensPosition(Float)
-//    case cameraExposure(Exposure)
-//    case cameraWhiteBalanceGains(AVCaptureWhiteBalanceGains)
-//    case cameraZoomFactor(CGFloat)
+//    case LensPosition(Float)
+//    case Exposure(Exposure)
+//    case WhiteBalanceGains(AVCaptureWhiteBalanceGains)
+//    case ZoomFactor(CGFloat)
 //    
 //    
-//    case cameraFocusMode(AVCaptureFocusMode)
-//    case cameraExposureMode(AVCaptureExposureMode)
-//    case cameraWhiteBalanceMode(AVCaptureWhiteBalanceMode)
+//    case FocusMode(AVCaptureFocusMode)
+//    case ExposureMode(AVCaptureExposureMode)
+//    case WhiteBalanceMode(AVCaptureWhiteBalanceMode)
 //    
-//    case cropAspectRatio(CSAspectRatio)
+//    case AspectRatio(CSAspectRatio)
 //}
 //
 //// value set type
 //enum CSSet {
 //    enum Exposure {
-//        case bias(Float)
-//        case durationAndISO(CMTime, Float)
+//        case Bias(Float)
+//        case DurationAndISO(CMTime, Float)
 //    }
-//    case cameraLensPosition(Float)
-//    case cameraExposure(Exposure)
-//    case cameraWhiteBalanceGains(AVCaptureWhiteBalanceGains)
-//    case cameraZoomFactor(CGFloat), cameraZoomFactorRamp(CGFloat, Float)
+//    case LensPosition(Float)
+//    case Exposure(Exposure)
+//    case WhiteBalanceGains(AVCaptureWhiteBalanceGains)
+//    case ZoomFactor(CGFloat), ZoomFactorRamp(CGFloat, Float)
 //    
 //    
-//    case cameraFocusMode(AVCaptureFocusMode)
-//    case cameraExposureMode(AVCaptureExposureMode)
-//    case cameraWhiteBalanceMode(AVCaptureWhiteBalanceMode)
+//    case FocusMode(AVCaptureFocusMode)
+//    case ExposureMode(AVCaptureExposureMode)
+//    case WhiteBalanceMode(AVCaptureWhiteBalanceMode)
 //    
-//    case cropAspectRatio(CSAspectRatio)
+//    case AspectRatio(CSAspectRatio)
 //}
 //
 //// notification type
 //enum CSNotification {
-//    case capturingStillImage(Bool)
-//    case imageSaved
-//    case cameraSubjectAreaChange
-//    case sessionRunning(Bool)
+//    case CapturingPhoto(Bool)
+//    case PhotoSaved
+//    case SubjectAreaChange
+//    case SessionRunning(Bool)
 //}
 //
 //typealias CSAspectRatio = CGFloat
@@ -103,7 +103,7 @@ class CSController2: NSObject {
         didSet{
             
             //previewView.aspectRatio = aspectRatio
-            notify( .cropAspectRatio(aspectRatio) )
+            notify( .AspectRatio(aspectRatio) )
             
         }
     }
@@ -285,55 +285,55 @@ class CSController2: NSObject {
             
             let capturing = new.boolValue
             
-            notify( .capturingStillImage(capturing) )
+            notify( .CapturingPhoto(capturing) )
             
         case "camera.focusMode":
             
             let focusMode = AVCaptureFocusMode(rawValue: new.integerValue)!
             
-            notify( .cameraFocusMode(focusMode) )
+            notify( .FocusMode(focusMode) )
             
         case "camera.exposureMode":
             
             let exposureMode = AVCaptureExposureMode(rawValue: new.integerValue)!
             
-            notify( .cameraExposureMode(exposureMode) )
+            notify( .ExposureMode(exposureMode) )
             
         case "camera.whiteBalanceMode":
             
             let whiteBalanceMode = AVCaptureWhiteBalanceMode(rawValue: new.integerValue)!
             
-            notify (.cameraWhiteBalanceMode(whiteBalanceMode) )
+            notify (.WhiteBalanceMode(whiteBalanceMode) )
             
         case "camera.ISO":
             
             let iso = new.floatValue
-            notify( .cameraExposure(.ISO(iso)) )
+            notify( .Exposure(.ISO(iso)) )
             
         case "camera.exposureTargetOffset":
             
             let exposureTargetOffset = new.floatValue
             
-            notify(.cameraExposure(.targetOffset(exposureTargetOffset)) )
+            notify(.Exposure(.TargetOffset(exposureTargetOffset)) )
             
         case "camera.exposureDuration":
             
             let exposureDuration = new.CMTimeValue
             
-            notify( .cameraExposure(.duration(exposureDuration)) )
+            notify( .Exposure(.Duration(exposureDuration)) )
             
         case "camera.deviceWhiteBalanceGains":
             
             var whiteBalanceGains = AVCaptureWhiteBalanceGains() // Empty
             (new as! NSValue).getValue( &whiteBalanceGains ) // Convert
             
-            notify( .cameraWhiteBalanceGains( whiteBalanceGains ) )
+            notify( .WhiteBalanceGains( whiteBalanceGains ) )
             
         case "camera.lensPosition":
             
             let lensPosition = new.floatValue
             
-            notify( .cameraLensPosition(lensPosition) )
+            notify( .LensPosition(lensPosition) )
             
             
         case "camera.adjustingFocus": return
@@ -364,19 +364,19 @@ class CSController2: NSObject {
     
     private func notify(change: CSChange) {
         switch change {
-        case .cameraLensPosition(let v): self.voBlocks.lensPosition.forEach { $1(v) }
-        case .cameraExposure(.ISO(let v)): self.voBlocks.iso.forEach { $1(v) }
-        case .cameraExposure(.duration(let v)): self.voBlocks.exposureDuration.forEach { $1(v) }
-        case .cameraExposure(.targetOffset(let v)): self.voBlocks.targetOffset.forEach { $1(v) }
-        case .cameraExposure(.bias(let v)): self.voBlocks.targetBias.forEach { $1(v) }
-        case .cameraWhiteBalanceGains(let v): self.voBlocks.whiteBalance.forEach { $1(v) }
-        case .cameraZoomFactor(let v): self.voBlocks.zoomFactor.forEach { $1(v) }
+        case .LensPosition(let v): self.voBlocks.lensPosition.forEach { $1(v) }
+        case .Exposure(.ISO(let v)): self.voBlocks.iso.forEach { $1(v) }
+        case .Exposure(.Duration(let v)): self.voBlocks.exposureDuration.forEach { $1(v) }
+        case .Exposure(.TargetOffset(let v)): self.voBlocks.targetOffset.forEach { $1(v) }
+        case .Exposure(.Bias(let v)): self.voBlocks.targetBias.forEach { $1(v) }
+        case .WhiteBalanceGains(let v): self.voBlocks.whiteBalance.forEach { $1(v) }
+        case .ZoomFactor(let v): self.voBlocks.zoomFactor.forEach { $1(v) }
             
-        case .cameraFocusMode(let v): self.voBlocks.focusMode.forEach { $1(v) }
-        case .cameraExposureMode(let v): self.voBlocks.exposureMode.forEach { $1(v) }
-        case .cameraWhiteBalanceMode(let v): self.voBlocks.whiteBalanceMode.forEach { $1(v) }
+        case .FocusMode(let v): self.voBlocks.focusMode.forEach { $1(v) }
+        case .ExposureMode(let v): self.voBlocks.exposureMode.forEach { $1(v) }
+        case .WhiteBalanceMode(let v): self.voBlocks.whiteBalanceMode.forEach { $1(v) }
             
-        case .cropAspectRatio(let v): self.voBlocks.aspectRatio.forEach { $1(v) }
+        case .AspectRatio(let v): self.voBlocks.aspectRatio.forEach { $1(v) }
         default: break
         }
     }
@@ -431,7 +431,7 @@ class CSController2: NSObject {
             object: camera,
             queue: NSOperationQueue.mainQueue(),
             usingBlock: { (_) in
-                me.delegate?.sessionControllerNotification(.cameraSubjectAreaChange)
+                me.delegate?.sessionControllerNotification(.SubjectAreaChange)
             }
         )
         
@@ -439,7 +439,7 @@ class CSController2: NSObject {
             AVCaptureSessionDidStartRunningNotification,
             object: session, queue: NSOperationQueue.mainQueue(),
             usingBlock: { (_) in
-                me.delegate?.sessionControllerNotification( .sessionRunning(true) )
+                me.delegate?.sessionControllerNotification( .SessionRunning(true) )
             }
         )
         
@@ -448,7 +448,7 @@ class CSController2: NSObject {
             object: session,
             queue: NSOperationQueue.mainQueue(),
             usingBlock: { (_) in
-                me.delegate?.sessionControllerNotification( .sessionRunning(false) )
+                me.delegate?.sessionControllerNotification( .SessionRunning(false) )
             }
         )
     }
@@ -489,7 +489,7 @@ class CSController2: NSObject {
         
         switch set {
             
-        case .cameraFocusMode( let focusMode ):
+        case .FocusMode( let focusMode ):
             
             cameraConfig(){
                 
@@ -497,7 +497,7 @@ class CSController2: NSObject {
                 
             }
             
-        case .cameraExposureMode( let exposureMode ):
+        case .ExposureMode( let exposureMode ):
             
             cameraConfig(){
                 
@@ -505,7 +505,7 @@ class CSController2: NSObject {
                 
             }
             
-        case .cameraWhiteBalanceMode( let whiteBalanceMode ):
+        case .WhiteBalanceMode( let whiteBalanceMode ):
             
             cameraConfig(){
                 
@@ -513,7 +513,7 @@ class CSController2: NSObject {
                 
             }
             
-        case .cameraExposure( .durationAndISO( let duration , let ISO ) ):
+        case .Exposure( .DurationAndISO( let duration , let ISO ) ):
             
             cameraConfig(){
                 
@@ -521,7 +521,7 @@ class CSController2: NSObject {
                 
             }
 
-        case .cameraExposure( .bias( let bias ) ):
+        case .Exposure( .Bias( let bias ) ):
             
             cameraConfig(){
                 
@@ -529,7 +529,7 @@ class CSController2: NSObject {
                 
             }
             
-        case .cameraLensPosition( let lensPosition ):
+        case .LensPosition( let lensPosition ):
             
             cameraConfig(){
                 
@@ -537,7 +537,7 @@ class CSController2: NSObject {
                 
             }
             
-        case .cameraWhiteBalanceGains( let wbgains ):
+        case .WhiteBalanceGains( let wbgains ):
             
             cameraConfig(){
                 
@@ -545,7 +545,7 @@ class CSController2: NSObject {
                 
             }
             
-        case .cameraZoomFactor(let zFactor):
+        case .ZoomFactor(let zFactor):
             
             cameraConfig(){
                 
@@ -553,7 +553,7 @@ class CSController2: NSObject {
                 
             }
             
-        case .cameraZoomFactorRamp(let zFactor, let rate):
+        case .ZoomFactorRamp(let zFactor, let rate):
             
             cameraConfig(){
                 
@@ -561,9 +561,12 @@ class CSController2: NSObject {
                 
             }
             
-        case .cropAspectRatio(let aspectRatio):
+        case .AspectRatio(let aspectRatio):
             
             self.aspectRatio = aspectRatio
+            
+            
+        case .AspectRatioMode(let _): break
             
         }
         
@@ -650,7 +653,7 @@ class CSController2: NSObject {
                 ALAssetsLibrary().writeImageToSavedPhotosAlbum(croppedImage, orientation: orientation) {
                     (path, error) in
                     
-                    self.notify(.imageSaved)
+                    self.notify(.PhotoSaved)
                     
                     guard error == nil else {
                         

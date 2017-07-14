@@ -10,13 +10,13 @@ import UIKit
 import AVFoundation
 
 class CapturePreviewLayer: AVCaptureVideoPreviewLayer {
-    var cropAspectRatio: CGFloat = 16 / 9 {
+    var aspectRatio: CGFloat = 16 / 9 {
         didSet { bounds = requestedBound ?? bounds.standardized /* recalculate*/}
     }
     
     override func preferredFrameSize() -> CGSize {
-        let ratioW = bounds.height * cropAspectRatio
-        let ratioH = bounds.width / cropAspectRatio
+        let ratioW = bounds.height * aspectRatio
+        let ratioH = bounds.width / aspectRatio
         let pRect = CGRectInset(bounds,
             max(bounds.width - ratioW, 0) / 2, // clipped
             max(bounds.height - ratioH, 0) / 2 // clipped
@@ -24,7 +24,7 @@ class CapturePreviewLayer: AVCaptureVideoPreviewLayer {
         return pRect.size
     }
     
-    private var requestedBound: CGRect?
+    var requestedBound: CGRect?
     
     override var frame: CGRect {
         willSet(newFrame) {
@@ -40,11 +40,8 @@ class CapturePreviewLayer: AVCaptureVideoPreviewLayer {
     
     override var bounds: CGRect {
         set {
-            if videoGravity != AVLayerVideoGravityResizeAspectFill {
-                videoGravity = AVLayerVideoGravityResizeAspectFill
-            }
-            let ratioW = newValue.height * cropAspectRatio
-            let ratioH = newValue.width / cropAspectRatio
+            let ratioW = newValue.height * aspectRatio
+            let ratioH = newValue.width / aspectRatio
             
             super.bounds = CGRectInset(newValue,
                 max(newValue.width - ratioW, 0) / 2, // clipped
@@ -54,5 +51,20 @@ class CapturePreviewLayer: AVCaptureVideoPreviewLayer {
         get {
             return super.bounds
         }
+    }
+    
+    func didInit(){
+        if videoGravity != AVLayerVideoGravityResizeAspectFill {
+            videoGravity = AVLayerVideoGravityResizeAspectFill
+        }
+    }
+    
+    override init!(session: AVCaptureSession!) {
+        super.init(session: session)
+        didInit()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

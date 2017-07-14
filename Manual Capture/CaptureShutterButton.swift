@@ -11,6 +11,7 @@ import UIKit
 
 let kCaptureShutterButtonSize = CGSizeMake(60, 60)
 let kCaptureGalleryButtonSize = CGSizeMake(40, 40)
+let kCaptureUndoButtonSize = CGSizeMake(40, 40)
 extension UIButton {
     class func shutterButton() -> UIButton {
         func iconImageWithColor(color:UIColor, _ bgcolor:UIColor) -> UIImage {
@@ -101,9 +102,35 @@ extension UIButton {
         button.frame = CGRectMake(0, 0, kCaptureShutterButtonSize.width, kCaptureShutterButtonSize.height)
 
         //button.adjustsImageWhenHighlighted = true
-        button.setBackgroundImage(iconImageWithColor(kCaptureTintColor, UIColor.whiteColor()), forState: .Normal)
-        button.setBackgroundImage(iconImageWithColor(UIColor.whiteColor(), kCaptureTintColor), forState: .Highlighted)
-        button.setBackgroundImage(alpha(iconImageWithColor(kCaptureTintColor, UIColor.whiteColor()), 1.0), forState: .Disabled)
+        if kIsVideoMode {
+            let n = kCaptureTintColor, h = UIColor(white: 1, alpha: 0.8), c = UIColor.clearColor()
+            button.setBackgroundImage(iconImageWithColor(c, n), forState: .Normal)
+            button.setBackgroundImage(iconImageWithColor(c, h), forState: .Highlighted)
+            button.setBackgroundImage(iconImageWithColor(c, n), forState: .Disabled)
+//            let a: CGFloat = 0.15
+//            button.setBackgroundImage(iconImageWithColor(
+//                UIColor.whiteColor(),//.colorWithAlphaComponent(0.5),
+//                UIColor(white: 0.08, alpha: a)
+//                ),
+//                forState: .Normal
+//            )
+//            button.setBackgroundImage(iconImageWithColor(
+//                UIColor(white: 0.08, alpha: a),
+//                UIColor(white: 1, alpha: 1)
+//                ),
+//                forState: .Highlighted
+//            )
+//            button.setBackgroundImage(iconImageWithColor(
+//                UIColor.whiteColor(),//.colorWithAlphaComponent(0.5),
+//                UIColor(white: 0.08, alpha: a)
+//                ),
+//                forState: .Disabled
+//            )
+        }else {
+            button.setBackgroundImage(iconImageWithColor(kCaptureTintColor, UIColor.whiteColor()), forState: .Normal)
+            button.setBackgroundImage(iconImageWithColor(UIColor.whiteColor(), kCaptureTintColor), forState: .Highlighted)
+            button.setBackgroundImage(alpha(iconImageWithColor(kCaptureTintColor, UIColor.whiteColor()), 1.0), forState: .Disabled)
+        }
         
         return button
     }
@@ -226,5 +253,79 @@ extension UIButton {
         return button
     }
 
+    
+    class func undoButton() -> UIButton {
+        func drawUndoButton(color: UIColor,_ color2: UIColor, frame: CGRect = CGRectMake(10, 10, 20, 20)) -> UIImage {
+            UIGraphicsBeginImageContextWithOptions(kCaptureUndoButtonSize, false, 0)
+                
+            //// Oval 2 Drawing
+            let oval2Path = UIBezierPath(ovalInRect: CGRectMake(0, 0, kCaptureUndoButtonSize.width, kCaptureUndoButtonSize.height))
+            color2.setFill()
+            oval2Path.fill()
+            
+            
+            //// undoGlyph Drawing
+            let undoGlyphPath = UIBezierPath()
+            undoGlyphPath.moveToPoint(CGPointMake(frame.minX + 0.43649 * frame.width, frame.minY + 0.20588 * frame.height))
+            undoGlyphPath.addLineToPoint(CGPointMake(frame.minX + 0.43649 * frame.width, frame.minY + 0.00000 * frame.height))
+            undoGlyphPath.addLineToPoint(CGPointMake(frame.minX + 0.12500 * frame.width, frame.minY + 0.35294 * frame.height))
+            undoGlyphPath.addLineToPoint(CGPointMake(frame.minX + 0.43649 * frame.width, frame.minY + 0.67647 * frame.height))
+            undoGlyphPath.addLineToPoint(CGPointMake(frame.minX + 0.43692 * frame.width, frame.minY + 0.47059 * frame.height))
+            undoGlyphPath.addCurveToPoint(CGPointMake(frame.minX + 0.60640 * frame.width, frame.minY + 1.00000 * frame.height), controlPoint1: CGPointMake(frame.minX + 0.55019 * frame.width, frame.minY + 0.47059 * frame.height), controlPoint2: CGPointMake(frame.minX + 0.90249 * frame.width, frame.minY + 0.60576 * frame.height))
+            undoGlyphPath.addCurveToPoint(CGPointMake(frame.minX + 0.83294 * frame.width, frame.minY + 0.64706 * frame.height), controlPoint1: CGPointMake(frame.minX + 0.69501 * frame.width, frame.minY + 0.93688 * frame.height), controlPoint2: CGPointMake(frame.minX + 0.83294 * frame.width, frame.minY + 0.83262 * frame.height))
+            undoGlyphPath.addCurveToPoint(CGPointMake(frame.minX + 0.43649 * frame.width, frame.minY + 0.20588 * frame.height), controlPoint1: CGPointMake(frame.minX + 0.83294 * frame.width, frame.minY + 0.62532 * frame.height), controlPoint2: CGPointMake(frame.minX + 0.86126 * frame.width, frame.minY + 0.20588 * frame.height))
+            undoGlyphPath.closePath()
+            color.setFill()
+            undoGlyphPath.fill()
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        }
+        let button = UIButton(type: UIButtonType.Custom)
+        button.frame = CGRectMake(0, 0, kCaptureGalleryButtonSize.width, kCaptureGalleryButtonSize.height)
+        
+        button.adjustsImageWhenHighlighted = true
+//        button.setBackgroundImage(drawUndoButton(
+//            kCaptureTintColor,
+//            UIColor.whiteColor()
+//            ),
+//            forState: .Normal
+//        )
+//        button.setBackgroundImage(drawUndoButton(
+//            UIColor.whiteColor(),
+//            kCaptureTintColor
+//            ),
+//            forState: .Highlighted
+//        )
+//        button.setBackgroundImage(drawUndoButton(
+//            kCaptureTintColor,
+//            UIColor.whiteColor()
+//            ),
+//            forState: .Disabled
+//        )
+
+        let a: CGFloat = 0.15
+        button.setBackgroundImage(drawUndoButton(
+            UIColor.whiteColor(),//.colorWithAlphaComponent(0.5),
+            UIColor(white: 0.08, alpha: a)
+            ),
+            forState: .Normal
+        )
+        button.setBackgroundImage(drawUndoButton(
+            UIColor(white: 0.08, alpha: a),
+            UIColor(white: 1, alpha: 1)
+            ),
+            forState: .Highlighted
+        )
+        button.setBackgroundImage(drawUndoButton(
+            UIColor.whiteColor(),//.colorWithAlphaComponent(0.5),
+            UIColor(white: 0.08, alpha: a)
+            ),
+            forState: .Disabled
+        )
+
+        
+        return button
+    }
 }
 

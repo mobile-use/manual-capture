@@ -9,14 +9,15 @@
 import UIKit
 
 class CaptureViewController2: UIViewController {
-    typealias Constraints = CaptureConstraint
+//    typealias Constraints = CaptureConstraint
     typealias PreviewView = CapturePreviewView
     
-    let steadyView = (content: UIView(), rotation: UIView())
+    let steadyView = RotationContainer()
     // Continue
-    var continueView: UIView!
-    var controlView: (content: UIView, rotation: UIView)!
-    var captureButton: UIButton!
+    var continueView = UIView()
+    var controlView = RotationContainer()
+    var captureButton = UIButton.shutterButton()
+    var captureButtonContainer: RotationContainer!
     var previewView: PreviewView!
     
     private var layout: Layout = []
@@ -25,7 +26,8 @@ class CaptureViewController2: UIViewController {
         typealias Block = ()->()
         typealias Curry = (Block)->()
         typealias Conditional = (Layout) -> Curry?
-        let curry: Curry = {$0()}
+        
+        let curry: Curry = { $0() }
         let has: Conditional = { self.layout.contains($0) ? curry : nil }
         let hasNot: Conditional = { !self.layout.contains($0) ? curry : nil }
         let had: Conditional = { oldLayout.contains($0) ? curry : nil }
@@ -38,17 +40,9 @@ class CaptureViewController2: UIViewController {
         
         
         added(.Continue)? {
-            self.continueView = UIView()
-            self.controlView = (content: UIView(), rotation: UIView())
-            self.captureButton = UIButton.shutterButton()
             self.previewView = self.sessionController.previewView
-            
-            
         }
         removed(.Continue)? {
-            self.continueView = nil
-            self.controlView = nil
-            self.captureButton = nil
             self.previewView = nil
         }
         has(.Init)? {
@@ -59,35 +53,18 @@ class CaptureViewController2: UIViewController {
     var sessionController: CSController2!
     
     override func viewDidLoad() {
-//        view.backgroundColor = UIColor.magentaColor()
-        
-        steadyView.rotation.frame = view.bounds
-        steadyView.content.frame = steadyView.rotation.bounds
-        controlView.rotation.frame = steadyView.content.bounds
-        controlView.content.frame = controlView.rotation.bounds
-        
-        view.addSubview(steadyView.rotation)
-        steadyView.rotation.addSubview(steadyView.content)
-        steadyView.content.addSubview(controlView.rotation)
-        controlView.rotation.addSubview(controlView.content)
-        
-        steadyView.rotation.backgroundColor = UIColor.clearColor()
-        steadyView.content.backgroundColor = UIColor(white: 0.08, alpha: 1.0)
-        controlView.rotation.backgroundColor = UIColor.clearColor()
-        controlView.content.backgroundColor = UIColor.clearColor()
-        
-        captureButton.translatesAutoresizingMaskIntoConstraints = false
-        steadyView.content.addSubview(captureButton)
-        steadyView.content.addConstraints(Constraints.captureButton(captureButton))
-        
+        captureButtonContainer = RotationContainer(view: captureButton)
+        let toolbar = UIView()
+        let capturebar = UIView()
         sessionController = CSController2()
-        
         previewView = sessionController.previewView
-        previewView.translatesAutoresizingMaskIntoConstraints = false
-        previewView.layer.zPosition = -1
-        previewView.backgroundColor = UIColor.blackColor()
-        steadyView.content.addSubview(previewView)
-        steadyView.content.addConstraints(Constraints.fillSuperview(previewView))
+        
+        view.layout(Style.FillSuperview, views: steadyView)
+        steadyView.view.layout(Style.FillSuperview, views: previewView)
+        steadyView.view.addSubview(controlView)
+        steadyView.view.layout(Style.Capturebar, views: capturebar)
+        steadyView.view.layout(Style.CaptureButtonContainer, views: captureButtonContainer)
+        steadyView.view.layout(Style.Toolbar, views: toolbar)
         
         layout = .Init
         
@@ -105,28 +82,15 @@ class CaptureViewController2: UIViewController {
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        
         let deltaTransform = coordinator.targetTransform()
-        
-        let oldAngle = self.steadyView.rotation.layer.valueForKeyPath("transform.rotation.z") as? CGFloat ?? 0
-        let deltaAngle = atan2(deltaTransform.b, deltaTransform.a)
-        let newAngle = oldAngle - deltaAngle
+        let newAngle = self.steadyView.rotation - atan2(deltaTransform.b, deltaTransform.a)
         
         coordinator.animateAlongsideTransition({ coordinator in
-            UIView.animateWithDuration(0){
-                self.steadyView.rotation.frame = self.view.bounds
-            }
-            
             // counter rotate
-            self.steadyView.rotation.layer.setValue(newAngle + 0.0001, forKeyPath: "transform.rotation.z")
-            // counter resize
-            self.steadyView.rotation.bounds.size = self.view.convertRect(self.view.bounds, toView: self.steadyView.rotation).size
-            
-            self.steadyView.content.frame = self.steadyView.rotation.bounds
-            
+            self.steadyView.rotation = newAngle + 0.0001
             }, completion: { coordinator in
                 // get rid of 0.0001
-                self.steadyView.rotation.layer.setValue(newAngle, forKeyPath: "transform.rotation.z")
+                self.steadyView.rotation = newAngle
         })
     }
     
@@ -146,45 +110,38 @@ class CaptureViewController2: UIViewController {
     var orientation: Orientation = .LandscapeLeft {
         didSet(oldOrientation) {
             guard orientation != oldOrientation else { return }
-            
-            let transform = CGAffineTransformRotate(CGAffineTransformIdentity, CGFloat(orientation.rotation))
+
             let duration: NSTimeInterval = 0.2
-            
             let animations = (
                 normal: {
-                    self.captureButton.transform = transform
-                    if self.orientation == .Portrait || oldOrientation == .Portrait {
-                        self.previewView.aspectRatio = 1/self.previewView.aspectRatio
+                    self.captureButtonContainer.rotation = CGFloat(self.orientation.rotation)
+                    
+                    let heightAndWidthSwapped = self.orientation == .Portrait || oldOrientation == .Portrait
+                    if heightAndWidthSwapped {
+                        self.previewView.aspectRatio = 1 / self.previewView.aspectRatio
                     }
                 },
                 fade: {
-                    var rect = self.steadyView.content.bounds
+                    var rect = self.steadyView.view.bounds
                     
                     if self.orientation == .Portrait {
                         rect.size.width -= 40
                     }
-                    
-                    
-                    self.controlView.rotation.transform = CGAffineTransformIdentity
-                    self.controlView.rotation.frame = rect
-                    
-                    self.controlView.rotation.transform = transform
-                    self.controlView.rotation.bounds = self.steadyView.content.convertRect(rect, toView: self.controlView.rotation)
-                    
-                    self.controlView.content.frame = self.controlView.rotation.bounds
+                    self.controlView.frame = rect
+                    self.controlView.rotation = CGFloat(self.orientation.rotation)
                 }
             )
             
             UIView.animateWithDuration(duration) { CATransaction.performBlock(duration) {
-                    
+                    animations.normal()
             }}
             
             UIView.animateWithDuration(duration,
-                animations: { self.controlView.rotation.alpha = 0.0 }, completion: { _ in
+                animations: { self.controlView.alpha = 0.0 }, completion: { _ in
                     CATransaction.disableActions {
                         animations.fade()
                     }
-                    UIView.animateWithDuration(duration) { self.controlView.rotation.alpha = 1.0 }
+                    UIView.animateWithDuration(duration) { self.controlView.alpha = 1.0 }
             })
         }
     }

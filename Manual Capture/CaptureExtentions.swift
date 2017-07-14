@@ -82,6 +82,14 @@ func roundToLog(x: Double, _ base: Double, _ coefficient: Double ) -> Double {
     return pow(base, power) * coefficient
 }
 
+/// temporarily set a value and perform a function then set back to original value
+func tempSetDo<T : Any>(inout set: T, to: T, action: () -> Void){
+    let oldValue = set
+    set = to
+    action()
+    set = oldValue
+}
+
 //func roundExposureDurationString(exposureDuration:CMTime) -> String {
 //    let doubleValue = CMTimeGetSeconds(exposureDuration)
 //    if ( doubleValue < 1 ) {

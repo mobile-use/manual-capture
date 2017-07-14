@@ -80,17 +80,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let properties = url.host?.componentsSeparatedByString("/")
         properties?.forEach { property in
             switch property {
-            case "video": kIsVideoMode = true
+            case "video":
+                kIsVideoMode = true
+            case "photo":
+                kIsVideoMode = false
             case "demo": kIsDemoMode = true
             case "no-reverse": kIsTestingNoReverse = true
-            case "walkthrough":
-                let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-                let initialViewController = storyBoard.instantiateViewControllerWithIdentifier("PagedGuide")
-                window?.rootViewController = initialViewController
-                window?.makeKeyAndVisible()
+            case "walkthrough": needsIntro = true
             default: break
             }
         }
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = storyBoard.instantiateViewControllerWithIdentifier("PagedGuide")
+        window?.rootViewController = initialViewController
+        window?.makeKeyAndVisible()
+        
         return true
     }
 

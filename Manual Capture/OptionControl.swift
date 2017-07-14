@@ -117,10 +117,12 @@ class OptionControl<V: Equatable>: Control {
         }
     }
     
+    var minWidth: CGFloat = 10
+    
     override func intrinsicContentSize() -> CGSize {
         let minSpacing: CGFloat = 15.0
         let width = textLayers.reduce(minSpacing) { (widthSum, textLayer) -> CGFloat in
-            return widthSum + textLayer.preferredFrameSize().width + minSpacing
+            return widthSum + max(textLayer.preferredFrameSize().width, minWidth) + minSpacing
         }
         return CGSizeMake(width, 30.0)
     }
@@ -128,7 +130,7 @@ class OptionControl<V: Equatable>: Control {
     override func layoutSublayersOfLayer(layer: CALayer) {
         super.layoutSublayersOfLayer(layer)
         let extraSpace = textLayers.reduce(bounds.width) {
-            $0 - $1.preferredFrameSize().width
+            $0 - max($1.preferredFrameSize().width, minWidth)
         }
         let space = extraSpace / CGFloat(textLayers.count + 1)
         
@@ -138,6 +140,7 @@ class OptionControl<V: Equatable>: Control {
         textLayers.forEach { (textLayer) in
             var textRect = CGRectZero
             textRect.size = textLayer.preferredFrameSize()
+            textRect.size.width = max(textRect.width, minWidth)
             textRect.origin.x = nextX
             textRect.origin.y = (bounds.height - textRect.height) * 0.5
             
@@ -156,7 +159,7 @@ class OptionControl<V: Equatable>: Control {
         guard textLayers.indices ~= selectedIndex else { return }
         let selectedTextLayer = textLayers[selectedIndex]
         
-        var newSize = selectedTextLayer.preferredFrameSize()
+        var newSize = selectedTextLayer.bounds.size
         newSize.width += 10
         newSize.height = 20
         

@@ -1,0 +1,846 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ozxmlscene>
+<ozml version="5.7">
+
+<displayversion>5.2.2</displayversion>
+
+<factory id="1" uuid="2784d9092de249f3832d1e70f535fb2d">
+	<description>Reverse</description>
+	<manufacturer>Apple</manufacturer>
+	<version>1</version>
+</factory>
+
+<factory id="2" uuid="46c844a813d311d8a438000a95af9f7e">
+	<description>Channel</description>
+	<manufacturer>Apple</manufacturer>
+	<version>1</version>
+</factory>
+
+<factory id="3" uuid="65cb4dc9d4504fa281921f5f751fba06">
+	<description>Widget</description>
+	<manufacturer>Apple</manufacturer>
+	<version>1</version>
+</factory>
+
+<factory id="4" uuid="66fc0d6af6a911d6a7a7000393670732">
+	<description>Image</description>
+	<manufacturer>Apple</manufacturer>
+	<version>1</version>
+</factory>
+
+<factory id="5" uuid="7d468273c013498e9806a0d7bc32fddf">
+	<description>Project</description>
+	<manufacturer>Apple</manufacturer>
+	<version>1</version>
+</factory>
+
+<factory id="6" uuid="ad55682bb8c94836b20b25cfd1636a6f">
+	<description>Hold Frame</description>
+	<manufacturer>Apple</manufacturer>
+	<version>1</version>
+</factory>
+
+<factory id="7" uuid="deca4859b16011d7a12d0003936f6f92">
+	<description>ProPlugin Filter</description>
+	<manufacturer>Apple</manufacturer>
+	<version>1</version>
+</factory>
+
+
+<build></build>
+
+<description></description>
+
+<canvas>
+	<layout>1</layout>
+	<activeView>0</activeView>
+</canvas>
+
+<viewer subview="0">
+	<resolutionMode>0</resolutionMode>
+	<dynamicResolution>1</dynamicResolution>
+	<viewmode>0</viewmode>
+	<overlayOptions>125452</overlayOptions>
+	<oscOptions>30</oscOptions>
+	<compensateAspectRatio>1</compensateAspectRatio>
+	<renderFields>0</renderFields>
+	<showMotionBlur>0</showMotionBlur>
+	<showFrameBlending>1</showFrameBlending>
+	<showLighting>1</showLighting>
+	<showShadows>1</showShadows>
+	<showReflection>1</showReflection>
+	<showDepthOfField>0</showDepthOfField>
+	<renderFullView>0</renderFullView>
+	<renderQuality>2</renderQuality>
+	<textRenderQuality>2</textRenderQuality>
+	<showHighQualityResampling>0</showHighQualityResampling>
+	<showShapeAntialiasing>1</showShapeAntialiasing>
+	<show3DIntersectionAntialiasing>0</show3DIntersectionAntialiasing>
+	<cameraType>0</cameraType>
+	<cameraName>Active Camera</cameraName>
+	<panZoom camera="0" zoom="1" panX="337" panY="-1.700408935546875" mode="1" centered="0"/>
+</viewer>
+
+<projectPanel>
+	<layersPreviewColumn>1</layersPreviewColumn>
+	<layersOpacityColumn>0</layersOpacityColumn>
+	<layersBlendColumn>0</layersBlendColumn>
+	<displayMasks>1</displayMasks>
+	<displayBehaviors>1</displayBehaviors>
+	<displayEffects>1</displayEffects>
+	<layersVerticalZoom>1.7999999523162842</layersVerticalZoom>
+	<mediaPreviewColumn>1</mediaPreviewColumn>
+	<mediaTypeColumn>1</mediaTypeColumn>
+	<mediaDurationColumn>1</mediaDurationColumn>
+	<mediaInUseColumn>1</mediaInUseColumn>
+	<mediaFrameSizeColumn>1</mediaFrameSizeColumn>
+	<mediaCompressorColumn>1</mediaCompressorColumn>
+	<mediaDepthColumn>1</mediaDepthColumn>
+	<mediaFrameRateColumn>1</mediaFrameRateColumn>
+	<mediaDataRateColumn>1</mediaDataRateColumn>
+	<mediaAudioRateColumn>1</mediaAudioRateColumn>
+	<mediaAudioFormatColumn>1</mediaAudioFormatColumn>
+	<mediaFileSizeColumn>1</mediaFileSizeColumn>
+	<mediaFileCreatedColumn>1</mediaFileCreatedColumn>
+	<mediaDileModifiedColumn>1</mediaDileModifiedColumn>
+	<mediaVerticalZoom>1.7999999523162842</mediaVerticalZoom>
+</projectPanel>
+
+<timeline>
+	<displayVideo>1</displayVideo>
+	<displayAudio>0</displayAudio>
+	<displayKeyframes>0</displayKeyframes>
+	<displayMasks>0</displayMasks>
+	<displayBehaviors>0</displayBehaviors>
+	<displayEffects>0</displayEffects>
+	<videoVerticalZoom>1.5555555555555556</videoVerticalZoom>
+	<audioVerticalZoom>1.5555555820465088</audioVerticalZoom>
+	<displayRange in="-28054060 37141179 1 0" out="3994658500 371411790 1 0"/>
+</timeline>
+
+<curveeditor>
+	<autozoom>0</autozoom>
+	<snapping>1</snapping>
+	<displayAudioWaveform>0</displayAudioWaveform>
+	<lockKeyframesInTime>0</lockKeyframesInTime>
+	<displayRange in="-28054060 37141179 1 0" out="3994658500 371411790 1 0"/>
+	<currentviewvolume originx="-0.75533574203446796" originy="-62.5" width="11.510671484068936" height="125"/>
+	<snapshotChannels>0</snapshotChannels>
+</curveeditor>
+
+<inspector>
+	<collapseState id="./1/100" state="1"/>
+	<collapseState id="./1/200" state="1"/>
+	<collapseState id="./1/324" state="0"/>
+</inspector>
+
+<scene>
+	<sceneSettings>
+		<width>600</width>
+		<height>600</height>
+		<duration>300</duration>
+		<shouldOverrideFCDuration>0</shouldOverrideFCDuration>
+		<frameRate>30</frameRate>
+		<NTSC>0</NTSC>
+		<channels>4</channels>
+		<pixelAspectRatio>1</pixelAspectRatio>
+		<backgroundColor red="0" green="0" blue="0" alpha="1"/>
+		<audioChannels>2</audioChannels>
+		<audioBitsPerSample>32</audioBitsPerSample>
+		<fieldRenderingMode>0</fieldRenderingMode>
+		<motionBlurSamples>8</motionBlurSamples>
+		<motionBlurDuration>1</motionBlurDuration>
+		<startTimecode>0</startTimecode>
+		<presetPath></presetPath>
+		<backgroundMode>0</backgroundMode>
+		<reflectionRecursionLimit>2</reflectionRecursionLimit>
+		<glyphOSCMode>0</glyphOSCMode>
+		<animateFlag>0</animateFlag>
+		<parameterColorSpaceID>3</parameterColorSpaceID>
+		<savePreviewMovie>0</savePreviewMovie>
+	</sceneSettings>
+	<exportSettings>
+		<version>1</version>
+		<locationMode>2</locationMode>
+		<resolutionMode>3</resolutionMode>
+		<colorMode>2</colorMode>
+		<premultiplyAlpha>1</premultiplyAlpha>
+		<renderQuality>10</renderQuality>
+		<textRenderQuality>6</textRenderQuality>
+		<useHighQualityResampling>1</useHighQualityResampling>
+		<useShapeAntialiasing>1</useShapeAntialiasing>
+		<use3DIntersectionAntialiasing>1</use3DIntersectionAntialiasing>
+		<fieldRenderingMode>2</fieldRenderingMode>
+		<motionBlurMode>2</motionBlurMode>
+		<frameBlendingMode>2</frameBlendingMode>
+		<camera>0</camera>
+		<lightingMode>2</lightingMode>
+		<shadowsMode>2</shadowsMode>
+		<reflectionsMode>2</reflectionsMode>
+		<depthOfFieldMode>2</depthOfFieldMode>
+	</exportSettings>
+	<publishSettings>
+		<version>2</version>
+	</publishSettings>
+	<currentFrame>97280 153600 1 0</currentFrame>
+	<currentObject>1504715075</currentObject>
+	<activeLayer>1504715076</activeLayer>
+	<timeRange offset="0 1 1 0" duration="1536000 153600 1 0"/>
+	<playRange offset="0 1 1 0" duration="450560 153600 1 0"/>
+	<flags>1</flags>
+	<audioTracks>0</audioTracks>
+	<timemarkerset/>
+	<guideset/>
+	<curvesets selected="1"/>
+	<scenenode name="Project" id="1504715067" factoryID="5" version="5">
+		<scenenode name="Widget" id="1504715068" factoryID="3" version="5">
+			<flags>0</flags>
+			<timing in="0 1 1 0" out="-5120 153600 1 0" offset="0 1 1 0"/>
+			<foldFlags>0</foldFlags>
+			<baseFlags>16</baseFlags>
+			<parameter name="Properties" id="1" flags="8589938704"/>
+			<parameter name="Object" id="2" flags="8589938704">
+				<parameter name="Options" id="103" flags="8589938688"/>
+				<parameter name="Hidden" id="102" flags="8589934608" default="0" value="1"/>
+				<parameter name="Snapshots" id="101" flags="8589938706"/>
+				<parameter name="Widget" id="100" flags="8589934608" default="1.7777777777777777" value="1.7777777777777777"/>
+			</parameter>
+		</scenenode>
+		<flags>0</flags>
+		<timing in="0 1 1 0" out="-5120 153600 1 0" offset="0 1 1 0"/>
+		<foldFlags>0</foldFlags>
+		<baseFlags>16</baseFlags>
+		<parameter name="Properties" id="1" flags="8589938704"/>
+		<parameter name="Object" id="2" flags="8589938704"/>
+	</scenenode>
+	<layer name="Group 2" id="1825757587">
+		<scenenode name="AdvancedControlsUI copy 1" id="1825757585" factoryID="4" version="5">
+			<validTracks>0</validTracks>
+			<aspectRatio>0</aspectRatio>
+			<flags>0</flags>
+			<timing in="373760 153600 1 0" out="460800 153600 1 0" offset="373760 153600 1 0"/>
+			<foldFlags>81920</foldFlags>
+			<baseFlags>524368</baseFlags>
+			<parameter name="Properties" id="1" flags="8589938704">
+				<parameter name="Transform" id="100" flags="8589938704">
+					<parameter name="Position" id="101" flags="8589938704">
+						<foldFlags>15</foldFlags>
+						<parameter name="X" id="1" flags="8589934608" default="0" value="0.50000000000299849"/>
+						<parameter name="Y" id="2" flags="8589934608" default="0" value="0.4999999999948237"/>
+					</parameter>
+					<parameter name="Scale" id="105" flags="8589938704">
+						<foldFlags>15</foldFlags>
+						<parameter name="X" id="1" flags="8589934608" default="1" value="0.82772812843320609"/>
+						<parameter name="Y" id="2" flags="8589934608" default="1" value="0.82772812843320609"/>
+					</parameter>
+				</parameter>
+				<parameter name="Blending" id="200" flags="8589938704">
+					<parameter name="Opacity" id="202" flags="8589934608">
+						<curve type="1" default="1" value="1">
+							<numberOfKeypoints>3</numberOfKeypoints>
+							<min>0</min>
+							<max>1</max>
+							<keypoint interpolation="1" flags="32">
+								<time>-25600 153600 1 0</time>
+								<value>1</value>
+								<outputTangentTime>0.055555555555555552</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>0 153600 1 0</time>
+								<value>0</value>
+								<inputTangentTime>-0.055555555599999987</inputTangentTime>
+								<inputTangentValue>-0</inputTangentValue>
+								<outputTangentTime>0.055555555599999987</outputTangentTime>
+								<outputTangentValue>-0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>25600 153600 1 0</time>
+								<value>1</value>
+								<inputTangentTime>-0.055555555555555552</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.1111111111111111</outputTangentTime>
+								<outputTangentValue>-0</outputTangentValue>
+							</keypoint>
+						</curve>
+					</parameter>
+				</parameter>
+				<parameter name="Lighting" id="230" flags="8589938706">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Shadows" id="234" flags="8589938706">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Reflection" id="223" flags="8589971474">
+					<foldFlags>131087</foldFlags>
+				</parameter>
+				<parameter name="Media" id="324" flags="8589938704">
+					<foldFlags>4</foldFlags>
+					<parameter name="Source Media" id="300" flags="81604444176" default="1504715070" value="1504715070"/>
+					<parameter name="Source Media" id="325" flags="8590000146">
+						<referencedObjectID></referencedObjectID>
+					</parameter>
+				</parameter>
+				<parameter name="Page Number" id="301" flags="8589934610" default="1" value="1"/>
+				<parameter name="Retime Value" id="304" flags="8590066066">
+					<curve type="1" default="1" value="1" round="0" retimingExtrapolation="1">
+						<numberOfKeypoints>2</numberOfKeypoints>
+						<postExtrapolation>1</postExtrapolation>
+						<keypoint interpolation="1" flags="32">
+							<time>0 153600 1 0</time>
+							<value>1</value>
+						</keypoint>
+						<keypoint interpolation="1" flags="32">
+							<time>92160 153600 1 0</time>
+							<value>19</value>
+						</keypoint>
+					</curve>
+				</parameter>
+				<parameter name="Retime Value Cache" id="319" flags="8590065810">
+					<curve type="1" default="1" value="1">
+						<numberOfKeypoints>2</numberOfKeypoints>
+						<keypoint interpolation="1" flags="160">
+							<time>0 1 1 0</time>
+							<value>1</value>
+						</keypoint>
+						<keypoint interpolation="1" flags="160">
+							<time>1474560 153600 1 0</time>
+							<value>289</value>
+						</keypoint>
+					</curve>
+				</parameter>
+				<parameter name="Duration Cache" id="320" flags="8589934610" default="0" value="288"/>
+			</parameter>
+			<parameter name="Object" id="2" flags="8589938704">
+				<parameter name="Width" id="313" flags="8589934610" default="1" value="960"/>
+				<parameter name="Height" id="314" flags="8589934610" default="1" value="640"/>
+			</parameter>
+			<filter name="Keyer" id="1825757628" factoryID="7" pluginUUID="41122549-B8A6-470E-94DA-211294D20B62" pluginVersion="3" pluginName="Keyer" pluginDynamicParams="0">
+				<timing in="373760 153600 1 0" out="460800 153600 1 0" offset="373760 153600 1 0"/>
+				<baseFlags>8589934672</baseFlags>
+				<foldFlags>65536</foldFlags>
+				<parameter name="DefaultSoftness" id="1" flags="12889161760" default="9" value="9"/>
+				<parameter name="Strength" id="36" flags="81604444176" default="1" value="1"/>
+				<parameter name="Keyer::ViewChannel" id="27" flags="12889161760" default="0" value="0"/>
+				<parameter name="Fill Holes" id="48" flags="12884901904" default="0" value="0"/>
+				<parameter name="Edge Distance" id="54" flags="12884901904" default="3" value="3"/>
+				<parameter name="Spill Level" id="20" flags="12884901904" default="0.46000000000000002" value="0.46000000834465027"/>
+				<parameter name="Invert" id="50" flags="12884967440" default="0" value="0"/>
+				<parameter name="OSC" id="3" flags="12889161760">
+					<numberOfKeypoints>0</numberOfKeypoints>
+					<defaultVal>*********LAeMb-gOLBoA11I*E61-*I46G7M75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8M50*wH4VpJ74tpP4nH0Ec91*oCJIJYNqJnJWFXP43nQpdGNKBoMKtbP4JnU*G*-M*0oV*82F7OHZAiPq7eNKBoQu0**x6I3FMLKWFXP43nQqtVPKJM74BgMLBnNLBSHZBBRLFVMalZEL7mMLaX3VUNJotHEL7mMLZMHZBDMadZMrHG2*cP2e0**x6I3FsTLl*EI233GqJtNL7DQqBHNLFpQ86U4JwE23--FIhZSKJmHrBXIqJoRL-T2*xCIohZSKJYEL7XO4ZqNL9F6mFG710**E*6*-2*4U*X*0o*AU*r*1s*F*-9*32*K*-X*4I*Nk-d*4s*SE-u*5k*UE0A*7I*d*0c*9**iE0y*9w*kE14*BY*r*1j*E2--*25*********U2*********7E*******************EY*</defaultVal>
+					<dataValue>*********LAeMb-gOLBoA11I*E61-*I46G7M75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8M50*wH4VpJ74tpP4nH0Ec91*oCJIJYNqJnJWFXP43nQpdGNKBoMKtbP4JnU*G*-M*0oV*82F7OHZAiPq7eNKBoQu0**x6I3FMLKWFXP43nQqtVPKJM74BgMLBnNLBSHZBBRLFVMalZEL7mMLaX3VUNJotHEL7mMLZMHZBDMadZMrHG2*cP2e0**x6I3FsTLl*EI233GqJtNL7DQqBHNLFpQ86U4JwE23--FIhZSKJmHrBXIqJoRL-T2*xCIohZSKJYEL7XO4ZqNL9F6mFG710**E*6*-2*4U*X*0o*AU*r*1s*F*-9*32*K*-X*4I*Nk-d*4s*SE-u*5k*UE0A*7I*d*0c*9**iE0y*9w*kE14*BY*r*1j*E2--*25*********U2*********7E*******************EY*</dataValue>
+				</parameter>
+				<parameter name="Keyer::Autokey" id="4" flags="12889161760">
+					<numberOfKeypoints>0</numberOfKeypoints>
+					<defaultVal>*********RQeMb-gOLBoA11I*E61-*I49WxM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8s50*oO4lkR5VwU6G6X8ZIYPbJgPB670UgALYZiOLFdMKlHMKpkP4JnJWFXP43nQs*0U*rG1UcD4JdCImtjMadZMrFneF*F2VAI3FML46*1U*G*-M*4U*S*06*7U*e*0s*A6Xm*U62WDpHIpG6wU60-6Xm*U62WDpHIpG6xEA1-6Xm*U62WDpnQrG6wU60-oWEZ7WRO74BgMLBnPa3hNJUYMqlVQrBZQptCIoppR43WP4J-Qb7VSOAa80ZLHZB-Qb7VSJVCIoxWOaJXRB6Y7GggLl*II233GqJtNL7-RLFjOqJtIqJoRL0W9GZT2-FEEIJ9NLZZQY3pR4xfNLZHNLFpQ3wE1otHGqJtNKF-QaBcOLNZQh2kAJ6YA6*-**U*2E*O*0A*9E*m*1Q*FU-A*32*M*-b*4Y*Ok-k*5g*VE05*6Y*Wk0B*6w*YE0H*7I*Zk0N*7s*ck0c*8o*gU0r*9k*kE14*Ag*pU1T*Cs*wU1u*EA-0*2T*G6-CE39*Is-IE********6-*********16*******************3H</defaultVal>
+					<dataValue>*********RQeMb-gOLBoA11I*E61-*I49WxM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8s50*oO4lkR5VwU6G6X8ZIYPbJgPB670UgALYZiOLFdMKlHMKpkP4JnJWFXP43nQs*0U*rG1UcD4JdCImtjMadZMrFneF*F2VAI3FML46*1U*G*-M*4U*S*06*7U*e*0s*A6Xm*U62WDpHIpG6wU60-6Xm*U62WDpHIpG6xEA1-6Xm*U62WDpnQrG6wU60-oWEZ7WRO74BgMLBnPa3hNJUYMqlVQrBZQptCIoppR43WP4J-Qb7VSOAa80ZLHZB-Qb7VSJVCIoxWOaJXRB6Y7GggLl*II233GqJtNL7-RLFjOqJtIqJoRL0W9GZT2-FEEIJ9NLZZQY3pR4xfNLZHNLFpQ3wE1otHGqJtNKF-QaBcOLNZQh2kAJ6YA6*-**U*2E*O*0A*9E*m*1Q*FU-A*32*M*-b*4Y*Ok-k*5g*VE05*6Y*Wk0B*6w*YE0H*7I*Zk0N*7s*ck0c*8o*gU0r*9k*kE14*Ag*pU1T*Cs*wU1u*EA-0*2T*G6-CE39*Is-IE********6-*********16*******************3H</dataValue>
+				</parameter>
+				<parameter name="Color Selection" id="18" flags="8589938704">
+					<foldFlags>4</foldFlags>
+					<parameter name="Graph" id="45" flags="81604444160">
+						<numberOfKeypoints>0</numberOfKeypoints>
+						<defaultVal>*********6YeMb-gOLBoA11I*E61-*I40EdM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c86503IYPbJgP-**Ll*DHZB9NLZZN23mMqVdRaJmoEgAIWEkU*262FcX9H6rCY-0J3RO*********E2*********1E*******************3k*</defaultVal>
+						<dataValue>*********6YeMb-gOLBoA11I*E61-*I40EdM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c86503IYPbJgP-**Ll*DHZB9NLZZN23mMqVdRaJmoEgAIWEkU*262FcX9H6rCY-0J3RO*********E2*********1E*******************3k*</dataValue>
+					</parameter>
+					<parameter name="Chroma" id="6" flags="81604444160">
+						<numberOfKeypoints>0</numberOfKeypoints>
+						<defaultVal>********-WseMb-gOLBoA11I*E61-*I4e8ZM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8wE9*Q6BHMrC1YuCnkxDXx*EI71F2J4FoVFMqFfRLNrS5a1V6K4Vt4GYtGJbu0YJGFiRKlgrl*K0Ec91*oC1l*F2VAI3FML4-YO4lkR5VwU6G6U70Ia7mUd8Wgg9GsjA12mAnFT2-3HPqNoI4ZZKJx1Hp7CFJ7TH3wE23FjP3-dNJZTEoxGHYJGLopT2-7HPqNoI4ZZKJx1Hp7CFJ7TIZ7T2-7HPqNoI4ZZK3x1Hp7CFJ7TIZ7T2--IPqlEOKJMLoBDIYt3IZxBJWFXP43nQplHQ4ldPaJKNL7oNLVT2-3HPqNoI4ZZK3x1Hp7CFJ7TIZwE23FjP3-dNJZTEoxGHYJGLp7T2-3IPqlEOKJNLoBDIYt3IZxGIZwE2JFjP3-dNJZTEoxGHYJGLolALl*FIqxaR3-dNJZTEoxGHYJGLp7T2--IPqlEOKJMLoBDIYt3IZxGLl*EJ4xgI4ZZKJx1Hp7CFJ7TH3wE2JFjP3-dNJVTEoxGHYJGLp7GLl*FJ4xgI4ZZK3x1Hp7CFJ7TH2lT2--IPqlEOKJMLoBDIYt3IZxALl*FIqxaR3-dNJVTEoxGHYJGLopT2-7HPqNoI4ZZKJx1Hp7CFJ7TH2lT2-7HPqNoI4ZZK3x1Hp7CFJ7TH2lT2-3HPqNoI4ZZKJx1Hp7CFJ7THJwE2JBjNbFEOKJMLoBDIYt3IZxAU-0**s*IU*y**s*fU-K*1M*6U*e*0M*GU*G*-s*4U*K**c*AU-C*1c*FU*gWjnOlKW6*****6fwUKVgWjlnRBG8z0Ou86fx4rLEWjpZ60G8z8fzy6fwuY*YWjuWyl06vitNN6fr2JH6WCviKKG6vitNN6fupB0EWCyCDeW8zfYbO6XjXXucWCyCDeh771YdEKYtH9axWOaJXR5CZGolBHYy*3c*NU-u*6s*cU0fNIUtHJ3JKJpVNKZhO63dO60*UIa7sIapsIa7tIalsIb7sIaptIaltIb7tU-S*46*LU*C*3s*LU*C**s*16fy***1GNKNbO3cYMqlVQrBiMKpZK0FXP43nQqJnLl*EI233GqJtNL7DHJNZQbFZS87dOZwE23--FIhZSKJmHopKNL7oNLVMHZBDMadZMrHNIUtHJ3JKJpVNP3hi65-l60*UU-q*46*PU*C*4c*QU*C**s*16ftaahEWj9XRk06yC4BZ6Xsa3w1NIUtHJ3JKJpVNSZhw65tz60*UU08*46*UU*C*5s*VU*C**s*16Xt8fkgWDZnug06yPoNJ6XtQyf1NIUtHJ3JKJpVNW3i866mB60*UU0S*46*ZU*C*76*aU*C**s*16Xu*mDoWDgCo4W6z*oyP6Xu7vh1NIUtHJ3JKJpVNZZiK67OK60*UU0a*46*dU*C*8M*dU*C**s*16Xy***1GNKOVcZtCIoppR43WP4J-Qb7VSOCVcqdLHZB-Qb7VSR7ZNeKaLl*FI233GqJtNL71MYBmIqJoRL0WdqdT2-3EEIJ9NLZZQYBWEr7HNLFpQ3wE1otHGqJtNKF-QaBcOLNZQh4eep6YA6*-**U*2E*O*0A*9E*m*1Q*NU-g*7g*fk10*BQ*v*1z*EM-2k2b*Hc-HU3W*LM-WE4Q*P*-l*5L*Sg0**6J*WY0DE6z*Y20Ek73*YQ0GE79*Yo0Hk7F*ZA0JE7L*ZY0Kk7R*Zw0ME7X*aI0Nk7d*as0Qk7s*bo0UU85*ck0YE8K*dg0c*8Z*ec0fk8o*fY0jU91*gU0nE9M*hs0s*9W*iE0tU9c*ic0zEA**kA1-UA7*kk11kAG*lI13kAN*lg15EAT*m216kAZ*mQ19*Al*nk1FEBM*pg1PUBr*sc1X*CC*t*1YUCI*tM1a*CO*tk1cECa*ug1g*D1*wI1lkD7*wg1nEDD*x21okDJ*xc1rkDY*yY1z*Dy-**2*UE2-*M20*E8-*k21UEH--U25EEW-1I2BkEt-1g2DEEz-222EkF3-2Q2H*FF-4*2N*Fg-522VEG6-7k2fUGl-9E********0*E********0g*******************2hU**</defaultVal>
+						<dataValue>********-WseMb-gOLBoA11I*E61-*I4e8ZM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8wE9*Q6BHMrC1YuCnkxDXx*EI71F2J4FoVFMqFfRLNrS5a1V6K4Vt4GYtGJbu0YJGFiRKlgrl*K0Ec91*oC1l*F2VAI3FML4-YO4lkR5VwU6G6U70Ia7mUd8Wgg9GsjA12mAnFT2-3HPqNoI4ZZKJx1Hp7CFJ7TH3wE23FjP3-dNJZTEoxGHYJGLopT2-7HPqNoI4ZZKJx1Hp7CFJ7TIZ7T2-7HPqNoI4ZZK3x1Hp7CFJ7TIZ7T2--IPqlEOKJMLoBDIYt3IZxBJWFXP43nQplHQ4ldPaJKNL7oNLVT2-3HPqNoI4ZZK3x1Hp7CFJ7TIZwE23FjP3-dNJZTEoxGHYJGLp7T2-3IPqlEOKJNLoBDIYt3IZxGIZwE2JFjP3-dNJZTEoxGHYJGLolALl*FIqxaR3-dNJZTEoxGHYJGLp7T2--IPqlEOKJMLoBDIYt3IZxGLl*EJ4xgI4ZZKJx1Hp7CFJ7TH3wE2JFjP3-dNJVTEoxGHYJGLp7GLl*FJ4xgI4ZZK3x1Hp7CFJ7TH2lT2--IPqlEOKJMLoBDIYt3IZxALl*FIqxaR3-dNJVTEoxGHYJGLopT2-7HPqNoI4ZZKJx1Hp7CFJ7TH2lT2-7HPqNoI4ZZK3x1Hp7CFJ7TH2lT2-3HPqNoI4ZZKJx1Hp7CFJ7THJwE2JBjNbFEOKJMLoBDIYt3IZxAU-0**s*IU*y**s*fU-K*1M*6U*e*0M*GU*G*-s*4U*K**c*AU-C*1c*FU*gWjnOlKW6*****6fwUKVgWjlnRBG8z0Ou86fx4rLEWjpZ60G8z8fzy6fwuY*YWjuWyl06vitNN6fr2JH6WCviKKG6vitNN6fupB0EWCyCDeW8zfYbO6XjXXucWCyCDeh771YdEKYtH9axWOaJXR5CZGolBHYy*3c*NU-u*6s*cU0fNIUtHJ3JKJpVNKZhO63dO60*UIa7sIapsIa7tIalsIb7sIaptIaltIb7tU-S*46*LU*C*3s*LU*C**s*16fy***1GNKNbO3cYMqlVQrBiMKpZK0FXP43nQqJnLl*EI233GqJtNL7DHJNZQbFZS87dOZwE23--FIhZSKJmHopKNL7oNLVMHZBDMadZMrHNIUtHJ3JKJpVNP3hi65-l60*UU-q*46*PU*C*4c*QU*C**s*16ftaahEWj9XRk06yC4BZ6Xsa3w1NIUtHJ3JKJpVNSZhw65tz60*UU08*46*UU*C*5s*VU*C**s*16Xt8fkgWDZnug06yPoNJ6XtQyf1NIUtHJ3JKJpVNW3i866mB60*UU0S*46*ZU*C*76*aU*C**s*16Xu*mDoWDgCo4W6z*oyP6Xu7vh1NIUtHJ3JKJpVNZZiK67OK60*UU0a*46*dU*C*8M*dU*C**s*16Xy***1GNKOVcZtCIoppR43WP4J-Qb7VSOCVcqdLHZB-Qb7VSR7ZNeKaLl*FI233GqJtNL71MYBmIqJoRL0WdqdT2-3EEIJ9NLZZQYBWEr7HNLFpQ3wE1otHGqJtNKF-QaBcOLNZQh4eep6YA6*-**U*2E*O*0A*9E*m*1Q*NU-g*7g*fk10*BQ*v*1z*EM-2k2b*Hc-HU3W*LM-WE4Q*P*-l*5L*Sg0**6J*WY0DE6z*Y20Ek73*YQ0GE79*Yo0Hk7F*ZA0JE7L*ZY0Kk7R*Zw0ME7X*aI0Nk7d*as0Qk7s*bo0UU85*ck0YE8K*dg0c*8Z*ec0fk8o*fY0jU91*gU0nE9M*hs0s*9W*iE0tU9c*ic0zEA**kA1-UA7*kk11kAG*lI13kAN*lg15EAT*m216kAZ*mQ19*Al*nk1FEBM*pg1PUBr*sc1X*CC*t*1YUCI*tM1a*CO*tk1cECa*ug1g*D1*wI1lkD7*wg1nEDD*x21okDJ*xc1rkDY*yY1z*Dy-**2*UE2-*M20*E8-*k21UEH--U25EEW-1I2BkEt-1g2DEEz-222EkF3-2Q2H*FF-4*2N*Fg-522VEG6-7k2fUGl-9E********0*E********0g*******************2hU**</dataValue>
+					</parameter>
+					<parameter name="Luma" id="5" flags="81604444160">
+						<numberOfKeypoints>0</numberOfKeypoints>
+						<defaultVal>*********H6eMb-gOLBoA11I*E61-*I45VxM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8Q50-AI3FMLJGFiRKlgpEY80kkB1UwE2F7IH5JhEJMYMqlVQrBIH5JhF3FARKp0J2lpPIC**c*4U*K**s*26fxqSV*WDWMLk06yWSvE6XymSvHG4-YO4pcYMqlVQrBiMKpZK0FXP43nQqJnLl*FI233GqJtNL7ARKpVIqJoRL0W5-pT2-3EEIJ9NLZZQYlpPK3HNLFpQ3VCIoxWOaJXR3wE1otHGqJtNKF-QaBcOLNZQh2U6J6YA6*-0-2O6momBnx3I3JQMKNfPKxlQrJuTsG7XdaWhfbBpiXfvU********2-*********06*******************1k</defaultVal>
+						<dataValue>*********H6eMb-gOLBoA11I*E61-*I45VxM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8Q50-AI3FMLJGFiRKlgpEY80kkB1UwE2F7IH5JhEJMYMqlVQrBIH5JhF3FARKp0J2lpPIC**c*4U*K**s*26fxqSV*WDWMLk06yWSvE6XymSvHG4-YO4pcYMqlVQrBiMKpZK0FXP43nQqJnLl*FI233GqJtNL7ARKpVIqJoRL0W5-pT2-3EEIJ9NLZZQYlpPK3HNLFpQ3VCIoxWOaJXR3wE1otHGqJtNKF-QaBcOLNZQh2U6J6YA6*-0-2O6momBnx3I3JQMKNfPKxlQrJuTsG7XdaWhfbBpiXfvU********2-*********06*******************1k</dataValue>
+					</parameter>
+					<parameter name="Histogram" id="9" flags="12889161776">
+						<numberOfKeypoints>0</numberOfKeypoints>
+						<defaultVal>********2N6eMb-gOLBoA11I**2**U*1**E*-E*4*eM0dpUYRaJmQqZjPZUYPq7eNKBoQpYYML7XO4ZqNL7I75FjQ-6**MOUfl1f**Q*0**B*PI-hU4r*PU-iE4u*Pg-j*4x*Ps-jk5**Q2-kU51*QE-lE54*QQ-m*57*Qc-mk5A*Qo-nU5D*R*-oE5G*RA-p*5J*RM-pk5M*RY-qU5P*Rk-rE5S*Rw-s*5V*S6-sk5Y*SI-tU5b*SU-uE5e*Sg-v*5h*Ss-vk5k*T2-wU5n*TE-xE5q*TQ-y*5t*Tc-yk5w*To-zU5z*U*0*E60*UA0-*63*UM0-k66*UY00U69*Uk01E6C*Uw02*6F*V602k6I*VI03U6L*VU04E6O*Vg05*6R*Vs05k6U*W206U6X*WE07E6a*WQ08*6d*Wc08k6g*Wo09U6j*X*0AE6m*XA0B*6p*XM0Bk6s*XY0CU6v*Xk0DE6y*Xw0E*7-*Y60Ek72*YI0FU75*YU0GE78*Yg0H*7B*Ys0Hk7E*Z20IU7H*ZE0JE7K*ZQ0K*7N*Zc0Kk7Q*Zo0LU7T*a*0ME7W*aA0N*7Z*aM0Nk7c*aY0OU7f*ak0PE7i*aw0Q*7l*b60Qk7o*bI0RU7r*bU0SE7u*bg0T*7x*bs0Tk8**c20UU81*cE0VE84*cQ0W*87*cc0Wk8A*co0XU8D*d*0YE8G*dA0Z*8J*dM0Zk8M*dY0aU8P*e7J74tpP4nG**Y*0U*9**lK74BgMLBnKIVdQrFjNr7VPM1eU*9G**s*0E*D*PFOHZAiPq7eNKBoQuwF*OE*2**F*-6*2k*I*-I*3U*L*-U*4E*O*-g*5**R*-s*5k*U*02*6U*N*0E*2k*a*-Y*8**H*0c*8k*g*0o*9U*h*1**2k*m*-Y*B**H*1M*Bk*s*1Y*CU*H*1k*4E*y*-Y*E**r*26*2k-2*-Q*FU*N*2U*4E-8*2g*H**N*2s*2k-E*-Y*IU*N*3E*JE-K*2g*K**N*3c*2k-Q*-A*LU*N*4**4E-W*-Y*N**N*4M*4E-c*0g*OU*h*4k*CE-i*-A*Q**H*56*2k-o*-Y*RU*H*5U*3k-u*2g*T**N*5s*9E0**-A*UU*H*6E*2k04*-A*W**H*6c*2k0A*-A*XU*N*7**2k0G*2g*Z*0J*7M*Gk0M*-Y*aU*H*7k*2k0S*-A*c**N*86*2k0Y*-A*dU*N*8U*4E0e*0o*f*0J*8s*2k0k*-A*gU*N*9E*4E0q*-Y*i**N*9c*2k0w*-A*jU*H*A**2k10*-A*l**H*AM*4E16*2g*mU*H*Ak*2k1C*-A*o**H*B6*Gk1I*-A*pU*H*BU*4E1O*-Y*r**H*Bs*2k1U*-Y*sU*t*CE*4E1a*-A*u**H*Cc*2k1g*-A*vU*H*D**2k1m*-Y*x**H*DM*2k1s*-Y*yU*H*Dk*4E1y*-A-***H*E6*2k22*-A--U*H*EU*CE28*0o-1**t*Es*CE2E*-Y-2U*H*FE*2k2K*FQ-4**H*Fc*2k2Q*-Y-5U*H*G**2k2W*-A-7**h*GM*2k2c*-A-8U*N*Gk*2k2i*-A-A**H*H6*2k2o*-A-BU*N*HU-3k2u*-A-D**H*Hs*Gk3**-A-EU*N*IE*2k34*FQ-G**H*Ic*4E3A*-A-HU*H*J**2k3G*2g-J**N*JM*2k3M*2g-KU-9*Jk*2k3S*-Y-M**N*K6*Gk3Y*-Q-NU*H*KU*2k3e*FQ-P*2L*Ks*3k3k*-A-QU2L*LE*8k3q*-Y-S**H*Lc*4E3w*-Y-TU*H*M**2k40*-A-V**f*MM*9E46*-A-WU*N*Mk*Gk4C*-A-Y*-9*N6*8k4I*2g-ZU*H*NU*2k4O*FQ-b*2L*Ns*4E4U*0o-cU-J*OE-dE4a*-A-e**f*Oc-ek4g*Oo-fU*h*P**4E4m*-C**s*2U*K*-c*5U*W*0M*8U*i*16*BU*u*1s*EU-4*2c*HU-G*3M*AU-O*-c*LU*m*46*4U-a*4c*PU-m*5M*QU-u*-c*TU*m*66*4U04*6c*XU0G*7M*4U0O*16*bU*m*86*WU0a*-c*eU*e*8s*AU0m*16*hU0u*9s*AU10*-c*lU*m*Ac*AU1C*B6*pU0u*Bc*AU1S*-c*sU*O*CM*AU1e*16*vU*m*D6*AU1q*16*yU-e*Ds*QU20*76--U*O*Ec*4U2C*-c-2U*m*FM*4U2O*0c-5U0u*G6*AU2a*56-8U*O*Gs*4U2m*-c-BU*O*Hc*4U2y*-c-EU*O*IM*AU38*-c-HU0u*J6-JU3O*9c-LU*m*K6*4U3a*-c-OU*O*Ks*AU3m*-c-RU*O*Lc*AU3y*16-UU-m*MM-JU48*-c-XU*O*N6*AU4K*16-aU*m*Ns*AU4W*-c-dU*O*Oc*4U4i*-c-gU*O*PM*4U4u*16-jU0u*Q6*4U54*-c-mU*O*Qs*4U5G*9c-pU*O*Rc*4U5S*16-sU*m*SM*4U5e*-c-vU*m*T6*YU5q*16-yU*O*Ts*4U60*-c0-U*O*Uc*4U6C*-c02U*m*VM*4U6O*-c05U*m*W6*4U6a*1608U*O*Ws*4U6m*-c0BU*O*Xc*4U6y*760EU-m*YM*YU78*760HU*m*Z6*4U7K*-c0KU7S*a6*4U7a*-c0OU*m*as*4U7m*-c0RU*O*bc*QU7y*-c0UU*O*cM*AU88*-c0XU*O*d6*4U8K*-c0aU*O*ds*AU8W*Zs0dU*O*ec*4U8i*9c0gU*O*fM*AU8u*-c0jU7S*g6*4U94*160mU*O*gs*4U9G*-c0pU0u*hc*AU9S*-c0sU0u*iM*iU9e*-c0vU*m*j6*AU9q*9c0yU*e*js*4UA0*-c1-U7S*kc0LUAC*0c12U*O*lM0LUAO*4c15U*m*m6*4UAa*1618U*m*ms*4UAm*-c1BU*O*nc*OUAy*561EU*O*oM*AUB8*9c1HU*O*p6*iUBK*4c1KU0u*ps*4UBW*-c1NU7S*qc0LUBi*161QU-m*rM*oUBu*rs1UU*O*sM*OUC8*ss1YUCK*tc*QUCS*161cU*O*uF21*-0n2EA02*2F*m*EAl216F*62EAW2*6F*o*F*SEF*o2E4l21EV*K2EBU2U*79tcF*q2F*q6F*s2F-kAF-m6E0F256l*32ER02ER12ES02Eg22EgX2*kF0mEE--29V-29cV29cl2D--2D6l2D7-2D7F2DF-2DN-*12EyY2Ez32F9a2FA22FA32*sF2kMF2mIF2qEF2uIF2uMF2wIF2wMF2yEF3iMF3kMF3kQF3mMF3qMF3uMF3wMF3yMF4iMF4iQF4iUF4kMF4kQF4mQF4mUF4oQF4oUF4qMF4qQF4sQF4sUF5gUF5iQF5iUE-l2T0-2T8-2TG-2TGF2TO-2TVl2Te-2TeF2Tu-2WmF2Wu-2WuF2X0-2X0F2X8-2X8F2XG-2XOF2XWF2XWV2XmV2XuF2amF2amV2auF2auV2b8V2b8l2bGF2bOV2bWV2beV2bmV2emV2eml2f0V2f0l2fGV2fOV2fWl2fv-2iul2iv-2jOl2jP-2jPF2jf-2jv-2jvF2mnF2mv-2mvF2mvV2n1-2n9F2nXF2nnV2nvF2nvV2r1V2rPF2rPV2rnV2rvF2rvV*42HgC2HgD2Hgi2Hgj2HhD2Hji2Hjj2Hjk2HvE2Hvj2Hvk2HwD2HwE2Hwk2HxE2Hzj2Hzk2I9l2IAk2IAl2IBE2IBk2ICF2IDl2IRF2ISl2ISm2ITG2ITl2ITm2ITn2IgF2IgG2IgH2Igl2IhG2IhI2Ijm2Ijn2Ixn2IyI2Iyo2Izn2Izo2JBp2JDo2JDp2JRp2JRq2JSK2JSp2JSr2JTJ2JTK2JTp2JTq2JiK2Jiq2Jir2JjK2Jjq2Jjr2JyL2Jyr2Jzq2Jzr2Jzs2KCs2KDM2KDs2KDt2-2FNxYFNzYFNzcE0l3fyV*E2Kjv2Kzu2KzvoU8Q*do0bU8TKWFXP43nQqtVPKJM74BgMLBnNLBSHZBBRLFVMalZEL7mMLaX*ds0c*8VJotHEL7mMLZMHZBDMadZMrHG*dk0bE8X*eFT2-3EEIJ9NLZZQYVdQrFjNr7VPO60dE8VLl*FI233GqJtNL76OLBoPqRmMKpT2*xCIohZSKJYEL7XO4ZqNL9F*eU0eJ6YA6*-**U*4E*W*0g*BE*u*1w04*6S*WQ09U6s*Xc0D*73*Z*3b*KS-O*3cUKY-OM3e*Ke-Ok3fUKk-P63h*Kq-PU3iUKw-Ps3k*L0-QE3lUL6-Qc3n*LC-R*3oULI-RM3q*LO-Rk3rULU-S63t*La-SU3uULg-Ss3w*Lm-TE3xULs-Tc3z*Ly-U*4*UM2-UM40*M8-Uk41UME-V643*MK-VU44UMQ-Vs46*MW-WE47UMc-Wc49*Mi-X*4AUMo-XM4C*Mu-Xk4DUN*-Y64F*N4-YU4GUNA-Ys4I*NG-ZE4JUNM-Zc4L*NS-a*4MUNY-aM4O*Ne-ak4PUNk-b64R*Nq-bU4SUNw-bs4U*O0-cE4VUO6-cc4X*OC-d*4YUOI-dM4a*OO-dk4bUOU-e64d*Oa-eU4eUOg-es4g*Om-fE4hUOs-fc4j*Oy-g*4kUP2-gM4m*P8-gk4nUPE-h64p*PK-hU4qUPQ-hs4s*PW-iE4tUPc-ic4v*Pi-j*4wUPo-jM4y*Pu-jk4zUQ*-k65-*Q4-kU50UQA-ks52*QG-lE53UQM-lc55*QS-m*56UQY-mM58*Qe-mk59UQk-n65B*Qq-nU5CUQw-ns5E*R0-oE5FUR6-oc5H*RC-p*5IURI-pM5K*RO-pk5LURU-q65N*Ra-qU5OURg-qs5Q*Rm-rE5RURs-rc5T*Ry-s*5UUS2-sM5W*S8-sk5XUSE-t65Z*SK-tU5aUSQ-ts5c*SW-uE5dUSc-uc5f*Si-v*5gUSo-vM5i*Su-vk5jUT*-w65l*T4-wU5mUTA-ws5o*TG-xE5pUTM-xc5r*TS-y*5sUTY-yM5u*Te-yk5vUTk-z65x*Tq-zU5yUTw-zs6**U00*E6-UU60*c61*UC0-*62UUI0-M64*UO0-k65UUU00667*Ua00U68UUg00s6A*Um01E6BUUs01c6D*Uy02*6EUV202M6G*V802k6HUVE0366J*VK03U6KUVQ03s6M*VW04E6NUVc04c6P*Vi05*6QUVo05M6S*Vu05k6TUW*0666V*W406U6WUWA06s6Y*WG07E6ZUWM07c6b*WS08*6cUWY08M6e*We08k6fUWk0966h*Wq09U6iUWw09s6k*X00AE6lUX60Ac6n*XC0B*6oUXI0BM6q*XO0Bk6rUXU0C66t*Xa0CY6ukXi0D*6wkXp0DU6yUXx0Dw7*UY30EU70UYB0Ew72UYL0Fc75EYU0GA77UYc0Gg79EYk0HA7BUYt0Hk7DUZ-0IA7FUZ70Ik7HkZG0JI7K*ZP0Js7M*ZX0KM7OEZg0Kw7QEZo0LQ7SUZx0M*7Uka40MY7X*aD0N67ZEaM0Ng7bUaV0OE7dkae0Oo7g*an0PM7iEaw0Pw7kUb30QU7mkbC0R27okbK0RY7r*bT0S67tEbc0Sg7vUbl0TE7xkbu0To8**c10UM80EcA0Uw82UcJ0VU84kcS0W287*cb0Wc89Eck0XA8BUct0Xk8Dkd00YI8G*d90Ys8IEdI0ZQ8KUdR0a*8Mkda0aY8P*dj0b68REds0bg8TUe-0cE8Vke80co8Y*eH0dM8a*eP0ds8cEeY0eQ8eUeh0f*8gkeq0fY8j*ez0g68lEf60gg8nUfF0hE8pkfO0ho8s*fX0iM8uEfg0iw8wUfp0jU8ykfy0k29-*g50kc91EgE0lA93UgN0lk95kgW0mI98*gf0ms9AEgo0nQ9CUgx0o*9Ekh40oY9H*hD0p69JEhM0pg9LUhV0qE9Nkhe0qo9Pkhm0rI9S*hu0ro9Tki00sI9W*iF0tk9dEio0vg9kkjA0xI9uEji1*6A3*kN1-k********0*U********8e*******************A5U**</defaultVal>
+						<dataValue>********2N6eMb-gOLBoA11I**2**U*1**E*-E*4*eM0dpUYRaJmQqZjPZUYPq7eNKBoQpYYML7XO4ZqNL7I75FjQ-6**MOUfl1f**Q*0**B*PI-hU4r*PU-iE4u*Pg-j*4x*Ps-jk5**Q2-kU51*QE-lE54*QQ-m*57*Qc-mk5A*Qo-nU5D*R*-oE5G*RA-p*5J*RM-pk5M*RY-qU5P*Rk-rE5S*Rw-s*5V*S6-sk5Y*SI-tU5b*SU-uE5e*Sg-v*5h*Ss-vk5k*T2-wU5n*TE-xE5q*TQ-y*5t*Tc-yk5w*To-zU5z*U*0*E60*UA0-*63*UM0-k66*UY00U69*Uk01E6C*Uw02*6F*V602k6I*VI03U6L*VU04E6O*Vg05*6R*Vs05k6U*W206U6X*WE07E6a*WQ08*6d*Wc08k6g*Wo09U6j*X*0AE6m*XA0B*6p*XM0Bk6s*XY0CU6v*Xk0DE6y*Xw0E*7-*Y60Ek72*YI0FU75*YU0GE78*Yg0H*7B*Ys0Hk7E*Z20IU7H*ZE0JE7K*ZQ0K*7N*Zc0Kk7Q*Zo0LU7T*a*0ME7W*aA0N*7Z*aM0Nk7c*aY0OU7f*ak0PE7i*aw0Q*7l*b60Qk7o*bI0RU7r*bU0SE7u*bg0T*7x*bs0Tk8**c20UU81*cE0VE84*cQ0W*87*cc0Wk8A*co0XU8D*d*0YE8G*dA0Z*8J*dM0Zk8M*dY0aU8P*e7J74tpP4nG**Y*0U*9**lK74BgMLBnKIVdQrFjNr7VPM1eU*9G**s*0E*D*PFOHZAiPq7eNKBoQuwF*OE*2**F*-6*2k*I*-I*3U*L*-U*4E*O*-g*5**R*-s*5k*U*02*6U*N*0E*2k*a*-Y*8**H*0c*8k*g*0o*9U*h*1**2k*m*-Y*B**H*1M*Bk*s*1Y*CU*H*1k*4E*y*-Y*E**r*26*2k-2*-Q*FU*N*2U*4E-8*2g*H**N*2s*2k-E*-Y*IU*N*3E*JE-K*2g*K**N*3c*2k-Q*-A*LU*N*4**4E-W*-Y*N**N*4M*4E-c*0g*OU*h*4k*CE-i*-A*Q**H*56*2k-o*-Y*RU*H*5U*3k-u*2g*T**N*5s*9E0**-A*UU*H*6E*2k04*-A*W**H*6c*2k0A*-A*XU*N*7**2k0G*2g*Z*0J*7M*Gk0M*-Y*aU*H*7k*2k0S*-A*c**N*86*2k0Y*-A*dU*N*8U*4E0e*0o*f*0J*8s*2k0k*-A*gU*N*9E*4E0q*-Y*i**N*9c*2k0w*-A*jU*H*A**2k10*-A*l**H*AM*4E16*2g*mU*H*Ak*2k1C*-A*o**H*B6*Gk1I*-A*pU*H*BU*4E1O*-Y*r**H*Bs*2k1U*-Y*sU*t*CE*4E1a*-A*u**H*Cc*2k1g*-A*vU*H*D**2k1m*-Y*x**H*DM*2k1s*-Y*yU*H*Dk*4E1y*-A-***H*E6*2k22*-A--U*H*EU*CE28*0o-1**t*Es*CE2E*-Y-2U*H*FE*2k2K*FQ-4**H*Fc*2k2Q*-Y-5U*H*G**2k2W*-A-7**h*GM*2k2c*-A-8U*N*Gk*2k2i*-A-A**H*H6*2k2o*-A-BU*N*HU-3k2u*-A-D**H*Hs*Gk3**-A-EU*N*IE*2k34*FQ-G**H*Ic*4E3A*-A-HU*H*J**2k3G*2g-J**N*JM*2k3M*2g-KU-9*Jk*2k3S*-Y-M**N*K6*Gk3Y*-Q-NU*H*KU*2k3e*FQ-P*2L*Ks*3k3k*-A-QU2L*LE*8k3q*-Y-S**H*Lc*4E3w*-Y-TU*H*M**2k40*-A-V**f*MM*9E46*-A-WU*N*Mk*Gk4C*-A-Y*-9*N6*8k4I*2g-ZU*H*NU*2k4O*FQ-b*2L*Ns*4E4U*0o-cU-J*OE-dE4a*-A-e**f*Oc-ek4g*Oo-fU*h*P**4E4m*-C**s*2U*K*-c*5U*W*0M*8U*i*16*BU*u*1s*EU-4*2c*HU-G*3M*AU-O*-c*LU*m*46*4U-a*4c*PU-m*5M*QU-u*-c*TU*m*66*4U04*6c*XU0G*7M*4U0O*16*bU*m*86*WU0a*-c*eU*e*8s*AU0m*16*hU0u*9s*AU10*-c*lU*m*Ac*AU1C*B6*pU0u*Bc*AU1S*-c*sU*O*CM*AU1e*16*vU*m*D6*AU1q*16*yU-e*Ds*QU20*76--U*O*Ec*4U2C*-c-2U*m*FM*4U2O*0c-5U0u*G6*AU2a*56-8U*O*Gs*4U2m*-c-BU*O*Hc*4U2y*-c-EU*O*IM*AU38*-c-HU0u*J6-JU3O*9c-LU*m*K6*4U3a*-c-OU*O*Ks*AU3m*-c-RU*O*Lc*AU3y*16-UU-m*MM-JU48*-c-XU*O*N6*AU4K*16-aU*m*Ns*AU4W*-c-dU*O*Oc*4U4i*-c-gU*O*PM*4U4u*16-jU0u*Q6*4U54*-c-mU*O*Qs*4U5G*9c-pU*O*Rc*4U5S*16-sU*m*SM*4U5e*-c-vU*m*T6*YU5q*16-yU*O*Ts*4U60*-c0-U*O*Uc*4U6C*-c02U*m*VM*4U6O*-c05U*m*W6*4U6a*1608U*O*Ws*4U6m*-c0BU*O*Xc*4U6y*760EU-m*YM*YU78*760HU*m*Z6*4U7K*-c0KU7S*a6*4U7a*-c0OU*m*as*4U7m*-c0RU*O*bc*QU7y*-c0UU*O*cM*AU88*-c0XU*O*d6*4U8K*-c0aU*O*ds*AU8W*Zs0dU*O*ec*4U8i*9c0gU*O*fM*AU8u*-c0jU7S*g6*4U94*160mU*O*gs*4U9G*-c0pU0u*hc*AU9S*-c0sU0u*iM*iU9e*-c0vU*m*j6*AU9q*9c0yU*e*js*4UA0*-c1-U7S*kc0LUAC*0c12U*O*lM0LUAO*4c15U*m*m6*4UAa*1618U*m*ms*4UAm*-c1BU*O*nc*OUAy*561EU*O*oM*AUB8*9c1HU*O*p6*iUBK*4c1KU0u*ps*4UBW*-c1NU7S*qc0LUBi*161QU-m*rM*oUBu*rs1UU*O*sM*OUC8*ss1YUCK*tc*QUCS*161cU*O*uF21*-0n2EA02*2F*m*EAl216F*62EAW2*6F*o*F*SEF*o2E4l21EV*K2EBU2U*79tcF*q2F*q6F*s2F-kAF-m6E0F256l*32ER02ER12ES02Eg22EgX2*kF0mEE--29V-29cV29cl2D--2D6l2D7-2D7F2DF-2DN-*12EyY2Ez32F9a2FA22FA32*sF2kMF2mIF2qEF2uIF2uMF2wIF2wMF2yEF3iMF3kMF3kQF3mMF3qMF3uMF3wMF3yMF4iMF4iQF4iUF4kMF4kQF4mQF4mUF4oQF4oUF4qMF4qQF4sQF4sUF5gUF5iQF5iUE-l2T0-2T8-2TG-2TGF2TO-2TVl2Te-2TeF2Tu-2WmF2Wu-2WuF2X0-2X0F2X8-2X8F2XG-2XOF2XWF2XWV2XmV2XuF2amF2amV2auF2auV2b8V2b8l2bGF2bOV2bWV2beV2bmV2emV2eml2f0V2f0l2fGV2fOV2fWl2fv-2iul2iv-2jOl2jP-2jPF2jf-2jv-2jvF2mnF2mv-2mvF2mvV2n1-2n9F2nXF2nnV2nvF2nvV2r1V2rPF2rPV2rnV2rvF2rvV*42HgC2HgD2Hgi2Hgj2HhD2Hji2Hjj2Hjk2HvE2Hvj2Hvk2HwD2HwE2Hwk2HxE2Hzj2Hzk2I9l2IAk2IAl2IBE2IBk2ICF2IDl2IRF2ISl2ISm2ITG2ITl2ITm2ITn2IgF2IgG2IgH2Igl2IhG2IhI2Ijm2Ijn2Ixn2IyI2Iyo2Izn2Izo2JBp2JDo2JDp2JRp2JRq2JSK2JSp2JSr2JTJ2JTK2JTp2JTq2JiK2Jiq2Jir2JjK2Jjq2Jjr2JyL2Jyr2Jzq2Jzr2Jzs2KCs2KDM2KDs2KDt2-2FNxYFNzYFNzcE0l3fyV*E2Kjv2Kzu2KzvoU8Q*do0bU8TKWFXP43nQqtVPKJM74BgMLBnNLBSHZBBRLFVMalZEL7mMLaX*ds0c*8VJotHEL7mMLZMHZBDMadZMrHG*dk0bE8X*eFT2-3EEIJ9NLZZQYVdQrFjNr7VPO60dE8VLl*FI233GqJtNL76OLBoPqRmMKpT2*xCIohZSKJYEL7XO4ZqNL9F*eU0eJ6YA6*-**U*4E*W*0g*BE*u*1w04*6S*WQ09U6s*Xc0D*73*Z*3b*KS-O*3cUKY-OM3e*Ke-Ok3fUKk-P63h*Kq-PU3iUKw-Ps3k*L0-QE3lUL6-Qc3n*LC-R*3oULI-RM3q*LO-Rk3rULU-S63t*La-SU3uULg-Ss3w*Lm-TE3xULs-Tc3z*Ly-U*4*UM2-UM40*M8-Uk41UME-V643*MK-VU44UMQ-Vs46*MW-WE47UMc-Wc49*Mi-X*4AUMo-XM4C*Mu-Xk4DUN*-Y64F*N4-YU4GUNA-Ys4I*NG-ZE4JUNM-Zc4L*NS-a*4MUNY-aM4O*Ne-ak4PUNk-b64R*Nq-bU4SUNw-bs4U*O0-cE4VUO6-cc4X*OC-d*4YUOI-dM4a*OO-dk4bUOU-e64d*Oa-eU4eUOg-es4g*Om-fE4hUOs-fc4j*Oy-g*4kUP2-gM4m*P8-gk4nUPE-h64p*PK-hU4qUPQ-hs4s*PW-iE4tUPc-ic4v*Pi-j*4wUPo-jM4y*Pu-jk4zUQ*-k65-*Q4-kU50UQA-ks52*QG-lE53UQM-lc55*QS-m*56UQY-mM58*Qe-mk59UQk-n65B*Qq-nU5CUQw-ns5E*R0-oE5FUR6-oc5H*RC-p*5IURI-pM5K*RO-pk5LURU-q65N*Ra-qU5OURg-qs5Q*Rm-rE5RURs-rc5T*Ry-s*5UUS2-sM5W*S8-sk5XUSE-t65Z*SK-tU5aUSQ-ts5c*SW-uE5dUSc-uc5f*Si-v*5gUSo-vM5i*Su-vk5jUT*-w65l*T4-wU5mUTA-ws5o*TG-xE5pUTM-xc5r*TS-y*5sUTY-yM5u*Te-yk5vUTk-z65x*Tq-zU5yUTw-zs6**U00*E6-UU60*c61*UC0-*62UUI0-M64*UO0-k65UUU00667*Ua00U68UUg00s6A*Um01E6BUUs01c6D*Uy02*6EUV202M6G*V802k6HUVE0366J*VK03U6KUVQ03s6M*VW04E6NUVc04c6P*Vi05*6QUVo05M6S*Vu05k6TUW*0666V*W406U6WUWA06s6Y*WG07E6ZUWM07c6b*WS08*6cUWY08M6e*We08k6fUWk0966h*Wq09U6iUWw09s6k*X00AE6lUX60Ac6n*XC0B*6oUXI0BM6q*XO0Bk6rUXU0C66t*Xa0CY6ukXi0D*6wkXp0DU6yUXx0Dw7*UY30EU70UYB0Ew72UYL0Fc75EYU0GA77UYc0Gg79EYk0HA7BUYt0Hk7DUZ-0IA7FUZ70Ik7HkZG0JI7K*ZP0Js7M*ZX0KM7OEZg0Kw7QEZo0LQ7SUZx0M*7Uka40MY7X*aD0N67ZEaM0Ng7bUaV0OE7dkae0Oo7g*an0PM7iEaw0Pw7kUb30QU7mkbC0R27okbK0RY7r*bT0S67tEbc0Sg7vUbl0TE7xkbu0To8**c10UM80EcA0Uw82UcJ0VU84kcS0W287*cb0Wc89Eck0XA8BUct0Xk8Dkd00YI8G*d90Ys8IEdI0ZQ8KUdR0a*8Mkda0aY8P*dj0b68REds0bg8TUe-0cE8Vke80co8Y*eH0dM8a*eP0ds8cEeY0eQ8eUeh0f*8gkeq0fY8j*ez0g68lEf60gg8nUfF0hE8pkfO0ho8s*fX0iM8uEfg0iw8wUfp0jU8ykfy0k29-*g50kc91EgE0lA93UgN0lk95kgW0mI98*gf0ms9AEgo0nQ9CUgx0o*9Ekh40oY9H*hD0p69JEhM0pg9LUhV0qE9Nkhe0qo9Pkhm0rI9S*hu0ro9Tki00sI9W*iF0tk9dEio0vg9kkjA0xI9uEji1*6A3*kN1-k********0*U********8e*******************A5U**</dataValue>
+					</parameter>
+					<parameter name="Chroma Rolloff" id="16" flags="12884901888" default="0.10000000000000001" value="0.10000000000000001"/>
+					<parameter name="Chroma Erode" id="17" flags="12889161760" default="0" value="0"/>
+					<parameter name="Luma Rolloff" id="14" flags="12884901888" default="0.10000000000000001" value="0.10000000000000001"/>
+					<parameter name="Fix Video" id="68" flags="12884967424" default="1" value="1"/>
+				</parameter>
+				<parameter name="Matte Tools" id="47" flags="8589938688">
+					<foldFlags>4</foldFlags>
+					<parameter name="Levels" id="49" flags="12884905984">
+						<foldFlags>15</foldFlags>
+					</parameter>
+					<parameter name="Shrink/Expand" id="53" flags="12884901888" default="0" value="0"/>
+					<parameter name="Soften" id="51" flags="12884901888" default="0" value="0"/>
+					<parameter name="Erode" id="52" flags="12884901888" default="0" value="0"/>
+				</parameter>
+				<parameter name="MinGreen" id="38" flags="12889161760" default="-3" value="-3"/>
+				<parameter name="MaxGreen" id="39" flags="12889161760" default="-1.75" value="-1.75"/>
+				<parameter name="GreenChroma" id="40" flags="12889161760" default="0.089999999999999997" value="0.089999999999999997"/>
+				<parameter name="MinBlue" id="41" flags="12889161760" default="-1.75" value="-1.75"/>
+				<parameter name="MaxBlue" id="42" flags="12889161760" default="0.125" value="0.125"/>
+				<parameter name="BlueChroma" id="43" flags="12889161760" default="0.089999999999999997" value="0.089999999999999997"/>
+				<parameter name="Spill Suppression" id="28" flags="8589938704">
+					<foldFlags>4</foldFlags>
+					<parameter name="Spill Contrast" id="26" flags="12884905984">
+						<foldFlags>15</foldFlags>
+					</parameter>
+					<parameter name="Tint" id="23" flags="12884901888" default="0.040000000000000001" value="0"/>
+					<parameter name="Saturation" id="24" flags="12884901888" default="0.75" value="1"/>
+				</parameter>
+				<parameter name="Light Wrap" id="33" flags="8589938704">
+					<foldFlags>4</foldFlags>
+					<parameter name="Amount" id="29" flags="12884901888" default="0" value="0"/>
+					<parameter name="Intensity" id="30" flags="12884901888" default="1" value="1"/>
+					<parameter name="Opacity" id="31" flags="12884901888" default="1" value="1"/>
+					<parameter name="Mode" id="32" flags="12884967424" default="0" value="0"/>
+				</parameter>
+				<parameter name="Luma Erode" id="15" flags="12889161760" default="0" value="0"/>
+				<parameter name="Preserve RGB" id="7" flags="12889161760" default="0" value="0"/>
+				<parameter name="KeyerIsInitialized" id="8" flags="12889161760" default="0" value="1"/>
+				<parameter name="Mix" id="10001" flags="12884901888" default="1" value="1"/>
+			</filter>
+			<behavior name="Reverse" id="1825757641" factoryID="1">
+				<timing in="373760 153600 1 0" out="460800 153600 1 0" offset="373760 153600 1 0"/>
+				<baseFlags>8589934672</baseFlags>
+				<foldFlags>65536</foldFlags>
+			</behavior>
+		</scenenode>
+		<aspectRatio>1</aspectRatio>
+		<flags>0</flags>
+		<timing in="373760 153600 1 0" out="460800 153600 1 0" offset="0 1 1 0"/>
+		<foldFlags>65536</foldFlags>
+		<baseFlags>524368</baseFlags>
+		<parameter name="Properties" id="1" flags="8589938704">
+			<parameter name="Lighting" id="230" flags="8589938706">
+				<foldFlags>15</foldFlags>
+			</parameter>
+			<parameter name="Shadows" id="234" flags="8589938706">
+				<foldFlags>15</foldFlags>
+			</parameter>
+			<parameter name="Reflection" id="223" flags="8589971474">
+				<foldFlags>131087</foldFlags>
+			</parameter>
+		</parameter>
+		<parameter name="Object" id="2" flags="8589938704">
+			<parameter name="Fixed Width" id="302" flags="12884901908" default="600" value="600"/>
+			<parameter name="Fixed Height" id="303" flags="12884901908" default="600" value="600"/>
+			<parameter name="Flatten" id="311" flags="8589934610" default="0" value="0"/>
+			<parameter name="Layer Order" id="305" flags="8589934610" default="0" value="0"/>
+			<parameter name="Aperture Width" id="312" flags="12884901906" default="600" value="600"/>
+			<parameter name="Aperture Height" id="313" flags="12884901906" default="600" value="600"/>
+		</parameter>
+	</layer>
+	<layer name="Group" id="1504715069">
+		<scenenode name="AdvancedControlsUI copy" id="1504715084" factoryID="4" version="5">
+			<validTracks>0</validTracks>
+			<aspectRatio>0</aspectRatio>
+			<flags>0</flags>
+			<timing in="225280 153600 1 0" out="1500160 153600 1 0" offset="40960 153600 1 0"/>
+			<foldFlags>16384</foldFlags>
+			<baseFlags>524368</baseFlags>
+			<parameter name="Properties" id="1" flags="8589938704">
+				<parameter name="Transform" id="100" flags="8589938704">
+					<parameter name="Position" id="101" flags="8589938704">
+						<foldFlags>15</foldFlags>
+						<parameter name="X" id="1" flags="8589934608" default="0" value="0.50000000000299849"/>
+						<parameter name="Y" id="2" flags="8589934608" default="0" value="0.4999999999948237"/>
+					</parameter>
+					<parameter name="Scale" id="105" flags="8589938704">
+						<foldFlags>15</foldFlags>
+						<parameter name="X" id="1" flags="8589934608" default="1" value="0.82772812843320609"/>
+						<parameter name="Y" id="2" flags="8589934608" default="1" value="0.82772812843320609"/>
+					</parameter>
+				</parameter>
+				<parameter name="Lighting" id="230" flags="8589938706">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Shadows" id="234" flags="8589938706">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Reflection" id="223" flags="8589971474">
+					<foldFlags>131087</foldFlags>
+				</parameter>
+				<parameter name="Media" id="324" flags="8589938704">
+					<foldFlags>4</foldFlags>
+					<parameter name="Source Media" id="300" flags="81604444176" default="1504715070" value="1504715070"/>
+					<parameter name="Source Media" id="325" flags="8590000146">
+						<referencedObjectID></referencedObjectID>
+					</parameter>
+				</parameter>
+				<parameter name="Page Number" id="301" flags="8589934610" default="1" value="1"/>
+				<parameter name="Retime Value" id="304" flags="8590066066">
+					<curve type="1" default="1" value="1" round="0" retimingExtrapolation="1">
+						<numberOfKeypoints>2</numberOfKeypoints>
+						<postExtrapolation>1</postExtrapolation>
+						<keypoint interpolation="1" flags="32">
+							<time>184320 153600 1 0</time>
+							<value>37</value>
+						</keypoint>
+						<keypoint interpolation="1" flags="32">
+							<time>1464320 153600 1 0</time>
+							<value>287</value>
+						</keypoint>
+					</curve>
+				</parameter>
+				<parameter name="Retime Value Cache" id="319" flags="8590065810">
+					<curve type="1" default="1" value="1">
+						<numberOfKeypoints>2</numberOfKeypoints>
+						<keypoint interpolation="1" flags="160">
+							<time>0 1 1 0</time>
+							<value>1</value>
+						</keypoint>
+						<keypoint interpolation="1" flags="160">
+							<time>1474560 153600 1 0</time>
+							<value>289</value>
+						</keypoint>
+					</curve>
+				</parameter>
+				<parameter name="Duration Cache" id="320" flags="8589934610" default="0" value="288"/>
+			</parameter>
+			<parameter name="Object" id="2" flags="8589938704">
+				<parameter name="Width" id="313" flags="8589934610" default="1" value="960"/>
+				<parameter name="Height" id="314" flags="8589934610" default="1" value="640"/>
+			</parameter>
+			<behavior name="Hold Frame" id="1825757584" factoryID="6">
+				<timing in="225280 153600 1 0" out="1500160 153600 1 0" offset="225280 153600 1 0"/>
+				<baseFlags>8589934672</baseFlags>
+			</behavior>
+		</scenenode>
+		<scenenode name="AdvancedControlsUI" id="1504715072" factoryID="4" version="5">
+			<validTracks>1</validTracks>
+			<aspectRatio>0</aspectRatio>
+			<flags>0</flags>
+			<timing in="0 1 1 0" out="220160 153600 1 0" offset="0 1 1 0"/>
+			<foldFlags>16384</foldFlags>
+			<baseFlags>524368</baseFlags>
+			<parameter name="Properties" id="1" flags="8589938704">
+				<parameter name="Transform" id="100" flags="8589938704">
+					<parameter name="Position" id="101" flags="8589938704">
+						<foldFlags>15</foldFlags>
+						<parameter name="X" id="1" flags="8589934608" default="0" value="0.50000000000299849"/>
+						<parameter name="Y" id="2" flags="8589934608" default="0" value="0.4999999999948237"/>
+					</parameter>
+					<parameter name="Scale" id="105" flags="8589938704">
+						<foldFlags>15</foldFlags>
+						<parameter name="X" id="1" flags="8589934608" default="1" value="0.82772812843320609"/>
+						<parameter name="Y" id="2" flags="8589934608" default="1" value="0.82772812843320609"/>
+					</parameter>
+				</parameter>
+				<parameter name="Lighting" id="230" flags="8589938706">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Shadows" id="234" flags="8589938706">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Reflection" id="223" flags="8589971474">
+					<foldFlags>131087</foldFlags>
+				</parameter>
+				<parameter name="Media" id="324" flags="8589938704">
+					<foldFlags>4</foldFlags>
+					<parameter name="Source Media" id="300" flags="81604444176" default="1504715070" value="1504715070"/>
+					<parameter name="Source Media" id="325" flags="8590000146">
+						<referencedObjectID></referencedObjectID>
+					</parameter>
+				</parameter>
+				<parameter name="Page Number" id="301" flags="8589934610" default="1" value="1"/>
+				<parameter name="Retime Value" id="304" flags="8590066066">
+					<curve type="1" default="1" value="1" round="0" retimingExtrapolation="1">
+						<numberOfKeypoints>2</numberOfKeypoints>
+						<postExtrapolation>1</postExtrapolation>
+						<keypoint interpolation="1" flags="32">
+							<time>0 1 1 0</time>
+							<value>1</value>
+						</keypoint>
+						<keypoint interpolation="1" flags="32">
+							<time>225280 153600 1 0</time>
+							<value>45</value>
+						</keypoint>
+					</curve>
+				</parameter>
+				<parameter name="Retime Value Cache" id="319" flags="8590065810">
+					<curve type="1" default="1" value="1">
+						<numberOfKeypoints>2</numberOfKeypoints>
+						<keypoint interpolation="1" flags="160">
+							<time>0 1 1 0</time>
+							<value>1</value>
+						</keypoint>
+						<keypoint interpolation="1" flags="160">
+							<time>1474560 153600 1 0</time>
+							<value>289</value>
+						</keypoint>
+					</curve>
+				</parameter>
+				<parameter name="Duration Cache" id="320" flags="8589934610" default="0" value="288"/>
+			</parameter>
+			<parameter name="Object" id="2" flags="8589938704">
+				<parameter name="Width" id="313" flags="8589934610" default="1" value="960"/>
+				<parameter name="Height" id="314" flags="8589934610" default="1" value="640"/>
+			</parameter>
+		</scenenode>
+		<aspectRatio>1</aspectRatio>
+		<flags>0</flags>
+		<timing in="0 1 1 0" out="1500160 153600 1 0" offset="0 1 1 0"/>
+		<foldFlags>0</foldFlags>
+		<baseFlags>524368</baseFlags>
+		<parameter name="Properties" id="1" flags="8589938704">
+			<parameter name="Blending" id="200" flags="8589938704">
+				<parameter name="Opacity" id="202" flags="8606713872">
+					<curve type="1" default="1" value="1">
+						<numberOfKeypoints>2</numberOfKeypoints>
+						<min>0</min>
+						<max>1</max>
+						<keypoint interpolation="1" flags="32">
+							<time>343040 153600 1 0</time>
+							<value>1</value>
+							<outputTangentTime>0.044444444444444446</outputTangentTime>
+							<outputTangentValue>0</outputTangentValue>
+						</keypoint>
+						<keypoint interpolation="1" flags="32">
+							<time>363520 153600 1 0</time>
+							<value>0</value>
+							<inputTangentTime>-0.044444444444444446</inputTangentTime>
+							<inputTangentValue>0</inputTangentValue>
+							<outputTangentTime>0.044444444444444446</outputTangentTime>
+							<outputTangentValue>-0</outputTangentValue>
+						</keypoint>
+					</curve>
+				</parameter>
+			</parameter>
+			<parameter name="Lighting" id="230" flags="8589938706">
+				<foldFlags>15</foldFlags>
+			</parameter>
+			<parameter name="Shadows" id="234" flags="8589938706">
+				<foldFlags>15</foldFlags>
+			</parameter>
+			<parameter name="Reflection" id="223" flags="8589971474">
+				<foldFlags>131087</foldFlags>
+			</parameter>
+		</parameter>
+		<parameter name="Object" id="2" flags="8589938704">
+			<parameter name="Fixed Width" id="302" flags="12901679124" default="720" value="720"/>
+			<parameter name="Fixed Height" id="303" flags="12901679124" default="480" value="480"/>
+			<parameter name="Flatten" id="311" flags="8589934610" default="0" value="0"/>
+			<parameter name="Layer Order" id="305" flags="8589934610" default="0" value="0"/>
+			<parameter name="Aperture Width" id="312" flags="12884901906" default="720" value="720"/>
+			<parameter name="Aperture Height" id="313" flags="12884901906" default="480" value="480"/>
+		</parameter>
+		<filter name="Keyer" id="1504715078" factoryID="7" pluginUUID="41122549-B8A6-470E-94DA-211294D20B62" pluginVersion="3" pluginName="Keyer" pluginDynamicParams="0">
+			<timing in="0 1 1 0" out="1469440 153600 1 0" offset="0 1 1 0"/>
+			<baseFlags>8589934672</baseFlags>
+			<parameter name="DefaultSoftness" id="1" flags="12889161760" default="9" value="9"/>
+			<parameter name="Strength" id="36" flags="81604444176" default="1" value="1"/>
+			<parameter name="Keyer::ViewChannel" id="27" flags="12889161760" default="0" value="0"/>
+			<parameter name="Fill Holes" id="48" flags="12884901904" default="0" value="0"/>
+			<parameter name="Edge Distance" id="54" flags="12884901904" default="3" value="3"/>
+			<parameter name="Spill Level" id="20" flags="12884901904" default="0.46000000000000002" value="0.46000000834465027"/>
+			<parameter name="Invert" id="50" flags="12884967440" default="0" value="0"/>
+			<parameter name="OSC" id="3" flags="12889161760">
+				<numberOfKeypoints>0</numberOfKeypoints>
+				<defaultVal>*********LAeMb-gOLBoA11I*E61-*I46G7M75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8M50*wH4VpJ74tpP4nH0Ec91*oCJIJYNqJnJWFXP43nQpdGNKBoMKtbP4JnU*G*-M*0oV*82F7OHZAiPq7eNKBoQu0**x6I3FMLKWFXP43nQqtVPKJM74BgMLBnNLBSHZBBRLFVMalZEL7mMLaX3VUNJotHEL7mMLZMHZBDMadZMrHG2*cP2e0**x6I3FsTLl*EI233GqJtNL7DQqBHNLFpQ86U4JwE23--FIhZSKJmHrBXIqJoRL-T2*xCIohZSKJYEL7XO4ZqNL9F6mFG710**E*6*-2*4U*X*0o*AU*r*1s*F*-9*32*K*-X*4I*Nk-d*4s*SE-u*5k*UE0A*7I*d*0c*9**iE0y*9w*kE14*BY*r*1j*E2--*25*********U2*********7E*******************EY*</defaultVal>
+				<dataValue>*********LAeMb-gOLBoA11I*E61-*I46G7M75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8M50*wH4VpJ74tpP4nH0Ec91*oCJIJYNqJnJWFXP43nQpdGNKBoMKtbP4JnU*G*-M*0oV*82F7OHZAiPq7eNKBoQu0**x6I3FMLKWFXP43nQqtVPKJM74BgMLBnNLBSHZBBRLFVMalZEL7mMLaX3VUNJotHEL7mMLZMHZBDMadZMrHG2*cP2e0**x6I3FsTLl*EI233GqJtNL7DQqBHNLFpQ86U4JwE23--FIhZSKJmHrBXIqJoRL-T2*xCIohZSKJYEL7XO4ZqNL9F6mFG710**E*6*-2*4U*X*0o*AU*r*1s*F*-9*32*K*-X*4I*Nk-d*4s*SE-u*5k*UE0A*7I*d*0c*9**iE0y*9w*kE14*BY*r*1j*E2--*25*********U2*********7E*******************EY*</dataValue>
+			</parameter>
+			<parameter name="Keyer::Autokey" id="4" flags="12889161760">
+				<numberOfKeypoints>0</numberOfKeypoints>
+				<defaultVal>*********lAeMb-gOLBoA11I*E61-*I4LZxM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8wE7UQ61H6nB1IqBnUtCXgwDHszE230EoF3FYR6GId9H2pCHp-FIZBOJGFiRKlgoUY80klSGKtdR4ZVP3BVPL-gNLBK74BgMLBnU*8*7R6C0UwlKYtH9axWOaJXR5Cj202E2F6H3-IK3lUN4VgQ5FsT602W6mEZ7WQc8Gcf90oi9n0**s*2U*K*-c*5U*W*0M*8U*i*16*BU*u*1s*EU-4*2c*HU-G*3M*KU-S*46*NU-e*4s*QU-q*5c*TU00*6M*WU0C*706wU60-6XxIpBIWD60*UG6wU60-6XxIpBIWDI1*kG6wU60-6XxQrBoWD60*UG6wU60-6XxQrBoWDI1*kG6wU60-6XxQrBoWDO0UcG6wU60-6XxYtCIWDO0UcG6xEA1-6XxQrBoWDI1*kG6xEA1-6XxQrBoWDO0UcG6xEA1-6XxYtCIWDO0UcG6xEA1-6XxYtCIWDS1UsG6xc80V6XxYtCIWDS1UsR7IJJNLKWFXP43nQqtVPKJM74BgMLBnNLBSHZBBRLFVMalZEL7mMLaXJZVNJotHEL7mMLZMHZBDMadZMrHGJ3JPL3wE33--FIhZSKJmELJoPqhZSJBZR5JkcZpNLl*II233GqJtNL7-RLFjOqJtIqJoRL-T2*xCIohZSKJYEL7XO4ZqNL9FM43G710**E*6*-2*4U*X*0o*AU*r*4**NU-f*5c*UE01*6I*WU0J*9Y*ik0x*9w*kE11*AI*lk17*Ag*nE1D*B2*ok1J*BQ*qE1P*Bo*rk1V*CA*tE1b*CY*uk1h*Cw*wE1n*DI*xk1t*Dg*zE20*EQ-1*2F*FM-4k2U*GI-8U2j*HE-CE2y*IA-G*3B*J6-Jk3Q*K2-NU3f*L*-RE3u*Lw-V*47*Ms-Yk4M*No-cU4b*P6-ik58*Qs-pU5T*SE-yk5y*VI07k6e*Wo********0*E********-W*******************09k**</defaultVal>
+				<dataValue>*********lAeMb-gOLBoA11I*E61-*I4LZxM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8wE7UQ61H6nB1IqBnUtCXgwDHszE230EoF3FYR6GId9H2pCHp-FIZBOJGFiRKlgoUY80klSGKtdR4ZVP3BVPL-gNLBK74BgMLBnU*8*7R6C0UwlKYtH9axWOaJXR5Cj202E2F6H3-IK3lUN4VgQ5FsT602W6mEZ7WQc8Gcf90oi9n0**s*2U*K*-c*5U*W*0M*8U*i*16*BU*u*1s*EU-4*2c*HU-G*3M*KU-S*46*NU-e*4s*QU-q*5c*TU00*6M*WU0C*706wU60-6XxIpBIWD60*UG6wU60-6XxIpBIWDI1*kG6wU60-6XxQrBoWD60*UG6wU60-6XxQrBoWDI1*kG6wU60-6XxQrBoWDO0UcG6wU60-6XxYtCIWDO0UcG6xEA1-6XxQrBoWDI1*kG6xEA1-6XxQrBoWDO0UcG6xEA1-6XxYtCIWDO0UcG6xEA1-6XxYtCIWDS1UsG6xc80V6XxYtCIWDS1UsR7IJJNLKWFXP43nQqtVPKJM74BgMLBnNLBSHZBBRLFVMalZEL7mMLaXJZVNJotHEL7mMLZMHZBDMadZMrHGJ3JPL3wE33--FIhZSKJmELJoPqhZSJBZR5JkcZpNLl*II233GqJtNL7-RLFjOqJtIqJoRL-T2*xCIohZSKJYEL7XO4ZqNL9FM43G710**E*6*-2*4U*X*0o*AU*r*4**NU-f*5c*UE01*6I*WU0J*9Y*ik0x*9w*kE11*AI*lk17*Ag*nE1D*B2*ok1J*BQ*qE1P*Bo*rk1V*CA*tE1b*CY*uk1h*Cw*wE1n*DI*xk1t*Dg*zE20*EQ-1*2F*FM-4k2U*GI-8U2j*HE-CE2y*IA-G*3B*J6-Jk3Q*K2-NU3f*L*-RE3u*Lw-V*47*Ms-Yk4M*No-cU4b*P6-ik58*Qs-pU5T*SE-yk5y*VI07k6e*Wo********0*E********-W*******************09k**</dataValue>
+			</parameter>
+			<parameter name="Color Selection" id="18" flags="8589938704">
+				<foldFlags>4</foldFlags>
+				<parameter name="Graph" id="45" flags="81604444160">
+					<numberOfKeypoints>0</numberOfKeypoints>
+					<defaultVal>*********6YeMb-gOLBoA11I*E61-*I40EdM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c86503IYPbJgP-**Ll*DHZB9NLZZN23mMqVdRaJmoEgAIWEkU*262FcX9H6rCY-0J3RO*********E2*********1E*******************3k*</defaultVal>
+					<dataValue>*********6YeMb-gOLBoA11I*E61-*I40EdM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c86503IYPbJgP-**Ll*DHZB9NLZZN23mMqVdRaJmoEgAIWEkU*262FcX9H6rCY-0J3RO*********E2*********1E*******************3k*</dataValue>
+				</parameter>
+				<parameter name="Chroma" id="6" flags="81604444160">
+					<numberOfKeypoints>0</numberOfKeypoints>
+					<defaultVal>********-WseMb-gOLBoA11I*E61-*I4e8ZM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8wE9*Q6BHMrC1YuCnkxDXx*EI71F2J4FoVFMqFfRLNrS5a1V6K4Vt4GYtGJbu0YJGFiRKlgrl*K0Ec91*oC1l*F2VAI3FML4-YO4lkR5VwU6G6U70Ia7mUd8Wgg9GsjA12mAnFT2-3HPqNoI4ZZKJx1Hp7CFJ7TH3wE23FjP3-dNJZTEoxGHYJGLopT2-7HPqNoI4ZZKJx1Hp7CFJ7TIZ7T2-7HPqNoI4ZZK3x1Hp7CFJ7TIZ7T2--IPqlEOKJMLoBDIYt3IZxBJWFXP43nQplHQ4ldPaJKNL7oNLVT2-3HPqNoI4ZZK3x1Hp7CFJ7TIZwE23FjP3-dNJZTEoxGHYJGLp7T2-3IPqlEOKJNLoBDIYt3IZxGIZwE2JFjP3-dNJZTEoxGHYJGLolALl*FIqxaR3-dNJZTEoxGHYJGLp7T2--IPqlEOKJMLoBDIYt3IZxGLl*EJ4xgI4ZZKJx1Hp7CFJ7TH3wE2JFjP3-dNJVTEoxGHYJGLp7GLl*FJ4xgI4ZZK3x1Hp7CFJ7TH2lT2--IPqlEOKJMLoBDIYt3IZxALl*FIqxaR3-dNJVTEoxGHYJGLopT2-7HPqNoI4ZZKJx1Hp7CFJ7TH2lT2-7HPqNoI4ZZK3x1Hp7CFJ7TH2lT2-3HPqNoI4ZZKJx1Hp7CFJ7THJwE2JBjNbFEOKJMLoBDIYt3IZxAU-0**s*IU*y**s*fU-K*1M*6U*e*0M*GU*G*-s*4U*K**c*AU-C*1c*FU*gWjnQYYm6*****6fwN10MWjlnQm08z*lLf6fx5Ki*Wjpx9EG8z8fy56fwzE62WjuWyk06vhtND6fp3lXsWCvSKHm6vhtND6fupAyQWCyPAuW8zfdlK6XjanCcWCyPAuh771YdEKYtH9axWOaJXR5CZGolBHYy*3c*NU-u*6s*cU0fNIUtHJ3JKJpVNKZhO63dO60*UIa7sIapsIa7tIalsIb7sIaptIaltIb7tU-S*46*LU*C*3s*LU*C**s*16fy***1GNKNbO3cYMqlVQrBiMKpZK0FXP43nQqJnLl*EI233GqJtNL7DHJNZQbFZS87dOZwE23--FIhZSKJmHopKNL7oNLVMHZBDMadZMrHNIUtHJ3JKJpVNP3hi65-l60*UU-q*46*PU*C*4c*QU*C**s*16ftaahEWj5rjM06yFhnc6Xsa3w1NIUtHJ3JKJpVNSZhw65tz60*UU08*46*UU*C*5s*VU*C**s*16XtbcV*WDcEnb06yZ7Mk6Xu2AtnNIUtHJ3JKJpVNW3i866mB60*UU0S*46*ZU*C*76*aU*C**s*16XuYyAEWDiF3U06z2QYS6XupKpXNIUtHJ3JKJpVNZZiK67OK60*UU0a*46*dU*C*8M*dU*C**s*16Xy***1GNKOVcZtCIoppR43WP4J-Qb7VSOCVcqdLHZB-Qb7VSR7ZNeKaLl*FI233GqJtNL71MYBmIqJoRL0WdqdT2-3EEIJ9NLZZQYBWEr7HNLFpQ3wE1otHGqJtNKF-QaBcOLNZQh4eep6YA6*-**U*2E*O*0A*9E*m*1Q*NU-g*7g*fk10*BQ*v*1z*EM-2k2b*Hc-HU3W*LM-WE4Q*P*-l*5L*Sg0**6J*WY0DE6z*Y20Ek73*YQ0GE79*Yo0Hk7F*ZA0JE7L*ZY0Kk7R*Zw0ME7X*aI0Nk7d*as0Qk7s*bo0UU85*ck0YE8K*dg0c*8Z*ec0fk8o*fY0jU91*gU0nE9M*hs0s*9W*iE0tU9c*ic0zEA**kA1-UA7*kk11kAG*lI13kAN*lg15EAT*m216kAZ*mQ19*Al*nk1FEBM*pg1PUBr*sc1X*CC*t*1YUCI*tM1a*CO*tk1cECa*ug1g*D1*wI1lkD7*wg1nEDD*x21okDJ*xc1rkDY*yY1z*Dy-**2*UE2-*M20*E8-*k21UEH--U25EEW-1I2BkEt-1g2DEEz-222EkF3-2Q2H*FF-4*2N*Fg-522VEG6-7k2fUGl-9E********0*E********0g*******************2hU**</defaultVal>
+					<dataValue>********-WseMb-gOLBoA11I*E61-*I4e8ZM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8wE9*Q6BHMrC1YuCnkxDXx*EI71F2J4FoVFMqFfRLNrS5a1V6K4Vt4GYtGJbu0YJGFiRKlgrl*K0Ec91*oC1l*F2VAI3FML4-YO4lkR5VwU6G6U70Ia7mUd8Wgg9GsjA12mAnFT2-3HPqNoI4ZZKJx1Hp7CFJ7TH3wE23FjP3-dNJZTEoxGHYJGLopT2-7HPqNoI4ZZKJx1Hp7CFJ7TIZ7T2-7HPqNoI4ZZK3x1Hp7CFJ7TIZ7T2--IPqlEOKJMLoBDIYt3IZxBJWFXP43nQplHQ4ldPaJKNL7oNLVT2-3HPqNoI4ZZK3x1Hp7CFJ7TIZwE23FjP3-dNJZTEoxGHYJGLp7T2-3IPqlEOKJNLoBDIYt3IZxGIZwE2JFjP3-dNJZTEoxGHYJGLolALl*FIqxaR3-dNJZTEoxGHYJGLp7T2--IPqlEOKJMLoBDIYt3IZxGLl*EJ4xgI4ZZKJx1Hp7CFJ7TH3wE2JFjP3-dNJVTEoxGHYJGLp7GLl*FJ4xgI4ZZK3x1Hp7CFJ7TH2lT2--IPqlEOKJMLoBDIYt3IZxALl*FIqxaR3-dNJVTEoxGHYJGLopT2-7HPqNoI4ZZKJx1Hp7CFJ7TH2lT2-7HPqNoI4ZZK3x1Hp7CFJ7TH2lT2-3HPqNoI4ZZKJx1Hp7CFJ7THJwE2JBjNbFEOKJMLoBDIYt3IZxAU-0**s*IU*y**s*fU-K*1M*6U*e*0M*GU*G*-s*4U*K**c*AU-C*1c*FU*gWjnQYYm6*****6fwN10MWjlnQm08z*lLf6fx5Ki*Wjpx9EG8z8fy56fwzE62WjuWyk06vhtND6fp3lXsWCvSKHm6vhtND6fupAyQWCyPAuW8zfdlK6XjanCcWCyPAuh771YdEKYtH9axWOaJXR5CZGolBHYy*3c*NU-u*6s*cU0fNIUtHJ3JKJpVNKZhO63dO60*UIa7sIapsIa7tIalsIb7sIaptIaltIb7tU-S*46*LU*C*3s*LU*C**s*16fy***1GNKNbO3cYMqlVQrBiMKpZK0FXP43nQqJnLl*EI233GqJtNL7DHJNZQbFZS87dOZwE23--FIhZSKJmHopKNL7oNLVMHZBDMadZMrHNIUtHJ3JKJpVNP3hi65-l60*UU-q*46*PU*C*4c*QU*C**s*16ftaahEWj5rjM06yFhnc6Xsa3w1NIUtHJ3JKJpVNSZhw65tz60*UU08*46*UU*C*5s*VU*C**s*16XtbcV*WDcEnb06yZ7Mk6Xu2AtnNIUtHJ3JKJpVNW3i866mB60*UU0S*46*ZU*C*76*aU*C**s*16XuYyAEWDiF3U06z2QYS6XupKpXNIUtHJ3JKJpVNZZiK67OK60*UU0a*46*dU*C*8M*dU*C**s*16Xy***1GNKOVcZtCIoppR43WP4J-Qb7VSOCVcqdLHZB-Qb7VSR7ZNeKaLl*FI233GqJtNL71MYBmIqJoRL0WdqdT2-3EEIJ9NLZZQYBWEr7HNLFpQ3wE1otHGqJtNKF-QaBcOLNZQh4eep6YA6*-**U*2E*O*0A*9E*m*1Q*NU-g*7g*fk10*BQ*v*1z*EM-2k2b*Hc-HU3W*LM-WE4Q*P*-l*5L*Sg0**6J*WY0DE6z*Y20Ek73*YQ0GE79*Yo0Hk7F*ZA0JE7L*ZY0Kk7R*Zw0ME7X*aI0Nk7d*as0Qk7s*bo0UU85*ck0YE8K*dg0c*8Z*ec0fk8o*fY0jU91*gU0nE9M*hs0s*9W*iE0tU9c*ic0zEA**kA1-UA7*kk11kAG*lI13kAN*lg15EAT*m216kAZ*mQ19*Al*nk1FEBM*pg1PUBr*sc1X*CC*t*1YUCI*tM1a*CO*tk1cECa*ug1g*D1*wI1lkD7*wg1nEDD*x21okDJ*xc1rkDY*yY1z*Dy-**2*UE2-*M20*E8-*k21UEH--U25EEW-1I2BkEt-1g2DEEz-222EkF3-2Q2H*FF-4*2N*Fg-522VEG6-7k2fUGl-9E********0*E********0g*******************2hU**</dataValue>
+				</parameter>
+				<parameter name="Luma" id="5" flags="81604444160">
+					<numberOfKeypoints>0</numberOfKeypoints>
+					<defaultVal>*********H6eMb-gOLBoA11I*E61-*I45VxM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8Q50-AI3FMLJGFiRKlgpEY80kkB1UwE2F7IH5JhEJMYMqlVQrBIH5JhF3FARKp0J2lpPIC**c*4U*K**s*26fxqSV*WDWMLk06yhJhM6XyxJhPG4-YO4pcYMqlVQrBiMKpZK0FXP43nQqJnLl*FI233GqJtNL7ARKpVIqJoRL0W5-pT2-3EEIJ9NLZZQYlpPK3HNLFpQ3VCIoxWOaJXR3wE1otHGqJtNKF-QaBcOLNZQh2U6J6YA6*-0-2O6momBnx3I3JQMKNfPKxlQrJuTsG7XdaWhfbBpiXfvU********2-*********06*******************1k</defaultVal>
+					<dataValue>*********H6eMb-gOLBoA11I*E61-*I45VxM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8Q50-AI3FMLJGFiRKlgpEY80kkB1UwE2F7IH5JhEJMYMqlVQrBIH5JhF3FARKp0J2lpPIC**c*4U*K**s*26fxqSV*WDWMLk06yhJhM6XyxJhPG4-YO4pcYMqlVQrBiMKpZK0FXP43nQqJnLl*FI233GqJtNL7ARKpVIqJoRL0W5-pT2-3EEIJ9NLZZQYlpPK3HNLFpQ3VCIoxWOaJXR3wE1otHGqJtNKF-QaBcOLNZQh2U6J6YA6*-0-2O6momBnx3I3JQMKNfPKxlQrJuTsG7XdaWhfbBpiXfvU********2-*********06*******************1k</dataValue>
+				</parameter>
+				<parameter name="Histogram" id="9" flags="12889161776">
+					<numberOfKeypoints>0</numberOfKeypoints>
+					<defaultVal>********AWweMb-gOLBoA11I**2**U*1**E*-E*4-rs5TpUYRaJmQqZjPZUYPq7eNKBoQpYYML7XO4ZqNL7I75FjQ-6**MOUfl20nk*5**U*1EGd-8c2ekGg-8o2fUGj-9*2gEGm-9A2h*Gp-9M2hkGs-9Y2iUGv-9k2jEGy-9w2k*H--A62kkH2-AI2lUH5-AU2mEH8-Ag2n*HB-As2nkHE-B22oUHH-BE2pEHK-BQ2q*HN-Bc2qkHQ-Bo2rUHT-C*2sEHW-CA2t*HZ-CM2tkHc-CY2uUHf-Ck2vEHi-Cw2w*Hl-D62wkHo-DI2xUHr-DU2yEHu-Dg2z*Hx-Ds2zkI*-E23*UI1-EE3-EI4-EQ30*I7-Ec30kIA-Eo31UID-F*32EIG-FA33*IJ-FM33kIM-FY34UIP-Fk35EIS-Fw36*IV-G636kIY-GI37UIb-GU38EIe-Gg39*Ih-Gs39kIk-H23AUIn-HE3BEIq-HQ3C*It-Hc3CkIw-Ho3DUIz-I*3EEJ0-IA3F*J3-IM3FkJ6-IY3GUJ9-Ik3HEJC-Iw3I*JF-J63IkJI-JI3JUJL-JU3KEJO-Jg3L*JR-Js3LkJU-K23MUJX-KE3NEJa-KQ3O*Jd-Kc3OkJg-Ko3PUJj-L*3QEJm-LA3R*Jp-LM3RkJs-LY3SUJv-Lk3TEJy-Lw3U*K--M63UkK2-MI3VUK5-MU3WEK8-Mg3X*KB-Ms3XkKE-N23YUKH-NE3ZEKK-NQ3a*KN-Nc3akKQ-No3bUKT-O*3cEKW-OA3d*KZ-OM3dkKc-OY3eUKf-Ok3fEKi-Ow3g*Kl-P63gkKo-PI3hUKr-PU3iEKu-Pg3j*Kx-Ps3jkL*-Q23kUL1-QE3lEL4-QQ3m*L7-Qc3mkLA-Qo3nULD-R*3oELG-RA3p*LJ-RM3pkLM-RY3qULP-Rk3rELS-Rw3s*LV-S63skLY-SI3tULb-SU3uELe-Sg3v*Lh-Ss3vkLk-T23wULn-TE3xELq-TQ3y*Lt-Tc3ykLw-To3zULz-U*4*EM0-UA4-*M3-UM4-kM6-UY40UM9-Uk41EMC-Uw42*MF-V642kMI-VI43UML-VU44EMO-Vg45*MR-Vs45kMU-W246UMX-WE47EMa-WQ48*Md-Wc48kMg-Wo49UMj-X*4AEMm-XA4B*Mp-XM4BkMs-XY4CUMv-Xk4DEMy-Xw4E*N--Y64EkN2-YI4FUN5-YU4GEN8-Yg4H*NB-Ys4HkNE-Z24IUNH-ZE4JENK-ZQ4K*NN-Zc4KkNQ-Zo4LUNT-a*4MENW-aA4N*NZ-aM4NkNc-aY4OUNf-ak4PENi-aw4Q*Nl-b64QkNo-bI4RUNr-bU4SENu-bg4T*Nx-bs4TkO*-c24UUO1-cE4VEO4-cQ4W*O7-cc4WkOA-co4XUOD-d*4YEOG-dA4Z*OJ-dM4ZkOM-dY4aUOP-dk4bEOS-dw4c*OV-e64ckOY-eI4dUOb-eU4eEOe-eg4f*Oh-es4fkOk-f24gUOn-fE4hEOq-fQ4i*Ot-fc4ikOw-fo4jUOz-g*4kEP0-gA4l*P3-gM4lkP6-gY4mUP9-gk4nEPC-gw4o*PF-h64okPI-hI4pUPL-hU4qEPO-hg4r*PR-hs4rkPU-i24sUPX-iE4tEPa-iQ4u*Pd-ic4ukPg-io4vUPj-j*4wEPm-jA4x*Pp-jM4xkPs-jY4yUPv-jk4zEPy-jw5**Q--k65*kQ2-kI5-UQ5-kU50EQ8-kg51*QB-ks51kQE-l252UQH-lE53EQK-lQ54*QN-lc54kQQ-lo55UQT-m*56EQW-mA57*QZ-mM57kQc-mY58UQf-mk59EQi-mw5A*Ql-n65AkQo-nI5BUQr-nU5CEQu-ng5D*Qx-ns5DkR*-o25EUR1-oE5FER4-oQ5G*R7-oc5GkRA-oo5HURD-p*5IERG-pA5J*RJ-pM5JkRM-pY5KURP-pk5LERS-pw5M*RV-q65MkRY-qI5NURb-qU5OERe-qg5P*Rh-qs5PkRk-r25QURn-rdJ74tpP4nG**Y*0U*9**lK74BgMLBnKIVdQrFjNr7VPM20nc*0oU*C**Y*1kGcKYtH9axWOaJXR5Cj2EGM*-**2E*G*-A*3**F*-M*2k*M*-Y*4U*P*-k*5E*S*-w*6**V*06*6k*Y*0I*7U*b*0U*8E*e*0g*9**h*0s*9k*k*12*AU*R*1E*BE*q*-w*C**t*1c*Ck*w*1o*DU*z*2**EE-0*-w*F*-3*2M*Fk-6*2Y*GU-9*2k*HE-C*2w*I*-F*36*Ik-I*-2*JU-L*3U*KE-O*3g*L*-R*3s*KE-U*-w*MU-X*4E*5k-a*2w*O*-d*4c*Ok-g*4o*PU-j*5**QE-m*-w*R*-p*5M*Rk-s*5Y*SU*j*5k*TE-y*5w*U*-X*66*2E02*6I*VU*j*6U*CE08*4A*X*-X*6s*Xk0E*72*YU0H*7E*ZE0K*7Q*a*0N*7c*5k0Q*3g*bU0T*8**cE0W*8A*d*0Z*8M*dk0c*1o*eU0X*8k*fE0i*1Y*g*-P*96*2E0o*-2*hU*T*9U*ck0u*9g*j**t*9s*jk1**A2*kU-9*AE*5k14*-o*m*17*Ac*mk1A*0Q*nU-9*B**oE1G*B2*p*0F*BM*pk1M*6I*qU1L*Bk*2E1S*2g*s**F*C6*9k1Y*-w*tU*T*CU*uE1e*B2*v**l*Cs*vk1k*D2*wU1n*DE*xE1q*DQ*y**l*Dc*yk1w*Do*zU*l*E**DE20*EA--*23*EM*5k26*-2-0U29*Ek*DE2C*0w-2**j*F6*pk2I*72-3U*l*FU-4E2O*32-5**j*Fs-5k2U*22-6U-X*GE*RE2a*GQ-8*1L*Gc*xE2g*4o-9U*l*H**5E2m*HA-B*-P*HM*AE2s*HY-CU0F*Hk*5k2y*0Q-E**F*I6*5k32*-g-FU35*IU*pk38*Ig-H*3B*Is*9k3E*-w-IU17*JE-JE3K*3g-K*29*Jc*jk3Q*0w-LU29*K*-ME3W*1o-N*0F*KM-Nk3c*4A-OU1L*Kk-JE3i*-w-Q*-X*L6*7k3o*-2-RU*T*LU*Kk3u*4A-T**T*Ls*QE4**M2-UU-X*ME*QE44*6w-W*47*Mc-Wk4A*8A-XU-l*N*-7k4G*0w-Z**T*NM-Zk4M*1I-aU1L*Nk*Gk4S*HA-c**j*O6*ck4Y*7Y-dU-X*OU*AE4e*Og-f**F*Os*5k4k*8A-gU*l*PE*5k4q*-w-i*23*Pc*YE4w*-w-jU23*Q*-kE50*-2-l*0D*QM-lk56*-w-mU-p*Qk-nE5C*12-o*2N*R6-ok5I*Eg-pU5L*RU*Mk5O*-w-r*5R*Rs-rk5U*BQ-sU*P*SE-tE5a*4A-u**F*Sc-WE5g*-g-vU*F*T**wk5m*12-x**T*TM*ck5s*EI-yU*T*Tk-0k5y*Tw0**1L*U6*5k62*JI0-U-h*UU-Gk68*DI01**F*Us-rE6E*Ro02U2N*VE*VE6K*0w04*1n*Vc-5k6Q*-g05U0D*W**9k6W*-w07**j*WM*2E6c*1Y08U4f*Wk*5k6i*-o0A*-l*X6*BE6o*HA0BU*T*XU*RE6u*DI0D*-X*Xs*5k7**DA0EU1d*YE*Mk74*0Q0G*1d*Yc*5k7A*0Q0HU7D*Z**pk7G*120J*7D*ZM*DE7M*-w0KU*l*Zk*9k7S*-w0M*-l*a6*CE7Y*-w0NU03*aU-4E7e*-20P**T*as-kE7k*Rw0QU*T*bE*xE7q*QQ0S**T*bc*xE7w*Ig0TU*T*c**DE80*-o0V**F*cM-ek86*RQ0WU1L*ck*7k8C*M20Y*0F*d6*5k8I*-w0ZU*F*dU*5k8O*-w0b**t*ds*pk8U*-w0cU*T*eE*5E8a*AY0e**T*ec*2E8g*Eg0fU5-*f**5k8m*-20h*5Z*fM-tE8s*-w0iU1p*fk*QE8y*0w0k*1n*g6*Gk92*-w0lU23*gU*mE98*-20n*23*gs0nk9E*Og0oU*T*hE*Mk9K*4A0q*-P*hc*Mk9Q*2g0rU0X*i**5k9W*Q20t**t*iM*5k9c*Q20uU4f*ik*5k9i*RQ0w*55*j6*Mk9o*0Q0xU2N*jU*5k9u*EI0z*-p*js*MkA**SI1*UA1*kE*GkA4*3g10*-X*kc*5kAA*1Y11U*j*l**2EAG*CY13*29*lM*5kAM*Eg14U*R*lk*2EAS*BQ16*AV*m6-tEAY*-w17U39*mU-rkAe*-w19*-9*ms*uEAk*Tw1AU9D*nE-rEAq*-w1C**F*nc*5kAw*-w1DU1L*o**AEB0*-w1F*-3*oM*QEB6*-w1GU1p*ok-rEBC*-21I*1p*p6-rEBI*-21JU1j*pU-WEBO*4A1L*2N*ps*uEBU*-w1MU*T*qE*IkBa*qQ1O*39*qc*2EBg*-w1PU*T*r**KkBm*0w1R**T*rM*DEBs*DA1SU*T*rk*2EBy*-o1U*5R*s6*5kC2*-w1VU29*sU*REC8*-w1X*-3*ss-tECE*-21YU*R*tE0HkCK*-w1a*CN*tc1akCQ*8A1bU*T*u**5kCW*-21d*0F*uM*AECc*-21eU*R*uk*CECi*uw1g*5R*v6*2ECo*5I1hU5z*vU*5kCu*Eg1j**v*vs*5kD**w21kU-B*wE--ED4*4A1m**T*wc*7kDA*1o1nU*F*x*-0kDG*0Q1p**T*xM-rEDM*521qU*T*xk-JEDS*SI1s**T*y6*5kDY*521tU0F*yU*5kDe*-w1v*Dh*ys1vkDk*1Y1wU*F*zE*4kDq*-w1y*5R*zc*KkDw*-g1zU*v-**-ekE0*-22-*1L-*M*FEE6*SI20U*F-*k*5EEC*DI22**T--622kEI--I23U*x--U*5kEO*1o25**F--s*MkEU*SI26U5R-0E*2EEa*6I28*-9-0c*5kEg*4A29U0D-1**7kEm*-22B**j-1M2BkEs-1Y2CU*R-1k*5kEy*4A2E*1L-26-WEF2*8A2FU-P-2U2GEF8*Q22H**F-2s-5kFE*Q22IU-P-3E2JEFK-3Q2K**R-3c*5kFQ*0w2LU-P-4**5kFW*4A2N*FZ-4M*7kFc*DA2OU3B-4k*DEFi*DA2Q*-x-562QkFo*4A2RU*j-5U*2EFu*Og2T*1L-5s*MkG**M22UU0D-6E*GkG4-6Q2W*G7-6c*KkGA*-w2XU*T-7**DEGG-7A2Z*-X-7M*REGM-7Y2aUGP-7k*2EGS*5I2c*FJ-862ckGY*1Y2dU5RU*C*-6*3U*O*-s*2U*W*-c*7U*e*0s*AU*q*1c*DU-0*2M*GU-C*36*JU-O*3s*MU-a*4c*PU-m*5M*SU-y*66*VU08*6s*CU0G*7M*aU-0*7s*cU0a*8c*fU0m*9M*iU0y*A6*lU-0*Ac*nU1G*BM*qU1S*C6*tU1e*Cs*wU1q*Dc*zU20*EM-0U*G*Es-2U2K*Fc-5U2W*GM-8U2i*Fc-AU-0*HM-CU2y*26-EU1q*IM-GU3C*J6-JU3O*Js-MU3a*Kc-PU-0*L6-RU3u*Ls-UU44*Mc*UU4C*N6-ZU4O*Ns-CU4W*-6-dU4e*Os*UU4m*86-hU2u*Pc-CU4y*Q6-lU58*Qs-oU5K*Rc-rU5W*SM-uU5i*26-wU2W*TM-yU5y*U60-U68*Us02U6K*Vc05U0m*W600U6a*Wc09U0W*X6-6U6q*-60CU*G*Xs*EU70*Uc0FU78*Ys*cU7G*ZM0KU7S*a6*tU7a*260OU*u*as0QU7q*bc0TU-W*c6*tU84*cc0XU88*d6-mU8K*dc0bU4e*e60aU8a*-60eU1a*es*2U8m*660hU-0*fc*EU8y*g60lU88*gc*WU9C*h60pU9O*hs0sU9a*ic0vU9m*jM*WU9u*js1*UA4*kc*WUAC*9612UAK*lc15UAW*2617U*G*mc19UAm*961BU00*nc*UUAy*dc1EU58*oM*WUB8*os1IU1y*pM*UUBO*ps1MU10*qM-CUBe*LM1PUBm*rM0aUBu*ic1TU3O*s6*WUC4*1c1WUCC*t6-6UCK*6c1aUCS*u6-mUCa*261eU-W*us*2UCm*261hU*m*vc1jUD0*dc1lUD8*ws1oUDK*661qU-0*xs0QUDW*yM1uU2W*ys19UDm*ZM1xU00*zc19UDy-*E0-*E4*962-*c-mUE21UE22UE23U2u-*EO*dc2--s1tUE26U-0-*Ea*Hc2-0c*MUE29U*G-*Em*262-1M-6UE2CU2u-*Ey*262-26-OUE2FUE2GUE2HU2u-*FG*Kc2-3M-kUE2KUE2LUE2MUE2NUE2OU68-*Fi*Kc2-561QUE2RU00-*Fu*262-5s2-662-6M*ZUE2WU8O-*GC*CM2-761XUE2ZU00-*GO*Uc2-7s-uUE2cU2u-*Ga*6c2-8c2-8s2-96*2UE2hU-0-*Gu*Uc2-9s*WUE2kU-0-*H4*262-Ac15UE2nU58-*HG*262-BM15UE2qUE2rUE2sU*G-*Ha*Q62-Cc2-Cs2-D6*EUE2xU3q-*Hu-*Hy-*I0*6c2-EM1HUE30UE31UE32UAi-*IK-*IO-*IS*Hc2-G6*EUE37UE38UE39UE3AUE3BU8O-*Iu*162-Hs2-I62-IM-CUE3GU*G-*JC-*FS-*JG*162-JM*2UE3KU9W-*JS*6c2-K6*EUE3NU68-*Je*ls2-Ks*EUE3QUAi-*Jq-*Ju-*Jy*dc2-M6*EUE3VUDa-*K8*Jc2-Ms1mUE3YU9e-*KK*-62-Nc2-Gc2-Ns2-Gc2-O61HUE3dU4e-*Ke*662-Os0sUE3gUBS-*Kq*162-Pc-kUE3jU00-*L0*262-QM*UUE3mU*G-*LC*862-R62-8s2-RM*EUE3qU*u-*LS*Kc2-S6*ZUE3tUCC-*Le*262-Ss-RUE3wU9e-*Lq*Hc2-Tc*EUE3zU9W-*M0*g62-UM-CUE40U-W-*MC*g62-V6*EUE43U-W-*MO-*MS-*MW*dc2-WM*WUE48UE45UE49U0m-*Mm*262-XM*WUE4CU00-*My*262-Y6-OUE4FU0W-*N8*262-Ys-eUE4IUBC-*NK*-62-Zc*EUE4LUE2rUE4MUE3AUE4NU-0-*Ne*ic2-as2-Cs2-b6*EUE4RU9e-*Nu*wc2-bs*EUE4UU0m-*O4*1c2-cc*2UE4XUE2fUE4YUE34UE4ZU8O-*OO*462-ds2-2c2-e6-mUE4dU-0-*Oe*262-es*2UE4gU-0-*Oq*262-fc*cUE4jU8O-*P0*262-gM*EUE4mU*u-*PC*b62-h6*EUE4pU*G-*PO*ms2-hs2-Bs2-i6*EUE4tU*G-*Pe-*J0-*Pi-*J0-*Pm*262-jM0uUE4yU3e-*Py*662-k60sUE5-U1a-*Q8*262-ks15UE52U7m-*QK*-62-lc15UE55UE56UE57UE2fUE58U-0-*Qi*Hc2-n6-CUE5BU2W-*Qu*Hc2-ns*tUE5EU68-*R4*262-oc2-Bs2-os*cUE5IU-0-*RK-*HS-*RO-*Gi-*RS*262-q62-Fc2-qM2-Cs2-qc-CUE5PU-W-*Rm*os2-rM*EUE5SUAS-*Ry*LM2-s6-CUE5VUE3EUE5WUE5XUE5YU1a-*SK*G62-tc-CUE5bU-0-*SW*862-uM*UUE5eU*G-*Si*g62-v619UE5hU-0-*Su*ms2-vs*CUE5kU*G-*T4*dc2-wc2-ws2-x62-I62-xM*EUE5qUD8-*TS-*Im-*TW*262-yM*tUE5uU90-*Ti-*Ju-*Tm-*QW-*Tq-*Ie-*Tu*262-zs*2UE6*U-0-*U4*2620*c0aUE61U08-*UG*2620-M*nUE64U3e-*US*2620060uUE67UE38UE68U*G-*Ui*ic20162-Gc201M*2UE6CU9G-*Uy-*FS-*V0*Hc202M1HUE6GU90-*VC*262036*EUE6JU24-*VO-*VS-*VW*wc204M*2UE6OU-0-*Vi*262056-6UE6RU00-*Vu*26205s*gUE6UU9W-*W4*26206c*2UE6XU*u-*WG-*Ie-*WK*26207c*EUE6bUAi-*WW*LM208M*EUE6eU1C-*Wi-*J0-*Wm*-6209M*CUE6iUE45UE6jU-0-*X0-*X4-*X8-*XC-*XG*Uc20BM*EUE6qU-0-*XS*-620C6-mUE6tU08-*Xe*-620Cs*CUE6wU0W-*Xq-*Xu-*Xy-*Ie-*Y0*-620EM-RUE70UE3SUE71U-0-*YG*ms20FM*eUE74U-0-*YS-*YW-*Ya*Cs20Gc15UE79U2u-*Ym*2620HM*MUE7CU0m-*Yy*-620I619UE7FU-W-*Z8*2620Is2-Gc20J6-OUE7JU-0-*ZO*yM20Js2-I620K6*EUE7NU-0-*Ze*Kc20Ks-mUE7QU-0-*Zq*2620Lc20Ls20M620MM20Mc*cUE7XU*G-*aG*1620NM*EUE7aUE38UE7bU2W-*aW*1620OM*eUE7eUE2fUE7fU*G-*am*dc20PM*nUE7iUE3EUE7jU*G-*b0*1c20QM0uUE7mU-0-*bC-*bG-*bK-*bO-*bS*9620S6*EUE7tU0m-*be*-620Ss-CUE7wUE3EUE7xUE38UE7yU*G-*by*Oc20U6*tUE8-U-0-*c8*Hc20Us-kUE82U-W-*cK*-620Vc*UUE85UE86UE87UE88UE89U*u-*cm*2620XM-CUE8CU8O-*cy-*FS-*d0*Uc20YM-6UE8GUE8HUE8IUE2rUE8JU*G-*dO*ps20Zs2-Bs20a6-6UE8NUE8OUE8PUE8QUE8RU*u-*du*2620bs*UUE8UU2W-*e4*2620cc-CUE8XUE8YUE8ZU-W-*eO*i620ds1oUE8cU0m-*ea*i620ec-YUE8fUE8gUE8hU2u-*eu*6620fs*2UE8kUE2fUE8lU8O-*f8*Hc20gs2-2c20h6-kUE8pU1a-*fO-*fS-*fW-*fa-*fe*G620is*EUE8wU-0-*fq*9620jc20js20k6-CUE9-U3q-*g8-*gC-*gG-*gK-*gO*-620ls-RUE96UE8OUE97UE98UE99U0W-*gm-*Ie-*goF*c*E*V20c-22kF20s-21*-216-24Jl216F*62EAW2-IF*mAE*F21E-28O-21EF222V21EV2-NF21El*A2EBU2U*BwWIF*q2F*RIF*q6EcV21U-*22EC-2*QF*s6F-i*EC-24sF25*-*D2EQ-202F-m2E0l256V-M2EQX21EF-mEF-o2E8-25EV2-a-25El-a2ERV2-*F-q6F*EEF-qAEMF25UV--2ES122QF-u6F0i*F10IF0i2EG-29*-*42Eg-24AF0k6F0kAF0kEE*l296F296V296l1O2EgY22cF0o6ECV29El2-I-29F-*K2Eh32EhW2-QF0qAF*XoF0qEF9VoF0s6F0sAEs-29V-2-2V29cl29d-2Cs-*Z2EvV2Ew-2Ew02Ew12Ew220*F1kIE1F2D6V*h2EwX20EF1mEF*EcF1mIE9V2D7V2DEV2DEl0A2Ex226QF1oIE0V2DMl152ExY2EDu2ExZ2Ey12Ey229oF1sIF1uEF1uIF1wIF2iIF2kEF2kIEIF2H-V2H7-*p2FAZ24kF2mMF2o6F2oAF2oEE5l2HFF-L2FB42FBX2FBY23MF2qIF2qMF2sEE-F2HVF2HVV2Hd-2HdF2HdV2HlF2KtV2Ktl2L-F*R2FQ42FQ52FQZ20MF3mMEL-2L7l*72FR32-kF3oMEHl2LFl2LNF-02FRa21kF3qQF3sIF3sMEA-2LVl*C2FS62FSZ2FSa2-AF3uQF3wMF3wQF4iMF4iQF4iUF4kME4-2P-l2P0-2P7V*e2Fgb2Fgc2Fh42Fh5212F4oUF4qMF4qQF4qUF4sMF4sQEAl2PW-2PdV2Pdl*r2Fic2Fj42Fj52Fj62Fjb2Fvb2Fvc266F5iYF5kQE4l2T0-*b2Fw72Fwa2Fwb2Fwc20gF5mYF5oQF5oUF5oYF5qQF5qUEF-2TOF2TVl2TW--A2Fy72Fyb2Fyc2Fyd2Fz52Fz62Fz72Fzb2Fzc2Fzd2G972G9c2G9d22IF6icF6kUF6kYF6mUE4F2X8F*t2GAe2GB62GB72GB82GBb2GBc276F6qYF6qcF6sUF6sYF6scF6uUF6uYF6ucF6wUF6wYE2V2XmV2Xu-2XuF2XuV2Xul2amF2auF2auV2aul2b0F2b0V*I2GQ92GQd2GQe2-sF7mgF7oYF7ocEGF2bGl2bOF2bOV20kV2bWF2bWV*W2GS92GSc2GSd2-2F7ucE6l2bel2bmF2bmV*O2GT92GTd2GTe2GTf2Gf82Gfe2Gff2Gfg2Gg82Gg92GgA2Gge2Ggf20YF8mkF8oYF8ocF8ogF8qcF8qgF8qkF8scF8sgF8ucF8ugF8ukF8wcF8wgF8ycF8ygF8ykF9ggF9igF9ikF9kgF9kkF9koF9mgF9mkF9ogF9okF9ooF9qgF9qkF9qoF9scF9sgF9skF9soF9ugF9ukF9uoF9wgF9wkE9-2jnF2jul2jv-2jvF2mnF2mv-2mvF2n0l2n1-2n1F2n1V2n9-2n9F2n9V2nGl2nH-2nHF2nHV2nP-2nPF2nPV2nX-2nXF2nXV2nf-2nfF2nfV2nn-2nnF2nnV2nv-2nvF2nvV2qn-2qnF2qvF2qvV2r1-2r1F2r1V2r1l2r9-2r9F2r9V2r9l2rH-2rHF2rHV2rHl2rP-2rPF2rPV2rX-2rXF2rXV2rXl2rfF2rfV2rfl2rnF2rnV2rnl2rvF2rvV-c2HTj2HfD2Hfi2Hfj2HgC2HgD2Hgi2Hgj2HhB2HhC2HhD2Hhh2Hhi2Hhj2Hhk2HiC2HiD2HiE2Hii2Hij2HjB2HjC2HjD2HjE2Hji2Hjj24sFCz*FDkwFDl*FDmsFDmwFDn*FDosFDowFDp*FDqsFDqwFDr*FDr2FDssFDswEMV2zY-2zYF2zfl2zg-2zgF2znl2zo-2zvl2zw-2zwF311l312-312F319l31A-31AF31Hl31I-31IF31Pl31Q-31QF31Xl31Y-31YF31fl31g-31gF31gV31o-31oF31oV31vl31w-31wF082IDm2IQF2IQG2IQk2IQl2IQm2IRE2IRF2IRG2IRH2IRk2IRl2IRm2IRn2ISE2ISF2ISG2ISk2ISl2ISm2ISn2ITF2ITG2ITH2ITl23*FFz6Evl35wl392V39AV39Al39IV39Il39QF39QV39Ql39YV0i2IiH2Iil2Iim2Iin2Iio2IjG2IjH2IjI2Ijm22oFGzAFGzEFHnAFHp6FHpAFHpEFHr6FHrAFHrEFHt6FHtAFHtEFHv6FHvAFHvEFHvIFHx6FHxAFHxEFHxIFHz6FHzAEOV3Dx-182Izp2JBH2JBI2JBn2JBo2JBp2JCH2JCI2JCJ2JCK2JCn2JCo2JCp2JCq2JDI2JDJ2JDK2JDo26EFIzIF*EsFIzMFJpEFJrIFJrMFJtEFJtIFJtMFJvEFJvIFJvMFJvQFJxEFJxIFJxMFJxQFJzEFJzIEfl3LxV2-HF3Lxl3PRF3PRV3PZF3PZV3PZl3PhF3PhV102Jir2JjJ2JjK2JjL2Jjp2Jjq2AMFKzQEyl3Py-3TRV3TZV3TZl3Ta-3ThV3Thl20hF3Ti-3TpV3Tpl3Tq-3TxV3Txl3Ty-0z2Jzt2KCL2KCr2KCs2KCt2KDL2KDM2KDN2KDr2KDs2DAFMzYEVV3XyV3bi-3bpl3bq-3bqF20gF3bqV3by-3byF1H2KTu25EFNzgFOzYFOzcFOzgEVF3jyV3jyx65R*Rp-rM5RpcYMqlVQrBiMKpZK0FXP43nQqJnLYtHHLJoMK7gNI3mQa3tckRq-rU5SJRCIo3mQa3tK2tHHq7eNKBooURo-rI5SkRwLl*FI233GqJtNL76OLBoPqRmMKqW-ro5SJwE2J--FIhZSKJmG4ZnR4xbQa3hLl*DHZB9NLZZN23mMqVdRaJmoES*-s3G710**E*6*-Y*6U*f*1I*CU*z-S23tkLk-TQ4*EM2-UM41kMO1osDI*xG1pEDJUxM1pcDL*xS1q*DMUxY1qMDO*xe1qkDPUxk1r6DR*xq1rUDSUxw1rsDU*y01sEDVUy61scDX*yC1t*DYUyI1tMDa*yO1tkDbUyU1u6Dd*ya1uUDeUyg1usDg*ym1vEDhUys1vcDj*yy1w*DkUz21wMDm*z81wkDnUzE1x6Dp*zK1xUDqUzQ1xsDs*zW1yEDtUzc1ycDv*zi1z*DwUzo1zMDy*zu1zkDzV**2*6E--*42*UE0V*A2*sE2-*G2-EE3V*M2-cE5-*S20*E6V*Y20ME8-*e20kE9V*k216EB-*q21UECV*w21sEE--022EEFV-622cEH--C23*EIV-I23MEK--O23kELV-U246EN--a24UEOV-g24sEQ--m25EERV-s25cET--y26*EUV0226MEW-0826kEXV0E276EZ-0K27UEaV0Q27sEc-0W28EEdV0c28cEf-0i29*EgV0o29MEi-0u29kEjV1*2A6El-142AUEmV1A2AsEo-1G2BEEpV1M2BcEr-1S2C*EsV1Y2CMEu-1e2CkEvV1k2D6Ex-1q2DUEyV1w2DsF*-202EEF-V262EcF1-2C2F*F2V2I2FMF4-2O2FkF5V2U2G6F7-2a2GUF8V2g2GsFA-2m2HEFBV2s2HcFD-2y2I*FEV322IMFG-382IkFHV3E2J6FJ-3K2JUFKV3Q2JsFM-3W2KEFNV3c2KcFP-3i2L*FQV3o2LMFS-3u2LkFTV4*2M6FV-442MUFWV4A2MsFY-4G2NEFZV4M2NcFb-4S2O*FcV4Y2OMFe-4e2OkFfV4k2P6Fh-4q2PUFiV4w2PsFk-502QEFlV562QcFn-5C2R*FoV5I2RMFq-5O2RkFrV5U2S6Ft-5a2SUFuV5g2SsFw-5n2TMFy-5v2ToG*-612UMG0-692UoG2-6G2VIG3l6O2VkG5l6V2WEG7V6d2WgG9V6k2XAGBF6s2XcGDF6z2Y6GFF762YcGHF7D2Z6GJ-7L2ZcGLF7U2aAGNF7c2acGPF7j2b6GR-7r2bYGT-7z2c6GV-852cYGX-8C2d2GYl8K2dUGal8R2e*GcV8Z2eQGeV8g2ewGgV8p2fQGiV8w2fwGkF922gMGmF992gsGo-9H2hIGq-9O2hoGrl9W2iEGtl9e2ioGvl9m2jEGxl9u2joGzlA02kEH-lA82koH1lAG2lEH3lAO2loH5lAW2mIH8-Ae2moH9lAm2nIHC-Av2nsHE-B12oIHG-B92osHI-BH2pIHK-BP2psHM-BX2qIHO-Be2qoHPlBm2rEHRlBt2rkHTVC-2sAHVVC62sgHXVCF2tAHZVCM2tgHbFCU2u6HdFCb2ucHf-Cj2v2Hh-Cr2vcHjFD*2w6HlFD52wcHn-DD2x2Hp-DK2xYHqlDS2y*HslDZ2yUHuVDh2ywHwVDo2zQHyFDw2zwI*VE23*QI0FEA3*sI2FEH3-MI4-EP3-oI6-EW30II7lEe30kI9lEl31EIBVEt31gIDVF*32AIFFF632cIHFFD336IJ-FL33cILFFT346IN-Fb34cIPFFj356IR-Fr35YIT-Fy362IUlG436UIWlGB37*IYVGJ37QIaVGQ37wIcFGY38MIeFGg38wIgVGp39QIiVGw39wIkVH33AQImVHA3AwIoFHI3BMIqFHP3BsIs-HX3CIIu-Hf3CsIwFHo3DMIyFHv3DsJ*FI23EMJ0FI93EsJ2-IH3FIJ4-IO3FoJ5lIW3GEJ7lId3GkJ9VIl3HAJBVIs3HgJDFJ*3I6JFFJ53IcJH-JD3J6JJFJL3JcJL-JT3K6JNFJc3KgJPFJk3L6JRFJr3LcJT-Jz3M2JV-K43MYJWlKC3N*JYlKJ3NUJaVKR3NwJcVKZ3OUJelKi3P*JglKp3PUJiVKx3PwJkVL23QQJmFLA3QsJoFLH3RMJqFLQ3RsJsFLX3SMJuFLg3SwJwVLo3TQJyVLx3U*K*lM33UUK0VMB3UwK2VMI3VQK4FMQ3VsK6FMX3WMK8FMg3WwKAVMo3XQKCFMw3XsKEFN13YMKG-N93YoKI-NG3ZIKJlNO3ZkKLlNV3aEKNVNd3agKPVNk3bAKRFNs3bgKTVO-3cEKVVO73cgKXVOF3dEKZVON3dgKbVOU3eAKdVOd3ekKflOm3fIKhlOu3fkKjlP-3gEKlVP73ggKnVPE3hAKpFPM3hcKrFPT3i6Kt-Pb3iYKv-Pj3j6Kx-Pr3jYKz-Pz3k6L--Q53kYL1-QD3l6L3-QL3lYL5-QS3m2L6lQa3mUL8lQh3n*LAlQq3nULClQx3o*LEVR33oQLGVRA3owLIFRI3pMLKFRP3psLM-RX3qILO-Re3qoLPlRm3rILS-Ru3roLTlS03sELVlS73skLXVSF3tALZVSN3tkLbVSV3uALdVSd3ukLfVSl3vELhlSu3voLjlT03wELllT73wkLnVTF3xALpVTM3xgLrFTU3y6LtFTb3ycLvFTk3zALxVTs3zgLzFU*4*AM-VU64*gM1FUE4-6M3FUL4-cM5FUU406M7FUb40cM9-Uj412MB-Uq41YMClUy42*MElV342UMGVVB42wMIVVJ43UMKVVR43wMMVVY44QMOVVh44wMQVVo45QMSFVw45sMUFW146MMW-W946sMYFWI47QMaFWQ47sMcFWX48MMe-Wf48sMgFWn49MMi-Wv49oMk-X14AMMm-X94AoMo-XG4BIMq-XP4BoMs-XW4CIMtlXe4CkMvlXm4DIMy-Xv4DoN*-Y04EIN-lY84EkN1lYF4FEN3lYO4FoN6-YW4GIN7lYe4GkN9lYl4HENBVYt4HgNDVZ*4IANFFZ64IcNHFZE4JANJVZN4JgNLVZU4KANNFZc4KcNPFZk4LANRFZs4LcNTFa*4MANVVa74MgNXVaE4NANZVaN4NgNbVaV4OENdlae4OkNflal4PENhVat4PgNjVb*4QANlFb64QgNnVbE4RANpFbM4RcNrFbT4S6Nt-bb4SYNv-bj4T6Nx-br4TYNz-by4U2O--c54UYO1-cC4V2O3-cL4VYO5-cS4W2O7-cb4WcO9Fcj4X6OB-cr4XYOD-cy4Y2OF-d54YYOH-dC4Z2OJ-dL4ZcOLFdT4a6ON-db4acOPFdk4bAORFds4bgOTVe-4cAOVVe74ckOXleG4dIOa-eO4doObleW4eEOdlee4eoOg-en4fMOiFev4fsOklf44gYOn-fC4h2OolfK4hUOqlfS4i*Oslfa4iUOulfh4j*OwVfp4jQOyVfw4jwP*Vg24kQP0VgB4kwP2VgI4lQP4VgR4lwP6VgY4mQP8Fgg4mwPAVgp4nQPCVgw4nwPEFh24oQPGVhA4owPIVhJ4pQPKVhQ4pwPMFhY4qQPOVhg4qwPQVho4rQPSVhx4s*PUli44sUPWliC4t2PZ-iL4tYPb-iT4u6PdFic4ucPfFij4v6Ph-ir4vYPj-iz4w6Pl-j54wcPnFjD4x6Pp-jL4xYPr-jS4y2Pt-jb4ycPvFjj4z6PxFjs4zgPzVk-5*EQ-Vk75*kQ1VkF5-AQ3VkN5-kQ5lkV50EQ7Vkd50kQ9lkl51EQBlku51kQDll052IQG-l952sQIFlI53QQKFlQ53wQMVlY54QQOFlg54sQQFln55MQS-lv55sQU-m156IQW-m956sQY-mH57IQa-mP57sQc-mX58MQeFmg58wQgVmp59QQiVmx5A*QkVn35AUQmlnC5B*QolnK5BYQr-nT5C6Qt-nb5CcQvFnj5D6QxFns5DgQzVo-5EER-Vo75EkR1VoF5FAR3VoN5FkR5loV5GER7loe5GoRA-on5HIRC-ov5HsRE-p15IMRGFpA5IwRIVpJ5JURKlpS5K2RN-pb5KYRP-pj5L6RRFpr5LcRT-pz5M6RVFq65MgRXVqE5NARZVqN5NkRblqW5OIRe-qf5OsRg-qn5PMRiFqw5PwRkVr35QURmlrC5R2RolrK5RYRr-rS5S2Rt-rb5SYRv-rj5T6RxFrs5TgRzFs*5UAS-Vs65UgS1FsE5VAS3VsM5VgS5VsV5WES7lse5WoSA-sn5XMSCFsw5XwSEFt25YQSGVtB5Z*SIltK5ZYSL-tT5a6SNFtc5agSPVtl5bESRltu5boSU-u15cMSWFuA5cwSYVuJ5dUSaluS5e2Sd-ub5ecSfFuk5fAShVut5fgSjVv-5gESllv85goSo-vH5hMSqFvQ5hwSsVvZ5iUSulvi5j2Sx-vr5jcSzFw*5kAT-Vw75kkT1lwG5lIT4-wP5lsT6FwY5mQT8Vwh5n*TAlwq5nYTD-wz5o6TFFx65ogTHVxF5pETJlxO5poTM-xX5qMTOFxg5qwTQVxp5rUTSlxx5s*TUly45sYTX-yD5t6TZFyM5tgTbVyV5uETdlye5uoTg-yn5vMTiFyw5vwTkVz35wUTmlzB5x*TolzK5xYTr-zT5y6TtFzc5ygTvVzl5zETxlzu5zkTzm*06*IU00*96*sU2G*I6-QU4W*R60*U6m*a60YU90*j616UBG*s61gUDW--62EUFm-862oUI0-H63MUKG-Q63wUMW-Z64QUOW-h65*UQm-q65YUT0-z666UVG0666gUXW0F67EUZm0O67oUc00X68MUeG0g68wUgW0o69QUiG0w69wUkW136AUUmm1C6B2Up01L6BYUr01T6C6UtG1c6CgUvW1l6DEUxW1t6DkUzm206EIV00296EsV2G2I6FQV4W2R6G*V6m2a6GYV902j6H6VBG2s6HcVDG2z6I6VFG366IgVHW3F6JEVJm3O6JoVM03X6KMVOG3g6KwVQW3p6LQVSW3x6M*VUm446MYVX04D6N6VZG4M6NgVbW4V6OEVdm4e6OoVg04m6PIVi04v6PsVkG526QQVmW5B6R*VoW5J6RUVqm5S6S2Vt05a6SYVum5i6T2Vx05r6TcVzG6*6UAW-W676UkW1m6G6VIW406O6VoW606X6WMW8G6g6WwWAW6p6XUWCW6x6XwWEW736YUWGm7C6Z2WJ07L6ZcWL07T6a2WN07b6acWPG7j6b6WRG7y6cYWYW8V6eUWg08t6g6WpW9P6iwX*GA46kY********0*U********S0*******************X0k**</defaultVal>
+					<dataValue>********AWweMb-gOLBoA11I**2**U*1**E*-E*4-rs5TpUYRaJmQqZjPZUYPq7eNKBoQpYYML7XO4ZqNL7I75FjQ-6**MOUfl20nk*5**U*1EGd-8c2ekGg-8o2fUGj-9*2gEGm-9A2h*Gp-9M2hkGs-9Y2iUGv-9k2jEGy-9w2k*H--A62kkH2-AI2lUH5-AU2mEH8-Ag2n*HB-As2nkHE-B22oUHH-BE2pEHK-BQ2q*HN-Bc2qkHQ-Bo2rUHT-C*2sEHW-CA2t*HZ-CM2tkHc-CY2uUHf-Ck2vEHi-Cw2w*Hl-D62wkHo-DI2xUHr-DU2yEHu-Dg2z*Hx-Ds2zkI*-E23*UI1-EE3-EI4-EQ30*I7-Ec30kIA-Eo31UID-F*32EIG-FA33*IJ-FM33kIM-FY34UIP-Fk35EIS-Fw36*IV-G636kIY-GI37UIb-GU38EIe-Gg39*Ih-Gs39kIk-H23AUIn-HE3BEIq-HQ3C*It-Hc3CkIw-Ho3DUIz-I*3EEJ0-IA3F*J3-IM3FkJ6-IY3GUJ9-Ik3HEJC-Iw3I*JF-J63IkJI-JI3JUJL-JU3KEJO-Jg3L*JR-Js3LkJU-K23MUJX-KE3NEJa-KQ3O*Jd-Kc3OkJg-Ko3PUJj-L*3QEJm-LA3R*Jp-LM3RkJs-LY3SUJv-Lk3TEJy-Lw3U*K--M63UkK2-MI3VUK5-MU3WEK8-Mg3X*KB-Ms3XkKE-N23YUKH-NE3ZEKK-NQ3a*KN-Nc3akKQ-No3bUKT-O*3cEKW-OA3d*KZ-OM3dkKc-OY3eUKf-Ok3fEKi-Ow3g*Kl-P63gkKo-PI3hUKr-PU3iEKu-Pg3j*Kx-Ps3jkL*-Q23kUL1-QE3lEL4-QQ3m*L7-Qc3mkLA-Qo3nULD-R*3oELG-RA3p*LJ-RM3pkLM-RY3qULP-Rk3rELS-Rw3s*LV-S63skLY-SI3tULb-SU3uELe-Sg3v*Lh-Ss3vkLk-T23wULn-TE3xELq-TQ3y*Lt-Tc3ykLw-To3zULz-U*4*EM0-UA4-*M3-UM4-kM6-UY40UM9-Uk41EMC-Uw42*MF-V642kMI-VI43UML-VU44EMO-Vg45*MR-Vs45kMU-W246UMX-WE47EMa-WQ48*Md-Wc48kMg-Wo49UMj-X*4AEMm-XA4B*Mp-XM4BkMs-XY4CUMv-Xk4DEMy-Xw4E*N--Y64EkN2-YI4FUN5-YU4GEN8-Yg4H*NB-Ys4HkNE-Z24IUNH-ZE4JENK-ZQ4K*NN-Zc4KkNQ-Zo4LUNT-a*4MENW-aA4N*NZ-aM4NkNc-aY4OUNf-ak4PENi-aw4Q*Nl-b64QkNo-bI4RUNr-bU4SENu-bg4T*Nx-bs4TkO*-c24UUO1-cE4VEO4-cQ4W*O7-cc4WkOA-co4XUOD-d*4YEOG-dA4Z*OJ-dM4ZkOM-dY4aUOP-dk4bEOS-dw4c*OV-e64ckOY-eI4dUOb-eU4eEOe-eg4f*Oh-es4fkOk-f24gUOn-fE4hEOq-fQ4i*Ot-fc4ikOw-fo4jUOz-g*4kEP0-gA4l*P3-gM4lkP6-gY4mUP9-gk4nEPC-gw4o*PF-h64okPI-hI4pUPL-hU4qEPO-hg4r*PR-hs4rkPU-i24sUPX-iE4tEPa-iQ4u*Pd-ic4ukPg-io4vUPj-j*4wEPm-jA4x*Pp-jM4xkPs-jY4yUPv-jk4zEPy-jw5**Q--k65*kQ2-kI5-UQ5-kU50EQ8-kg51*QB-ks51kQE-l252UQH-lE53EQK-lQ54*QN-lc54kQQ-lo55UQT-m*56EQW-mA57*QZ-mM57kQc-mY58UQf-mk59EQi-mw5A*Ql-n65AkQo-nI5BUQr-nU5CEQu-ng5D*Qx-ns5DkR*-o25EUR1-oE5FER4-oQ5G*R7-oc5GkRA-oo5HURD-p*5IERG-pA5J*RJ-pM5JkRM-pY5KURP-pk5LERS-pw5M*RV-q65MkRY-qI5NURb-qU5OERe-qg5P*Rh-qs5PkRk-r25QURn-rdJ74tpP4nG**Y*0U*9**lK74BgMLBnKIVdQrFjNr7VPM20nc*0oU*C**Y*1kGcKYtH9axWOaJXR5Cj2EGM*-**2E*G*-A*3**F*-M*2k*M*-Y*4U*P*-k*5E*S*-w*6**V*06*6k*Y*0I*7U*b*0U*8E*e*0g*9**h*0s*9k*k*12*AU*R*1E*BE*q*-w*C**t*1c*Ck*w*1o*DU*z*2**EE-0*-w*F*-3*2M*Fk-6*2Y*GU-9*2k*HE-C*2w*I*-F*36*Ik-I*-2*JU-L*3U*KE-O*3g*L*-R*3s*KE-U*-w*MU-X*4E*5k-a*2w*O*-d*4c*Ok-g*4o*PU-j*5**QE-m*-w*R*-p*5M*Rk-s*5Y*SU*j*5k*TE-y*5w*U*-X*66*2E02*6I*VU*j*6U*CE08*4A*X*-X*6s*Xk0E*72*YU0H*7E*ZE0K*7Q*a*0N*7c*5k0Q*3g*bU0T*8**cE0W*8A*d*0Z*8M*dk0c*1o*eU0X*8k*fE0i*1Y*g*-P*96*2E0o*-2*hU*T*9U*ck0u*9g*j**t*9s*jk1**A2*kU-9*AE*5k14*-o*m*17*Ac*mk1A*0Q*nU-9*B**oE1G*B2*p*0F*BM*pk1M*6I*qU1L*Bk*2E1S*2g*s**F*C6*9k1Y*-w*tU*T*CU*uE1e*B2*v**l*Cs*vk1k*D2*wU1n*DE*xE1q*DQ*y**l*Dc*yk1w*Do*zU*l*E**DE20*EA--*23*EM*5k26*-2-0U29*Ek*DE2C*0w-2**j*F6*pk2I*72-3U*l*FU-4E2O*32-5**j*Fs-5k2U*22-6U-X*GE*RE2a*GQ-8*1L*Gc*xE2g*4o-9U*l*H**5E2m*HA-B*-P*HM*AE2s*HY-CU0F*Hk*5k2y*0Q-E**F*I6*5k32*-g-FU35*IU*pk38*Ig-H*3B*Is*9k3E*-w-IU17*JE-JE3K*3g-K*29*Jc*jk3Q*0w-LU29*K*-ME3W*1o-N*0F*KM-Nk3c*4A-OU1L*Kk-JE3i*-w-Q*-X*L6*7k3o*-2-RU*T*LU*Kk3u*4A-T**T*Ls*QE4**M2-UU-X*ME*QE44*6w-W*47*Mc-Wk4A*8A-XU-l*N*-7k4G*0w-Z**T*NM-Zk4M*1I-aU1L*Nk*Gk4S*HA-c**j*O6*ck4Y*7Y-dU-X*OU*AE4e*Og-f**F*Os*5k4k*8A-gU*l*PE*5k4q*-w-i*23*Pc*YE4w*-w-jU23*Q*-kE50*-2-l*0D*QM-lk56*-w-mU-p*Qk-nE5C*12-o*2N*R6-ok5I*Eg-pU5L*RU*Mk5O*-w-r*5R*Rs-rk5U*BQ-sU*P*SE-tE5a*4A-u**F*Sc-WE5g*-g-vU*F*T**wk5m*12-x**T*TM*ck5s*EI-yU*T*Tk-0k5y*Tw0**1L*U6*5k62*JI0-U-h*UU-Gk68*DI01**F*Us-rE6E*Ro02U2N*VE*VE6K*0w04*1n*Vc-5k6Q*-g05U0D*W**9k6W*-w07**j*WM*2E6c*1Y08U4f*Wk*5k6i*-o0A*-l*X6*BE6o*HA0BU*T*XU*RE6u*DI0D*-X*Xs*5k7**DA0EU1d*YE*Mk74*0Q0G*1d*Yc*5k7A*0Q0HU7D*Z**pk7G*120J*7D*ZM*DE7M*-w0KU*l*Zk*9k7S*-w0M*-l*a6*CE7Y*-w0NU03*aU-4E7e*-20P**T*as-kE7k*Rw0QU*T*bE*xE7q*QQ0S**T*bc*xE7w*Ig0TU*T*c**DE80*-o0V**F*cM-ek86*RQ0WU1L*ck*7k8C*M20Y*0F*d6*5k8I*-w0ZU*F*dU*5k8O*-w0b**t*ds*pk8U*-w0cU*T*eE*5E8a*AY0e**T*ec*2E8g*Eg0fU5-*f**5k8m*-20h*5Z*fM-tE8s*-w0iU1p*fk*QE8y*0w0k*1n*g6*Gk92*-w0lU23*gU*mE98*-20n*23*gs0nk9E*Og0oU*T*hE*Mk9K*4A0q*-P*hc*Mk9Q*2g0rU0X*i**5k9W*Q20t**t*iM*5k9c*Q20uU4f*ik*5k9i*RQ0w*55*j6*Mk9o*0Q0xU2N*jU*5k9u*EI0z*-p*js*MkA**SI1*UA1*kE*GkA4*3g10*-X*kc*5kAA*1Y11U*j*l**2EAG*CY13*29*lM*5kAM*Eg14U*R*lk*2EAS*BQ16*AV*m6-tEAY*-w17U39*mU-rkAe*-w19*-9*ms*uEAk*Tw1AU9D*nE-rEAq*-w1C**F*nc*5kAw*-w1DU1L*o**AEB0*-w1F*-3*oM*QEB6*-w1GU1p*ok-rEBC*-21I*1p*p6-rEBI*-21JU1j*pU-WEBO*4A1L*2N*ps*uEBU*-w1MU*T*qE*IkBa*qQ1O*39*qc*2EBg*-w1PU*T*r**KkBm*0w1R**T*rM*DEBs*DA1SU*T*rk*2EBy*-o1U*5R*s6*5kC2*-w1VU29*sU*REC8*-w1X*-3*ss-tECE*-21YU*R*tE0HkCK*-w1a*CN*tc1akCQ*8A1bU*T*u**5kCW*-21d*0F*uM*AECc*-21eU*R*uk*CECi*uw1g*5R*v6*2ECo*5I1hU5z*vU*5kCu*Eg1j**v*vs*5kD**w21kU-B*wE--ED4*4A1m**T*wc*7kDA*1o1nU*F*x*-0kDG*0Q1p**T*xM-rEDM*521qU*T*xk-JEDS*SI1s**T*y6*5kDY*521tU0F*yU*5kDe*-w1v*Dh*ys1vkDk*1Y1wU*F*zE*4kDq*-w1y*5R*zc*KkDw*-g1zU*v-**-ekE0*-22-*1L-*M*FEE6*SI20U*F-*k*5EEC*DI22**T--622kEI--I23U*x--U*5kEO*1o25**F--s*MkEU*SI26U5R-0E*2EEa*6I28*-9-0c*5kEg*4A29U0D-1**7kEm*-22B**j-1M2BkEs-1Y2CU*R-1k*5kEy*4A2E*1L-26-WEF2*8A2FU-P-2U2GEF8*Q22H**F-2s-5kFE*Q22IU-P-3E2JEFK-3Q2K**R-3c*5kFQ*0w2LU-P-4**5kFW*4A2N*FZ-4M*7kFc*DA2OU3B-4k*DEFi*DA2Q*-x-562QkFo*4A2RU*j-5U*2EFu*Og2T*1L-5s*MkG**M22UU0D-6E*GkG4-6Q2W*G7-6c*KkGA*-w2XU*T-7**DEGG-7A2Z*-X-7M*REGM-7Y2aUGP-7k*2EGS*5I2c*FJ-862ckGY*1Y2dU5RU*C*-6*3U*O*-s*2U*W*-c*7U*e*0s*AU*q*1c*DU-0*2M*GU-C*36*JU-O*3s*MU-a*4c*PU-m*5M*SU-y*66*VU08*6s*CU0G*7M*aU-0*7s*cU0a*8c*fU0m*9M*iU0y*A6*lU-0*Ac*nU1G*BM*qU1S*C6*tU1e*Cs*wU1q*Dc*zU20*EM-0U*G*Es-2U2K*Fc-5U2W*GM-8U2i*Fc-AU-0*HM-CU2y*26-EU1q*IM-GU3C*J6-JU3O*Js-MU3a*Kc-PU-0*L6-RU3u*Ls-UU44*Mc*UU4C*N6-ZU4O*Ns-CU4W*-6-dU4e*Os*UU4m*86-hU2u*Pc-CU4y*Q6-lU58*Qs-oU5K*Rc-rU5W*SM-uU5i*26-wU2W*TM-yU5y*U60-U68*Us02U6K*Vc05U0m*W600U6a*Wc09U0W*X6-6U6q*-60CU*G*Xs*EU70*Uc0FU78*Ys*cU7G*ZM0KU7S*a6*tU7a*260OU*u*as0QU7q*bc0TU-W*c6*tU84*cc0XU88*d6-mU8K*dc0bU4e*e60aU8a*-60eU1a*es*2U8m*660hU-0*fc*EU8y*g60lU88*gc*WU9C*h60pU9O*hs0sU9a*ic0vU9m*jM*WU9u*js1*UA4*kc*WUAC*9612UAK*lc15UAW*2617U*G*mc19UAm*961BU00*nc*UUAy*dc1EU58*oM*WUB8*os1IU1y*pM*UUBO*ps1MU10*qM-CUBe*LM1PUBm*rM0aUBu*ic1TU3O*s6*WUC4*1c1WUCC*t6-6UCK*6c1aUCS*u6-mUCa*261eU-W*us*2UCm*261hU*m*vc1jUD0*dc1lUD8*ws1oUDK*661qU-0*xs0QUDW*yM1uU2W*ys19UDm*ZM1xU00*zc19UDy-*E0-*E4*962-*c-mUE21UE22UE23U2u-*EO*dc2--s1tUE26U-0-*Ea*Hc2-0c*MUE29U*G-*Em*262-1M-6UE2CU2u-*Ey*262-26-OUE2FUE2GUE2HU2u-*FG*Kc2-3M-kUE2KUE2LUE2MUE2NUE2OU68-*Fi*Kc2-561QUE2RU00-*Fu*262-5s2-662-6M*ZUE2WU8O-*GC*CM2-761XUE2ZU00-*GO*Uc2-7s-uUE2cU2u-*Ga*6c2-8c2-8s2-96*2UE2hU-0-*Gu*Uc2-9s*WUE2kU-0-*H4*262-Ac15UE2nU58-*HG*262-BM15UE2qUE2rUE2sU*G-*Ha*Q62-Cc2-Cs2-D6*EUE2xU3q-*Hu-*Hy-*I0*6c2-EM1HUE30UE31UE32UAi-*IK-*IO-*IS*Hc2-G6*EUE37UE38UE39UE3AUE3BU8O-*Iu*162-Hs2-I62-IM-CUE3GU*G-*JC-*FS-*JG*162-JM*2UE3KU9W-*JS*6c2-K6*EUE3NU68-*Je*ls2-Ks*EUE3QUAi-*Jq-*Ju-*Jy*dc2-M6*EUE3VUDa-*K8*Jc2-Ms1mUE3YU9e-*KK*-62-Nc2-Gc2-Ns2-Gc2-O61HUE3dU4e-*Ke*662-Os0sUE3gUBS-*Kq*162-Pc-kUE3jU00-*L0*262-QM*UUE3mU*G-*LC*862-R62-8s2-RM*EUE3qU*u-*LS*Kc2-S6*ZUE3tUCC-*Le*262-Ss-RUE3wU9e-*Lq*Hc2-Tc*EUE3zU9W-*M0*g62-UM-CUE40U-W-*MC*g62-V6*EUE43U-W-*MO-*MS-*MW*dc2-WM*WUE48UE45UE49U0m-*Mm*262-XM*WUE4CU00-*My*262-Y6-OUE4FU0W-*N8*262-Ys-eUE4IUBC-*NK*-62-Zc*EUE4LUE2rUE4MUE3AUE4NU-0-*Ne*ic2-as2-Cs2-b6*EUE4RU9e-*Nu*wc2-bs*EUE4UU0m-*O4*1c2-cc*2UE4XUE2fUE4YUE34UE4ZU8O-*OO*462-ds2-2c2-e6-mUE4dU-0-*Oe*262-es*2UE4gU-0-*Oq*262-fc*cUE4jU8O-*P0*262-gM*EUE4mU*u-*PC*b62-h6*EUE4pU*G-*PO*ms2-hs2-Bs2-i6*EUE4tU*G-*Pe-*J0-*Pi-*J0-*Pm*262-jM0uUE4yU3e-*Py*662-k60sUE5-U1a-*Q8*262-ks15UE52U7m-*QK*-62-lc15UE55UE56UE57UE2fUE58U-0-*Qi*Hc2-n6-CUE5BU2W-*Qu*Hc2-ns*tUE5EU68-*R4*262-oc2-Bs2-os*cUE5IU-0-*RK-*HS-*RO-*Gi-*RS*262-q62-Fc2-qM2-Cs2-qc-CUE5PU-W-*Rm*os2-rM*EUE5SUAS-*Ry*LM2-s6-CUE5VUE3EUE5WUE5XUE5YU1a-*SK*G62-tc-CUE5bU-0-*SW*862-uM*UUE5eU*G-*Si*g62-v619UE5hU-0-*Su*ms2-vs*CUE5kU*G-*T4*dc2-wc2-ws2-x62-I62-xM*EUE5qUD8-*TS-*Im-*TW*262-yM*tUE5uU90-*Ti-*Ju-*Tm-*QW-*Tq-*Ie-*Tu*262-zs*2UE6*U-0-*U4*2620*c0aUE61U08-*UG*2620-M*nUE64U3e-*US*2620060uUE67UE38UE68U*G-*Ui*ic20162-Gc201M*2UE6CU9G-*Uy-*FS-*V0*Hc202M1HUE6GU90-*VC*262036*EUE6JU24-*VO-*VS-*VW*wc204M*2UE6OU-0-*Vi*262056-6UE6RU00-*Vu*26205s*gUE6UU9W-*W4*26206c*2UE6XU*u-*WG-*Ie-*WK*26207c*EUE6bUAi-*WW*LM208M*EUE6eU1C-*Wi-*J0-*Wm*-6209M*CUE6iUE45UE6jU-0-*X0-*X4-*X8-*XC-*XG*Uc20BM*EUE6qU-0-*XS*-620C6-mUE6tU08-*Xe*-620Cs*CUE6wU0W-*Xq-*Xu-*Xy-*Ie-*Y0*-620EM-RUE70UE3SUE71U-0-*YG*ms20FM*eUE74U-0-*YS-*YW-*Ya*Cs20Gc15UE79U2u-*Ym*2620HM*MUE7CU0m-*Yy*-620I619UE7FU-W-*Z8*2620Is2-Gc20J6-OUE7JU-0-*ZO*yM20Js2-I620K6*EUE7NU-0-*Ze*Kc20Ks-mUE7QU-0-*Zq*2620Lc20Ls20M620MM20Mc*cUE7XU*G-*aG*1620NM*EUE7aUE38UE7bU2W-*aW*1620OM*eUE7eUE2fUE7fU*G-*am*dc20PM*nUE7iUE3EUE7jU*G-*b0*1c20QM0uUE7mU-0-*bC-*bG-*bK-*bO-*bS*9620S6*EUE7tU0m-*be*-620Ss-CUE7wUE3EUE7xUE38UE7yU*G-*by*Oc20U6*tUE8-U-0-*c8*Hc20Us-kUE82U-W-*cK*-620Vc*UUE85UE86UE87UE88UE89U*u-*cm*2620XM-CUE8CU8O-*cy-*FS-*d0*Uc20YM-6UE8GUE8HUE8IUE2rUE8JU*G-*dO*ps20Zs2-Bs20a6-6UE8NUE8OUE8PUE8QUE8RU*u-*du*2620bs*UUE8UU2W-*e4*2620cc-CUE8XUE8YUE8ZU-W-*eO*i620ds1oUE8cU0m-*ea*i620ec-YUE8fUE8gUE8hU2u-*eu*6620fs*2UE8kUE2fUE8lU8O-*f8*Hc20gs2-2c20h6-kUE8pU1a-*fO-*fS-*fW-*fa-*fe*G620is*EUE8wU-0-*fq*9620jc20js20k6-CUE9-U3q-*g8-*gC-*gG-*gK-*gO*-620ls-RUE96UE8OUE97UE98UE99U0W-*gm-*Ie-*goF*c*E*V20c-22kF20s-21*-216-24Jl216F*62EAW2-IF*mAE*F21E-28O-21EF222V21EV2-NF21El*A2EBU2U*BwWIF*q2F*RIF*q6EcV21U-*22EC-2*QF*s6F-i*EC-24sF25*-*D2EQ-202F-m2E0l256V-M2EQX21EF-mEF-o2E8-25EV2-a-25El-a2ERV2-*F-q6F*EEF-qAEMF25UV--2ES122QF-u6F0i*F10IF0i2EG-29*-*42Eg-24AF0k6F0kAF0kEE*l296F296V296l1O2EgY22cF0o6ECV29El2-I-29F-*K2Eh32EhW2-QF0qAF*XoF0qEF9VoF0s6F0sAEs-29V-2-2V29cl29d-2Cs-*Z2EvV2Ew-2Ew02Ew12Ew220*F1kIE1F2D6V*h2EwX20EF1mEF*EcF1mIE9V2D7V2DEV2DEl0A2Ex226QF1oIE0V2DMl152ExY2EDu2ExZ2Ey12Ey229oF1sIF1uEF1uIF1wIF2iIF2kEF2kIEIF2H-V2H7-*p2FAZ24kF2mMF2o6F2oAF2oEE5l2HFF-L2FB42FBX2FBY23MF2qIF2qMF2sEE-F2HVF2HVV2Hd-2HdF2HdV2HlF2KtV2Ktl2L-F*R2FQ42FQ52FQZ20MF3mMEL-2L7l*72FR32-kF3oMEHl2LFl2LNF-02FRa21kF3qQF3sIF3sMEA-2LVl*C2FS62FSZ2FSa2-AF3uQF3wMF3wQF4iMF4iQF4iUF4kME4-2P-l2P0-2P7V*e2Fgb2Fgc2Fh42Fh5212F4oUF4qMF4qQF4qUF4sMF4sQEAl2PW-2PdV2Pdl*r2Fic2Fj42Fj52Fj62Fjb2Fvb2Fvc266F5iYF5kQE4l2T0-*b2Fw72Fwa2Fwb2Fwc20gF5mYF5oQF5oUF5oYF5qQF5qUEF-2TOF2TVl2TW--A2Fy72Fyb2Fyc2Fyd2Fz52Fz62Fz72Fzb2Fzc2Fzd2G972G9c2G9d22IF6icF6kUF6kYF6mUE4F2X8F*t2GAe2GB62GB72GB82GBb2GBc276F6qYF6qcF6sUF6sYF6scF6uUF6uYF6ucF6wUF6wYE2V2XmV2Xu-2XuF2XuV2Xul2amF2auF2auV2aul2b0F2b0V*I2GQ92GQd2GQe2-sF7mgF7oYF7ocEGF2bGl2bOF2bOV20kV2bWF2bWV*W2GS92GSc2GSd2-2F7ucE6l2bel2bmF2bmV*O2GT92GTd2GTe2GTf2Gf82Gfe2Gff2Gfg2Gg82Gg92GgA2Gge2Ggf20YF8mkF8oYF8ocF8ogF8qcF8qgF8qkF8scF8sgF8ucF8ugF8ukF8wcF8wgF8ycF8ygF8ykF9ggF9igF9ikF9kgF9kkF9koF9mgF9mkF9ogF9okF9ooF9qgF9qkF9qoF9scF9sgF9skF9soF9ugF9ukF9uoF9wgF9wkE9-2jnF2jul2jv-2jvF2mnF2mv-2mvF2n0l2n1-2n1F2n1V2n9-2n9F2n9V2nGl2nH-2nHF2nHV2nP-2nPF2nPV2nX-2nXF2nXV2nf-2nfF2nfV2nn-2nnF2nnV2nv-2nvF2nvV2qn-2qnF2qvF2qvV2r1-2r1F2r1V2r1l2r9-2r9F2r9V2r9l2rH-2rHF2rHV2rHl2rP-2rPF2rPV2rX-2rXF2rXV2rXl2rfF2rfV2rfl2rnF2rnV2rnl2rvF2rvV-c2HTj2HfD2Hfi2Hfj2HgC2HgD2Hgi2Hgj2HhB2HhC2HhD2Hhh2Hhi2Hhj2Hhk2HiC2HiD2HiE2Hii2Hij2HjB2HjC2HjD2HjE2Hji2Hjj24sFCz*FDkwFDl*FDmsFDmwFDn*FDosFDowFDp*FDqsFDqwFDr*FDr2FDssFDswEMV2zY-2zYF2zfl2zg-2zgF2znl2zo-2zvl2zw-2zwF311l312-312F319l31A-31AF31Hl31I-31IF31Pl31Q-31QF31Xl31Y-31YF31fl31g-31gF31gV31o-31oF31oV31vl31w-31wF082IDm2IQF2IQG2IQk2IQl2IQm2IRE2IRF2IRG2IRH2IRk2IRl2IRm2IRn2ISE2ISF2ISG2ISk2ISl2ISm2ISn2ITF2ITG2ITH2ITl23*FFz6Evl35wl392V39AV39Al39IV39Il39QF39QV39Ql39YV0i2IiH2Iil2Iim2Iin2Iio2IjG2IjH2IjI2Ijm22oFGzAFGzEFHnAFHp6FHpAFHpEFHr6FHrAFHrEFHt6FHtAFHtEFHv6FHvAFHvEFHvIFHx6FHxAFHxEFHxIFHz6FHzAEOV3Dx-182Izp2JBH2JBI2JBn2JBo2JBp2JCH2JCI2JCJ2JCK2JCn2JCo2JCp2JCq2JDI2JDJ2JDK2JDo26EFIzIF*EsFIzMFJpEFJrIFJrMFJtEFJtIFJtMFJvEFJvIFJvMFJvQFJxEFJxIFJxMFJxQFJzEFJzIEfl3LxV2-HF3Lxl3PRF3PRV3PZF3PZV3PZl3PhF3PhV102Jir2JjJ2JjK2JjL2Jjp2Jjq2AMFKzQEyl3Py-3TRV3TZV3TZl3Ta-3ThV3Thl20hF3Ti-3TpV3Tpl3Tq-3TxV3Txl3Ty-0z2Jzt2KCL2KCr2KCs2KCt2KDL2KDM2KDN2KDr2KDs2DAFMzYEVV3XyV3bi-3bpl3bq-3bqF20gF3bqV3by-3byF1H2KTu25EFNzgFOzYFOzcFOzgEVF3jyV3jyx65R*Rp-rM5RpcYMqlVQrBiMKpZK0FXP43nQqJnLYtHHLJoMK7gNI3mQa3tckRq-rU5SJRCIo3mQa3tK2tHHq7eNKBooURo-rI5SkRwLl*FI233GqJtNL76OLBoPqRmMKqW-ro5SJwE2J--FIhZSKJmG4ZnR4xbQa3hLl*DHZB9NLZZN23mMqVdRaJmoES*-s3G710**E*6*-Y*6U*f*1I*CU*z-S23tkLk-TQ4*EM2-UM41kMO1osDI*xG1pEDJUxM1pcDL*xS1q*DMUxY1qMDO*xe1qkDPUxk1r6DR*xq1rUDSUxw1rsDU*y01sEDVUy61scDX*yC1t*DYUyI1tMDa*yO1tkDbUyU1u6Dd*ya1uUDeUyg1usDg*ym1vEDhUys1vcDj*yy1w*DkUz21wMDm*z81wkDnUzE1x6Dp*zK1xUDqUzQ1xsDs*zW1yEDtUzc1ycDv*zi1z*DwUzo1zMDy*zu1zkDzV**2*6E--*42*UE0V*A2*sE2-*G2-EE3V*M2-cE5-*S20*E6V*Y20ME8-*e20kE9V*k216EB-*q21UECV*w21sEE--022EEFV-622cEH--C23*EIV-I23MEK--O23kELV-U246EN--a24UEOV-g24sEQ--m25EERV-s25cET--y26*EUV0226MEW-0826kEXV0E276EZ-0K27UEaV0Q27sEc-0W28EEdV0c28cEf-0i29*EgV0o29MEi-0u29kEjV1*2A6El-142AUEmV1A2AsEo-1G2BEEpV1M2BcEr-1S2C*EsV1Y2CMEu-1e2CkEvV1k2D6Ex-1q2DUEyV1w2DsF*-202EEF-V262EcF1-2C2F*F2V2I2FMF4-2O2FkF5V2U2G6F7-2a2GUF8V2g2GsFA-2m2HEFBV2s2HcFD-2y2I*FEV322IMFG-382IkFHV3E2J6FJ-3K2JUFKV3Q2JsFM-3W2KEFNV3c2KcFP-3i2L*FQV3o2LMFS-3u2LkFTV4*2M6FV-442MUFWV4A2MsFY-4G2NEFZV4M2NcFb-4S2O*FcV4Y2OMFe-4e2OkFfV4k2P6Fh-4q2PUFiV4w2PsFk-502QEFlV562QcFn-5C2R*FoV5I2RMFq-5O2RkFrV5U2S6Ft-5a2SUFuV5g2SsFw-5n2TMFy-5v2ToG*-612UMG0-692UoG2-6G2VIG3l6O2VkG5l6V2WEG7V6d2WgG9V6k2XAGBF6s2XcGDF6z2Y6GFF762YcGHF7D2Z6GJ-7L2ZcGLF7U2aAGNF7c2acGPF7j2b6GR-7r2bYGT-7z2c6GV-852cYGX-8C2d2GYl8K2dUGal8R2e*GcV8Z2eQGeV8g2ewGgV8p2fQGiV8w2fwGkF922gMGmF992gsGo-9H2hIGq-9O2hoGrl9W2iEGtl9e2ioGvl9m2jEGxl9u2joGzlA02kEH-lA82koH1lAG2lEH3lAO2loH5lAW2mIH8-Ae2moH9lAm2nIHC-Av2nsHE-B12oIHG-B92osHI-BH2pIHK-BP2psHM-BX2qIHO-Be2qoHPlBm2rEHRlBt2rkHTVC-2sAHVVC62sgHXVCF2tAHZVCM2tgHbFCU2u6HdFCb2ucHf-Cj2v2Hh-Cr2vcHjFD*2w6HlFD52wcHn-DD2x2Hp-DK2xYHqlDS2y*HslDZ2yUHuVDh2ywHwVDo2zQHyFDw2zwI*VE23*QI0FEA3*sI2FEH3-MI4-EP3-oI6-EW30II7lEe30kI9lEl31EIBVEt31gIDVF*32AIFFF632cIHFFD336IJ-FL33cILFFT346IN-Fb34cIPFFj356IR-Fr35YIT-Fy362IUlG436UIWlGB37*IYVGJ37QIaVGQ37wIcFGY38MIeFGg38wIgVGp39QIiVGw39wIkVH33AQImVHA3AwIoFHI3BMIqFHP3BsIs-HX3CIIu-Hf3CsIwFHo3DMIyFHv3DsJ*FI23EMJ0FI93EsJ2-IH3FIJ4-IO3FoJ5lIW3GEJ7lId3GkJ9VIl3HAJBVIs3HgJDFJ*3I6JFFJ53IcJH-JD3J6JJFJL3JcJL-JT3K6JNFJc3KgJPFJk3L6JRFJr3LcJT-Jz3M2JV-K43MYJWlKC3N*JYlKJ3NUJaVKR3NwJcVKZ3OUJelKi3P*JglKp3PUJiVKx3PwJkVL23QQJmFLA3QsJoFLH3RMJqFLQ3RsJsFLX3SMJuFLg3SwJwVLo3TQJyVLx3U*K*lM33UUK0VMB3UwK2VMI3VQK4FMQ3VsK6FMX3WMK8FMg3WwKAVMo3XQKCFMw3XsKEFN13YMKG-N93YoKI-NG3ZIKJlNO3ZkKLlNV3aEKNVNd3agKPVNk3bAKRFNs3bgKTVO-3cEKVVO73cgKXVOF3dEKZVON3dgKbVOU3eAKdVOd3ekKflOm3fIKhlOu3fkKjlP-3gEKlVP73ggKnVPE3hAKpFPM3hcKrFPT3i6Kt-Pb3iYKv-Pj3j6Kx-Pr3jYKz-Pz3k6L--Q53kYL1-QD3l6L3-QL3lYL5-QS3m2L6lQa3mUL8lQh3n*LAlQq3nULClQx3o*LEVR33oQLGVRA3owLIFRI3pMLKFRP3psLM-RX3qILO-Re3qoLPlRm3rILS-Ru3roLTlS03sELVlS73skLXVSF3tALZVSN3tkLbVSV3uALdVSd3ukLfVSl3vELhlSu3voLjlT03wELllT73wkLnVTF3xALpVTM3xgLrFTU3y6LtFTb3ycLvFTk3zALxVTs3zgLzFU*4*AM-VU64*gM1FUE4-6M3FUL4-cM5FUU406M7FUb40cM9-Uj412MB-Uq41YMClUy42*MElV342UMGVVB42wMIVVJ43UMKVVR43wMMVVY44QMOVVh44wMQVVo45QMSFVw45sMUFW146MMW-W946sMYFWI47QMaFWQ47sMcFWX48MMe-Wf48sMgFWn49MMi-Wv49oMk-X14AMMm-X94AoMo-XG4BIMq-XP4BoMs-XW4CIMtlXe4CkMvlXm4DIMy-Xv4DoN*-Y04EIN-lY84EkN1lYF4FEN3lYO4FoN6-YW4GIN7lYe4GkN9lYl4HENBVYt4HgNDVZ*4IANFFZ64IcNHFZE4JANJVZN4JgNLVZU4KANNFZc4KcNPFZk4LANRFZs4LcNTFa*4MANVVa74MgNXVaE4NANZVaN4NgNbVaV4OENdlae4OkNflal4PENhVat4PgNjVb*4QANlFb64QgNnVbE4RANpFbM4RcNrFbT4S6Nt-bb4SYNv-bj4T6Nx-br4TYNz-by4U2O--c54UYO1-cC4V2O3-cL4VYO5-cS4W2O7-cb4WcO9Fcj4X6OB-cr4XYOD-cy4Y2OF-d54YYOH-dC4Z2OJ-dL4ZcOLFdT4a6ON-db4acOPFdk4bAORFds4bgOTVe-4cAOVVe74ckOXleG4dIOa-eO4doObleW4eEOdlee4eoOg-en4fMOiFev4fsOklf44gYOn-fC4h2OolfK4hUOqlfS4i*Oslfa4iUOulfh4j*OwVfp4jQOyVfw4jwP*Vg24kQP0VgB4kwP2VgI4lQP4VgR4lwP6VgY4mQP8Fgg4mwPAVgp4nQPCVgw4nwPEFh24oQPGVhA4owPIVhJ4pQPKVhQ4pwPMFhY4qQPOVhg4qwPQVho4rQPSVhx4s*PUli44sUPWliC4t2PZ-iL4tYPb-iT4u6PdFic4ucPfFij4v6Ph-ir4vYPj-iz4w6Pl-j54wcPnFjD4x6Pp-jL4xYPr-jS4y2Pt-jb4ycPvFjj4z6PxFjs4zgPzVk-5*EQ-Vk75*kQ1VkF5-AQ3VkN5-kQ5lkV50EQ7Vkd50kQ9lkl51EQBlku51kQDll052IQG-l952sQIFlI53QQKFlQ53wQMVlY54QQOFlg54sQQFln55MQS-lv55sQU-m156IQW-m956sQY-mH57IQa-mP57sQc-mX58MQeFmg58wQgVmp59QQiVmx5A*QkVn35AUQmlnC5B*QolnK5BYQr-nT5C6Qt-nb5CcQvFnj5D6QxFns5DgQzVo-5EER-Vo75EkR1VoF5FAR3VoN5FkR5loV5GER7loe5GoRA-on5HIRC-ov5HsRE-p15IMRGFpA5IwRIVpJ5JURKlpS5K2RN-pb5KYRP-pj5L6RRFpr5LcRT-pz5M6RVFq65MgRXVqE5NARZVqN5NkRblqW5OIRe-qf5OsRg-qn5PMRiFqw5PwRkVr35QURmlrC5R2RolrK5RYRr-rS5S2Rt-rb5SYRv-rj5T6RxFrs5TgRzFs*5UAS-Vs65UgS1FsE5VAS3VsM5VgS5VsV5WES7lse5WoSA-sn5XMSCFsw5XwSEFt25YQSGVtB5Z*SIltK5ZYSL-tT5a6SNFtc5agSPVtl5bESRltu5boSU-u15cMSWFuA5cwSYVuJ5dUSaluS5e2Sd-ub5ecSfFuk5fAShVut5fgSjVv-5gESllv85goSo-vH5hMSqFvQ5hwSsVvZ5iUSulvi5j2Sx-vr5jcSzFw*5kAT-Vw75kkT1lwG5lIT4-wP5lsT6FwY5mQT8Vwh5n*TAlwq5nYTD-wz5o6TFFx65ogTHVxF5pETJlxO5poTM-xX5qMTOFxg5qwTQVxp5rUTSlxx5s*TUly45sYTX-yD5t6TZFyM5tgTbVyV5uETdlye5uoTg-yn5vMTiFyw5vwTkVz35wUTmlzB5x*TolzK5xYTr-zT5y6TtFzc5ygTvVzl5zETxlzu5zkTzm*06*IU00*96*sU2G*I6-QU4W*R60*U6m*a60YU90*j616UBG*s61gUDW--62EUFm-862oUI0-H63MUKG-Q63wUMW-Z64QUOW-h65*UQm-q65YUT0-z666UVG0666gUXW0F67EUZm0O67oUc00X68MUeG0g68wUgW0o69QUiG0w69wUkW136AUUmm1C6B2Up01L6BYUr01T6C6UtG1c6CgUvW1l6DEUxW1t6DkUzm206EIV00296EsV2G2I6FQV4W2R6G*V6m2a6GYV902j6H6VBG2s6HcVDG2z6I6VFG366IgVHW3F6JEVJm3O6JoVM03X6KMVOG3g6KwVQW3p6LQVSW3x6M*VUm446MYVX04D6N6VZG4M6NgVbW4V6OEVdm4e6OoVg04m6PIVi04v6PsVkG526QQVmW5B6R*VoW5J6RUVqm5S6S2Vt05a6SYVum5i6T2Vx05r6TcVzG6*6UAW-W676UkW1m6G6VIW406O6VoW606X6WMW8G6g6WwWAW6p6XUWCW6x6XwWEW736YUWGm7C6Z2WJ07L6ZcWL07T6a2WN07b6acWPG7j6b6WRG7y6cYWYW8V6eUWg08t6g6WpW9P6iwX*GA46kY********0*U********S0*******************X0k**</dataValue>
+				</parameter>
+				<parameter name="Chroma Rolloff" id="16" flags="12884901888" default="0.10000000000000001" value="0.10000000000000001"/>
+				<parameter name="Chroma Erode" id="17" flags="12889161760" default="0" value="0"/>
+				<parameter name="Luma Rolloff" id="14" flags="12884901888" default="0.10000000000000001" value="0.10000000000000001"/>
+				<parameter name="Fix Video" id="68" flags="12884967424" default="1" value="1"/>
+			</parameter>
+			<parameter name="Matte Tools" id="47" flags="8589938688">
+				<foldFlags>4</foldFlags>
+				<parameter name="Levels" id="49" flags="12884905984">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Shrink/Expand" id="53" flags="12884901888" default="0" value="0"/>
+				<parameter name="Soften" id="51" flags="12884901888" default="0" value="0"/>
+				<parameter name="Erode" id="52" flags="12884901888" default="0" value="0"/>
+			</parameter>
+			<parameter name="MinGreen" id="38" flags="12889161760" default="-3" value="-3"/>
+			<parameter name="MaxGreen" id="39" flags="12889161760" default="-1.75" value="-1.75"/>
+			<parameter name="GreenChroma" id="40" flags="12889161760" default="0.089999999999999997" value="0.089999999999999997"/>
+			<parameter name="MinBlue" id="41" flags="12889161760" default="-1.75" value="-1.75"/>
+			<parameter name="MaxBlue" id="42" flags="12889161760" default="0.125" value="0.125"/>
+			<parameter name="BlueChroma" id="43" flags="12889161760" default="0.089999999999999997" value="0.089999999999999997"/>
+			<parameter name="Spill Suppression" id="28" flags="8589938704">
+				<foldFlags>4</foldFlags>
+				<parameter name="Spill Contrast" id="26" flags="12884905984">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Tint" id="23" flags="12884901888" default="0.040000000000000001" value="0"/>
+				<parameter name="Saturation" id="24" flags="12884901888" default="0.75" value="1"/>
+			</parameter>
+			<parameter name="Light Wrap" id="33" flags="8589938704">
+				<foldFlags>4</foldFlags>
+				<parameter name="Amount" id="29" flags="12884901888" default="0" value="0"/>
+				<parameter name="Intensity" id="30" flags="12884901888" default="1" value="1"/>
+				<parameter name="Opacity" id="31" flags="12884901888" default="1" value="1"/>
+				<parameter name="Mode" id="32" flags="12884967424" default="0" value="0"/>
+			</parameter>
+			<parameter name="Luma Erode" id="15" flags="12889161760" default="0" value="0"/>
+			<parameter name="Preserve RGB" id="7" flags="12889161760" default="0" value="0"/>
+			<parameter name="KeyerIsInitialized" id="8" flags="12889161760" default="0" value="1"/>
+			<parameter name="Mix" id="10001" flags="12884901888" default="1" value="1"/>
+		</filter>
+	</layer>
+	<layer name="Group 1" id="1504715076">
+		<scenenode name="IMG_0422" id="1504715075" factoryID="4" version="5">
+			<validTracks>1</validTracks>
+			<aspectRatio>0</aspectRatio>
+			<flags>0</flags>
+			<timing in="-5120 153600 1 0" out="1525760 153600 1 0" offset="-5120 153600 1 0"/>
+			<foldFlags>16384</foldFlags>
+			<baseFlags>524369</baseFlags>
+			<parameter name="Properties" id="1" flags="8589938704">
+				<parameter name="Transform" id="100" flags="8589938704">
+					<parameter name="Position" id="101" flags="8589938704">
+						<foldFlags>15</foldFlags>
+						<parameter name="X" id="1" flags="8606711824" default="0" value="-266.33593750004428"/>
+						<parameter name="Y" id="2" flags="8606711824" default="0" value="-67.562500000007105"/>
+					</parameter>
+					<parameter name="Scale" id="105" flags="8589938704">
+						<foldFlags>15</foldFlags>
+						<parameter name="X" id="1" flags="8606711824" default="1" value="0.40999999999999998"/>
+						<parameter name="Y" id="2" flags="8606711824" default="1" value="0.40999999999999998"/>
+						<parameter name="Z" id="3" flags="8606711824" default="1" value="0.40999999999999998"/>
+					</parameter>
+				</parameter>
+				<parameter name="Lighting" id="230" flags="8589938706">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Shadows" id="234" flags="8589938706">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Reflection" id="223" flags="8589971474">
+					<foldFlags>131087</foldFlags>
+				</parameter>
+				<parameter name="Media" id="324" flags="8589938704">
+					<foldFlags>4</foldFlags>
+					<parameter name="Source Media" id="300" flags="81621221392" default="1504715074" value="1504715074"/>
+					<parameter name="Source Media" id="325" flags="8590000146">
+						<referencedObjectID></referencedObjectID>
+					</parameter>
+				</parameter>
+				<parameter name="Page Number" id="301" flags="8589934610" default="1" value="1"/>
+				<parameter name="Retime Value" id="304" flags="8590066066" default="1" value="1"/>
+				<parameter name="Retime Value Cache" id="319" flags="8590065810" default="1" value="1"/>
+			</parameter>
+			<parameter name="Object" id="2" flags="8589938704">
+				<parameter name="Width" id="313" flags="8589934610" default="1" value="3264"/>
+				<parameter name="Height" id="314" flags="8589934610" default="1" value="1836"/>
+			</parameter>
+		</scenenode>
+		<aspectRatio>1</aspectRatio>
+		<flags>0</flags>
+		<timing in="0 153600 1 0" out="1530880 153600 1 0" offset="-5120 153600 1 0"/>
+		<foldFlags>65536</foldFlags>
+		<baseFlags>524368</baseFlags>
+		<parameter name="Properties" id="1" flags="8589938704">
+			<parameter name="Lighting" id="230" flags="8589938706">
+				<foldFlags>15</foldFlags>
+			</parameter>
+			<parameter name="Shadows" id="234" flags="8589938706">
+				<foldFlags>15</foldFlags>
+			</parameter>
+			<parameter name="Reflection" id="223" flags="8589971474">
+				<foldFlags>131087</foldFlags>
+			</parameter>
+		</parameter>
+		<parameter name="Object" id="2" flags="8589938704">
+			<parameter name="Fixed Width" id="302" flags="12884901908" default="600" value="600"/>
+			<parameter name="Fixed Height" id="303" flags="12884901908" default="600" value="600"/>
+			<parameter name="Flatten" id="311" flags="8589934610" default="0" value="0"/>
+			<parameter name="Layer Order" id="305" flags="8589934610" default="0" value="0"/>
+			<parameter name="Aperture Width" id="312" flags="12884901906" default="600" value="600"/>
+			<parameter name="Aperture Height" id="313" flags="12884901906" default="600" value="600"/>
+		</parameter>
+	</layer>
+
+	<footage name="Media Layer" id="1504715071">
+		<clip name="IMG_0422" id="1504715074">
+			<pathURL>file:///Users/kobejean/Pictures/Jean's%20iPhone/IMG_0422.JPG</pathURL>
+			<relativeURL>../../../../Pictures/Jean's%20iPhone/IMG_0422.JPG</relativeURL>
+			<missingWidth>3264</missingWidth>
+			<missingHeight>1836</missingHeight>
+			<missingDuration>0.033333333333333333</missingDuration>
+			<creationDuration>1</creationDuration>
+			<mediaID></mediaID>
+			<flags>0</flags>
+			<timing in="0 1 1 0" out="0 153600 1 0" offset="0 1 1 0"/>
+			<foldFlags>0</foldFlags>
+			<baseFlags>524304</baseFlags>
+			<parameter name="Properties" id="1" flags="8589938704"/>
+			<parameter name="Object" id="2" flags="8589938704">
+				<parameter name="Pixel Aspect Ratio" id="104" flags="12884901888" default="1" value="1"/>
+				<parameter name="Frame Rate" id="107" flags="8589934592" default="0" value="30"/>
+				<parameter name="Fixed Width" id="114" flags="12884901888" default="3264" value="3264"/>
+				<parameter name="Fixed Height" id="115" flags="12884901888" default="1836" value="1836"/>
+				<parameter name="Use Background Color" id="116" flags="8589934594" default="0" value="0"/>
+				<parameter name="Background Color" id="117" flags="8589971458">
+					<foldFlags>15</foldFlags>
+					<parameter name="Red" id="1" flags="8589967376" default="1" value="1"/>
+					<parameter name="Green" id="2" flags="8589967376" default="1" value="1"/>
+					<parameter name="Blue" id="3" flags="8589967376" default="1" value="1"/>
+				</parameter>
+			</parameter>
+		</clip>
+		<clip name="AdvancedControlsUI" id="1504715070">
+			<pathURL>file:///Users/kobejean/Code/Xcode%20Projects/Manual%20Capture/Graphics%20&amp;%20Design/AdvancedControlsUI.mov</pathURL>
+			<relativeURL>AdvancedControlsUI.mov</relativeURL>
+			<missingWidth>960</missingWidth>
+			<missingHeight>640</missingHeight>
+			<missingDuration>9.5999999999999996</missingDuration>
+			<creationDuration>288</creationDuration>
+			<mediaID></mediaID>
+			<flags>0</flags>
+			<timing in="0 1 1 0" out="1469440 153600 1 0" offset="0 1 1 0"/>
+			<foldFlags>0</foldFlags>
+			<baseFlags>524304</baseFlags>
+			<parameter name="Properties" id="1" flags="8589938704"/>
+			<parameter name="Object" id="2" flags="8589938704">
+				<parameter name="Pixel Aspect Ratio" id="104" flags="12884901888" default="1" value="1"/>
+				<parameter name="Frame Rate" id="107" flags="8589934592" default="0" value="30"/>
+				<parameter name="Fixed Width" id="114" flags="12884901890" default="960" value="960"/>
+				<parameter name="Fixed Height" id="115" flags="12884901890" default="640" value="640"/>
+				<parameter name="Use Background Color" id="116" flags="8589934594" default="0" value="0"/>
+				<parameter name="Background Color" id="117" flags="8589971458">
+					<foldFlags>15</foldFlags>
+					<parameter name="Red" id="1" flags="8589967376" default="1" value="1"/>
+					<parameter name="Green" id="2" flags="8589967376" default="1" value="1"/>
+					<parameter name="Blue" id="3" flags="8589967376" default="1" value="1"/>
+				</parameter>
+			</parameter>
+		</clip>
+		<flags>0</flags>
+		<timing in="0 1 1 0" out="1469440 153600 1 0" offset="0 1 1 0"/>
+		<foldFlags>0</foldFlags>
+		<baseFlags>524304</baseFlags>
+		<parameter name="Properties" id="1" flags="8589938704"/>
+		<parameter name="Object" id="2" flags="8589938704"/>
+	</footage>
+</scene>
+
+</ozml>

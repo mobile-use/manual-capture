@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ozxmlscene>
+<ozml version="5.7">
+
+<displayversion>5.2.2</displayversion>
+
+<factory id="1" uuid="46c844a813d311d8a438000a95af9f7e">
+	<description>Channel</description>
+	<manufacturer>Apple</manufacturer>
+	<version>1</version>
+</factory>
+
+<factory id="2" uuid="65cb4dc9d4504fa281921f5f751fba06">
+	<description>Widget</description>
+	<manufacturer>Apple</manufacturer>
+	<version>1</version>
+</factory>
+
+<factory id="3" uuid="66fc0d6af6a911d6a7a7000393670732">
+	<description>Image</description>
+	<manufacturer>Apple</manufacturer>
+	<version>1</version>
+</factory>
+
+<factory id="4" uuid="7d468273c013498e9806a0d7bc32fddf">
+	<description>Project</description>
+	<manufacturer>Apple</manufacturer>
+	<version>1</version>
+</factory>
+
+<factory id="5" uuid="deca4859b16011d7a12d0003936f6f92">
+	<description>ProPlugin Filter</description>
+	<manufacturer>Apple</manufacturer>
+	<version>1</version>
+</factory>
+
+
+<build></build>
+
+<description></description>
+
+<canvas>
+	<layout>1</layout>
+	<activeView>0</activeView>
+</canvas>
+
+<viewer subview="0">
+	<resolutionMode>0</resolutionMode>
+	<dynamicResolution>1</dynamicResolution>
+	<viewmode>0</viewmode>
+	<overlayOptions>125452</overlayOptions>
+	<oscOptions>30</oscOptions>
+	<compensateAspectRatio>1</compensateAspectRatio>
+	<renderFields>0</renderFields>
+	<showMotionBlur>0</showMotionBlur>
+	<showFrameBlending>1</showFrameBlending>
+	<showLighting>1</showLighting>
+	<showShadows>1</showShadows>
+	<showReflection>1</showReflection>
+	<showDepthOfField>0</showDepthOfField>
+	<renderFullView>0</renderFullView>
+	<renderQuality>2</renderQuality>
+	<textRenderQuality>2</textRenderQuality>
+	<showHighQualityResampling>0</showHighQualityResampling>
+	<showShapeAntialiasing>1</showShapeAntialiasing>
+	<show3DIntersectionAntialiasing>0</show3DIntersectionAntialiasing>
+	<cameraType>0</cameraType>
+	<cameraName>Active Camera</cameraName>
+	<panZoom camera="0" zoom="1" panX="336" panY="-3.20050048828125" mode="1" centered="0"/>
+</viewer>
+
+<projectPanel>
+	<layersPreviewColumn>1</layersPreviewColumn>
+	<layersOpacityColumn>0</layersOpacityColumn>
+	<layersBlendColumn>0</layersBlendColumn>
+	<displayMasks>1</displayMasks>
+	<displayBehaviors>1</displayBehaviors>
+	<displayEffects>1</displayEffects>
+	<layersVerticalZoom>1.7999999523162842</layersVerticalZoom>
+	<mediaPreviewColumn>1</mediaPreviewColumn>
+	<mediaTypeColumn>1</mediaTypeColumn>
+	<mediaDurationColumn>1</mediaDurationColumn>
+	<mediaInUseColumn>1</mediaInUseColumn>
+	<mediaFrameSizeColumn>1</mediaFrameSizeColumn>
+	<mediaCompressorColumn>1</mediaCompressorColumn>
+	<mediaDepthColumn>1</mediaDepthColumn>
+	<mediaFrameRateColumn>1</mediaFrameRateColumn>
+	<mediaDataRateColumn>1</mediaDataRateColumn>
+	<mediaAudioRateColumn>1</mediaAudioRateColumn>
+	<mediaAudioFormatColumn>1</mediaAudioFormatColumn>
+	<mediaFileSizeColumn>1</mediaFileSizeColumn>
+	<mediaFileCreatedColumn>1</mediaFileCreatedColumn>
+	<mediaDileModifiedColumn>1</mediaDileModifiedColumn>
+	<mediaVerticalZoom>1.7999999523162842</mediaVerticalZoom>
+</projectPanel>
+
+<timeline>
+	<displayVideo>1</displayVideo>
+	<displayAudio>0</displayAudio>
+	<displayKeyframes>0</displayKeyframes>
+	<displayMasks>0</displayMasks>
+	<displayBehaviors>0</displayBehaviors>
+	<displayEffects>0</displayEffects>
+	<videoVerticalZoom>1.5555555555555556</videoVerticalZoom>
+	<audioVerticalZoom>1.5555555820465088</audioVerticalZoom>
+	<displayRange in="-215 208 3 0" out="2295 208 3 0"/>
+</timeline>
+
+<curveeditor>
+	<autozoom>0</autozoom>
+	<snapping>1</snapping>
+	<displayAudioWaveform>0</displayAudioWaveform>
+	<lockKeyframesInTime>0</lockKeyframesInTime>
+	<displayRange in="-215 208 3 0" out="2295 208 3 0"/>
+	<currentviewvolume originx="-1.0336538461538463" originy="-62.5" width="12.067307692307692" height="125"/>
+	<snapshotChannels>0</snapshotChannels>
+</curveeditor>
+
+<inspector>
+	<collapseState id="./1/100" state="1"/>
+	<collapseState id="./1/200" state="1"/>
+	<collapseState id="./1/324" state="0"/>
+</inspector>
+
+<scene>
+	<sceneSettings>
+		<width>600</width>
+		<height>600</height>
+		<duration>300</duration>
+		<shouldOverrideFCDuration>0</shouldOverrideFCDuration>
+		<frameRate>30</frameRate>
+		<NTSC>0</NTSC>
+		<channels>4</channels>
+		<pixelAspectRatio>1</pixelAspectRatio>
+		<backgroundColor red="0" green="0" blue="0" alpha="1"/>
+		<audioChannels>2</audioChannels>
+		<audioBitsPerSample>32</audioBitsPerSample>
+		<fieldRenderingMode>0</fieldRenderingMode>
+		<motionBlurSamples>8</motionBlurSamples>
+		<motionBlurDuration>1</motionBlurDuration>
+		<startTimecode>0</startTimecode>
+		<presetPath></presetPath>
+		<backgroundMode>0</backgroundMode>
+		<reflectionRecursionLimit>2</reflectionRecursionLimit>
+		<glyphOSCMode>0</glyphOSCMode>
+		<animateFlag>0</animateFlag>
+		<parameterColorSpaceID>3</parameterColorSpaceID>
+		<savePreviewMovie>0</savePreviewMovie>
+	</sceneSettings>
+	<exportSettings>
+		<version>1</version>
+		<locationMode>2</locationMode>
+		<resolutionMode>3</resolutionMode>
+		<colorMode>2</colorMode>
+		<premultiplyAlpha>1</premultiplyAlpha>
+		<renderQuality>10</renderQuality>
+		<textRenderQuality>6</textRenderQuality>
+		<useHighQualityResampling>1</useHighQualityResampling>
+		<useShapeAntialiasing>1</useShapeAntialiasing>
+		<use3DIntersectionAntialiasing>1</use3DIntersectionAntialiasing>
+		<fieldRenderingMode>2</fieldRenderingMode>
+		<motionBlurMode>2</motionBlurMode>
+		<frameBlendingMode>2</frameBlendingMode>
+		<camera>0</camera>
+		<lightingMode>2</lightingMode>
+		<shadowsMode>2</shadowsMode>
+		<reflectionsMode>2</reflectionsMode>
+		<depthOfFieldMode>2</depthOfFieldMode>
+	</exportSettings>
+	<publishSettings>
+		<version>2</version>
+	</publishSettings>
+	<currentFrame>245760 153600 1 0</currentFrame>
+	<currentObject>10006</currentObject>
+	<activeLayer>10003</activeLayer>
+	<timeRange offset="0 1 1 0" duration="1536000 153600 1 0"/>
+	<playRange offset="0 1 1 0" duration="1536000 153600 1 0"/>
+	<flags>1</flags>
+	<audioTracks>0</audioTracks>
+	<timemarkerset/>
+	<guideset/>
+	<curvesets selected="1"/>
+	<scenenode name="Project" id="10000" factoryID="4" version="5">
+		<scenenode name="Widget" id="10002" factoryID="2" version="5">
+			<flags>0</flags>
+			<timing in="0 1 1 0" out="-5120 153600 1 0" offset="0 1 1 0"/>
+			<foldFlags>0</foldFlags>
+			<baseFlags>16</baseFlags>
+			<parameter name="Properties" id="1" flags="8589938704"/>
+			<parameter name="Object" id="2" flags="8589938704">
+				<parameter name="Options" id="103" flags="8589938688"/>
+				<parameter name="Hidden" id="102" flags="8589934608" default="0" value="1"/>
+				<parameter name="Snapshots" id="101" flags="8589938706"/>
+				<parameter name="Widget" id="100" flags="8589934608" default="1.7777777777777777" value="1.7777777777777777"/>
+			</parameter>
+		</scenenode>
+		<flags>0</flags>
+		<timing in="0 1 1 0" out="-5120 153600 1 0" offset="0 1 1 0"/>
+		<foldFlags>0</foldFlags>
+		<baseFlags>16</baseFlags>
+		<parameter name="Properties" id="1" flags="8589938704"/>
+		<parameter name="Object" id="2" flags="8589938704"/>
+	</scenenode>
+	<layer name="Group" id="10003">
+		<scenenode name="Untitled" id="10008" factoryID="3" version="5">
+			<validTracks>1</validTracks>
+			<aspectRatio>0</aspectRatio>
+			<flags>0</flags>
+			<timing in="0 1 1 0" out="1617920 153600 1 0" offset="0 1 1 0"/>
+			<foldFlags>16384</foldFlags>
+			<baseFlags>524304</baseFlags>
+			<parameter name="Properties" id="1" flags="8589938704">
+				<parameter name="Lighting" id="230" flags="8589938706">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Shadows" id="234" flags="8589938706">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Reflection" id="223" flags="8589971474">
+					<foldFlags>131087</foldFlags>
+				</parameter>
+				<parameter name="Media" id="324" flags="8589938704">
+					<foldFlags>4</foldFlags>
+					<parameter name="Source Media" id="300" flags="81604444176" default="10006" value="10006"/>
+					<parameter name="Source Media" id="325" flags="8590000146">
+						<referencedObjectID></referencedObjectID>
+					</parameter>
+				</parameter>
+				<parameter name="Page Number" id="301" flags="8589934610" default="1" value="1"/>
+				<parameter name="Retime Value" id="304" flags="8590066066">
+					<curve type="1" default="1" value="1" round="0" retimingExtrapolation="1">
+						<numberOfKeypoints>2</numberOfKeypoints>
+						<keypoint interpolation="1" flags="32">
+							<time>0 1 1 0</time>
+							<value>1</value>
+						</keypoint>
+						<keypoint interpolation="1" flags="32">
+							<time>1623040 153600 1 0</time>
+							<value>318</value>
+						</keypoint>
+					</curve>
+				</parameter>
+				<parameter name="Retime Value Cache" id="319" flags="8590065810">
+					<curve type="1" default="1" value="1">
+						<numberOfKeypoints>2</numberOfKeypoints>
+						<keypoint interpolation="1" flags="160">
+							<time>0 1 1 0</time>
+							<value>1</value>
+						</keypoint>
+						<keypoint interpolation="1" flags="160">
+							<time>1623040 153600 1 0</time>
+							<value>318</value>
+						</keypoint>
+					</curve>
+				</parameter>
+				<parameter name="Duration Cache" id="320" flags="8589934610" default="0" value="317"/>
+			</parameter>
+			<parameter name="Object" id="2" flags="8589938704">
+				<parameter name="Width" id="313" flags="8589934610" default="1" value="960"/>
+				<parameter name="Height" id="314" flags="8589934610" default="1" value="640"/>
+			</parameter>
+		</scenenode>
+		<aspectRatio>1</aspectRatio>
+		<flags>0</flags>
+		<timing in="0 1 1 0" out="1617920 153600 1 0" offset="0 1 1 0"/>
+		<foldFlags>0</foldFlags>
+		<baseFlags>524304</baseFlags>
+		<parameter name="Properties" id="1" flags="8589938704">
+			<parameter name="Lighting" id="230" flags="8589938706">
+				<foldFlags>15</foldFlags>
+			</parameter>
+			<parameter name="Shadows" id="234" flags="8589938706">
+				<foldFlags>15</foldFlags>
+			</parameter>
+			<parameter name="Reflection" id="223" flags="8589971474">
+				<foldFlags>131087</foldFlags>
+			</parameter>
+		</parameter>
+		<parameter name="Object" id="2" flags="8589938704">
+			<parameter name="Fixed Width" id="302" flags="12884901908" default="720" value="720"/>
+			<parameter name="Fixed Height" id="303" flags="12884901908" default="480" value="480"/>
+			<parameter name="Flatten" id="311" flags="8589934610" default="0" value="0"/>
+			<parameter name="Layer Order" id="305" flags="8589934610" default="0" value="0"/>
+			<parameter name="Aperture Width" id="312" flags="12884901906" default="720" value="720"/>
+			<parameter name="Aperture Height" id="313" flags="12884901906" default="480" value="480"/>
+		</parameter>
+		<filter name="Keyer" id="1504712769" factoryID="5" pluginUUID="41122549-B8A6-470E-94DA-211294D20B62" pluginVersion="3" pluginName="Keyer" pluginDynamicParams="0">
+			<timing in="0 1 1 0" out="1617920 153600 1 0" offset="0 1 1 0"/>
+			<baseFlags>8589934608</baseFlags>
+			<parameter name="DefaultSoftness" id="1" flags="12889161760" default="9" value="9"/>
+			<parameter name="Strength" id="36" flags="81604444176" default="1" value="1"/>
+			<parameter name="Keyer::ViewChannel" id="27" flags="12889161760" default="0" value="0"/>
+			<parameter name="Fill Holes" id="48" flags="12884901904" default="0" value="0"/>
+			<parameter name="Edge Distance" id="54" flags="12884901904" default="3" value="3"/>
+			<parameter name="Spill Level" id="20" flags="12884901904" default="0.46000000000000002" value="0.46000000834465027"/>
+			<parameter name="Invert" id="50" flags="12884967440" default="0" value="0"/>
+			<parameter name="OSC" id="3" flags="12889161760">
+				<numberOfKeypoints>0</numberOfKeypoints>
+				<defaultVal>*********LAeMb-gOLBoA11I*E61-*I46G7M75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8M50*wH4VpJ74tpP4nH0Ec91*oCJIJYNqJnJWFXP43nQpdGNKBoMKtbP4JnU*G*-M*0oV*82F7OHZAiPq7eNKBoQu0**x6I3FMLKWFXP43nQqtVPKJM74BgMLBnNLBSHZBBRLFVMalZEL7mMLaX3VUNJotHEL7mMLZMHZBDMadZMrHG2*cP2e0**x6I3FsTLl*EI233GqJtNL7DQqBHNLFpQ86U4JwE23--FIhZSKJmHrBXIqJoRL-T2*xCIohZSKJYEL7XO4ZqNL9F6mFG710**E*6*-2*4U*X*0o*AU*r*1s*F*-9*32*K*-X*4I*Nk-d*4s*SE-u*5k*UE0A*7I*d*0c*9**iE0y*9w*kE14*BY*r*1j*E2--*25*********U2*********7E*******************EY*</defaultVal>
+				<dataValue>*********LAeMb-gOLBoA11I*E61-*I46G7M75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8M50*wH4VpJ74tpP4nH0Ec91*oCJIJYNqJnJWFXP43nQpdGNKBoMKtbP4JnU*G*-M*0oV*82F7OHZAiPq7eNKBoQu0**x6I3FMLKWFXP43nQqtVPKJM74BgMLBnNLBSHZBBRLFVMalZEL7mMLaX3VUNJotHEL7mMLZMHZBDMadZMrHG2*cP2e0**x6I3FsTLl*EI233GqJtNL7DQqBHNLFpQ86U4JwE23--FIhZSKJmHrBXIqJoRL-T2*xCIohZSKJYEL7XO4ZqNL9F6mFG710**E*6*-2*4U*X*0o*AU*r*1s*F*-9*32*K*-X*4I*Nk-d*4s*SE-u*5k*UE0A*7I*d*0c*9**iE0y*9w*kE14*BY*r*1j*E2--*25*********U2*********7E*******************EY*</dataValue>
+			</parameter>
+			<parameter name="Keyer::Autokey" id="4" flags="12889161760">
+				<numberOfKeypoints>0</numberOfKeypoints>
+				<defaultVal>*********RQeMb-gOLBoA11I*E61-*I49WxM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8s50*oO4lkR5VwU6G6X8ZIYPbJgPB670UgALYZiOLFdMKlHMKpkP4JnJWFXP43nQs*0U*rG1UcD4JdCImtjMadZMrFneF*F2VAI3FML46*1U*G*-M*4U*S*06*7U*e*0s*A6Xm*U62WDpHIpG6wU60-6Xm*U62WDpHIpG6xEA1-6Xm*U62WDpnQrG6wU60-oWEZ7WRO74BgMLBnPa3hNJUYMqlVQrBZQptCIoppR43WP4J-Qb7VSOAa80ZLHZB-Qb7VSJVCIoxWOaJXRB6Y7GggLl*II233GqJtNL7-RLFjOqJtIqJoRL0W9GZT2-FEEIJ9NLZZQY3pR4xfNLZHNLFpQ3wE1otHGqJtNKF-QaBcOLNZQh2kAJ6YA6*-**U*2E*O*0A*9E*m*1Q*FU-A*32*M*-b*4Y*Ok-k*5g*VE05*6Y*Wk0B*6w*YE0H*7I*Zk0N*7s*ck0c*8o*gU0r*9k*kE14*Ag*pU1T*Cs*wU1u*EA-0*2T*G6-CE39*Is-IE********6-*********16*******************3H</defaultVal>
+				<dataValue>*********RQeMb-gOLBoA11I*E61-*I49WxM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8s50*oO4lkR5VwU6G6X8ZIYPbJgPB670UgALYZiOLFdMKlHMKpkP4JnJWFXP43nQs*0U*rG1UcD4JdCImtjMadZMrFneF*F2VAI3FML46*1U*G*-M*4U*S*06*7U*e*0s*A6Xm*U62WDpHIpG6wU60-6Xm*U62WDpHIpG6xEA1-6Xm*U62WDpnQrG6wU60-oWEZ7WRO74BgMLBnPa3hNJUYMqlVQrBZQptCIoppR43WP4J-Qb7VSOAa80ZLHZB-Qb7VSJVCIoxWOaJXRB6Y7GggLl*II233GqJtNL7-RLFjOqJtIqJoRL0W9GZT2-FEEIJ9NLZZQY3pR4xfNLZHNLFpQ3wE1otHGqJtNKF-QaBcOLNZQh2kAJ6YA6*-**U*2E*O*0A*9E*m*1Q*FU-A*32*M*-b*4Y*Ok-k*5g*VE05*6Y*Wk0B*6w*YE0H*7I*Zk0N*7s*ck0c*8o*gU0r*9k*kE14*Ag*pU1T*Cs*wU1u*EA-0*2T*G6-CE39*Is-IE********6-*********16*******************3H</dataValue>
+			</parameter>
+			<parameter name="Color Selection" id="18" flags="8589938704">
+				<foldFlags>4</foldFlags>
+				<parameter name="Graph" id="45" flags="81604444160">
+					<numberOfKeypoints>0</numberOfKeypoints>
+					<defaultVal>*********6YeMb-gOLBoA11I*E61-*I40EdM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c86503IYPbJgP-**Ll*DHZB9NLZZN23mMqVdRaJmoEgAIWEkU*262FcX9H6rCY-0J3RO*********E2*********1E*******************3k*</defaultVal>
+					<dataValue>*********6YeMb-gOLBoA11I*E61-*I40EdM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c86503IYPbJgP-**Ll*DHZB9NLZZN23mMqVdRaJmoEgAIWEkU*262FcX9H6rCY-0J3RO*********E2*********1E*******************3k*</dataValue>
+				</parameter>
+				<parameter name="Chroma" id="6" flags="81604444160">
+					<numberOfKeypoints>0</numberOfKeypoints>
+					<defaultVal>********-WseMb-gOLBoA11I*E61-*I4e8ZM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8wE9*Q6BHMrC1YuCnkxDXx*EI71F2J4FoVFMqFfRLNrS5a1V6K4Vt4GYtGJbu0YJGFiRKlgrl*K0Ec91*oC1l*F2VAI3FML4-YO4lkR5VwU6G6U70Ia7mUd8Wgg9GsjA12mAnFT2-3HPqNoI4ZZKJx1Hp7CFJ7TH3wE23FjP3-dNJZTEoxGHYJGLopT2-7HPqNoI4ZZKJx1Hp7CFJ7TIZ7T2-7HPqNoI4ZZK3x1Hp7CFJ7TIZ7T2--IPqlEOKJMLoBDIYt3IZxBJWFXP43nQplHQ4ldPaJKNL7oNLVT2-3HPqNoI4ZZK3x1Hp7CFJ7TIZwE23FjP3-dNJZTEoxGHYJGLp7T2-3IPqlEOKJNLoBDIYt3IZxGIZwE2JFjP3-dNJZTEoxGHYJGLolALl*FIqxaR3-dNJZTEoxGHYJGLp7T2--IPqlEOKJMLoBDIYt3IZxGLl*EJ4xgI4ZZKJx1Hp7CFJ7TH3wE2JFjP3-dNJVTEoxGHYJGLp7GLl*FJ4xgI4ZZK3x1Hp7CFJ7TH2lT2--IPqlEOKJMLoBDIYt3IZxALl*FIqxaR3-dNJVTEoxGHYJGLopT2-7HPqNoI4ZZKJx1Hp7CFJ7TH2lT2-7HPqNoI4ZZK3x1Hp7CFJ7TH2lT2-3HPqNoI4ZZKJx1Hp7CFJ7THJwE2JBjNbFEOKJMLoBDIYt3IZxAU-0**s*IU*y**s*fU-K*1M*6U*e*0M*GU*G*-s*4U*K**c*AU-C*1c*FU*gWjnOlKW6*****6fwUKVgWjlnRBG8z0Ou86fx4rLEWjpZ60G8z8fzy6fwuY*YWjuWyl06vitNN6fr2JH6WCviKKG6vitNN6fupB0EWCyCDeW8zfYbO6XjXXucWCyCDeh771YdEKYtH9axWOaJXR5CZGolBHYy*3c*NU-u*6s*cU0fNIUtHJ3JKJpVNKZhO63dO60*UIa7sIapsIa7tIalsIb7sIaptIaltIb7tU-S*46*LU*C*3s*LU*C**s*16fy***1GNKNbO3cYMqlVQrBiMKpZK0FXP43nQqJnLl*EI233GqJtNL7DHJNZQbFZS87dOZwE23--FIhZSKJmHopKNL7oNLVMHZBDMadZMrHNIUtHJ3JKJpVNP3hi65-l60*UU-q*46*PU*C*4c*QU*C**s*16ftaahEWj9XRk06yC4BZ6Xsa3w1NIUtHJ3JKJpVNSZhw65tz60*UU08*46*UU*C*5s*VU*C**s*16Xt8fkgWDZnug06yPoNJ6XtQyf1NIUtHJ3JKJpVNW3i866mB60*UU0S*46*ZU*C*76*aU*C**s*16Xu*mDoWDgCo4W6z*oyP6Xu7vh1NIUtHJ3JKJpVNZZiK67OK60*UU0a*46*dU*C*8M*dU*C**s*16Xy***1GNKOVcZtCIoppR43WP4J-Qb7VSOCVcqdLHZB-Qb7VSR7ZNeKaLl*FI233GqJtNL71MYBmIqJoRL0WdqdT2-3EEIJ9NLZZQYBWEr7HNLFpQ3wE1otHGqJtNKF-QaBcOLNZQh4eep6YA6*-**U*2E*O*0A*9E*m*1Q*NU-g*7g*fk10*BQ*v*1z*EM-2k2b*Hc-HU3W*LM-WE4Q*P*-l*5L*Sg0**6J*WY0DE6z*Y20Ek73*YQ0GE79*Yo0Hk7F*ZA0JE7L*ZY0Kk7R*Zw0ME7X*aI0Nk7d*as0Qk7s*bo0UU85*ck0YE8K*dg0c*8Z*ec0fk8o*fY0jU91*gU0nE9M*hs0s*9W*iE0tU9c*ic0zEA**kA1-UA7*kk11kAG*lI13kAN*lg15EAT*m216kAZ*mQ19*Al*nk1FEBM*pg1PUBr*sc1X*CC*t*1YUCI*tM1a*CO*tk1cECa*ug1g*D1*wI1lkD7*wg1nEDD*x21okDJ*xc1rkDY*yY1z*Dy-**2*UE2-*M20*E8-*k21UEH--U25EEW-1I2BkEt-1g2DEEz-222EkF3-2Q2H*FF-4*2N*Fg-522VEG6-7k2fUGl-9E********0*E********0g*******************2hU**</defaultVal>
+					<dataValue>********-WseMb-gOLBoA11I*E61-*I4e8ZM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8wE9*Q6BHMrC1YuCnkxDXx*EI71F2J4FoVFMqFfRLNrS5a1V6K4Vt4GYtGJbu0YJGFiRKlgrl*K0Ec91*oC1l*F2VAI3FML4-YO4lkR5VwU6G6U70Ia7mUd8Wgg9GsjA12mAnFT2-3HPqNoI4ZZKJx1Hp7CFJ7TH3wE23FjP3-dNJZTEoxGHYJGLopT2-7HPqNoI4ZZKJx1Hp7CFJ7TIZ7T2-7HPqNoI4ZZK3x1Hp7CFJ7TIZ7T2--IPqlEOKJMLoBDIYt3IZxBJWFXP43nQplHQ4ldPaJKNL7oNLVT2-3HPqNoI4ZZK3x1Hp7CFJ7TIZwE23FjP3-dNJZTEoxGHYJGLp7T2-3IPqlEOKJNLoBDIYt3IZxGIZwE2JFjP3-dNJZTEoxGHYJGLolALl*FIqxaR3-dNJZTEoxGHYJGLp7T2--IPqlEOKJMLoBDIYt3IZxGLl*EJ4xgI4ZZKJx1Hp7CFJ7TH3wE2JFjP3-dNJVTEoxGHYJGLp7GLl*FJ4xgI4ZZK3x1Hp7CFJ7TH2lT2--IPqlEOKJMLoBDIYt3IZxALl*FIqxaR3-dNJVTEoxGHYJGLopT2-7HPqNoI4ZZKJx1Hp7CFJ7TH2lT2-7HPqNoI4ZZK3x1Hp7CFJ7TH2lT2-3HPqNoI4ZZKJx1Hp7CFJ7THJwE2JBjNbFEOKJMLoBDIYt3IZxAU-0**s*IU*y**s*fU-K*1M*6U*e*0M*GU*G*-s*4U*K**c*AU-C*1c*FU*gWjnOlKW6*****6fwUKVgWjlnRBG8z0Ou86fx4rLEWjpZ60G8z8fzy6fwuY*YWjuWyl06vitNN6fr2JH6WCviKKG6vitNN6fupB0EWCyCDeW8zfYbO6XjXXucWCyCDeh771YdEKYtH9axWOaJXR5CZGolBHYy*3c*NU-u*6s*cU0fNIUtHJ3JKJpVNKZhO63dO60*UIa7sIapsIa7tIalsIb7sIaptIaltIb7tU-S*46*LU*C*3s*LU*C**s*16fy***1GNKNbO3cYMqlVQrBiMKpZK0FXP43nQqJnLl*EI233GqJtNL7DHJNZQbFZS87dOZwE23--FIhZSKJmHopKNL7oNLVMHZBDMadZMrHNIUtHJ3JKJpVNP3hi65-l60*UU-q*46*PU*C*4c*QU*C**s*16ftaahEWj9XRk06yC4BZ6Xsa3w1NIUtHJ3JKJpVNSZhw65tz60*UU08*46*UU*C*5s*VU*C**s*16Xt8fkgWDZnug06yPoNJ6XtQyf1NIUtHJ3JKJpVNW3i866mB60*UU0S*46*ZU*C*76*aU*C**s*16Xu*mDoWDgCo4W6z*oyP6Xu7vh1NIUtHJ3JKJpVNZZiK67OK60*UU0a*46*dU*C*8M*dU*C**s*16Xy***1GNKOVcZtCIoppR43WP4J-Qb7VSOCVcqdLHZB-Qb7VSR7ZNeKaLl*FI233GqJtNL71MYBmIqJoRL0WdqdT2-3EEIJ9NLZZQYBWEr7HNLFpQ3wE1otHGqJtNKF-QaBcOLNZQh4eep6YA6*-**U*2E*O*0A*9E*m*1Q*NU-g*7g*fk10*BQ*v*1z*EM-2k2b*Hc-HU3W*LM-WE4Q*P*-l*5L*Sg0**6J*WY0DE6z*Y20Ek73*YQ0GE79*Yo0Hk7F*ZA0JE7L*ZY0Kk7R*Zw0ME7X*aI0Nk7d*as0Qk7s*bo0UU85*ck0YE8K*dg0c*8Z*ec0fk8o*fY0jU91*gU0nE9M*hs0s*9W*iE0tU9c*ic0zEA**kA1-UA7*kk11kAG*lI13kAN*lg15EAT*m216kAZ*mQ19*Al*nk1FEBM*pg1PUBr*sc1X*CC*t*1YUCI*tM1a*CO*tk1cECa*ug1g*D1*wI1lkD7*wg1nEDD*x21okDJ*xc1rkDY*yY1z*Dy-**2*UE2-*M20*E8-*k21UEH--U25EEW-1I2BkEt-1g2DEEz-222EkF3-2Q2H*FF-4*2N*Fg-522VEG6-7k2fUGl-9E********0*E********0g*******************2hU**</dataValue>
+				</parameter>
+				<parameter name="Luma" id="5" flags="81604444160">
+					<numberOfKeypoints>0</numberOfKeypoints>
+					<defaultVal>*********H6eMb-gOLBoA11I*E61-*I45VxM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8Q50-AI3FMLJGFiRKlgpEY80kkB1UwE2F7IH5JhEJMYMqlVQrBIH5JhF3FARKp0J2lpPIC**c*4U*K**s*26fxqSV*WDWMLk06yWSvE6XymSvHG4-YO4pcYMqlVQrBiMKpZK0FXP43nQqJnLl*FI233GqJtNL7ARKpVIqJoRL0W5-pT2-3EEIJ9NLZZQYlpPK3HNLFpQ3VCIoxWOaJXR3wE1otHGqJtNKF-QaBcOLNZQh2U6J6YA6*-0-2O6momBnx3I3JQMKNfPKxlQrJuTsG7XdaWhfbBpiXfvU********2-*********06*******************1k</defaultVal>
+					<dataValue>*********H6eMb-gOLBoA11I*E61-*I45VxM75NZQbBdPqtM74xWOaJXR5BN743mMqVdRaJmJ0FoPr*G**44c8Q50-AI3FMLJGFiRKlgpEY80kkB1UwE2F7IH5JhEJMYMqlVQrBIH5JhF3FARKp0J2lpPIC**c*4U*K**s*26fxqSV*WDWMLk06yWSvE6XymSvHG4-YO4pcYMqlVQrBiMKpZK0FXP43nQqJnLl*FI233GqJtNL7ARKpVIqJoRL0W5-pT2-3EEIJ9NLZZQYlpPK3HNLFpQ3VCIoxWOaJXR3wE1otHGqJtNKF-QaBcOLNZQh2U6J6YA6*-0-2O6momBnx3I3JQMKNfPKxlQrJuTsG7XdaWhfbBpiXfvU********2-*********06*******************1k</dataValue>
+				</parameter>
+				<parameter name="Histogram" id="9" flags="12889161776">
+					<numberOfKeypoints>0</numberOfKeypoints>
+					<defaultVal>********3yceMb-gOLBoA11I**2**U*1**E*-E*4*tk1bJUYRaJmQqZjPZUYPq7eNKBoQpYYML7XO4ZqNL7I75FjQ-6**MOUfl2-Dk*5**U*1E7L*ZU0KE7O*Zg0L*7R*Zs0Lk7U*a20MU7X*aE0NE7a*aQ0O*7d*ac0Ok7g*ao0PU7j*b*0QE7m*bA0R*7p*bM0Rk7s*bY0SU7v*bk0TE7y*bw0U*8-*c60Uk82*cI0VU85*cU0WE88*cg0X*8B*cs0Xk8E*d20YU8H*dE0ZE8K*dQ0a*8N*dc0ak8Q*do0bU8T*e*0cE8W*eA0d*8Z*eM0dk8c*eY0eU8f*ek0fE8i*ew0g*8l*f60gk8o*fI0hU8r*fU0iE8u*fg0j*8x*fs0jk9**g20kU91*gE0lE94*gQ0m*97*gc0mk9A*go0nU9D*h*0oE9G*hA0p*9J*hM0pk9M*hY0qU9P*hk0rE9S*hw0s*9V*i60sk9Y*iI0tU9b*iU0uE9e*ig0v*9h*is0vk9k*j20wU9n*jE0xE9q*jQ0y*9t*jc0yk9w*jo0zU9z*k*1*EA0*kA1-*A3*kM1-kA6*kY10UA9*kk11EAC*kw12*AF*l612kAI*lI13UAL*lU14EAO*lg15*AR*ls15kAU*m216UAX*mE17EAa*mQ18*Ad*mc18kAg*mo19UAj*n*1AEAm*nA1B*Ap*nM1BkAs*nY1CUAv*nk1DEAy*nw1E*B-*o61EkB2*oI1FUB5*oU1GEB8*og1H*BB*os1HkBE*p21IUBH*pE1JEBK*pQ1K*BN*pc1KkBQ*po1LUBT*q*1MEBW*qA1N*BZ*qM1NkBc*qY1OUBf*qk1PEBi*qw1Q*Bl*r61QkBo*rI1RUBr*rU1SEBu*rg1T*Bx*rs1TkC**s21UUC1*sE1VEC4*sQ1W*C7*sc1WkCA*so1XUCD*t*1YECMJGFiRKlgoU*7**c*0k*AJWFXP43nQpZ6OLBoPqRmMKq-*Hu**h6*1U*7**w0JZdCImtjMadZMrFnfl20FU*E*-2*2U*F*-E*3E*K*-Q*4**N*-c*4k*Q*-o*5U*T*0**6E*W*0A*7**Z*0M*7k*c*0Y*8U*f*0k*9E*i*-w*A**l*16*AE*o*12*BU*l*1U*3E*u*-I*D**l*1s*AE-**0A*EU*J*2E*3E-4*12*G**R*2c*5E-A*-w*HU*l*3**7E-G*12*J**R*3M*Jk-M*0I*KU*l*3k*5E-S*-o*M**R*46*7E-Y*-w*NU*R*4U*AE-e*-2*P**R*4s*Pk-k*-o*QU*R*5E*5k-q*-o*S**l*5c*AE-w*-o*TU-z*6**AE00*-o*V**R*6M*Vk06*-w*WU*R*6k*AE0C*12*Y**l*76*5E0I*-o*ZU*R*7U*5E0O*-w*b**l*7s*5E0U*0A*cU*J*8E*3E0a*-o*e**R*8c*AE0g*-o*fU*R*9**AE0m*-o*h**l*9M*Pk0s*0I*iU*R*9k*Tk0y*12*k**l*A6*AE12*12*lU*l*AU*AE18*12*n**R*As*5E1E*12*oU*T*BE*pE1K*12*q**T*Bc*5k1Q*12*rU*l*C**5E1W*-o*t**l*CM*AE1c*12*uU*R*Ck*AE1i*12*w**l*D6*AE1o*12*xU*l*DU*5E1u*-I*z*1J*Ds*AE2**-o-*U*Z*EE*5k24*12-0**R*Ec*AE2A*12-1U*l*F**AE2G*12-3**l*FM*AE2M*-o-4U*R*Fk*5k2S*-o-6**l*G6*AE2Y*12-7U*l*GU*7E2e*12-9**R*Gs*AE2k*12-AU*l*HE*5E2q*-w-C**l*Hc*AE2w*-o-DU*Z*I**5E30*12-F**l*IM*AE36*12-GU*l*Ik*AE3C*12-I**l*J6*AE3I*-o-JU*l*JU*5E3O*-o-L**l*Js*AE3U*-o-MU*l*KE*5E3a*12-O**l*Kc*AE3g*12-PU*R*L**6k3m*12-R**Z*LM*3E3s*-w-SU*l*Lk*AE3y*12-U**l*M6*7E42*-o-VU*R*MU*5E48*5w-X**l*Ms*AE4E*12-YU*l*NE*5E4K*12-a**l*Nc*AE4Q*12-bU*l*O**3E4W*12-d**l*OM*AE4c*-w-eU*l*Ok*AE4i*12-g**R*P6*AE4o*12-hU*R*PU*Tk4u*12-j**l*Ps*5k5**-o-kU*l*QE*AE54*12-m**l*Qc*AE5A*BI-nU*l*R**AE5G*12-p**R*RM*AE5M*-o-qU*l*Rk*7E5S*-o-s**l*S6*7E5Y*-w-tU*l*SU*AE5e*-w-v**R*Ss*AE5k*12-wU*Z*TE*6k5q*12-y**l*Tc*Tk5w*5w-zU*X*U**AE60*-o0-**l*UM*pE66*UY00U*l*Uk*5E6C*1202**R*V6*5E6I*1203U*l*VU*AE6O*UY05**J*Vs*AE6U*-o06U*R*WE*5k6a*1208**l*Wc*pE6g*Wo09U*T*X**AE6m*-o0B**X*XM*Pk6s*120CU*R*Xk*3E6y*Xw0E**f*Y6*AE72*120FU05*YU*2E78*120H**l*Ys*8k7E*0A0IU*Z*ZE*5M*1U*G*-M*2U*O*-s*6U*a*0c*9U*m*1M*CU*y*26*FU-8*2s*IU-K*3c*LU-W*4M*OU-i*56*RU-u*5s*UU-4*6M*WU0C*6c*YU08*7M*WU0O*-s*bU*S*86*WU0a*6c*eU-K*8s*5U0m*-s*hU08*9c*DU0y*1s*kU-4*AM*WU18*3s*nU08*B6*DU1K*Bc*rU-S*C6*WU1a*1s*uU*y*Cs*DU1m*3s*xU-4*Dc*DU1y*6c-*U*G*EM*DU28*Es-2U*y*FM*DU2O*2M-5U*y*G6*WU2a*6c-8U*y*Gs-AU2q*6c-CU*y*Hs*DU30*IM-GU-4*Is*DU3G*6c-JU08*Jc*WU3S*1s-MU*y*KM*DU3e*1s-PU-4*L6*WU3q*1s-SU-K*Ls*5U40*-s-VU*y*Mc*DU4C*6c-YU*y*NM*DU4O*6c-bU*y*O6*WU4a*Es-eU-S*Os*DU4m*H6-hU08*Pc*WU4y*6c-kU08*QM*WU58*6c-nU08*R6*DU5K*1s-qU08*Rs*FU5W*SM-uU08*Ss*FU5m*2M-xU08*Tc*WU5y*1s0*U*y*UM*WU68*6c01U08*V6*DU6K*6c04U08*Vs*WU6W*6c07U08*Wc*WU6i*1s0AU*S*XM-tU6u*6c0DU*y*Y6*LU74*2M0GU08*Ys*DU7G*6c0JU08*Zc*WU7S*6c0MU08*aM*WU7e*6c0PU*y*b6*DU7q*2M0SU*y*bs*WU80*6c0VU08*cc*WU8C*3s0YU08*dM*DU8O*6c0bU08*e6*WU8a*1s0eU-4*es*WU8m*6c0hU*y*fc*LU8y*1s0kU08*gM*WU98*6c0nU08*h6*WU9K*6c0qU08*hs*WU9W*6c0tU*y*ic*WU9i*1s0wU*y*jM*WU9u*6c0zU*y*k6*WUA4*1s10U08*ks*WUAG*6c13U08*lc*DUAS*3M16U08*mM*LUAe*-s19U-4*n6*WUAq*6c1CU08*ns*WUB0*3s1FU*y*oc*DUBC*1s1IU2m*pM*WUBO*6c1LU08*q6*WUBa*1s1OU08*qs*WUBm*6c1RU08*rc*WUBy*-s1UU08*sM*WUC8*6c1XU-4*t6*WUCK*6c1aU08*ts*DUCW*6c1dU08*uc*DUCi*H61gU08*vM*WUCu*2M1jU*y*w6*WUD4*6c1mU08*ws*WUDG*6c1pU5a*xc*WUDS*6c1sU08*yM*DUDe*6c1vU*y*z6*WUDq*3s1yU*y*zs*WUE2*U-S-*E4*2M2-*c*WUE21U08-*EG*2M2--M*DUE24U08-*ES*6c2-06*LUE27U-K-*Ee*6c2-0s*WUE2AU2m-*Eq*H62-1c*JUE2DU08-*F0*1s2-2M*WUE2GU5a-*FC-*FG-*FK*6c2-3c*DUE2LU08-*FW*1s2-4M*DUE2OU08-*Fi*6c2-56*WUE2RUE2IUE2SU*S-*Fy*6c2-66*DUE2VU*y-*G8*2M2-6s*WUE2YU08-*GK*SM2-7c2-7s2-86*FUE2dU08-*Ge*1s2-8s*JUE2gU2C-*Gq*6c2-9c*DUE2jU*S-*H0-*H4-*H8*5M2-As*WUE2oU08-*HK*IM2-Bc*2UE2rU08-*HW*6c2-CM*RUE2uU-K-*Hi*3s2-D6*DUE2x2E9*2*oF*g2F*g6E-F20s-2Enl20sF*H2EA*2E3F2EA-2*6F*k6E*l216--r2EAV2*YF*m6E--21E-2-zV21EF*e2EB02-EF*q*G**YPYV21MF21MV*-2EC-2EOW2EP-2EP02EP12EPV2EQ12EQW2EQX2ER02ER12ES02EeW2EeX2EeY2Ef12EfW2Eg22EgX2*kF0mEF0sEF0u6F0uAF1eEF1eIF1gAF1gEF1iIF1kEF1mAF1mEE0-2D7F2DF-2DN-2Dd-2DlF2GV-2GVF2GdF*42F9Z2F9a2FA22FA32-*F2kMF2mIF2qEF2qMF2uIF2uMF2wIF2wMF2yEF3eMF3gMF3iMF3kMF3kQF3mMF3qMF3uMF3wMF3yMF4aQF4cQF4gQF4iMF4iQF4iUF4kMF4kQF4mQF4mUF4oQF4oUF4qMF4qQF4sQF4sUF5cUF5gUF5iQF5iUE-l2T-l2T0-2T8-2TG-2TGF2TO-2TVl2Tdl2Te-2TeF2Tu-2WNl2WO-2WOF2WWF2We-2Wm-2WmF2Wu-2WuF2X0-2X0F2X8-2X8F2XG-2XOF2XWF2XWV2XeV2XmV2XuF2aOl2aWF2amV2auF2auV2b8V2b8l2bGF2bGl2bOV2bWV2bel2bmV2eWF2eWl2emF2emV2eml2f0V2f0l2fGV2fOV2fWl2fv-2iWl2iel2if-2in-2iul2iv-2jOl2jP-2jPF2jX-2jf-2jv-2jvF2mX-2mnF2mv-2mvF2mvV2n1-2n9F2nP-2nX-2nXF2nnV2nvF2nvV2r1V2r1l2r9V2rHF2rHV2rPF2rPV2rnV2rvF2rvV2unF2uvl2v1V2v1l2v9V2v9l2vHl2vPl2vfl2vvV2vvl2vw-2yo-2yoF2yvl2yw-2z1l2z2-2zA-2zI-2zQ-2zvl2zw-30wF31A-31AF31I-31IF31Q-31YF31gF31oF31wF35A-35IF35IV35gF35gV35oV35wF35wV35wl392F392V392l39AF39AV39IV39J-39Z-39ol39wV39wl3DQl3DZ-3Dh-3Dwl3Dx-3HR-3HRF3Hwl3Hx-3HxF*82JDq2JRp2JRq2JSK2JSp2JSr2JTJ2JTK2JTp2JTq2JTr2JiK2Jiq2Jir2JjK2Jjp2Jjq2Jjr2*gFLtQFLvQFLzMFLzQFLzUFLzYFMvUFMxUFMzUE1l3XyF3bqF3by-3byF3byV3byl3fyF3fyV3fyl3jyV3jyx61YUCH*tE1ZJcYMqlVQrBiMKpZK0FXP43nQqJnLYtHHLJoMK7gNI3mQa3tckCI*tM1ZpRCIo3mQa3tK2tHHq7eNKBooUCG*tA1aECOLl*FI233GqJtNL76OLBoPqRmMKqW*tg1ZpwE2J--FIhZSKJmG4ZnR4xbQa3hLl*DHZB9NLZZN23mMqVdRaJmoECS*txG710**E*6*-Y*6U*f*1I*CU*z*g20lk9E*hQ0sE9Y*iM0vk9u-sc5X*SC-t*5YUSI-tM5a*SO-tk5bUSU-u65d*Sa-uU5eUSg-us5g*Sm-vE5hUSs-vc5j*Sy-w*5kUT2-wM5m*T8-wk5nUTE-x65p*TK-xU5qUTQ-xs5s*TW-yE5tUTc-yc5v*Ti-z*5wUTo-zM5y*Tu-zk5zUU*0*66-*U40*U60UUA0*s62*UG0-E63UUM0-c65*US00*66UUY00M68*Ue00k69UUk0166B*Uq01U6CUUw01s6E*V002E6FUV602c6H*VC03*6IUVI03M6K*VO03k6LUVU0466N*Va04U6OUVg04s6Q*Vm05E6RUVs05c6T*Vy06*6UUW206M6W*W806k6XUWE0766Z*WK07U6aUWQ07s6c*WW08E6dUWc08c6f*Wi09*6gUWo09M6i*Wu09k6jUX*0A66l*X40AU6mUXA0As6o*XG0BE6pUXM0Bc6r*XS0C*6sUXY0CM6u*Xe0Ck6vUXk0D66x*Xq0DU6yUXw0Ds7**Y00EE7-UY60Ec71*YC0F*72UYI0FM74*YO0Fk75UYU0G677*Ya0GU78UYg0Gs7A*Ym0HE7BUYs0Hc7D*Yy0I*7EUZ20IM7G*Z80Ik7HUZE0J67J*ZK0JU7KUZQ0Js7M*ZW0KE7NUZc0Kc7P*Zi0L*7QUZo0LM7S*Zu0Lk7TUa*0M67V*a40MU7WUaA0Ms7Y*aG0NE7ZUaM0Nc7b*aS0O*7cUaY0OM7e*ae0Ok7fUak0P67h*aq0PU7iUaw0Ps7k*b00QE7lUb60Qc7n*bC0R*7oUbI0RM7q*bO0Rk7rUbU0S67t*ba0SU7uUbg0Ss7w*bm0TE7xUbs0Tc7z*by0U*8*Uc20UM80*c80Uk81UcE0V683*cK0VU84UcQ0Vs86*cW0WE87Ucc0Wc89*ci0X*8AUco0XM8C*cu0Xk8DUd*0Y68F*d40YU8GUdA0Ys8I*dG0ZE8JUdM0Zc8L*dS0a*8MUdY0aM8O*de0ak8PUdk0b68R*dq0bU8SUdw0bs8U*e00cE8VUe60cc8X*eC0d*8YUeI0dM8a*eO0dk8bUeU0e68d*ea0eU8eUeg0es8g*em0fE8hUes0fc8j*ey0g*8kUf20gM8m*f80gk8nUfE0h68p*fK0hU8qUfQ0hs8s*fW0iE8tUfc0ic8v*fi0j*8wUfo0jM8y*fu0jk8zUg*0k69-*g40kU90UgA0ks92*gG0lE93UgM0lc95*gS0m*96UgY0mM98*ge0mk99Ugl0nA9BUgs0ng9DEh*0o69FEh50oc9H*hD0p29J*hK0pY9KkhS0q*9MkhZ0qU9OUhh0qw9QUho0rQ9SEhw0rs9UEi10sM9W*i90so9Y*iH0tM9a*iP0to9c*iW0uI9dkie0uk9fkil0vE9hUit0vg9jUj-0wE9lUj70wg9nUjE0xA9pEjM0xc9rEjT0y69t*jb0yY9v*jj0z69x*jr0zY9z*jy1*2A*kk41*UA0kkB1-*A2UkJ1-QA4UkR10*A6UkZ10QA8Ukg10wAAEko11MACEkv11sAE*l112IAG*l812oAHklG13EAJklO13kALklW14EANkle14oAPklm15IAS*lu15oATkm016EAVkm716kAXUmF17EAZkmN17kAbUmV18MAeEmg18sAgEmo19QAiUmx1A*Akkn41AYAn*nD1B6ApEnM1BgArUnV1CEAtknd1CkAvknm1DIAy*nv1DsB*Eo21EQB0UoB1EwB2UoJ1FUB4koS1G2B7*ob1GYB9*oj1H6BBEor1HcBDEp*1IABFUp71IkBHkpG1JIBK*pP1JsBMEpY1KQBOUph1L*BQkpq1LYBT*pz1M6BVEq61MgBXUqF1NEBZkqO1NoBc*qX1OMBeEqg1OsBgEqo1PQBiUqx1Q*Bkkr41QYBn*rD1R6BpErM1RgBrUrV1SEBtkre1SoBw*rn1TMByErw1TwC*Us31UUC0ksC1V2C3*sL1VcC5EsU1WAC7Usd1WkC9ksm1XICC*sv1XsCEEt21YQCGUtB1Z*CIktK1ZYCL*tT1a6CNEtc1agCPUtl1bECRktu1boCU*u11cMCWEuA1cwCYUuJ1dUCakuS1e2Cd*ub1ecCfEuk1fAChUut1fkCjkv01gICm*v91gsCoEvI1hQCqUvR1i*Cskva1iYCv*vj1j6CxEvs1jgCzUw-1kED-kw81koD2*wH1lMD4EwQ1lwD6UwZ1mUD8kwi1n2DB*wr1ncDDEx*1oADFUx71okDHkxG1pIDK*xP1psDMExY1qQDOUxh1r*DQkxq1rYDT*xy1s2DV*y51scDXEyE1tADZUyN1tkDbkyW1uIDe*yf1usDgEyo1vMDiEyw1vwDkUz31wUDmkzC1x2DokzK1xYDr*zT1y6DtEzc1ygDvUzl1zEDzF*62-2E6-*b20wEC---23IEKV-i26*EVF06*********U6********1c*******************26c*</defaultVal>
+					<dataValue>********3yceMb-gOLBoA11I**2**U*1**E*-E*4*tk1bJUYRaJmQqZjPZUYPq7eNKBoQpYYML7XO4ZqNL7I75FjQ-6**MOUfl2-Dk*5**U*1E7L*ZU0KE7O*Zg0L*7R*Zs0Lk7U*a20MU7X*aE0NE7a*aQ0O*7d*ac0Ok7g*ao0PU7j*b*0QE7m*bA0R*7p*bM0Rk7s*bY0SU7v*bk0TE7y*bw0U*8-*c60Uk82*cI0VU85*cU0WE88*cg0X*8B*cs0Xk8E*d20YU8H*dE0ZE8K*dQ0a*8N*dc0ak8Q*do0bU8T*e*0cE8W*eA0d*8Z*eM0dk8c*eY0eU8f*ek0fE8i*ew0g*8l*f60gk8o*fI0hU8r*fU0iE8u*fg0j*8x*fs0jk9**g20kU91*gE0lE94*gQ0m*97*gc0mk9A*go0nU9D*h*0oE9G*hA0p*9J*hM0pk9M*hY0qU9P*hk0rE9S*hw0s*9V*i60sk9Y*iI0tU9b*iU0uE9e*ig0v*9h*is0vk9k*j20wU9n*jE0xE9q*jQ0y*9t*jc0yk9w*jo0zU9z*k*1*EA0*kA1-*A3*kM1-kA6*kY10UA9*kk11EAC*kw12*AF*l612kAI*lI13UAL*lU14EAO*lg15*AR*ls15kAU*m216UAX*mE17EAa*mQ18*Ad*mc18kAg*mo19UAj*n*1AEAm*nA1B*Ap*nM1BkAs*nY1CUAv*nk1DEAy*nw1E*B-*o61EkB2*oI1FUB5*oU1GEB8*og1H*BB*os1HkBE*p21IUBH*pE1JEBK*pQ1K*BN*pc1KkBQ*po1LUBT*q*1MEBW*qA1N*BZ*qM1NkBc*qY1OUBf*qk1PEBi*qw1Q*Bl*r61QkBo*rI1RUBr*rU1SEBu*rg1T*Bx*rs1TkC**s21UUC1*sE1VEC4*sQ1W*C7*sc1WkCA*so1XUCD*t*1YECMJGFiRKlgoU*7**c*0k*AJWFXP43nQpZ6OLBoPqRmMKq-*Hu**h6*1U*7**w0JZdCImtjMadZMrFnfl20FU*E*-2*2U*F*-E*3E*K*-Q*4**N*-c*4k*Q*-o*5U*T*0**6E*W*0A*7**Z*0M*7k*c*0Y*8U*f*0k*9E*i*-w*A**l*16*AE*o*12*BU*l*1U*3E*u*-I*D**l*1s*AE-**0A*EU*J*2E*3E-4*12*G**R*2c*5E-A*-w*HU*l*3**7E-G*12*J**R*3M*Jk-M*0I*KU*l*3k*5E-S*-o*M**R*46*7E-Y*-w*NU*R*4U*AE-e*-2*P**R*4s*Pk-k*-o*QU*R*5E*5k-q*-o*S**l*5c*AE-w*-o*TU-z*6**AE00*-o*V**R*6M*Vk06*-w*WU*R*6k*AE0C*12*Y**l*76*5E0I*-o*ZU*R*7U*5E0O*-w*b**l*7s*5E0U*0A*cU*J*8E*3E0a*-o*e**R*8c*AE0g*-o*fU*R*9**AE0m*-o*h**l*9M*Pk0s*0I*iU*R*9k*Tk0y*12*k**l*A6*AE12*12*lU*l*AU*AE18*12*n**R*As*5E1E*12*oU*T*BE*pE1K*12*q**T*Bc*5k1Q*12*rU*l*C**5E1W*-o*t**l*CM*AE1c*12*uU*R*Ck*AE1i*12*w**l*D6*AE1o*12*xU*l*DU*5E1u*-I*z*1J*Ds*AE2**-o-*U*Z*EE*5k24*12-0**R*Ec*AE2A*12-1U*l*F**AE2G*12-3**l*FM*AE2M*-o-4U*R*Fk*5k2S*-o-6**l*G6*AE2Y*12-7U*l*GU*7E2e*12-9**R*Gs*AE2k*12-AU*l*HE*5E2q*-w-C**l*Hc*AE2w*-o-DU*Z*I**5E30*12-F**l*IM*AE36*12-GU*l*Ik*AE3C*12-I**l*J6*AE3I*-o-JU*l*JU*5E3O*-o-L**l*Js*AE3U*-o-MU*l*KE*5E3a*12-O**l*Kc*AE3g*12-PU*R*L**6k3m*12-R**Z*LM*3E3s*-w-SU*l*Lk*AE3y*12-U**l*M6*7E42*-o-VU*R*MU*5E48*5w-X**l*Ms*AE4E*12-YU*l*NE*5E4K*12-a**l*Nc*AE4Q*12-bU*l*O**3E4W*12-d**l*OM*AE4c*-w-eU*l*Ok*AE4i*12-g**R*P6*AE4o*12-hU*R*PU*Tk4u*12-j**l*Ps*5k5**-o-kU*l*QE*AE54*12-m**l*Qc*AE5A*BI-nU*l*R**AE5G*12-p**R*RM*AE5M*-o-qU*l*Rk*7E5S*-o-s**l*S6*7E5Y*-w-tU*l*SU*AE5e*-w-v**R*Ss*AE5k*12-wU*Z*TE*6k5q*12-y**l*Tc*Tk5w*5w-zU*X*U**AE60*-o0-**l*UM*pE66*UY00U*l*Uk*5E6C*1202**R*V6*5E6I*1203U*l*VU*AE6O*UY05**J*Vs*AE6U*-o06U*R*WE*5k6a*1208**l*Wc*pE6g*Wo09U*T*X**AE6m*-o0B**X*XM*Pk6s*120CU*R*Xk*3E6y*Xw0E**f*Y6*AE72*120FU05*YU*2E78*120H**l*Ys*8k7E*0A0IU*Z*ZE*5M*1U*G*-M*2U*O*-s*6U*a*0c*9U*m*1M*CU*y*26*FU-8*2s*IU-K*3c*LU-W*4M*OU-i*56*RU-u*5s*UU-4*6M*WU0C*6c*YU08*7M*WU0O*-s*bU*S*86*WU0a*6c*eU-K*8s*5U0m*-s*hU08*9c*DU0y*1s*kU-4*AM*WU18*3s*nU08*B6*DU1K*Bc*rU-S*C6*WU1a*1s*uU*y*Cs*DU1m*3s*xU-4*Dc*DU1y*6c-*U*G*EM*DU28*Es-2U*y*FM*DU2O*2M-5U*y*G6*WU2a*6c-8U*y*Gs-AU2q*6c-CU*y*Hs*DU30*IM-GU-4*Is*DU3G*6c-JU08*Jc*WU3S*1s-MU*y*KM*DU3e*1s-PU-4*L6*WU3q*1s-SU-K*Ls*5U40*-s-VU*y*Mc*DU4C*6c-YU*y*NM*DU4O*6c-bU*y*O6*WU4a*Es-eU-S*Os*DU4m*H6-hU08*Pc*WU4y*6c-kU08*QM*WU58*6c-nU08*R6*DU5K*1s-qU08*Rs*FU5W*SM-uU08*Ss*FU5m*2M-xU08*Tc*WU5y*1s0*U*y*UM*WU68*6c01U08*V6*DU6K*6c04U08*Vs*WU6W*6c07U08*Wc*WU6i*1s0AU*S*XM-tU6u*6c0DU*y*Y6*LU74*2M0GU08*Ys*DU7G*6c0JU08*Zc*WU7S*6c0MU08*aM*WU7e*6c0PU*y*b6*DU7q*2M0SU*y*bs*WU80*6c0VU08*cc*WU8C*3s0YU08*dM*DU8O*6c0bU08*e6*WU8a*1s0eU-4*es*WU8m*6c0hU*y*fc*LU8y*1s0kU08*gM*WU98*6c0nU08*h6*WU9K*6c0qU08*hs*WU9W*6c0tU*y*ic*WU9i*1s0wU*y*jM*WU9u*6c0zU*y*k6*WUA4*1s10U08*ks*WUAG*6c13U08*lc*DUAS*3M16U08*mM*LUAe*-s19U-4*n6*WUAq*6c1CU08*ns*WUB0*3s1FU*y*oc*DUBC*1s1IU2m*pM*WUBO*6c1LU08*q6*WUBa*1s1OU08*qs*WUBm*6c1RU08*rc*WUBy*-s1UU08*sM*WUC8*6c1XU-4*t6*WUCK*6c1aU08*ts*DUCW*6c1dU08*uc*DUCi*H61gU08*vM*WUCu*2M1jU*y*w6*WUD4*6c1mU08*ws*WUDG*6c1pU5a*xc*WUDS*6c1sU08*yM*DUDe*6c1vU*y*z6*WUDq*3s1yU*y*zs*WUE2*U-S-*E4*2M2-*c*WUE21U08-*EG*2M2--M*DUE24U08-*ES*6c2-06*LUE27U-K-*Ee*6c2-0s*WUE2AU2m-*Eq*H62-1c*JUE2DU08-*F0*1s2-2M*WUE2GU5a-*FC-*FG-*FK*6c2-3c*DUE2LU08-*FW*1s2-4M*DUE2OU08-*Fi*6c2-56*WUE2RUE2IUE2SU*S-*Fy*6c2-66*DUE2VU*y-*G8*2M2-6s*WUE2YU08-*GK*SM2-7c2-7s2-86*FUE2dU08-*Ge*1s2-8s*JUE2gU2C-*Gq*6c2-9c*DUE2jU*S-*H0-*H4-*H8*5M2-As*WUE2oU08-*HK*IM2-Bc*2UE2rU08-*HW*6c2-CM*RUE2uU-K-*Hi*3s2-D6*DUE2x2E9*2*oF*g2F*g6E-F20s-2Enl20sF*H2EA*2E3F2EA-2*6F*k6E*l216--r2EAV2*YF*m6E--21E-2-zV21EF*e2EB02-EF*q*G**YPYV21MF21MV*-2EC-2EOW2EP-2EP02EP12EPV2EQ12EQW2EQX2ER02ER12ES02EeW2EeX2EeY2Ef12EfW2Eg22EgX2*kF0mEF0sEF0u6F0uAF1eEF1eIF1gAF1gEF1iIF1kEF1mAF1mEE0-2D7F2DF-2DN-2Dd-2DlF2GV-2GVF2GdF*42F9Z2F9a2FA22FA32-*F2kMF2mIF2qEF2qMF2uIF2uMF2wIF2wMF2yEF3eMF3gMF3iMF3kMF3kQF3mMF3qMF3uMF3wMF3yMF4aQF4cQF4gQF4iMF4iQF4iUF4kMF4kQF4mQF4mUF4oQF4oUF4qMF4qQF4sQF4sUF5cUF5gUF5iQF5iUE-l2T-l2T0-2T8-2TG-2TGF2TO-2TVl2Tdl2Te-2TeF2Tu-2WNl2WO-2WOF2WWF2We-2Wm-2WmF2Wu-2WuF2X0-2X0F2X8-2X8F2XG-2XOF2XWF2XWV2XeV2XmV2XuF2aOl2aWF2amV2auF2auV2b8V2b8l2bGF2bGl2bOV2bWV2bel2bmV2eWF2eWl2emF2emV2eml2f0V2f0l2fGV2fOV2fWl2fv-2iWl2iel2if-2in-2iul2iv-2jOl2jP-2jPF2jX-2jf-2jv-2jvF2mX-2mnF2mv-2mvF2mvV2n1-2n9F2nP-2nX-2nXF2nnV2nvF2nvV2r1V2r1l2r9V2rHF2rHV2rPF2rPV2rnV2rvF2rvV2unF2uvl2v1V2v1l2v9V2v9l2vHl2vPl2vfl2vvV2vvl2vw-2yo-2yoF2yvl2yw-2z1l2z2-2zA-2zI-2zQ-2zvl2zw-30wF31A-31AF31I-31IF31Q-31YF31gF31oF31wF35A-35IF35IV35gF35gV35oV35wF35wV35wl392F392V392l39AF39AV39IV39J-39Z-39ol39wV39wl3DQl3DZ-3Dh-3Dwl3Dx-3HR-3HRF3Hwl3Hx-3HxF*82JDq2JRp2JRq2JSK2JSp2JSr2JTJ2JTK2JTp2JTq2JTr2JiK2Jiq2Jir2JjK2Jjp2Jjq2Jjr2*gFLtQFLvQFLzMFLzQFLzUFLzYFMvUFMxUFMzUE1l3XyF3bqF3by-3byF3byV3byl3fyF3fyV3fyl3jyV3jyx61YUCH*tE1ZJcYMqlVQrBiMKpZK0FXP43nQqJnLYtHHLJoMK7gNI3mQa3tckCI*tM1ZpRCIo3mQa3tK2tHHq7eNKBooUCG*tA1aECOLl*FI233GqJtNL76OLBoPqRmMKqW*tg1ZpwE2J--FIhZSKJmG4ZnR4xbQa3hLl*DHZB9NLZZN23mMqVdRaJmoECS*txG710**E*6*-Y*6U*f*1I*CU*z*g20lk9E*hQ0sE9Y*iM0vk9u-sc5X*SC-t*5YUSI-tM5a*SO-tk5bUSU-u65d*Sa-uU5eUSg-us5g*Sm-vE5hUSs-vc5j*Sy-w*5kUT2-wM5m*T8-wk5nUTE-x65p*TK-xU5qUTQ-xs5s*TW-yE5tUTc-yc5v*Ti-z*5wUTo-zM5y*Tu-zk5zUU*0*66-*U40*U60UUA0*s62*UG0-E63UUM0-c65*US00*66UUY00M68*Ue00k69UUk0166B*Uq01U6CUUw01s6E*V002E6FUV602c6H*VC03*6IUVI03M6K*VO03k6LUVU0466N*Va04U6OUVg04s6Q*Vm05E6RUVs05c6T*Vy06*6UUW206M6W*W806k6XUWE0766Z*WK07U6aUWQ07s6c*WW08E6dUWc08c6f*Wi09*6gUWo09M6i*Wu09k6jUX*0A66l*X40AU6mUXA0As6o*XG0BE6pUXM0Bc6r*XS0C*6sUXY0CM6u*Xe0Ck6vUXk0D66x*Xq0DU6yUXw0Ds7**Y00EE7-UY60Ec71*YC0F*72UYI0FM74*YO0Fk75UYU0G677*Ya0GU78UYg0Gs7A*Ym0HE7BUYs0Hc7D*Yy0I*7EUZ20IM7G*Z80Ik7HUZE0J67J*ZK0JU7KUZQ0Js7M*ZW0KE7NUZc0Kc7P*Zi0L*7QUZo0LM7S*Zu0Lk7TUa*0M67V*a40MU7WUaA0Ms7Y*aG0NE7ZUaM0Nc7b*aS0O*7cUaY0OM7e*ae0Ok7fUak0P67h*aq0PU7iUaw0Ps7k*b00QE7lUb60Qc7n*bC0R*7oUbI0RM7q*bO0Rk7rUbU0S67t*ba0SU7uUbg0Ss7w*bm0TE7xUbs0Tc7z*by0U*8*Uc20UM80*c80Uk81UcE0V683*cK0VU84UcQ0Vs86*cW0WE87Ucc0Wc89*ci0X*8AUco0XM8C*cu0Xk8DUd*0Y68F*d40YU8GUdA0Ys8I*dG0ZE8JUdM0Zc8L*dS0a*8MUdY0aM8O*de0ak8PUdk0b68R*dq0bU8SUdw0bs8U*e00cE8VUe60cc8X*eC0d*8YUeI0dM8a*eO0dk8bUeU0e68d*ea0eU8eUeg0es8g*em0fE8hUes0fc8j*ey0g*8kUf20gM8m*f80gk8nUfE0h68p*fK0hU8qUfQ0hs8s*fW0iE8tUfc0ic8v*fi0j*8wUfo0jM8y*fu0jk8zUg*0k69-*g40kU90UgA0ks92*gG0lE93UgM0lc95*gS0m*96UgY0mM98*ge0mk99Ugl0nA9BUgs0ng9DEh*0o69FEh50oc9H*hD0p29J*hK0pY9KkhS0q*9MkhZ0qU9OUhh0qw9QUho0rQ9SEhw0rs9UEi10sM9W*i90so9Y*iH0tM9a*iP0to9c*iW0uI9dkie0uk9fkil0vE9hUit0vg9jUj-0wE9lUj70wg9nUjE0xA9pEjM0xc9rEjT0y69t*jb0yY9v*jj0z69x*jr0zY9z*jy1*2A*kk41*UA0kkB1-*A2UkJ1-QA4UkR10*A6UkZ10QA8Ukg10wAAEko11MACEkv11sAE*l112IAG*l812oAHklG13EAJklO13kALklW14EANkle14oAPklm15IAS*lu15oATkm016EAVkm716kAXUmF17EAZkmN17kAbUmV18MAeEmg18sAgEmo19QAiUmx1A*Akkn41AYAn*nD1B6ApEnM1BgArUnV1CEAtknd1CkAvknm1DIAy*nv1DsB*Eo21EQB0UoB1EwB2UoJ1FUB4koS1G2B7*ob1GYB9*oj1H6BBEor1HcBDEp*1IABFUp71IkBHkpG1JIBK*pP1JsBMEpY1KQBOUph1L*BQkpq1LYBT*pz1M6BVEq61MgBXUqF1NEBZkqO1NoBc*qX1OMBeEqg1OsBgEqo1PQBiUqx1Q*Bkkr41QYBn*rD1R6BpErM1RgBrUrV1SEBtkre1SoBw*rn1TMByErw1TwC*Us31UUC0ksC1V2C3*sL1VcC5EsU1WAC7Usd1WkC9ksm1XICC*sv1XsCEEt21YQCGUtB1Z*CIktK1ZYCL*tT1a6CNEtc1agCPUtl1bECRktu1boCU*u11cMCWEuA1cwCYUuJ1dUCakuS1e2Cd*ub1ecCfEuk1fAChUut1fkCjkv01gICm*v91gsCoEvI1hQCqUvR1i*Cskva1iYCv*vj1j6CxEvs1jgCzUw-1kED-kw81koD2*wH1lMD4EwQ1lwD6UwZ1mUD8kwi1n2DB*wr1ncDDEx*1oADFUx71okDHkxG1pIDK*xP1psDMExY1qQDOUxh1r*DQkxq1rYDT*xy1s2DV*y51scDXEyE1tADZUyN1tkDbkyW1uIDe*yf1usDgEyo1vMDiEyw1vwDkUz31wUDmkzC1x2DokzK1xYDr*zT1y6DtEzc1ygDvUzl1zEDzF*62-2E6-*b20wEC---23IEKV-i26*EVF06*********U6********1c*******************26c*</dataValue>
+				</parameter>
+				<parameter name="Chroma Rolloff" id="16" flags="12884901888" default="0.10000000000000001" value="0.10000000000000001"/>
+				<parameter name="Chroma Erode" id="17" flags="12889161760" default="0" value="0"/>
+				<parameter name="Luma Rolloff" id="14" flags="12884901888" default="0.10000000000000001" value="0.10000000000000001"/>
+				<parameter name="Fix Video" id="68" flags="12884967424" default="1" value="1"/>
+			</parameter>
+			<parameter name="Matte Tools" id="47" flags="8589938688">
+				<foldFlags>4</foldFlags>
+				<parameter name="Levels" id="49" flags="12884905984">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Shrink/Expand" id="53" flags="12884901888" default="0" value="0"/>
+				<parameter name="Soften" id="51" flags="12884901888" default="0" value="0"/>
+				<parameter name="Erode" id="52" flags="12884901888" default="0" value="0"/>
+			</parameter>
+			<parameter name="MinGreen" id="38" flags="12889161760" default="-3" value="-3"/>
+			<parameter name="MaxGreen" id="39" flags="12889161760" default="-1.75" value="-1.75"/>
+			<parameter name="GreenChroma" id="40" flags="12889161760" default="0.089999999999999997" value="0.089999999999999997"/>
+			<parameter name="MinBlue" id="41" flags="12889161760" default="-1.75" value="-1.75"/>
+			<parameter name="MaxBlue" id="42" flags="12889161760" default="0.125" value="0.125"/>
+			<parameter name="BlueChroma" id="43" flags="12889161760" default="0.089999999999999997" value="0.089999999999999997"/>
+			<parameter name="Spill Suppression" id="28" flags="8589938704">
+				<foldFlags>4</foldFlags>
+				<parameter name="Spill Contrast" id="26" flags="12884905984">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Tint" id="23" flags="12884901888" default="0.040000000000000001" value="0"/>
+				<parameter name="Saturation" id="24" flags="12884901888" default="0.75" value="1"/>
+			</parameter>
+			<parameter name="Light Wrap" id="33" flags="8589938704">
+				<foldFlags>4</foldFlags>
+				<parameter name="Amount" id="29" flags="12884901888" default="0" value="0"/>
+				<parameter name="Intensity" id="30" flags="12884901888" default="1" value="1"/>
+				<parameter name="Opacity" id="31" flags="12884901888" default="1" value="1"/>
+				<parameter name="Mode" id="32" flags="12884967424" default="0" value="0"/>
+			</parameter>
+			<parameter name="Luma Erode" id="15" flags="12889161760" default="0" value="0"/>
+			<parameter name="Preserve RGB" id="7" flags="12889161760" default="0" value="0"/>
+			<parameter name="KeyerIsInitialized" id="8" flags="12889161760" default="0" value="1"/>
+			<parameter name="Mix" id="10001" flags="12884901888" default="1" value="1"/>
+		</filter>
+	</layer>
+	<layer name="Group 1" id="1504712773">
+		<scenenode name="IMG_0417" id="1504712772" factoryID="3" version="5">
+			<validTracks>1</validTracks>
+			<aspectRatio>0</aspectRatio>
+			<flags>0</flags>
+			<timing in="0 1 1 0" out="1530880 153600 1 0" offset="0 1 1 0"/>
+			<foldFlags>16384</foldFlags>
+			<baseFlags>524304</baseFlags>
+			<parameter name="Properties" id="1" flags="8589938704">
+				<parameter name="Transform" id="100" flags="8589938704">
+					<parameter name="Position" id="101" flags="8589938704">
+						<foldFlags>15</foldFlags>
+						<parameter name="X" id="1" flags="8589934608" default="0" value="68.023437499998451"/>
+						<parameter name="Y" id="2" flags="8589934608" default="0" value="2.5234375000084412"/>
+					</parameter>
+					<parameter name="Scale" id="105" flags="8589938704">
+						<foldFlags>15</foldFlags>
+						<parameter name="X" id="1" flags="8589934608" default="1" value="0.32954622821352647"/>
+						<parameter name="Y" id="2" flags="8589934608" default="1" value="0.32954622821352647"/>
+						<parameter name="Z" id="3" flags="8589934608" default="1" value="0.27000000000000002"/>
+					</parameter>
+				</parameter>
+				<parameter name="Lighting" id="230" flags="8589938706">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Shadows" id="234" flags="8589938706">
+					<foldFlags>15</foldFlags>
+				</parameter>
+				<parameter name="Reflection" id="223" flags="8589971474">
+					<foldFlags>131087</foldFlags>
+				</parameter>
+				<parameter name="Media" id="324" flags="8589938704">
+					<foldFlags>4</foldFlags>
+					<parameter name="Source Media" id="300" flags="81604444176" default="1504712771" value="1504712771"/>
+					<parameter name="Source Media" id="325" flags="8590000146">
+						<referencedObjectID></referencedObjectID>
+					</parameter>
+				</parameter>
+				<parameter name="Page Number" id="301" flags="8589934610" default="1" value="1"/>
+				<parameter name="Retime Value" id="304" flags="8590066066" default="1" value="1"/>
+				<parameter name="Retime Value Cache" id="319" flags="8590065810" default="1" value="1"/>
+			</parameter>
+			<parameter name="Object" id="2" flags="8589938704">
+				<parameter name="Width" id="313" flags="8589934610" default="1" value="3264"/>
+				<parameter name="Height" id="314" flags="8589934610" default="1" value="1836"/>
+			</parameter>
+			<filter name="Color Balance" id="1504715054" factoryID="5" pluginUUID="E9B93275-A56D-4012-BEF6-5DD59A74B344" pluginVersion="1" pluginName="Color Balance" pluginDynamicParams="0">
+				<timing in="0 1 1 0" out="1530880 153600 1 0" offset="0 1 1 0"/>
+				<baseFlags>8589934608</baseFlags>
+				<parameter name="Shadows" id="10" flags="12884906000">
+					<foldFlags>15</foldFlags>
+					<parameter name="Red" id="1" flags="8589934608">
+						<curve type="1" default="0.5" value="0.5">
+							<numberOfKeypoints>1</numberOfKeypoints>
+							<min>0</min>
+							<max>1</max>
+							<keypoint interpolation="1" flags="32">
+								<time>163840 153600 1 0</time>
+								<value>0.5</value>
+							</keypoint>
+						</curve>
+					</parameter>
+					<parameter name="Green" id="2" flags="8589934608">
+						<curve type="1" default="0.5" value="0.5">
+							<numberOfKeypoints>1</numberOfKeypoints>
+							<min>0</min>
+							<max>1</max>
+							<keypoint interpolation="1" flags="32">
+								<time>163840 153600 1 0</time>
+								<value>0.5</value>
+							</keypoint>
+						</curve>
+					</parameter>
+					<parameter name="Blue" id="3" flags="8589934608">
+						<curve type="1" default="0.5" value="0.5">
+							<numberOfKeypoints>1</numberOfKeypoints>
+							<min>0</min>
+							<max>1</max>
+							<keypoint interpolation="1" flags="32">
+								<time>163840 153600 1 0</time>
+								<value>0.5</value>
+							</keypoint>
+						</curve>
+					</parameter>
+				</parameter>
+				<parameter name="Midtones" id="11" flags="12884906000">
+					<foldFlags>11</foldFlags>
+					<parameter name="Red" id="1" flags="8589934608">
+						<curve type="1" default="0.5" value="0.5">
+							<numberOfKeypoints>8</numberOfKeypoints>
+							<min>0</min>
+							<max>1</max>
+							<keypoint interpolation="1" flags="32">
+								<time>163840 153600 1 0</time>
+								<value>0.5</value>
+								<outputTangentTime>0.18888888888888888</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>250880 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.18888888888888888</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.23333333333333334</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>358400 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.23333333333333334</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.055555555555555552</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>384000 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.055555555555555552</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.29999999999999999</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>522240 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.29999999999999999</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.1111111111111111</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>573440 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.1111111111111111</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.22222222222222221</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>675840 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.22222222222222221</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.25555555555555554</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>793600 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.25555555555555554</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.25555555555555554</outputTangentTime>
+								<outputTangentValue>-0</outputTangentValue>
+							</keypoint>
+						</curve>
+					</parameter>
+					<parameter name="Green" id="2" flags="8589934608">
+						<curve type="1" default="0.5" value="0.5">
+							<numberOfKeypoints>8</numberOfKeypoints>
+							<min>0</min>
+							<max>1</max>
+							<keypoint interpolation="1" flags="32">
+								<time>163840 153600 1 0</time>
+								<value>0.5</value>
+								<outputTangentTime>0.18888888888888888</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>250880 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.18888888888888888</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.23333333333333334</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>358400 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.23333333333333334</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.055555555555555552</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>384000 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.055555555555555552</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.29999999999999999</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>522240 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.29999999999999999</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.1111111111111111</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>573440 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.1111111111111111</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.22222222222222221</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>675840 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.22222222222222221</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.25555555555555554</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>793600 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.25555555555555554</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.25555555555555554</outputTangentTime>
+								<outputTangentValue>-0</outputTangentValue>
+							</keypoint>
+						</curve>
+					</parameter>
+					<parameter name="Blue" id="3" flags="8589934608">
+						<curve type="1" default="0.5" value="0.5">
+							<numberOfKeypoints>8</numberOfKeypoints>
+							<min>0</min>
+							<max>1</max>
+							<keypoint interpolation="1" flags="32">
+								<time>163840 153600 1 0</time>
+								<value>0.5</value>
+								<outputTangentTime>0.18888888888888888</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>250880 153600 1 0</time>
+								<value>0.44</value>
+								<inputTangentTime>-0.18888888888888888</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.23333333333333334</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>358400 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.23333333333333334</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.055555555555555552</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>384000 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.055555555555555552</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.29999999999999999</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>522240 153600 1 0</time>
+								<value>0.28000000000000003</value>
+								<inputTangentTime>-0.29999999999999999</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.1111111111111111</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>573440 153600 1 0</time>
+								<value>0.32000000000000001</value>
+								<inputTangentTime>-0.1111111111111111</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.22222222222222221</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>675840 153600 1 0</time>
+								<value>0.42999999999999999</value>
+								<inputTangentTime>-0.22222222222222221</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.25555555555555554</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>793600 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.25555555555555554</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.25555555555555554</outputTangentTime>
+								<outputTangentValue>-0</outputTangentValue>
+							</keypoint>
+						</curve>
+					</parameter>
+				</parameter>
+				<parameter name="Highlights" id="12" flags="12884906000">
+					<foldFlags>11</foldFlags>
+					<parameter name="Red" id="1" flags="8589934608">
+						<curve type="1" default="0.5" value="0.5">
+							<numberOfKeypoints>8</numberOfKeypoints>
+							<min>0</min>
+							<max>1</max>
+							<keypoint interpolation="1" flags="32">
+								<time>163840 153600 1 0</time>
+								<value>0.5</value>
+								<outputTangentTime>0.18888888888888888</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>250880 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.18888888888888888</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.23333333333333334</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>358400 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.23333333333333334</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.055555555555555552</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>384000 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.055555555555555552</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.29999999999999999</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>522240 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.29999999999999999</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.1111111111111111</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>573440 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.1111111111111111</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.22222222222222221</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>675840 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.22222222222222221</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.25555555555555554</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>793600 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.25555555555555554</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.25555555555555554</outputTangentTime>
+								<outputTangentValue>-0</outputTangentValue>
+							</keypoint>
+						</curve>
+					</parameter>
+					<parameter name="Green" id="2" flags="8589934608">
+						<curve type="1" default="0.5" value="0.5">
+							<numberOfKeypoints>8</numberOfKeypoints>
+							<min>0</min>
+							<max>1</max>
+							<keypoint interpolation="1" flags="32">
+								<time>163840 153600 1 0</time>
+								<value>0.5</value>
+								<outputTangentTime>0.18888888888888888</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>250880 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.18888888888888888</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.23333333333333334</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>358400 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.23333333333333334</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.055555555555555552</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>384000 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.055555555555555552</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.29999999999999999</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>522240 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.29999999999999999</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.1111111111111111</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>573440 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.1111111111111111</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.22222222222222221</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>675840 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.22222222222222221</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.25555555555555554</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>793600 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.25555555555555554</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.25555555555555554</outputTangentTime>
+								<outputTangentValue>-0</outputTangentValue>
+							</keypoint>
+						</curve>
+					</parameter>
+					<parameter name="Blue" id="3" flags="8589934608">
+						<curve type="1" default="0.5" value="0.5">
+							<numberOfKeypoints>8</numberOfKeypoints>
+							<min>0</min>
+							<max>1</max>
+							<keypoint interpolation="1" flags="32">
+								<time>163840 153600 1 0</time>
+								<value>0.5</value>
+								<outputTangentTime>0.18888888888888888</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>250880 153600 1 0</time>
+								<value>0.41999999999999998</value>
+								<inputTangentTime>-0.18888888888888888</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.23333333333333334</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>358400 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.23333333333333334</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.055555555555555552</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>384000 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.055555555555555552</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.29999999999999999</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>522240 153600 1 0</time>
+								<value>0.28000000000000003</value>
+								<inputTangentTime>-0.29999999999999999</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.1111111111111111</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>573440 153600 1 0</time>
+								<value>0.34000000000000002</value>
+								<inputTangentTime>-0.1111111111111111</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.22222222222222221</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>675840 153600 1 0</time>
+								<value>0.46999999999999997</value>
+								<inputTangentTime>-0.22222222222222221</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.25555555555555554</outputTangentTime>
+								<outputTangentValue>0</outputTangentValue>
+							</keypoint>
+							<keypoint interpolation="1" flags="32">
+								<time>793600 153600 1 0</time>
+								<value>0.5</value>
+								<inputTangentTime>-0.25555555555555554</inputTangentTime>
+								<inputTangentValue>0</inputTangentValue>
+								<outputTangentTime>0.25555555555555554</outputTangentTime>
+								<outputTangentValue>-0</outputTangentValue>
+							</keypoint>
+						</curve>
+					</parameter>
+				</parameter>
+				<parameter name="Boost" id="14" flags="12884901904" default="0" value="0"/>
+				<parameter name="Clip Color Values" id="13" flags="12884967440" default="0" value="0"/>
+				<parameter name="Mix" id="10001" flags="12884901888" default="1" value="1"/>
+			</filter>
+		</scenenode>
+		<aspectRatio>1</aspectRatio>
+		<flags>0</flags>
+		<timing in="0 1 1 0" out="1530880 153600 1 0" offset="0 1 1 0"/>
+		<foldFlags>0</foldFlags>
+		<baseFlags>524304</baseFlags>
+		<parameter name="Properties" id="1" flags="8589938704">
+			<parameter name="Lighting" id="230" flags="8589938706">
+				<foldFlags>15</foldFlags>
+			</parameter>
+			<parameter name="Shadows" id="234" flags="8589938706">
+				<foldFlags>15</foldFlags>
+			</parameter>
+			<parameter name="Reflection" id="223" flags="8589971474">
+				<foldFlags>131087</foldFlags>
+			</parameter>
+		</parameter>
+		<parameter name="Object" id="2" flags="8589938704">
+			<parameter name="Fixed Width" id="302" flags="12884901908" default="600" value="600"/>
+			<parameter name="Fixed Height" id="303" flags="12884901908" default="600" value="600"/>
+			<parameter name="Flatten" id="311" flags="8589934610" default="0" value="0"/>
+			<parameter name="Layer Order" id="305" flags="8589934610" default="0" value="0"/>
+			<parameter name="Aperture Width" id="312" flags="12884901906" default="600" value="600"/>
+			<parameter name="Aperture Height" id="313" flags="12884901906" default="600" value="600"/>
+		</parameter>
+	</layer>
+
+	<footage name="Media Layer" id="10007">
+		<clip name="IMG_0417" id="1504712771">
+			<pathURL>file:///Users/kobejean/Pictures/Jean's%20iPhone/IMG_0417.JPG</pathURL>
+			<relativeURL>../../../../Pictures/Jean's%20iPhone/IMG_0417.JPG</relativeURL>
+			<missingWidth>3264</missingWidth>
+			<missingHeight>1836</missingHeight>
+			<missingDuration>0.033333333333333333</missingDuration>
+			<creationDuration>1</creationDuration>
+			<mediaID></mediaID>
+			<flags>0</flags>
+			<timing in="0 1 1 0" out="0 153600 1 0" offset="0 1 1 0"/>
+			<foldFlags>0</foldFlags>
+			<baseFlags>524304</baseFlags>
+			<parameter name="Properties" id="1" flags="8589938704"/>
+			<parameter name="Object" id="2" flags="8589938704">
+				<parameter name="Pixel Aspect Ratio" id="104" flags="12884901888" default="1" value="1"/>
+				<parameter name="Frame Rate" id="107" flags="8589934592" default="0" value="30"/>
+				<parameter name="Fixed Width" id="114" flags="12884901888" default="3264" value="3264"/>
+				<parameter name="Fixed Height" id="115" flags="12884901888" default="1836" value="1836"/>
+				<parameter name="Use Background Color" id="116" flags="8589934594" default="0" value="0"/>
+				<parameter name="Background Color" id="117" flags="8589971458">
+					<foldFlags>15</foldFlags>
+					<parameter name="Red" id="1" flags="8589967376" default="1" value="1"/>
+					<parameter name="Green" id="2" flags="8589967376" default="1" value="1"/>
+					<parameter name="Blue" id="3" flags="8589967376" default="1" value="1"/>
+				</parameter>
+			</parameter>
+		</clip>
+		<clip name="Untitled" id="10006">
+			<pathURL>file:///Users/kobejean/Desktop/Untitled.mov</pathURL>
+			<relativeURL>../../../../Desktop/Untitled.mov</relativeURL>
+			<missingWidth>960</missingWidth>
+			<missingHeight>640</missingHeight>
+			<missingDuration>10.566666666666666</missingDuration>
+			<creationDuration>317</creationDuration>
+			<mediaID></mediaID>
+			<flags>0</flags>
+			<timing in="0 1 1 0" out="1617920 153600 1 0" offset="0 1 1 0"/>
+			<foldFlags>0</foldFlags>
+			<baseFlags>524305</baseFlags>
+			<parameter name="Properties" id="1" flags="8589938704"/>
+			<parameter name="Object" id="2" flags="8589938704">
+				<parameter name="Pixel Aspect Ratio" id="104" flags="12884901888" default="1" value="1"/>
+				<parameter name="Frame Rate" id="107" flags="8589934592" default="0" value="30"/>
+				<parameter name="Fixed Width" id="114" flags="12884901890" default="960" value="960"/>
+				<parameter name="Fixed Height" id="115" flags="12884901890" default="640" value="640"/>
+				<parameter name="Use Background Color" id="116" flags="8589934594" default="0" value="0"/>
+				<parameter name="Background Color" id="117" flags="8589971458">
+					<foldFlags>15</foldFlags>
+					<parameter name="Red" id="1" flags="8589967376" default="1" value="1"/>
+					<parameter name="Green" id="2" flags="8589967376" default="1" value="1"/>
+					<parameter name="Blue" id="3" flags="8589967376" default="1" value="1"/>
+				</parameter>
+			</parameter>
+		</clip>
+		<flags>0</flags>
+		<timing in="0 1 1 0" out="1617920 153600 1 0" offset="0 1 1 0"/>
+		<foldFlags>0</foldFlags>
+		<baseFlags>524304</baseFlags>
+		<parameter name="Properties" id="1" flags="8589938704"/>
+		<parameter name="Object" id="2" flags="8589938704"/>
+	</footage>
+</scene>
+
+</ozml>

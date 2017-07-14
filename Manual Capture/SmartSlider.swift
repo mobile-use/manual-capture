@@ -37,7 +37,7 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
         }else if added.hasProperty(.ComputerControlled) { transitionScale = 1.0 }
         
         if let tScale = transitionScale {
-            line.updateLineApearance(initialSensitivity, tScale, travelDistance, fingerProgress)
+            line.updateLineApearance(initialSensitivity, tScale, travelDistance, fingerProgress, progress, totalDistance)
         }
     }
     
@@ -85,7 +85,7 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
         }
         var shouldRound = false
         if state.hasProperty(.Active) {
-            line.updateLineApearance(initialSensitivity, transitionScale, travelDistance, fingerProgress)
+            line.updateLineApearance(initialSensitivity, transitionScale, travelDistance, fingerProgress, progress, totalDistance)
             shouldRound = (transitionScale == 1.0)
         }
         
@@ -114,11 +114,7 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     
     let gesture: SmartSliderGesture
     
-    var initialSensitivity: CGFloat = 0.3 {
-        didSet{
-            gesture.sensitivity = initialSensitivity
-        }
-    }
+    var initialSensitivity: CGFloat = 0.3
     
     var warpSpeedReverses = !kIsTestingNoReverse//false//!kIsVideoMode
     
@@ -128,7 +124,7 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     /// displacement of progress so that the knob will position right under finger
     private var transitionDistance: CGFloat {
         if /*!warpSpeedReverses*/kIsVideoMode {
-            return (direction.axis == .Horizontal) ? 160.0 : 240.0
+            return (direction.axis == .Horizontal) ? 130.0 : 195
             //return (direction.axis == .Horizontal) ? 50 : 75
         }else {
             return (direction.axis == .Horizontal) ? 90.0 : 135.0
@@ -147,6 +143,8 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     /// relative referance of perpendicular distance where transition should start
     private var perpendicularStartDistance: CGFloat = 0
     
+    private var startTravelDistance: CGFloat = 0
+    
     func handleSmartSliderGesture(sender:SmartSliderGesture) {
         switch sender.state {
         case .Began:
@@ -154,6 +152,7 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
             perpendicularStartDistance = abs(perpendicularDistance) + transitionStartDistance
             fingerProgress = 0
             accuracyProgress = progress
+            //startTravelDistance = progress * totalDistance
             
             if !state.hasProperty(.Active) {
                 // first to activate
@@ -181,11 +180,11 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
             fingerProgress = _progressForTargetPoint(sender.lastFingerLocation)
             
             if abs(perpendicularDistance) < abs(oldPerpendicularDistance) - 0.5 && !warpSpeedReverses {
-                let newAccuracyProgress = (0.001 + progress - transitionScale * fingerProgress) / (1.001 - transitionScale)
+                let newAccuracyProgress = (0.000001 + progress - transitionScale * fingerProgress) / (1.000001 - transitionScale)
                 accuracyProgress = newAccuracyProgress // + abs(accuracyProgress - newAccuracyProgress) * reverseValue
             }
             
-            accuracyProgress += sender.progressChange
+            accuracyProgress += sender.progressChange * Float(initialSensitivity)
             
             let newProgress = (accuracyProgress + (fingerProgress - accuracyProgress) * transitionScale)
             
@@ -283,7 +282,6 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
         
         knobLayer.labelTextMinWidth = labelTextMinWidth
         
-        gesture.sensitivity = initialSensitivity
         gesture.addTarget(self, action: "handleSmartSliderGesture:")
         
         lineLayer.removeFromSuperlayer()
@@ -494,7 +492,7 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
 import UIKit.UIGestureRecognizerSubclass
 
 class SmartSliderGesture: UIPanGestureRecognizer {
-    var sensitivity: CGFloat = 0.4
+//    var sensitivity: CGFloat = 0.4
     var startBounds: (() -> CGRect)?
     var sliderBounds: (() -> CGRect)?
     var direction: Slider.Direction
@@ -575,7 +573,7 @@ class SmartSliderGesture: UIPanGestureRecognizer {
             }
             let frame = (view != nil) ? view!.frame : UIScreen.mainScreen().bounds
             let progressLength: CGFloat = (direction == .Right || direction == .Left) ? frame.width : frame.height
-            progressChange = Float(sensitivity * change / progressLength)
+            progressChange = Float( change / progressLength)
         }
     }
     

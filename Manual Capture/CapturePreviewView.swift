@@ -21,7 +21,10 @@ class CapturePreviewView: UIView {
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
         super.init(frame:CGRectZero)
         guard previewLayer != nil else { return nil }
+        
+        previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         layer.addSublayer(previewLayer)
+        self.backgroundColor = UIColor.blackColor()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -34,9 +37,6 @@ class CapturePreviewView: UIView {
             return
         }
         
-        if previewLayer.videoGravity != AVLayerVideoGravityResizeAspectFill {
-            previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-        }
         let ratio = (
             width: layer.bounds.height * aspectRatio,
             height: layer.bounds.width / aspectRatio

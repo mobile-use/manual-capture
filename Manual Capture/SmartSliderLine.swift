@@ -154,13 +154,17 @@ class SmartSliderLine: CALayer {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateLineApearance(initialSensitivity:CGFloat, _ transitionScale: Float, _ travelDistance:CGFloat, _ fingerProgress: Float) {
+    func updateLineApearance(initialSensitivity:CGFloat, _ transitionScale: Float, _ travelDistance:CGFloat, _ fingerProgress: Float, _ progress: Float, _ totalDistance: CGFloat) {
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
         
         if (transitionScale != 1) {
-            var scale = 1 / (initialSensitivity + abs(1.0 - initialSensitivity) * CGFloat(transitionScale) * 2)
-            //scale = 1 / initialSensitivity
+            let initScale = 1 / (initialSensitivity)
+            let initDisplayScale = min(6, initScale / 2)
+            let scale = 1 / (initialSensitivity + abs(1.0 - initialSensitivity) * CGFloat(transitionScale) * 2)
+            let displayScale = min(6, scale / 2)
+            
+            let length = max(bounds.width, bounds.height)
             
             // retina round
             func r(f:CGFloat) -> CGFloat {
@@ -172,10 +176,10 @@ class SmartSliderLine: CALayer {
             let lineWidth2: CGFloat = 1.00
             
             /// scaled dash space
-            let sDS = dashSpace * min(6, scale / 2)
+            let sDS = dashSpace * displayScale
             
             /// rounded scaled dash space (not)
-            let rsDS = sDS//r(sDS)
+            let rsDS = r(sDS)//sDS
             
             /// difference of rounded scaled dash space and scaled dash space
             //let drsDS = rsDS - sDS
@@ -185,18 +189,21 @@ class SmartSliderLine: CALayer {
             
             //let dashSpeedMag: CGFloat = 1.5 + CGFloat(transitionScale)
             
-            let absTD = abs(travelDistance)
-            let sabsTD = absTD * scale //* dashSpeedMag
+            //let absTD = abs(travelDistance)
+            //let boundFinger = min(1, max(fingerProgress, 0))
+            let relDScale = Float(displayScale/initDisplayScale)
+            let warpSpeed = relDScale * progress + ((fingerProgress-progress)*2/Float(initialSensitivity) + progress)
+            let sabsTD = totalDistance * CGFloat(progressValue(transitionScale, relDScale * fingerProgress, warpSpeed)) //* dashSpeedMag
             let rsabsTD = r(sabsTD)
-            let scaleCenter = r(absTD * 0.5)//CGFloat(fingerProgress))
-            
+            //let scaleCenter = r(absTD * 0)//CGFloat(fingerProgress))
             /// dash pattern lengths in in travel distance
             //let dplCount = rsabsTD / dpl1
             
             /// offset resulting from rounding dash space
             //let difT = dplCount * drsDS
-            let maxLeadingLength = max(bounds.width, bounds.height) * scale
-            let leadingLength = min(rsabsTD, maxLeadingLength) + scaleCenter //+ difT
+            
+            let maxLeadingLength = length * (displayScale/initDisplayScale) * CGFloat(progressValue(transitionScale, 1.0, 1.0 / Float(initialSensitivity) ))
+            let leadingLength = rsabsTD//, maxLeadingLength)// + scaleCenter //+ difT
             
             dashLineLayer1.lineDashPattern = [lineWidth1, rsDS]
             dashLineLayer1.lineDashPhase = CGFloat(-leadingLength)

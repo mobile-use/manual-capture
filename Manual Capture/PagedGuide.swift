@@ -17,10 +17,11 @@ class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     
     var pageViewController: UIPageViewController!
     let contents: [Content] = [
-        (title: "Quick Adjustments", description: "Get accustomed to using these quick gestures and you will be snaping quality shots with ease.", videoName: "TestFoot1"),
-        (title: "Warp Speed", description: "Ramp up the traking speed by sliding away from the slider.", videoName: "TestFoot2"),
-        (title: "Advanced Controls", description: "Tap the screen to hide or show advanced controls.", videoName: "TestFoot3"),
-        (title: "I Can't See Yet :(", description: "Please allow \(kAppName) to use the camera.", videoName: "TestFoot4")
+        (title: "Quick Adjustments", description: "Get accustomed to using these quick gestures and you will be snaping quality shots with ease.", videoName: "FourCornerUI"),
+        (title: "Warp Speed", description: "Ramp up the traking speed by sliding away from the slider.", videoName: "WarpSpeedDemo"),
+        (title: "Advanced Controls", description: "Tap the screen to hide or show advanced controls.", videoName: "AdvancedControlsDemo")
+//        ,
+//        (title: "I Can't See Yet :(", description: "Please allow \(kAppName) to use the camera.", videoName: "TestFoot4")
     ]
     
     override func viewDidLoad() {
