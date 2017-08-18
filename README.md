@@ -1,4 +1,6 @@
 ![icon](docs/icon.png)
+
+[Download](https://itunes.apple.com/us/app/manual-capture/id1033453019?mt=8)
 # Manual Capture
 Manual Capture is an app made with the intention of getting people to discover their inner photographer. Designed to give users a sense of space, the app makes composition natural and fun.
 
