@@ -10,14 +10,16 @@ import UIKit
 import AVFoundation
 import AssetsLibrary
 
-enum SessionError : ErrorType {
-    enum InputError : ErrorType {
+enum SessionError : Error {
+    enum InputError : Error {
         case AccessDenied
         case CannotAddToSession
-        case InitFailed(ErrorType?)
+        case CannotConnect
+        case InitFailed(Error?)
     }
-    enum OutputError : ErrorType {
+    enum OutputError : Error {
         case CannotAddToSession
+        case CannotConnect
     }
     case NoCameraForPosition
     case CameraInputError(InputError)
@@ -30,7 +32,7 @@ enum SessionError : ErrorType {
 // MARK: Delegate Protocol
 
 protocol CSControllerDelegate {
-    func sessionControllerError(error: ErrorType)
+    func sessionControllerError(error: Error)
     func sessionControllerNotification(notification:CSNotification)
 }
 
@@ -45,14 +47,14 @@ enum CSChange {
     }
     case LensPosition(Float)
     case Exposure(ExposureType)
-    case WhiteBalanceGains(AVCaptureWhiteBalanceGains)
+    case WhiteBalanceGains(AVCaptureDevice.WhiteBalanceGains)
     case ZoomFactor(CGFloat)
     case AspectRatio(CSAspectRatio)
     
     
-    case FocusMode(AVCaptureFocusMode)
-    case ExposureMode(AVCaptureExposureMode)
-    case WhiteBalanceMode(AVCaptureWhiteBalanceMode)
+    case FocusMode(AVCaptureDevice.FocusMode)
+    case ExposureMode(AVCaptureDevice.ExposureMode)
+    case WhiteBalanceMode(AVCaptureDevice.WhiteBalanceMode)
     case AspectRatioMode(CSAspectRatioMode)
 }
 
@@ -64,14 +66,14 @@ enum CSSet {
     }
     case LensPosition(Float)
     case Exposure(ExposureType)
-    case WhiteBalanceGains(AVCaptureWhiteBalanceGains)
+    case WhiteBalanceGains(AVCaptureDevice.WhiteBalanceGains)
     case ZoomFactor(CGFloat), ZoomFactorRamp(CGFloat, Float)
     case AspectRatio(CSAspectRatio)
     
     
-    case FocusMode(AVCaptureFocusMode)
-    case ExposureMode(AVCaptureExposureMode)
-    case WhiteBalanceMode(AVCaptureWhiteBalanceMode)
+    case FocusMode(AVCaptureDevice.FocusMode)
+    case ExposureMode(AVCaptureDevice.ExposureMode)
+    case WhiteBalanceMode(AVCaptureDevice.WhiteBalanceMode)
     case AspectRatioMode(CSAspectRatioMode)
 }
 
@@ -84,7 +86,7 @@ enum CSNotification {
 }
 
 typealias CSAspectRatio = CGFloat
-func CSAspectRatioMake(width: CGFloat, _ height: CGFloat) -> CSAspectRatio {
+func CSAspectRatioMake(_ width: CGFloat, _ height: CGFloat) -> CSAspectRatio {
     return width / height
 }
 
@@ -93,18 +95,24 @@ enum CSAspectRatioMode: Int {
 }
 
 class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        <#code#>
+    }
+    
     
     private var _notifObservers: [ String : AnyObject? ] = [ : ]
     typealias KVOContext = UInt8
     private var _context: [ String : KVOContext ] = [ : ]
     
     let session: AVCaptureSession
-    let sessionQueue: dispatch_queue_t
+    let sessionQueue: DispatchQueue
     let previewLayer: CapturePreviewLayer
-    var camera: AVCaptureDevice!
+    // KVO
+    @objc dynamic var camera: AVCaptureDevice!
     var cameraInput: AVCaptureDeviceInput!
     var audioInput: AVCaptureDeviceInput!
-    var photoOutput: AVCaptureStillImageOutput!
+    // KVO
+    @objc dynamic var photoOutput: AVCaptureStillImageOutput!
     var videoOutput: AVCaptureMovieFileOutput!
     var backgroundRecordingID: UIBackgroundTaskIdentifier!
     
@@ -112,14 +120,14 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
         didSet{
             
             previewLayer.aspectRatio = aspectRatio
-            notify( .AspectRatio(aspectRatio) )
+            notify(change: .AspectRatio(aspectRatio) )
             
         }
     }
     var aspectRatioMode: CSAspectRatioMode = .Fullscreen {
         didSet{
             updateAspectRatio()
-            notify( .AspectRatioMode(aspectRatioMode) )
+            notify(change: .AspectRatioMode(aspectRatioMode) )
         }
     }
     func updateAspectRatio() {
@@ -129,10 +137,11 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
             let aspectRatio = self.aspectRatio
             self.aspectRatio = aspectRatio
         case .Fullscreen:
-            let size = previewLayer.requestedBound?.size ?? UIScreen.mainScreen().bounds.size
+            let size = previewLayer.requestedBound?.size ?? UIScreen.main.bounds.size
             self.aspectRatio = CSAspectRatioMake(size.width, size.height)
         case .Sensor:
-            let size = previewLayer.rectForMetadataOutputRectOfInterest(CGRectMake(0,0,1,1)).size
+            let unitRect = CGRect(x: 0, y: 0, width: 1, height: 1)
+            let size = previewLayer.layerRectConverted(fromMetadataOutputRect: unitRect).size
             self.aspectRatio = CSAspectRatioMake(size.width, size.height)
         }
     }
@@ -148,13 +157,13 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
         typealias ExposureDurationBlock = (CMTime) -> ()
         typealias TargetOffsetBlock = (Float) -> ()
         typealias TargetBiasBlock = (Float) -> ()
-        typealias WhiteBalanceGainsBlock = (AVCaptureWhiteBalanceGains) -> ()
+        typealias WhiteBalanceGainsBlock = (AVCaptureDevice.WhiteBalanceGains) -> ()
         typealias ZoomFactorBlock = (CGFloat) -> ()
         typealias AspectRatioBlock = (CSAspectRatio) -> ()
         
-        typealias FocusModeBlock = (AVCaptureFocusMode) -> ()
-        typealias ExposureModeBlock = (AVCaptureExposureMode) -> ()
-        typealias WhiteBalanceModeBlock = (AVCaptureWhiteBalanceMode) -> ()
+        typealias FocusModeBlock = (AVCaptureDevice.FocusMode) -> ()
+        typealias ExposureModeBlock = (AVCaptureDevice.ExposureMode) -> ()
+        typealias WhiteBalanceModeBlock = (AVCaptureDevice.WhiteBalanceMode) -> ()
         typealias AspectRatioModeBlock = (CSAspectRatioMode) -> ()
         
         var lensPosition        = [ String : LensPositionBlock ]()
@@ -173,12 +182,13 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
         
     }
     var voBlocks = VOBlocks()
+    var observers = [NSKeyValueObservation]()
     
     override init() {
         session = AVCaptureSession()
-        session.sessionPreset = kIsVideoMode ? AVCaptureSessionPresetHigh : AVCaptureSessionPresetPhoto
+        session.sessionPreset = kIsVideoMode ? AVCaptureSession.Preset.high : AVCaptureSession.Preset.photo
         
-        sessionQueue = dispatch_queue_create("Capture Session", DISPATCH_QUEUE_SERIAL)
+        sessionQueue = DispatchQueue(label: "com.manual-camera.session")
         
         previewLayer = CapturePreviewLayer(session: session)
         previewLayer.aspectRatio = aspectRatio
@@ -196,21 +206,15 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
         }
     }
     
-    private func requestCameraAccess(completionHandler:()->Void) {
+    private func requestCameraAccess(completionHandler:@escaping ()->Void) {
         
-        AVCaptureDevice.requestAccessForMediaType( AVMediaTypeVideo ) {
+        AVCaptureDevice.requestAccess( for: AVMediaType.video ) {
             (granted) in
-            
             if granted {
-                
                 completionHandler()
-                
             }else{
-                
-                self.notify(SessionError.CameraAccessDenied)
-                
+                self.notify(error: SessionError.CameraAccessDenied)
             }
-            
         }
         
     }
@@ -219,13 +223,18 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
         
         func addDevicesIfNeeded(){
             
-            func addCameraFromPosition(position:AVCaptureDevicePosition) throws {
-                
-                guard let cameraFromPosition = position.device else {
-                    throw SessionError.NoCameraForPosition
+            func getCamera(position: AVCaptureDevice.Position) throws -> AVCaptureDevice {
+                if #available(iOS 10.0, *), let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position)  {
+                    return device
+                } else if let device = AVCaptureDevice.`default`(for: .video), device.position == position {
+                    return device
+                } else {
+                    let devices = AVCaptureDevice.devices(for: .video).filter() { $0.position == position }
+                    if !devices.isEmpty {
+                        return devices[0]
+                    }
                 }
-                camera = cameraFromPosition
-                
+                throw SessionError.NoCameraForPosition
             }
             
             func addCameraInputFromCamera(camera:AVCaptureDevice) throws {
@@ -244,45 +253,41 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                 
                 session.addInput(cameraInput)
                 
-                guard let connection = previewLayer.connection else { return }
+                guard let connection = previewLayer.connection else {
+                    throw SessionError.CameraInputError(.CannotConnect)
+                }
                 
-                let statusBarOrientation = UIApplication.sharedApplication().statusBarOrientation
+                let statusBarOrientation = UIApplication.shared.statusBarOrientation
                 connection.videoOrientation = AVCaptureVideoOrientation(ui: statusBarOrientation)
-                if connection.supportsVideoStabilization {
-                    connection.preferredVideoStabilizationMode = .Auto
+                if connection.isVideoStabilizationSupported {
+                    connection.preferredVideoStabilizationMode = .auto
                 }
                 
             }
             
             func addAudioInput() throws {
-                
                 do {
-                    let audioDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+                    guard let audioDevice = AVCaptureDevice.default(for: AVMediaType.audio) else {
+                        throw SessionError.AudioInputError(.InitFailed(nil))
+                    }
                     audioInput = try AVCaptureDeviceInput(device: audioDevice)
                 }
-                    
                 catch {
                     throw SessionError.AudioInputError(.InitFailed(error))
                 }
-                
                 guard session.canAddInput(audioInput) else {
                     throw SessionError.AudioInputError(.CannotAddToSession)
                 }
                 session.addInput(audioInput)
-                
             }
             
             func addPhotoOutput() throws {
-                
                 photoOutput = AVCaptureStillImageOutput()
-                
                 guard session.canAddOutput(photoOutput) else {
                     throw SessionError.PhotoOutputError(.CannotAddToSession)
                 }
-                
-                photoOutput.highResolutionStillImageOutputEnabled = true
+                photoOutput.isHighResolutionStillImageOutputEnabled = true
                 session.addOutput(photoOutput)
-                
             }
             
             func addVideoOutput() throws {
@@ -291,24 +296,22 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                     throw SessionError.VideoOutputError(.CannotAddToSession)
                 }
                 session.addOutput(videoOutput)
-                
-                let connection = videoOutput.connectionWithMediaType(AVMediaTypeVideo)
-                if connection.supportsVideoStabilization {
-                    connection.preferredVideoStabilizationMode = .Auto
+                guard let connection = videoOutput.connection(with: .video) else {
+                    throw SessionError.VideoOutputError(.CannotConnect)
+                }
+                if connection.isVideoStabilizationSupported {
+                    connection.preferredVideoStabilizationMode = .auto
                 }
             }
             
             do {
-                
                 session.beginConfiguration()
-                
-                backgroundRecordingID = UIBackgroundTaskInvalid
-                
+                backgroundRecordingID = UIBackgroundTaskIdentifier.invalid
                 if camera == nil {
-                    try addCameraFromPosition(AVCaptureDevicePosition.Back)
+                    try camera = getCamera(position: .back)
                 }
                 if cameraInput == nil {
-                    try addCameraInputFromCamera(camera)
+                    try addCameraInputFromCamera(camera: camera)
                 }
                 if photoOutput == nil {
                     try addPhotoOutput()
@@ -321,116 +324,35 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
                         try addVideoOutput()
                     }
                 }
-                
                 session.commitConfiguration()
-                
             } catch {
-                
-                self.notify(error)
-                
+                self.notify(error: error)
             }
         }
         
         func startRunningSession() {
-            
-            dispatch_async(sessionQueue) {
-                
+            sessionQueue.async() {
                 self.addObservers()
-                
                 self.session.startRunning()
-                
             }
-            
         }
         
         addDevicesIfNeeded()
         startRunningSession()
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        
-        guard let new = change![NSKeyValueChangeNewKey], keyPath = keyPath else { return }
-        
-        switch keyPath {
-            
-        case "photoOutput.capturingStillImage":
-            
-            let capturing = new.boolValue
-            
-            notify( .CapturingPhoto(capturing) )
-            
-        case "camera.focusMode":
-            
-            let focusMode = AVCaptureFocusMode(rawValue: new.integerValue)!
-            
-            notify( .FocusMode(focusMode) )
-            
-        case "camera.exposureMode":
-            
-            let exposureMode = AVCaptureExposureMode(rawValue: new.integerValue)!
-            
-            notify( .ExposureMode(exposureMode) )
-            
-        case "camera.whiteBalanceMode":
-            
-            let whiteBalanceMode = AVCaptureWhiteBalanceMode(rawValue: new.integerValue)!
-            
-            notify (.WhiteBalanceMode(whiteBalanceMode) )
-            
-        case "camera.ISO":
-            
-            let iso = new.floatValue
-            notify( .Exposure(.ISO(iso)) )
-            
-        case "camera.exposureTargetOffset":
-            
-            let exposureTargetOffset = new.floatValue
-            
-            notify(.Exposure(.TargetOffset(exposureTargetOffset)) )
-            
-        case "camera.exposureDuration":
-            
-            let exposureDuration = new.CMTimeValue
-            
-            notify( .Exposure(.Duration(exposureDuration)) )
-            
-        case "camera.deviceWhiteBalanceGains":
-            
-            var whiteBalanceGains = AVCaptureWhiteBalanceGains() // Empty
-            (new as! NSValue).getValue( &whiteBalanceGains ) // Convert
-            
-            notify( .WhiteBalanceGains( whiteBalanceGains ) )
-            
-        case "camera.lensPosition":
-            
-            let lensPosition = new.floatValue
-            
-            notify( .LensPosition(lensPosition) )
-            
-            
-        case "camera.adjustingFocus": return
-        case "camera.adjustingExposure": return
-        default: return
-            
-        }
-    }
-    
     // MARK: Notify
     
-    private func notify(error: ErrorType) {
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            
-            self.delegate?.sessionControllerError(error)
+    private func notify(error: Error) {
+        DispatchQueue.main.async { [unowned self] in
+            self.delegate?.sessionControllerError(error: error)
             print(error)
-            
         }
-        
     }
     
     private func notify(notification: CSNotification) {
-        dispatch_async( dispatch_get_main_queue() ) {
-            self.delegate?.sessionControllerNotification(notification)
+        DispatchQueue.main.async { [unowned self] in
+            self.delegate?.sessionControllerNotification(notification: notification)
         }
     }
     
@@ -443,7 +365,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
         case .Exposure(.Bias(let v)): self.voBlocks.targetBias.forEach { $1(v) }
         case .WhiteBalanceGains(let v): self.voBlocks.whiteBalance.forEach { $1(v) }
         case .ZoomFactor(let v): self.voBlocks.zoomFactor.forEach { $1(v) }
-            case .AspectRatio(let v): self.voBlocks.aspectRatio.forEach { $1(v) }
+        case .AspectRatio(let v): self.voBlocks.aspectRatio.forEach { $1(v) }
             
         case .FocusMode(let v): self.voBlocks.focusMode.forEach { $1(v) }
         case .ExposureMode(let v): self.voBlocks.exposureMode.forEach { $1(v) }
@@ -454,285 +376,218 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
         }
     }
     
-    private func addObservers(){
-        
-        let keyPaths = [
-            "photoOutput.capturingStillImage",
-            
-            "camera.adjustingFocus",
-            "camera.adjustingExposure",
-            
-            "camera.focusMode",
-            "camera.exposureMode",
-            "camera.whiteBalanceMode",
-            
-            "camera.ISO",
-            "camera.exposureTargetOffset",
-            "camera.exposureDuration",
-            "camera.deviceWhiteBalanceGains",
-            "camera.lensPosition"
+    private func addObservers() {
+        self.observers = [
+            photoOutput.observe(\AVCaptureStillImageOutput.isCapturingStillImage, options: [.initial], changeHandler: {
+                [unowned self] photoOutput, _ in
+                self.notify(notification: .CapturingPhoto(photoOutput.isCapturingStillImage) )
+            }),
+            camera.observe(\AVCaptureDevice.focusMode, options: [.initial], changeHandler: {
+                [unowned self] camera, _ in
+                self.notify(change: .FocusMode(camera.focusMode) )
+            }),
+            camera.observe(\AVCaptureDevice.exposureMode, options: [.initial], changeHandler: {
+                [unowned self] camera, _ in
+                self.notify(change: .ExposureMode(camera.exposureMode) )
+            }),
+            camera.observe(\AVCaptureDevice.whiteBalanceMode, options: [.initial], changeHandler: {
+                [unowned self] camera, _ in
+                self.notify(change: .WhiteBalanceMode(camera.whiteBalanceMode) )
+            }),
+            camera.observe(\AVCaptureDevice.iso, options: [.initial], changeHandler: {
+                [unowned self] camera, _ in
+                self.notify(change: .Exposure(.ISO(camera.iso)) )
+            }),
+            camera.observe(\AVCaptureDevice.exposureTargetOffset, options: [.initial], changeHandler: {
+                [unowned self] camera, _ in
+                self.notify(change: .Exposure(.TargetOffset(camera.exposureTargetOffset)) )
+            }),
+            camera.observe(\AVCaptureDevice.exposureDuration, options: [.initial], changeHandler: {
+                [unowned self] camera, _ in
+                self.notify(change: .Exposure(.Duration(camera.exposureDuration)) )
+            }),
+            camera.observe(\AVCaptureDevice.deviceWhiteBalanceGains, options: [.initial], changeHandler: {
+                [unowned self] camera, _ in
+                self.notify(change: .WhiteBalanceGains( camera.deviceWhiteBalanceGains ) )
+            }),
+            camera.observe(\AVCaptureDevice.lensPosition, options: [.initial], changeHandler: {
+                [unowned self] camera, _ in
+                self.notify(change: .LensPosition(camera.lensPosition) )
+            }),
         ]
-        
-        for keyPath in keyPaths {
-            
-            // add observer
-            _context[keyPath] = KVOContext()
-            addObserver(
-                self,
-                forKeyPath: keyPath,
-                options: .New,
-                context: &self._context[keyPath]!
-            )
-            
-        }
-        
-        unowned let me = self
-        
-        _notifObservers["RuntimeError"] = NSNotificationCenter.defaultCenter().addObserverForName(
-            AVCaptureSessionRuntimeErrorNotification,
+
+        _notifObservers["RuntimeError"] = NotificationCenter.default.addObserver(
+            forName: .AVCaptureSessionRuntimeError,
             object: sessionQueue,
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: { (_) in
-                dispatch_async( me.sessionQueue ) {
-                    me.session.startRunning()
+            queue: OperationQueue.main,
+            using: { [unowned self] (_) in
+                self.sessionQueue.async() {
+                    self.session.startRunning()
                 }
             }
         )
-        
-        _notifObservers["SubjectAreaChange"] = NSNotificationCenter.defaultCenter().addObserverForName(
-            AVCaptureDeviceSubjectAreaDidChangeNotification,
+
+        _notifObservers["SubjectAreaChange"] = NotificationCenter.default.addObserver(
+            forName: .AVCaptureDeviceSubjectAreaDidChange,
             object: camera,
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: { (_) in
-                me.delegate?.sessionControllerNotification(.SubjectAreaChange)
+            queue: OperationQueue.main,
+            using: { [unowned self] (_) in
+                self.delegate?.sessionControllerNotification(notification: .SubjectAreaChange)
             }
         )
-        
-        _notifObservers["SessionStarted"] = NSNotificationCenter.defaultCenter().addObserverForName(
-            AVCaptureSessionDidStartRunningNotification,
-            object: session, queue: NSOperationQueue.mainQueue(),
-            usingBlock: { (_) in
-                me.delegate?.sessionControllerNotification( .SessionRunning(true) )
+
+        _notifObservers["SessionStarted"] = NotificationCenter.default.addObserver(
+            forName: .AVCaptureSessionDidStartRunning,
+            object: session, queue: OperationQueue.main,
+            using: { [unowned self] (_) in
+                self.delegate?.sessionControllerNotification(notification: .SessionRunning(true) )
             }
         )
-        
-        _notifObservers["SessionStopped"] = NSNotificationCenter.defaultCenter().addObserverForName(
-            AVCaptureSessionDidStopRunningNotification,
+
+        _notifObservers["SessionStopped"] = NotificationCenter.default.addObserver(
+            forName: .AVCaptureSessionDidStopRunning,
             object: session,
-            queue: NSOperationQueue.mainQueue(),
-            usingBlock: { (_) in
-                me.delegate?.sessionControllerNotification( .SessionRunning(false) )
+            queue: OperationQueue.main,
+            using: { [unowned self] (_) in
+                self.delegate?.sessionControllerNotification(notification: .SessionRunning(false) )
             }
         )
-    }
-    
-    private func removeObservers(){
-        
-        for (kp, _) in _context {
-            
-            removeObserver(self, forKeyPath: kp, context: &_context[kp]!)
-            
-        }
-        
-        for (_, observer) in _notifObservers {
-            
-            NSNotificationCenter.defaultCenter().removeObserver(observer!)
-            
-        }
         
     }
     
     func set(set:CSSet){
-        
         let cameraConfig = { (config: () -> Void) -> Void in
-            
             do {
                 try self.camera.lockForConfiguration()
-                
                 config()
-                
                 self.camera.unlockForConfiguration()
-            }
-                
-            catch {
+            } catch {
                 print(error)
             }
-            
         }
         
         switch set {
-            
         case .FocusMode( let focusMode ):
-            
             cameraConfig(){
-                
                 self.camera.focusMode = focusMode
-                
             }
-            
         case .ExposureMode( let exposureMode ):
-            
             cameraConfig(){
-                
                 self.camera.exposureMode = exposureMode
-                
             }
-            
         case .WhiteBalanceMode( let whiteBalanceMode ):
-            
             cameraConfig(){
-                
                 self.camera.whiteBalanceMode = whiteBalanceMode
-                
             }
-            
         case .Exposure( .DurationAndISO( let duration , let ISO ) ):
-            
             cameraConfig(){
-                
-                self.camera.setExposureModeCustomWithDuration(duration, ISO: ISO, completionHandler: nil)
-                
+                self.camera.setExposureModeCustom(duration: duration, iso: ISO, completionHandler: nil)
             }
-
         case .Exposure( .Bias( let bias ) ):
-            
             cameraConfig(){
-                
                 self.camera.setExposureTargetBias( bias, completionHandler: nil )
-                
             }
-            
         case .LensPosition( let lensPosition ):
-            
             cameraConfig(){
-                
-                self.camera.setFocusModeLockedWithLensPosition( lensPosition, completionHandler: nil )
-                
+                self.camera.setFocusModeLocked( lensPosition: lensPosition, completionHandler: nil )
             }
-            
         case .WhiteBalanceGains( let wbgains ):
-            
             cameraConfig(){
-                
-                self.camera.setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains( wbgains, completionHandler: nil )
-                
+                self.camera.setWhiteBalanceModeLocked( with: wbgains, completionHandler: nil )
             }
-            
         case .ZoomFactor(let zFactor):
-            
             cameraConfig(){
-                
                 self.camera.videoZoomFactor = zFactor
-                
             }
-            
         case .ZoomFactorRamp(let zFactor, let rate):
-            
             cameraConfig(){
-                
-                self.camera.rampToVideoZoomFactor(zFactor, withRate: rate)
-                
+                self.camera.ramp(toVideoZoomFactor: zFactor, withRate: rate)
             }
-            
         case .AspectRatio(let aspectRatio):
-            
             self.aspectRatioMode = .Lock
             self.aspectRatio = aspectRatio
-        
         case .AspectRatioMode(let mode):
-        
             self.aspectRatioMode = mode
-        
         }
         
     }
     
     func captureStillPhoto() {
-        
-        dispatch_async(sessionQueue){
-            
+        sessionQueue.async(){
             func captureError(errorText:String) {
-                
                 UIAlertView(title: "Capture Error", message: errorText, delegate: nil, cancelButtonTitle: "Dismiss").show()
-                
             }
-            
             // Update the orientation on the still image output video connection before capturing.
-            guard let connection = self.photoOutput.connectionWithMediaType(AVMediaTypeVideo) else {
-                
-                captureError("Output connection was bad. Try retaking photo.")
+            guard let connection = self.photoOutput.connection(with: AVMediaType.video) else {
+                captureError(errorText: "Output connection was bad. Try retaking photo.")
                 return
-                
             }
-            connection.videoOrientation = self.previewLayer.connection?.videoOrientation ?? .LandscapeRight
+            connection.videoOrientation = self.previewLayer.connection?.videoOrientation ?? .landscapeRight
             
-            self.photoOutput.captureStillImageAsynchronouslyFromConnection(connection){
+            self.photoOutput.captureStillImageAsynchronously(from: connection){
                 (imageSampleBuffer, error) in
-                
-                guard imageSampleBuffer != nil else{
-                    
-                    captureError("Couldn't retrieve sample buffer. Try retaking photo.")
+                guard let imageSampleBuffer = imageSampleBuffer else{
+                    captureError(errorText: "Couldn't retrieve sample buffer. Try retaking photo.")
                     return
-                    
                 }
                 guard let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageSampleBuffer) else {
-                    
-                    captureError("Couldn't get image data. Try retaking photo.")
+                    captureError(errorText: "Couldn't get image data. Try retaking photo.")
                     return
-                    
                 }
                 guard let image: UIImage = UIImage(data: imageData) else {
-                    
-                    captureError("Couldn't create image from data. Try retaking photo.")
+                    captureError(errorText: "Couldn't create image from data. Try retaking photo.")
                     return
-                    
                 }
                 
                 let scaled = (
                     width: min( image.size.height * self.aspectRatio, image.size.width),
                     height: min( image.size.width / self.aspectRatio, image.size.height)
                 )
-                var cropRect = CGRectInset(
-                    CGRectMake(0, 0, image.size.width, image.size.height), // original rect
-                    (image.size.width - scaled.width) / 2 , // clipped width
-                    (image.size.height - scaled.height) / 2 // clipped height
+                var cropRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height).insetBy(
+                    dx: (image.size.width - scaled.width) / 2 , // clipped width
+                    dy: (image.size.height - scaled.height) / 2 // clipped height
                 )
                 
                 var cropTransForm: CGAffineTransform {
                     func rad(deg:Double)-> CGFloat {
-                        return CGFloat(deg / 180.0 * M_PI)
+                        return CGFloat(deg / 180.0 * Double.pi)
                     }
                     switch (image.imageOrientation)
                     {
-                    case .Left:
-                        return CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(90)), 0, -image.size.height)
-                    case .Right:
-                        return CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(-90)), -image.size.width, 0)
-                    case .Down:
-                        return CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(-180)), -image.size.width, -image.size.height)
+                    case .left:
+                        let rotationTransform = CGAffineTransform(rotationAngle: rad(deg: 90))
+                        return rotationTransform.translatedBy(x: 0, y: -image.size.height)
+                    case .right:
+                        let rotationTransform = CGAffineTransform(rotationAngle: rad(deg: -90))
+                        return rotationTransform.translatedBy(x: -image.size.width, y: 0)
+                    case .down:
+                        let rotationTransform = CGAffineTransform(rotationAngle: rad(deg: -180))
+                        return rotationTransform.translatedBy(x: -image.size.width, y: -image.size.height)
                     default:
-                        return CGAffineTransformIdentity
+                        return CGAffineTransform.identity
                     }
                 }
                 
-                cropRect = CGRectApplyAffineTransform(cropRect, cropTransForm)
+                cropRect = cropRect.applying(cropTransForm)
                 
-                guard let croppedImage = CGImageCreateWithImageInRect(image.CGImage, cropRect) else {
-                    
-                    captureError("Couldn't crop image to apropriate size. Try retaking photo.")
+                guard let cgImage = image.cgImage else {
+                    captureError(errorText: "Couldn't turn image into CGImage. Try retaking photo.")
                     return
-                    
+                }
+                guard let croppedImage = cgImage.cropping(to: cropRect) else {
+                    captureError(errorText: "Couldn't crop image to apropriate size. Try retaking photo.")
+                    return
                 }
                 let orientation = ALAssetOrientation(rawValue: image.imageOrientation.rawValue)!
                 
-                ALAssetsLibrary().writeImageToSavedPhotosAlbum(croppedImage, orientation: orientation) {
+                ALAssetsLibrary().writeImage(toSavedPhotosAlbum: croppedImage, orientation: orientation) {
                     (path, error) in
                     
-                    self.notify(.PhotoSaved)
+                    self.notify(notification: .PhotoSaved)
                     
                     guard error == nil else {
                         
-                        captureError("Couldn't save photo.\n Try going to Settings > Privacy > Photos\n Then switch \(kAppName) to On")
+                        captureError(errorText: "Couldn't save photo.\n Try going to Settings > Privacy > Photos\n Then switch \(kAppName) to On")
                         return
                         
                     }
@@ -748,51 +603,39 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
     
     func captureVideo() {
         
-        dispatch_async(sessionQueue){
-            if !self.videoOutput.recording {
+        sessionQueue.async(){
+            if !self.videoOutput.isRecording {
                 
-//                var record = {
-//                    if UIDevice.currentDevice().multitaskingSupported {
-//                        self.backgroundRecordingID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler(nil)
-//                    }
-//                    
-//                    let recordingConnection = self.videoOutput.connectionWithMediaType(AVMediaTypeVideo)
-//                    recordingConnection.videoOrientation = self.previewLayer.connection.videoOrientation
-//                    
-//                    let videoFileName = NSProcessInfo.processInfo().globallyUniqueString
-//                    let videoFilePath = NSTemporaryDirectory().stringByAppendingString(videoFileName + ".mov")
-//                    
-//                    self.videoOutput.startRecordingToOutputFileURL(
-//                        NSURL(fileURLWithPath: videoFilePath), recordingDelegate: self)
-//                }
                 var me = self
-                let unsafeMe = UnsafeMutablePointer<CSController>.alloc(1)
-                unsafeMe.initialize(me)
+                let unsafeMe = UnsafeMutablePointer<CSController>.allocate(capacity: 1)
+                unsafeMe.initialize(to: me)
                 
                 AudioServicesAddSystemSoundCompletion(1117, nil, nil, { _, userData in
-                    let unsafeMe = unsafeBitCast(userData, UnsafeMutablePointer<CSController>.self)
-                    var me: CSController { return unsafeMe.memory }
+                    let unsafeMe = unsafeBitCast(userData, to: UnsafeMutablePointer<CSController>.self)
+                    var me: CSController { return unsafeMe.pointee }
                     
                     // start recording
-                    if UIDevice.currentDevice().multitaskingSupported {
-                        me.backgroundRecordingID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler(nil)
+                    if UIDevice.current.isMultitaskingSupported {
+                        me.backgroundRecordingID = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
                     }
                     
-                    let recordingConnection = me.videoOutput.connectionWithMediaType(AVMediaTypeVideo)
-                    recordingConnection.videoOrientation = me.previewLayer.connection.videoOrientation
+                    if let recordingConnection = me.videoOutput.connection(with: AVMediaType.video),
+                        let previewConnection = me.previewLayer.connection {
+                        recordingConnection.videoOrientation = previewConnection.videoOrientation
+                    } else {
+                        me.notify(error: SessionError.OutputError.CannotConnect)
+                    }
+                    let videoFileName = ProcessInfo.processInfo.globallyUniqueString
+                    let videoFilePath = NSTemporaryDirectory().appendingFormat(videoFileName + ".mov")
                     
-                    let videoFileName = NSProcessInfo.processInfo().globallyUniqueString
-                    let videoFilePath = NSTemporaryDirectory().stringByAppendingString(videoFileName + ".mov")
-                    
-                    me.videoOutput.startRecordingToOutputFileURL(
-                        NSURL(fileURLWithPath: videoFilePath), recordingDelegate: me)
+                    me.videoOutput.startRecording(
+                        to: NSURL(fileURLWithPath: videoFilePath) as URL, recordingDelegate: me)
                     
                     
                     AudioServicesRemoveSystemSoundCompletion(1117)
                     
-                    unsafeMe.destroy()
-                    unsafeMe.dealloc(1)
-                    userData.destroy()
+                    unsafeMe.deinitialize(count: 1)
+                    unsafeMe.deallocate()
                     
                 }, unsafeMe)
                 
@@ -815,37 +658,37 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
         AudioServicesPlaySystemSound(1118)
         
         let currentBackgroundRecordingID = backgroundRecordingID
-        backgroundRecordingID = UIBackgroundTaskInvalid
+        backgroundRecordingID = UIBackgroundTaskIdentifier.invalid
         
         let cleanup = {
             do {
-                try NSFileManager.defaultManager().removeItemAtURL(outputFileURL)
+                try FileManager.default.removeItem(at: outputFileURL as URL)
             } catch {
                 
             }
-            if currentBackgroundRecordingID != UIBackgroundTaskInvalid {
-                UIApplication.sharedApplication().endBackgroundTask(currentBackgroundRecordingID)
+            if currentBackgroundRecordingID != UIBackgroundTaskIdentifier.invalid {
+                UIApplication.shared.endBackgroundTask(currentBackgroundRecordingID!)
             }
         }
         
         if error == nil {
             PHPhotoLibrary.requestAuthorization { status in
-                guard status == .Authorized else { cleanup(); return }
-                PHPhotoLibrary.sharedPhotoLibrary().performChanges({
+                guard status == .authorized else { cleanup(); return }
+                PHPhotoLibrary.shared().performChanges({
                     if #available(iOS 9.0, *) {
                         let options = PHAssetResourceCreationOptions()
                         options.shouldMoveFile = true
-                        let changeRequest = PHAssetCreationRequest.creationRequestForAsset()
-                        changeRequest.addResourceWithType(.Video, fileURL: outputFileURL, options: options)
+                        let changeRequest = PHAssetCreationRequest.forAsset()
+                        changeRequest.addResource(with: .video, fileURL: outputFileURL as URL, options: options)
                     } else {
                         // Fallback on earlier versions
-                        PHAssetChangeRequest.creationRequestForAssetFromVideoAtFileURL(outputFileURL)
+                        PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputFileURL as URL)
                     }
                     
                     }, completionHandler: { success, error in
                 
                         if ( !success ) {
-                            print( "Could not save movie to photo library: ", error )
+                            print( "Could not save movie to photo library: ", error ?? "" )
                         }
                         cleanup()
                 })
@@ -858,149 +701,91 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
     
     // MARK: Utilities
     
-    
-    
-    func _normalizeGains(var g:AVCaptureWhiteBalanceGains) -> AVCaptureWhiteBalanceGains{
-        
+    func _normalizeGains( g:AVCaptureDevice.WhiteBalanceGains) -> AVCaptureDevice.WhiteBalanceGains{
+        var g = g
         let maxGain = camera.maxWhiteBalanceGain - 0.001
         
         g.redGain = max( 1.0, g.redGain )
         
-        
         g.greenGain = max( 1.0, g.greenGain )
-        
         g.blueGain = max( 1.0, g.blueGain )
-        
         g.redGain = min( maxGain, g.redGain )
-        
         g.greenGain = min( maxGain, g.greenGain )
-        
         g.blueGain = min( maxGain, g.blueGain )
         
         return g
         
     }
     
-    
-    
     /// previous tint and temp
     
+    private var _ptt:AVCaptureDevice.WhiteBalanceTemperatureAndTintValues? = nil
     
-    
-    private var _ptt:AVCaptureWhiteBalanceTemperatureAndTintValues? = nil
-    
-    func _normalizeGainsForTemperatureAndTint(tt:AVCaptureWhiteBalanceTemperatureAndTintValues) -> AVCaptureWhiteBalanceGains{
+    func _normalizeGainsForTemperatureAndTint(tt:AVCaptureDevice.WhiteBalanceTemperatureAndTintValues) -> AVCaptureDevice.WhiteBalanceGains{
         
-        var g = camera.deviceWhiteBalanceGainsForTemperatureAndTintValues(tt)
+        var g = camera.deviceWhiteBalanceGains(for: tt)
         
-        if !_gainsInRange(g){
+        if !_gainsInRange(gains: g){
             
             if _ptt != nil {
-                
                 let dTemp = tt.temperature - _ptt!.temperature
-                
                 let dTint = tt.tint - _ptt!.tint
-                
                 var eTint = round(tt.tint)
-                
                 var eTemperature = round(tt.temperature)
-                
                 var i = 0
-                
-                var eGains: AVCaptureWhiteBalanceGains = camera.deviceWhiteBalanceGainsForTemperatureAndTintValues(tt)
-                
-                
+                var eGains: AVCaptureDevice.WhiteBalanceGains = camera.deviceWhiteBalanceGains(for: tt)
                 
                 if abs(dTemp) > abs(dTint) {
-                    
-                    while !_gainsInRange(eGains) {
-                        
-                        let nTT = camera.temperatureAndTintValuesForDeviceWhiteBalanceGains(_normalizeGains(eGains))
-                        
+                    while !_gainsInRange(gains: eGains) {
+                        let nTT = camera.temperatureAndTintValues(for: _normalizeGains(g: eGains))
                         let eTintNew = round(nTT.tint)
-                        
                         let eTemperatureNew = round(nTT.temperature)
-                        
                         //prioritize
-                        
                         if eTint != eTintNew {eTint = eTintNew}
-                            
                         else if eTemperature != eTemperatureNew {eTemperature = eTemperatureNew}
-                        
                         if i > 3 || (eTint == eTintNew && eTemperature == eTemperatureNew) {
-                            
-                            eGains = _normalizeGains(eGains)
-                            
+                            eGains = _normalizeGains(g: eGains)
                         }else{
-                            
-                            eGains = camera.deviceWhiteBalanceGainsForTemperatureAndTintValues(AVCaptureWhiteBalanceTemperatureAndTintValues(temperature: eTemperature, tint: eTint))
-                            
+                            eGains = camera.deviceWhiteBalanceGains(for: AVCaptureDevice.WhiteBalanceTemperatureAndTintValues(temperature: eTemperature, tint: eTint))
                         }
-                        
-                        i++
-                        
+                        i += 1
                     }
-                    
                     g = eGains
-                    
-                }else if abs(dTemp) < abs(dTint) {
-                    
-                    while !_gainsInRange(eGains) {
-                        
-                        let nTT = camera.temperatureAndTintValuesForDeviceWhiteBalanceGains(_normalizeGains(eGains))
-                        
+                } else if abs(dTemp) < abs(dTint) {
+                    while !_gainsInRange(gains: eGains) {
+                        let nTT = camera.temperatureAndTintValues(for: _normalizeGains(g: eGains))
                         let eTintNew = round(nTT.tint)
-                        
                         let eTemperatureNew = round(nTT.temperature)
-                        
-                        if eTemperature != eTemperatureNew {eTemperature = eTemperatureNew}
-                            
-                        else if eTint != eTintNew {eTint = eTintNew}
-                        
-                        if i > 3 || (eTint == eTintNew && eTemperature == eTemperatureNew) {
-                            
-                            eGains = _normalizeGains(eGains)
-                            
-                        }else{
-                            
-                            eGains = camera.deviceWhiteBalanceGainsForTemperatureAndTintValues(AVCaptureWhiteBalanceTemperatureAndTintValues(temperature: eTemperature, tint: eTint))
+                        if eTemperature != eTemperatureNew {
+                            eTemperature = eTemperatureNew
+                        } else if eTint != eTintNew {
+                            eTint = eTintNew
                             
                         }
-                        
-                        i++
-                        
+                        if i > 3 || (eTint == eTintNew && eTemperature == eTemperatureNew) {
+                            eGains = _normalizeGains(g: eGains)
+                        } else {
+                            eGains = camera.deviceWhiteBalanceGains(for: AVCaptureDevice.WhiteBalanceTemperatureAndTintValues(temperature: eTemperature, tint: eTint))
+                        }
+                        i += 1
                     }
-                    
                     g = eGains
-                    
                 }
-                
             }
-            
         }
         
         _ptt = tt
         
-        return _normalizeGains(g)
+        return _normalizeGains(g: g)
         
     }
     
-    func _gainsInRange(gains:AVCaptureWhiteBalanceGains) -> Bool {
-        
+    func _gainsInRange(gains: AVCaptureDevice.WhiteBalanceGains) -> Bool {
         let maxGain = camera.maxWhiteBalanceGain
-        
         let r = (1.0 <= gains.redGain && gains.redGain <= maxGain)
-        
         let g = (1.0 <= gains.greenGain && gains.greenGain <= maxGain)
-        
         let b = (1.0 <= gains.blueGain && gains.blueGain <= maxGain)
-        
         return r && g && b
         
-    }
-    
-
-    deinit {
-        removeObservers()
     }
 }

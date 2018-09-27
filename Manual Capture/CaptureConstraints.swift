@@ -14,7 +14,7 @@ typealias StyleConstraints = (UIView) -> Constraints
 
 
 extension NSLayoutConstraint {
-    convenience init(item: UIView, attribute: NSLayoutAttribute, relation: NSLayoutRelation = .Equal, toItem: UIView? = nil, attribute toAttribute: NSLayoutAttribute = .NotAnAttribute, multiplier: CGFloat = 1, constant: CGFloat = 0) {
+    convenience init(item: UIView, attribute: NSLayoutConstraint.Attribute, relation: NSLayoutConstraint.Relation = .equal, toItem: UIView? = nil, attribute toAttribute: NSLayoutConstraint.Attribute = .notAnAttribute, multiplier: CGFloat = 1, constant: CGFloat = 0) {
         self.init(item: item, attribute: attribute,
             relatedBy: relation,
             toItem: toItem, attribute: toAttribute,
@@ -27,7 +27,7 @@ struct Style {
     typealias StyleConstraints = ([UIView]) -> Constraints
     let constraints: StyleConstraints
     
-    init(constraints: StyleConstraints){
+    init(constraints: @escaping StyleConstraints){
         self.constraints = constraints
     }
     
@@ -37,11 +37,11 @@ struct Style {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.frame = superview.bounds
         
-        let horizontal = Constraint.constraintsWithVisualFormat("H:|[view]|",
-            options: [.AlignAllCenterX, .AlignAllCenterY],
+        let horizontal = Constraint.constraints(withVisualFormat: "H:|[view]|",
+                                                options: [.alignAllCenterX, .alignAllCenterY],
             metrics: nil, views: ["view" : view])
-        let verticle = Constraint.constraintsWithVisualFormat("V:|[view]|",
-            options: [.AlignAllCenterX, .AlignAllCenterY],
+        let verticle = Constraint.constraints(withVisualFormat: "V:|[view]|",
+                                              options: [.alignAllCenterX, .alignAllCenterY],
             metrics: nil, views: ["view" : view])
         
         return horizontal + verticle
@@ -56,13 +56,13 @@ extension Style {
         
         container.translatesAutoresizingMaskIntoConstraints = false
         
-        let centerY = Constraint(item: container, attribute: .CenterY,
-            toItem: superview, attribute: .CenterY)
-        let rightMargin = Constraint(item: container, attribute: .RightMargin,
-            toItem: superview, attribute: .RightMargin,
+        let centerY = Constraint(item: container, attribute: .centerY,
+                                 toItem: superview, attribute: .centerY)
+        let rightMargin = Constraint(item: container, attribute: .rightMargin,
+                                     toItem: superview, attribute: .rightMargin,
             constant: -10)
-        let width = Constraint(item: container, attribute: .Width, constant: 60)
-        let height = Constraint(item: container, attribute: .Height, constant: 60)
+        let width = Constraint(item: container, attribute: .width, constant: 60)
+        let height = Constraint(item: container, attribute: .height, constant: 60)
         
         return [centerY, rightMargin, width, height]
     }
@@ -75,11 +75,11 @@ extension Style {
 //        toolbar.layer.borderWidth = 1.0
 //        toolbar.layer.borderColor = UIColor.whiteColor().CGColor        
         
-        let x = Constraint.constraintsWithVisualFormat("H:|[toolbar(40)]",
-            options: [.AlignAllCenterX, .AlignAllCenterY],
+        let x = Constraint.constraints(withVisualFormat: "H:|[toolbar(40)]",
+                                       options: [.alignAllCenterX, .alignAllCenterY],
             metrics: nil, views: ["toolbar" : toolbar])
-        let y = Constraint.constraintsWithVisualFormat("V:|[toolbar]|",
-            options: [.AlignAllCenterX, .AlignAllCenterY],
+        let y = Constraint.constraints(withVisualFormat: "V:|[toolbar]|",
+                                       options: [.alignAllCenterX, .alignAllCenterY],
             metrics: nil, views: ["toolbar" : toolbar])
         
         return x + y
@@ -93,11 +93,11 @@ extension Style {
 //        capturebar.layer.borderWidth = 1.0
 //        capturebar.layer.borderColor = UIColor.whiteColor().CGColor
         
-        let x = Constraint.constraintsWithVisualFormat("H:[capturebar(80)]|",
-            options: [.AlignAllCenterX, .AlignAllCenterY],
+        let x = Constraint.constraints(withVisualFormat: "H:[capturebar(80)]|",
+                                       options: [.alignAllCenterX, .alignAllCenterY],
             metrics: nil, views: ["capturebar" : capturebar])
-        let y = Constraint.constraintsWithVisualFormat("V:|[capturebar]|",
-            options: [.AlignAllCenterX, .AlignAllCenterY],
+        let y = Constraint.constraints(withVisualFormat: "V:|[capturebar]|",
+                                       options: [.alignAllCenterX, .alignAllCenterY],
             metrics: nil, views: ["capturebar" : capturebar])
         
         return x + y

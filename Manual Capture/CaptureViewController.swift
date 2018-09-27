@@ -13,13 +13,14 @@ import AssetsLibrary
 let kCaptureTintColor = UIColor(red: 221/255, green: 0/255, blue: 63/255, alpha: 1.0)
 
 class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureViewDelegate {
+    
     var controlView: CaptureView!
     
     override func viewDidLoad() {
         controlView = CaptureView(frame: view.bounds)
         controlView.delegate = self
         
-        view.backgroundColor = UIColor.blackColor()
+        view.backgroundColor = UIColor.black
         view.addSubview(controlView)
         
         delay(2.4) {
@@ -28,17 +29,17 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
 //        print(view.frame, view.bounds)
 //        print(controlView.frame, controlView.bounds)
 //        print(controlView.sessionController.previewLayer.frame, controlView.sessionController.previewLayer.bounds)
         
-        controlView.frame = view.superview!.convertRect(view.superview!.bounds, toView: controlView)
-        controlView.frame.origin = CGPointZero
+        controlView.frame = view.superview!.convert(view.superview!.bounds, to: controlView)
+        controlView.frame.origin = CGPoint.zero
         controlView.sessionController.previewLayer.frame.size = controlView.bounds.size
-        controlView.sessionController.previewLayer.position = CGPointMake(controlView.bounds.midX, controlView.bounds.midY)
-        previousOrient = UIApplication.sharedApplication().statusBarOrientation
-        UIView.animateWithDuration(0.2){
+        controlView.sessionController.previewLayer.position = CGPoint(x: controlView.bounds.midX, y: controlView.bounds.midY)
+        previousOrient = UIApplication.shared.statusBarOrientation
+        UIView.animate(withDuration: 0.2){
              self.controlView.alpha = 1.0
         }
         //controlView.sessionController.aspectRatio = controlView.sessionController.aspectRatio
@@ -49,11 +50,11 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         controlView.sessionController.volumeButtonHandler?.active = true
-        UIView.animateWithDuration(0){
-            self.controlView.updateConstraintsForKeys(
-                [
+        UIView.animate(withDuration: 0){
+            self.controlView.updateConstraints(
+                forKeys: [
                     .Slider(.Top),
                     .Slider(.Bottom),
                     .Slider(.Left),
@@ -69,53 +70,56 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
         controlView.sessionController.updateAspectRatio()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         controlView.sessionController.volumeButtonHandler?.active = false
     }
     
     
     var allowPortrait = false
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return (allowPortrait) ? [.Landscape, .Portrait] : [.Landscape, .Portrait]//UIInterfaceOrientationMask.Landscape
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return (allowPortrait) ? [.landscape, .portrait] : [.landscape, .portrait]//UIInterfaceOrientationMask.Landscape
     }
     
     func showPhotoBrowser() {
         loadCameraRollAssets()
-        let browser = MWPhotoBrowser(delegate: self)
+        guard let browser = MWPhotoBrowser(delegate: self) else {
+            fatalError("couldn't load MWPhotoBrowser")
+            return
+        }
         browser.startOnGrid = true
         browser.enableGrid = true
         browser.enableSwipeToDismiss = true
         
         let nav = UINavigationController(rootViewController: browser)
-        presentViewController(nav, animated: true, completion: nil)
+        present(nav, animated: true, completion: nil)
     }
     
-    var cameraRollAssets: PHFetchResult!
+    var cameraRollAssets: PHFetchResult<PHAsset>!
     
     func loadCameraRollAssets() {
-        let result = PHAssetCollection.fetchAssetCollectionsWithType(
-            PHAssetCollectionType.SmartAlbum,
-            subtype: PHAssetCollectionSubtype.SmartAlbumUserLibrary,
+        let result = PHAssetCollection.fetchAssetCollections(
+            with: PHAssetCollectionType.smartAlbum,
+            subtype: PHAssetCollectionSubtype.smartAlbumUserLibrary,
             options: nil
         )
-        guard let cameraRoll = result.firstObject as? PHAssetCollection else { print(result); return }
+        guard let cameraRoll = result.firstObject else { print(result); return }
         
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        cameraRollAssets =  PHAsset.fetchAssetsInAssetCollection(cameraRoll, options: fetchOptions)
+        cameraRollAssets = PHAsset.fetchAssets(in: cameraRoll, options: fetchOptions)
     }
     
-    func numberOfPhotosInPhotoBrowser(photoBrowser: MWPhotoBrowser!) -> UInt {
+    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
         return UInt(cameraRollAssets.count)
     }
     
-    func photoBrowser(photoBrowser: MWPhotoBrowser!, photoAtIndex index: UInt) -> MWPhotoProtocol! {
-        guard let asset = cameraRollAssets.objectAtIndex(Int(index)) as? PHAsset else { return nil }
+    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
+        let asset = cameraRollAssets.object(at: Int(index))
 //        let id = asset.localIdentifier[0..<36]
 //        let url = NSURL(string: "assets-library://asset/asset.JPG?id=\(id)&ext=JPG")
 //        print(url)
 //        return MWPhoto(URL: url)
-        var size = CGSizeMake(CGFloat(asset.pixelWidth), CGFloat(asset.pixelHeight))
+        var size = CGSize(width: CGFloat(asset.pixelWidth), height: CGFloat(asset.pixelHeight))
         let length = max(size.width, size.height)
         let maxLength: CGFloat = 1920
         let scaleDown = maxLength / max(length, maxLength)
@@ -124,9 +128,9 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
         return MWPhoto(asset: asset, targetSize: size)
     }
     
-    func photoBrowser(photoBrowser: MWPhotoBrowser!, thumbPhotoAtIndex index: UInt) -> MWPhotoProtocol! {
-        guard let asset = cameraRollAssets.objectAtIndex(Int(index)) as? PHAsset else { return nil }
-        let size = CGSizeMake(400, 400)
+    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, thumbPhotoAt index: UInt) -> MWPhotoProtocol! {
+        let asset = cameraRollAssets.object(at: Int(index))
+        let size = CGSize(width: 400, height: 400)
         return MWPhoto(asset: asset, targetSize: size)
     }
     
@@ -295,7 +299,7 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
     var previousOrient: UIInterfaceOrientation? = nil
     var previousaspectRatio: CSAspectRatio? = nil
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 //        controlView.backgroundColor = UIColor.clearColor()
 //        let oldSuperlayer = controlView.sessionController.previewLayer.superlayer
 //        let pLayer = controlView.sessionController.previewLayer
@@ -306,82 +310,81 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
 //        let dur = coordinator.transitionDuration()
         
         let oldTransform = (view: view.transform, controlView: controlView.transform)
-        let deltaTransform = coordinator.targetTransform()
-        let invertTransform = CGAffineTransformInvert(deltaTransform)
+        let deltaTransform = coordinator.targetTransform
+        let invertTransform = deltaTransform.inverted()
         
         
-        coordinator.animateAlongsideTransition({(_) in
-            UIView.animateWithDuration(0){
-                self.view.frame = coordinator.containerView().bounds
+        coordinator.animate(alongsideTransition: {(_) in
+            UIView.animate(withDuration: 0){
+                self.view.frame = coordinator.containerView.bounds
             }
             
             // counter rotate
-            self.view.transform = CGAffineTransformConcat(self.view.transform, invertTransform)
-                .rotate(0.000001)
+            self.view.transform = self.view.transform.concatenating(invertTransform)
+                .rotate(angle: 0.000001)
             // correct position
             
 //            self.view.bounds.size = self.view.convertRect(coordinator.containerView().bounds, toView: self.view).size
 //            
 //            self.controlView.frame = self.view.bounds
             
-            self.controlView.frame.offsetInPlace(dx: (size.width - self.view.frame.width)/2 ,
-                dy: (size.height - self.view.frame.height)/2)
-            }, completion: nil)
+            self.controlView.frame.offsetBy(dx: (size.width - self.view.frame.width)/2 ,
+                                            dy: (size.height - self.view.frame.height)/2)
+        }, completion: nil)
         
-        let options: UIViewAnimationOptions = [.CurveLinear, .BeginFromCurrentState]
+        let options: UIView.AnimationOptions = [.curveLinear, .beginFromCurrentState]
         let fadeSpeed = 0.4
         
         var oldAlphas: [Int : CGFloat] = [:]
         
-        UIView.animateWithDuration(fadeSpeed/2, delay: 0, options: options, animations: {
-            self.controlView.subviews.forEach { subview in
-                oldAlphas[subview.hash] = subview.alpha
-                subview.alpha = (subview == self.controlView.shutterButton) ? subview.alpha : 0.0
-            }
+        UIView.animate(withDuration: fadeSpeed/2, delay: 0, options: options, animations: {
+                self.controlView.subviews.forEach { subview in
+                    oldAlphas[subview.hash] = subview.alpha
+                    subview.alpha = (subview == self.controlView.shutterButton) ? subview.alpha : 0.0
+                }
             }) { _ in
-            
-            self.view.transform = oldTransform.view
-            
-            self.controlView.frame.insetInPlace(dx: (self.controlView.frame.width - size.width)/2,
-                dy: (self.controlView.frame.height - size.height)/2)
-            
-            let orient = UIApplication.sharedApplication().statusBarOrientation
+                
+                self.view.transform = oldTransform.view
+                    self.controlView.frame.insetBy(dx: (self.controlView.frame.width - size.width)/2,
+                                               dy: (self.controlView.frame.height - size.height)/2)
+                
+                    let orient = UIApplication.shared.statusBarOrientation
+                
+                    CATransaction.disableActions {
+                    
+                self.controlView.sessionController.previewLayer.connection?.videoOrientation = AVCaptureVideoOrientation(ui:orient)
+                        
+                    }
+                
+                let currentaspectRatio = self.controlView.sessionController.aspectRatio
+                
+                    guard let previousOrient = self.previousOrient, orient != previousOrient else {
+                    self.previousOrient = orient
+                    return
+                }
+                self.previousOrient = orient
                 
                 CATransaction.disableActions {
-                
-            self.controlView.sessionController.previewLayer.connection?.videoOrientation = AVCaptureVideoOrientation(ui:orient)
+                    self.controlView.sessionController.previewLayer.frame.size = self.controlView.bounds.size
+                    self.controlView.sessionController.previewLayer.position = CGPointMake(self.controlView.bounds.midX, self.controlView.bounds.midY)
+                    
+                    self.controlView.sessionController.updateAspectRatio()
                     
                 }
-            
-            let currentaspectRatio = self.controlView.sessionController.aspectRatio
-            
-            guard let previousOrient = self.previousOrient where orient != previousOrient else {
-                self.previousOrient = orient
-                return
-            }
-            self.previousOrient = orient
                 
-            CATransaction.disableActions {
-                self.controlView.sessionController.previewLayer.frame.size = self.controlView.bounds.size
-                self.controlView.sessionController.previewLayer.position = CGPointMake(self.controlView.bounds.midX, self.controlView.bounds.midY)
-                
-                self.controlView.sessionController.updateAspectRatio()
-                
-            }
-            
-            self.controlView.updateConstraintsForKeys(
-                [
-                    .Slider(.Top),
-                    .Slider(.Bottom),
-                    .Slider(.Left),
-                    .Slider(.Right),
-                    .ShutterButton,
-                    .MenuControl,
-                    .GalleryButton,
-                    .UndoButton,
-                    .ControlPanel
-                ]
-            )
+                self.controlView.updateConstraintsForKeys(
+                    [
+                        .Slider(.Top),
+                        .Slider(.Bottom),
+                        .Slider(.Left),
+                        .Slider(.Right),
+                        .ShutterButton,
+                        .MenuControl,
+                        .GalleryButton,
+                        .UndoButton,
+                        .ControlPanel
+                    ]
+                )
             
 //            
 //            let isTempAR = self.controlView.menuControl.alpha != 1 && self.controlView.layout.currentMode == .AspectRatio

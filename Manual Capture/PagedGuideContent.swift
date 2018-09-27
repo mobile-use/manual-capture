@@ -9,7 +9,7 @@
 import UIKit
 import AVKit
 
-let videoQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)//dispatch_queue_create("Video Preparing", DISPATCH_QUEUE_SERIAL)
+//let videoQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)//dispatch_queue_create("Video Preparing", DISPATCH_QUEUE_SERIAL)
 
 
 class PagedGuideContent: UIViewController {
@@ -22,50 +22,49 @@ class PagedGuideContent: UIViewController {
     
     var content: Content = ("Title", "Description.", "TestFoot1") {
         didSet {
-            titleLabel?.text = content.title
-            descriptionTextView?.text = content.description
-            let fixedWidth = descriptionTextView?.frame.width
-            descriptionTextView?.frame.size = descriptionTextView.sizeThatFits(CGSize(width: fixedWidth!, height: CGFloat.max))
+            titleLabel.text = content.title
+            descriptionTextView.text = content.description
+            let fixedWidth = descriptionTextView.frame.width
+            descriptionTextView.frame.size = descriptionTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
         }
     }
     var index = -1
     
     override func viewDidLoad() {
-        titleLabel?.text = content.title
-        descriptionTextView?.text = content.description
-        let fixedWidth = descriptionTextView?.frame.width
-        descriptionTextView?.frame.size = descriptionTextView.sizeThatFits(CGSize(width: fixedWidth!, height: CGFloat.max))
+        titleLabel.text = content.title
+        descriptionTextView.text = content.description
+        let fixedWidth = descriptionTextView.frame.width
+        let discriptionFitSize = CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude)
+        descriptionTextView.frame.size = descriptionTextView.sizeThatFits(discriptionFitSize)
         
-        
-
-        
-        let url = NSBundle.mainBundle().URLForResource(content.videoName, withExtension: "mov")
-        mediaPlayer = AVPlayer(URL: url!)
-        let mediaLayer = AVPlayerLayer(player: mediaPlayer)
-        mediaLayer.frame = mediaContainer.layer.bounds
-        mediaContainer.layer.addSublayer(mediaLayer)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "playerItemDidReachEnd:",
-            name: AVPlayerItemDidPlayToEndTimeNotification,
-            object: mediaPlayer.currentItem)
-
+        if let url = Bundle.main.url(forResource: content.videoName, withExtension: "mov") {
+            mediaPlayer = AVPlayer(url: url)
+            let mediaLayer = AVPlayerLayer(player: mediaPlayer)
+            mediaLayer.frame = mediaContainer.layer.bounds
+            mediaContainer.layer.addSublayer(mediaLayer)
+            
+            let selector = #selector(PagedGuideContent.playerItemDidReachEnd(notification:))
+            NotificationCenter.default.addObserver(self, selector: selector, name: .AVPlayerItemDidPlayToEndTime,
+                                                   object: mediaPlayer.currentItem)
+        } else {
+            print("Could not locate movie file at: \(content.videoName).mov")
+        }
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
-    func playerItemDidReachEnd(notification: NSNotification) {
-        mediaPlayer.seekToTime(kCMTimeZero)
+    @objc func playerItemDidReachEnd(notification: NSNotification) {
+        mediaPlayer.seek(to: CMTime.zero)
         mediaPlayer.play()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         mediaPlayer.play()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         mediaPlayer.pause()
     }
 }

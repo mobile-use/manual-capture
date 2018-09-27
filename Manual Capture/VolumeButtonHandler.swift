@@ -10,16 +10,13 @@ import AVFoundation
 import MediaPlayer
 
 class VolumeButtonHandler: NSObject {
-    
-    private let sessionVolumeKeyPath = "outputVolume"
-    
-    private var sessionContext = KVOContext()
+    private let outputVolumeObserver: NSKeyValueObservation
     
     private let maxVolume: Float = 0.99999, minVolume: Float = 0.00001
     
     private var appIsActive: Bool
     
-    private var session = AVAudioSession.sharedInstance()
+    @objc dynamic private var session = AVAudioSession.sharedInstance()
     
     private var volumeView: MPVolumeView!
     
@@ -36,78 +33,78 @@ class VolumeButtonHandler: NSObject {
         super.init()
         
         do {
+            if #available(iOS 10.0, *) {
+                try session.setCategory(AVAudioSession.Category.ambient, mode: .default)
+            } else {
+                session.perform(NSSelectorFromString("setCategory:error:"), with: AVAudioSession.Category.playback)
+            }
             
-            try setUpSession()
+            try session.setActive(true)
+            
             
         } catch {
             
             // Error
             
         }
+        // Observe outputVolume
+        outputVolumeObserver = session.observe(\AVAudioSession.outputVolume, options: [.new]) {
+            [unowned self] session, change in
+            guard self.appIsActive else { return /* Probably control center */ }
+            guard let newVolume = change.newValue else { fatalError("missing new value") }
+            guard newVolume != self.initialVolume else { return /* Resetting volume */ }
+            self.action?()
+            self.setSystemVolume(volume: self.initialVolume)
+        }
+        
+        // Audio session is interrupted when you send the app to the background,
+        // and needs to be set to active again when it goes to app goes back to the foreground
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(VolumeButtonHandler.audioSessionInterrupted),
+                                               name: AVAudioSession.interruptionNotification,
+                                               object: nil)
         
     }
     
-    convenience init(action:() -> Void) {
+    convenience init(action:@escaping () -> Void) {
         self.init()
         self.action = action
     }
     
-    func setUpSession() throws {
-        
-        try session.setCategory(AVAudioSessionCategoryAmbient)
-        
-        try session.setActive(true)
-        
-        // Observe outputVolume
-        session.addObserver(self,
-            forKeyPath: sessionVolumeKeyPath,
-            options: [.Old, .New],
-            context: &sessionContext)
-        
-        // Audio session is interrupted when you send the app to the background,
-        // and needs to be set to active again when it goes to app goes back to the foreground
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "audioSessionInterrupted:",
-            name: AVAudioSessionInterruptionNotification,
-            object: nil)
-        
-    }
     
-    func audioSessionInterrupted(notification: NSNotification) {
+    @objc func audioSessionInterrupted(notification: NSNotification) {
         
         guard let info = notification.userInfo,
-            typeObject = info[AVAudioSessionInterruptionTypeKey],
-            typeInt = typeObject.integerValue,
-            interuptionType = AVAudioSessionInterruptionType(rawValue: UInt(typeInt)) else {
+            let typeObject = info[AVAudioSessionInterruptionTypeKey],
+            let typeInt = typeObject as? Int,
+            let interuptionType = AVAudioSession.InterruptionType(rawValue: UInt(typeInt)) else {
             print("Audio Session Interruption Type Unknown.")
             return
         }
         
-        
         switch interuptionType {
-        case .Began:
+        case .began:
             print("Audio Session Interruption Began.")
-        case .Ended:
+        case .ended:
             do {
                 try session.setActive(true)
             } catch {
                 print(error)
             }
-            
         }
     }
     
     func disableVolumeHUD() {
         let max = CGFloat( MAXFLOAT )
-        let rect = CGRectMake(max, max, 0, 0)
+        let rect = CGRect(x: max, y: max, width: 0, height: 0)
         volumeView = MPVolumeView(frame: rect)
         
-        let window = UIApplication.sharedApplication().windows.first
+        let window = UIApplication.shared.windows.first
         window?.addSubview(volumeView)
         
         volumeView.subviews.forEach { view in
-            let classString = NSStringFromClass(view.dynamicType)
-                .componentsSeparatedByString(".")
+            let classString = NSStringFromClass(type(of: view))
+                .components(separatedBy: ".")
                 .last
             if classString == "MPVolumeSlider" {
                 volumeSlider = view as? UISlider
@@ -119,41 +116,15 @@ class VolumeButtonHandler: NSObject {
         initialVolume = session.outputVolume
         if initialVolume > maxVolume {
             initialVolume = maxVolume
-            setSystemVolume(initialVolume)
+            setSystemVolume(volume: initialVolume)
         } else if initialVolume < minVolume {
             initialVolume = minVolume
-            setSystemVolume(initialVolume)
+            setSystemVolume(volume: initialVolume)
         }
     }
     
     func applicationDidChangeActive(notification: NSNotification) {
-        appIsActive = (notification.name == UIApplicationDidBecomeActiveNotification)
-    }
-    
-    // MARK: KVO
-    
-    private typealias KVOContext = UInt8
-    
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if context == &sessionContext && keyPath == sessionVolumeKeyPath {
-            guard appIsActive else {
-                // Probably control center
-                return
-            }
-            
-            guard let newVolume = change?[NSKeyValueChangeNewKey]?.floatValue
-                //, oldVolume = change?[NSKeyValueChangeOldKey]?.floatValue
-                else { return }
-            
-            guard newVolume != initialVolume else {
-                // Probably resetting volume
-                return
-            }
-            
-            action?()
-            setSystemVolume(initialVolume)
-            
-        }
+        appIsActive = (notification.name == UIApplication.didBecomeActiveNotification)
     }
     
     // MARK: System Volume
@@ -162,7 +133,7 @@ class VolumeButtonHandler: NSObject {
 //        let musicPlayer = MPMusicPlayerController.applicationMusicPlayer()
 //        musicPlayer.volume = volume
         volumeSlider?.setValue(volume, animated: true)
-        volumeSlider?.sendActionsForControlEvents(.TouchUpInside)
+        volumeSlider?.sendActions(for: .touchUpInside)
         
     }
 }

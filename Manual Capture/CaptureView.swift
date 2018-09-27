@@ -48,7 +48,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         
         sessionController.delegate = self
         
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.black
         
         if kIsDemoMode { // For screen shots
 //            let sampleImageLayer = CALayer()
@@ -57,16 +57,16 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
 //            sampleImageLayer.frame = bounds
 //            
 //            layer.addSublayer(sampleImageLayer)
-            backgroundColor = UIColor.greenColor()
+            backgroundColor = UIColor.green
         }else{
-            sessionController.previewLayer.backgroundColor = UIColor.blackColor().CGColor
+            sessionController.previewLayer.backgroundColor = UIColor.black.cgColor
             sessionController.previewLayer.opacity = 0.0
             sessionController.previewLayer.frame = bounds
             
             layer.addSublayer(sessionController.previewLayer)
         }
         
-        setUpLayoutForMode(.Initial)
+        setUpLayout(forMode:.Initial)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -82,19 +82,19 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         twoFinger: UITapGestureRecognizer()
     )
     
-    override func addGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+    override func addGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
         super.addGestureRecognizer(gestureRecognizer)
         gestureRecognizer.delegate = self
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
-        if let controlPanel = currentControlPanel where touch.view!.isDescendantOfView(controlPanel) {
+        guard let touchView = touch.view else { return true }
+        if let controlPanel = currentControlPanel, touchView.isDescendant(of: controlPanel) {
             return false
         }
-        if touch.view!.isKindOfClass(UIButton) || touch.view!.isKindOfClass(ControlPanel) {
+        if touchView is UIButton || touchView is ControlPanel {
             return false// allows button to recieve touch down for button pressed look
         }
-        
         return true
     }
     
@@ -124,9 +124,11 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             switchToLayout(.AspectRatio)
             
-            var i = kAspectRatiosControlItems.indexOf { $0.value == sessionController.aspectRatio } ?? -1
-            i++
-            i = kAspectRatiosControlItems.indices ~= i ? i : 0
+            var i = kAspectRatiosControlItems.firstIndex() { $0.value == sessionController.aspectRatio } ?? -1
+            // switch to next aspect ratio
+            i = i.advanced(by: 1)
+            // if last then go back to first
+            i = (kAspectRatiosControlItems.indices ~= i) ? i : 0
     
             
             sessionController.set(.AspectRatio( kAspectRatiosControlItems[i].value ) )
@@ -297,12 +299,12 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
     var mainSliders: [ MainSliderPositionType : Slider ] = [ : ]
     
     var sliders: (
-        zoom: SmartSlider<CGFloat>!,
-        focus: SmartSlider<Float>!,
-        temperature: SmartSlider<Float>!,
-        tint: SmartSlider<Float>!,
-        iso: SmartSlider<Float>!,
-        exposureDuration: SmartSlider<CMTime>!
+        zoom: SmartSlider<CGFloat>,
+        focus: SmartSlider<Float>,
+        temperature: SmartSlider<Float>,
+        tint: SmartSlider<Float>,
+        iso: SmartSlider<Float>,
+        exposureDuration: SmartSlider<CMTime>
     )
     
     // MARK: Control Related
@@ -321,17 +323,17 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
     
     // MARK: Layout Related
     
-    private func setUpLayoutForMode(mode:Layout.Mode) -> Void {
+    private func setUpLayout(forMode mode:Layout.Mode) -> Void {
         
         unowned let me = self
         
-        func setUpControlPanel(rows:[ControlPanel.Row], inout _ layout: Layout) {
+        func setUpControlPanel(rows:[ControlPanel.Row], _ layout: inout Layout) {
             
             let controlPanel = ControlPanel(
                 
                 rows: rows,
                 
-                frame: CGRectMake(0, 20, self.bounds.width, 50)
+                frame: CGRect(x: 0, y: 20, width: self.bounds.width, height: 50)
             )
             
             controlPanel.translatesAutoresizingMaskIntoConstraints = false
@@ -1436,7 +1438,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         
         
         
-        setUpLayoutForMode(layoutMode)
+        setUpLayout(forMode:layoutMode)
         
         if let i = OptionControl.indexOfItemWithValue(layoutMode, items: menuControl.items) {
             menuControl.selectedIndex = i
@@ -1523,9 +1525,9 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
     }
     
     
-    func createConstraintsForKey(key:ConstraintKey) -> [NSLayoutConstraint] {
+    func createConstraints(forKey key:ConstraintKey) -> [NSLayoutConstraint] {
         
-        let orientation = UIApplication.sharedApplication().statusBarOrientation
+        let orientation = UIApplication.sharedApplication.statusBarOrientation
         
         var constraints: [NSLayoutConstraint] = []
         
@@ -1852,16 +1854,16 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             let vConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
                 
                 "V:|-y-[S]",
-                options: .DirectionLeftToRight,
+                options: .directionLeftToRight,
                 metrics: [ "y" : yMargin ],
                 views: [ "S":slider ]
             
             )
             
-            let hConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            let hConstraints = NSLayoutConstraint.constraints(
                 
-                "H:|->=m-[S(>=300@750)]->=m-|",
-                options: .DirectionLeftToRight,
+                withVisualFormat: "H:|->=m-[S(>=300@750)]->=m-|",
+                options: .directionLeftToRight,
                 metrics: ["m": mx],
                 views: ["S":slider]
             
@@ -1869,71 +1871,55 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             
             let lowPriorityCenterXConstraint = NSLayoutConstraint(
                 item: slider,
-                attribute: .CenterX, relatedBy: .Equal,
+                attribute: .centerX, relatedBy: .equal,
                 toItem: self,
-                attribute: .CenterX, multiplier: 1, constant: 0
+                attribute: .centerX, multiplier: 1, constant: 0
             )
-            lowPriorityCenterXConstraint.priority = UILayoutPriorityDefaultLow
+            lowPriorityCenterXConstraint.priority = UILayoutPriority.defaultLow
             
             constraints.append(lowPriorityCenterXConstraint)
-            constraints.appendContentsOf(hConstraints)
-            constraints.appendContentsOf(vConstraints)
+            constraints.append(contentsOf: hConstraints)
+            constraints.append(contentsOf: vConstraints)
          
             
             
         }
-        
         for constraint in constraints {
-            
             constraint.identifier = key.description
-        
         }
-        
         return constraints
-        
     }
     
     
-    func addConstraintsForKeys( keys: [ConstraintKey] ) {
-        
+    func addConstraints(forKeys keys: [ConstraintKey] ) {
         for key in keys {
-            
-            addConstraints( createConstraintsForKey( key ) )
-            
+            addConstraints( createConstraints(forKey: key ) )
         }
-        
     }
     
     
-    func getConstraintsForKeys( keys: [ConstraintKey] ) -> [NSLayoutConstraint] {
-        
-        return constraints.filter { (constraint) in
-            
+    func getConstraints(forKeys keys: [ConstraintKey] ) -> [NSLayoutConstraint] {
+        let returnConstraints = constraints.filter { (constraint) in
             guard let id = constraint.identifier else { return false }
-            
-            for key in keys { if key.description == id { return true } }
-            
+            for key in keys {
+                if key.description == id {
+                    return true
+                }
+            }
             return false
-            
         }
-        
+        return returnConstraints
     }
     
     
-    func updateConstraintsForKeys(keys:[ConstraintKey]) {
-        
-        removeConstraints( getConstraintsForKeys ( keys ) )
-        
-        addConstraintsForKeys(keys)
-        
+    func updateConstraints(forKeys keys:[ConstraintKey]) {
+        removeConstraints( getConstraints(forKeys: keys) )
+        addConstraints(forKeys: keys)
     }
     
     struct Layout {
-        
         typealias Init = () -> Void
-        
         typealias Performer = () -> Void
-        
         typealias Completer = (Bool) -> Void
         
         enum Mode {
@@ -1952,23 +1938,23 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             case Fullscreen
         }
         
-        static func appendPerformer (inout performer: Performer, appendedPerformer: Performer) {
+        static func appendPerformer (_ performer: inout Performer, appendedPerformer: @escaping Performer) {
             let previousPerformer = performer
             performer = { previousPerformer(); appendedPerformer() }
         }
         
-        static func appendCompleter (inout completer: Completer, appendedCompleter: Completer) {
+        static func appendCompleter (_ completer: inout Completer, appendedCompleter: @escaping Completer) {
             let previousCompleter = completer
             completer = { previousCompleter($0); appendedCompleter($0) }
         }
         
-        static func fusePerformers(performers: Performer...) -> Performer {
+        static func fusePerformers(_ performers: Performer...) -> Performer {
             return performers.reduce({}) { left, right in
                 { left(); right() }
             }
         }
         
-        static func alphaPerformer(alpha: CGFloat = 0.0, views: UIView...) -> Performer {
+        static func alphaPerformer(_ alpha: CGFloat = 0.0, views: UIView...) -> Performer {
             var performer: Performer = {}
             views.forEach { (view: UIView) in
                 Layout.appendPerformer(&performer) { [unowned view] in
@@ -1978,7 +1964,7 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             return performer
         }
         
-        static func opacityPerformer(opacity: Float = 0.0, layers: CALayer...) -> Performer {
+        static func opacityPerformer(_ opacity: Float = 0.0, layers: CALayer...) -> Performer {
             var performer: Performer = {}
             layers.forEach { (layer: CALayer) in
                 Layout.appendPerformer(&performer) { [unowned layer] in
@@ -1988,48 +1974,42 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             return performer
         }
         
-        mutating func tempShow(views: UIView...) {
+        mutating func tempShow(_ views: UIView...) {
             views.forEach { (view: UIView) in
                 self.tempAlpha(view, 1.0, 0.0)
             }
         }
         
-        mutating func tempHide(views: UIView...) {
+        mutating func tempHide(_ views: UIView...) {
             views.forEach { (view: UIView) in
                 self.tempAlpha(view, 0.0)
             }
         }
         
         /// sets optional to nil on exitCompletion
-        mutating func temp<Optional>(inout optional:Optional?) {
+        mutating func temp<Optional>(_ optional: inout Optional?) {
             Layout.appendCompleter(&exitCompleter) { _ in
                 optional = nil
             }
         }
         
-        mutating func tempAlpha(view: UIView, _ temporaryAlpha: CGFloat, _ resetAlpha: CGFloat? = nil ) {
+        mutating func tempAlpha(_ view: UIView, _ temporaryAlpha: CGFloat, _ resetAlpha: CGFloat? = nil ) {
             let resetAlpha = resetAlpha ?? view.alpha
             
-            Layout.appendPerformer(&entrancePerformer) { [unowned view] in
+            Layout.appendPerformer(&entrancePerformer) { // [unowned view] in
                 view.alpha = temporaryAlpha
             }
-            Layout.appendPerformer(&exitPerformer) { [unowned view] in
+            Layout.appendPerformer(&exitPerformer) { // [unowned view] in
                 view.alpha = resetAlpha
             }
         }
         
         var entranceStarter: Init = {}
-        
         var entrancePerformer: Performer = {}
-        
         var entranceCompleter: Completer = {$0}
-        
         var exitPerformer: Performer = {}
-        
         var exitCompleter: Completer = {$0}
-        
         var savedMode: Mode = .Focus
-        
         var currentMode: Mode = .Initial
         
     }

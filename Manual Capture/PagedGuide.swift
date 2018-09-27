@@ -9,6 +9,15 @@
 import UIKit
 
 class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    var allowPortrait = false
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return (allowPortrait) ? [.landscape, .portrait] : .landscape
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     typealias Content = (title: String, description: String, videoName: String)
     typealias Page = PagedGuideContent
     
@@ -17,24 +26,29 @@ class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     
     var pageViewController: UIPageViewController!
     let contents: [Content] = [
-        (title: "Quick Adjustments", description: "Get accustomed to using these quick gestures and you will be snaping quality shots with ease.", videoName: "FourCornerUI"),
-        (title: "Warp Speed", description: "Ramp up the traking speed by sliding away from the slider.", videoName: "WarpSpeedDemo"),
-        (title: "Advanced Controls", description: "Tap the screen to hide or show advanced controls.", videoName: "AdvancedControlsDemo")
-//        ,
-//        (title: "I Can't See Yet :(", description: "Please allow \(kAppName) to use the camera.", videoName: "TestFoot4")
+        (title: "Quick Adjustments",
+         description: "Get accustomed to using these quick gestures and you will be snaping quality shots with ease.",
+         videoName: "FourCornerUI"),
+        (title: "Warp Speed",
+         description: "Ramp up the traking speed by sliding away from the slider.",
+         videoName: "WarpSpeedDemo"),
+        (title: "Advanced Controls",
+         description: "Tap the screen to hide or show advanced controls.",
+         videoName: "AdvancedControlsDemo")
     ]
     
+    
     override func viewDidLoad() {
-        pageViewController = storyboard?.instantiateViewControllerWithIdentifier("PageController") as! UIPageViewController
+        pageViewController = storyboard?.instantiateViewController(withIdentifier: "PageController") as? UIPageViewController
         pageViewController.dataSource = self
         pageViewController.delegate = self
         pageViewController.view.frame = pageContainer.bounds
-        addChildViewController(pageViewController)
+        addChild(pageViewController)
         pageContainer.addSubview(pageViewController.view)
-        pageViewController.didMoveToParentViewController(self)
+        pageViewController.didMove(toParent: self)
         
-        let firstPage = viewControllerAtIndex(0)!
-        pageViewController.setViewControllers([firstPage], direction: .Forward, animated: true, completion: nil)
+        guard let firstPage = createPageViewController(atIndex: 0) else { return }
+        pageViewController.setViewControllers([firstPage], direction: .forward, animated: true, completion: nil)
         
         delay(2.4) {
             self.allowPortrait = true
@@ -43,14 +57,14 @@ class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
         
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let referedPage = viewController as? Page else { return nil }
-        return viewControllerAtIndex(referedPage.index+1)
+        return createPageViewController(atIndex: referedPage.index+1)
     }
 
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let referedPage = viewController as? Page else { return nil }
-        return viewControllerAtIndex(referedPage.index-1)
+        return createPageViewController(atIndex: referedPage.index-1)
     }
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
@@ -61,33 +75,24 @@ class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
         return 0
     }
     
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         guard let transitionPage = pendingViewControllers.first as? Page else { return }
         if transitionPage.index + 1 == contents.endIndex {
-            closeButton.enabled = true
+            closeButton.isEnabled = true
         }
     }
     
-    func viewControllerAtIndex(index:Int) -> UIViewController? {
+    func createPageViewController(atIndex index: Int) -> UIViewController? {
         guard contents.indices ~= index else { return nil }
         
-        let page = storyboard?.instantiateViewControllerWithIdentifier("PagedGuideContent") as? Page
-        page?.content = contents[index]
-        page?.index = index
+        let page = storyboard?.instantiateViewController(withIdentifier: "PagedGuideContent") as! Page
+        page.content = contents[index]
+        page.index = index
         return page
     }
     
     @IBAction func startApp(){
-        let capture = storyboard?.instantiateViewControllerWithIdentifier("Capture")
-        presentViewController(capture!, animated: true, completion: nil)
-    }
-    
-    var allowPortrait = false
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return (allowPortrait) ? [.Landscape, .Portrait] : UIInterfaceOrientationMask.Landscape
-    }
-    
-    override func prefersStatusBarHidden() -> Bool {
-        return true
+        let capture = storyboard?.instantiateViewController(withIdentifier: "Capture")
+        present(capture!, animated: true, completion: nil)
     }
 }

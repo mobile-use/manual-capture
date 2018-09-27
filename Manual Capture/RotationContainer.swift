@@ -15,7 +15,7 @@ class RotationContainer: UIView {
     override var frame: CGRect {
         didSet{
             // temporarily reset transform and resize frame
-            tempSetDo(&inbetweenView.transform, to: CGAffineTransformIdentity) {
+            tempSetDo(set: &inbetweenView.transform, to: CGAffineTransform.identity) {
                 self.inbetweenView.frame = self.bounds
                 self.view.frame = self.inbetweenView.bounds
             }
@@ -24,10 +24,10 @@ class RotationContainer: UIView {
     
     var rotation: CGFloat {
         set {
-            rotate(newValue)
+            rotate(angle: newValue)
         }
         get {
-            return CGFloat(inbetweenView.layer.valueForKeyPath("transform.rotation.z")?.floatValue ?? 0)
+            return CGFloat((inbetweenView.layer.value(forKeyPath: "transform.rotation.z") as AnyObject).floatValue ?? 0)
         }
     }
     
@@ -35,14 +35,14 @@ class RotationContainer: UIView {
         
         inbetweenView.layer.setValue(angle, forKeyPath: "transform.rotation.z")
         inbetweenView.frame = bounds
-        view.frame = convertRect(bounds, toView: inbetweenView)
+        view.frame = convert(bounds, to: inbetweenView)
 
     }
     
     override init(frame: CGRect){
         // frame with zero origin
-        view = UIView(frame: CGRect(origin: CGPointZero, size: frame.size))
-        inbetweenView = UIView(frame: CGRect(origin: CGPointZero, size: frame.size))
+        view = UIView(frame: CGRect(origin: CGPoint.zero, size: frame.size))
+        inbetweenView = UIView(frame: CGRect(origin: CGPoint.zero, size: frame.size))
         super.init(frame: frame)
         addSubview(inbetweenView)
         inbetweenView.addSubview(view)
@@ -50,7 +50,7 @@ class RotationContainer: UIView {
     
     init(view:UIView){
         self.view = view
-        inbetweenView = UIView(frame: CGRect(origin: CGPointZero, size: view.frame.size))
+        inbetweenView = UIView(frame: CGRect(origin: CGPoint.zero, size: view.frame.size))
         super.init(frame: view.frame)
         addSubview(inbetweenView)
         inbetweenView.addSubview(view)
