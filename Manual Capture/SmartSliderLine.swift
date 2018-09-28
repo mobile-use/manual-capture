@@ -202,7 +202,7 @@ class SmartSliderLine: CALayer {
             /// offset resulting from rounding dash space
             //let difT = dplCount * drsDS
             
-            let maxLeadingLength = length * (displayScale/initDisplayScale) * CGFloat(progressValue(transitionScale, 1.0, 1.0 / Float(initialSensitivity) ))
+            //let maxLeadingLength = length * (displayScale/initDisplayScale) * CGFloat(progressValue(transitionScale, 1.0, 1.0 / Float(initialSensitivity) ))
             let leadingLength = rsabsTD//, maxLeadingLength)// + scaleCenter //+ difT
             
             dashLineLayer1.lineDashPattern = [lineWidth1, rsDS] as [NSNumber]

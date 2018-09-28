@@ -22,13 +22,33 @@ class CSController2: NSObject {
     var camera: AVCaptureDevice!
     var cameraInput: AVCaptureDeviceInput!
     var photoOutput: AVCaptureStillImageOutput!
-    
     var aspectRatio = CSAspectRatioMake(16,9) {
         didSet{
             
-            //previewView.aspectRatio = aspectRatio
+            previewView.aspectRatio = aspectRatio
             notify(change: .aspectRatio(aspectRatio) )
             
+        }
+    }
+    var aspectRatioMode: CSAspectRatioMode = .fullscreen {
+        didSet{
+            updateAspectRatio()
+            notify(change: .aspectRatioMode(aspectRatioMode) )
+        }
+    }
+    func updateAspectRatio() {
+        guard previewView.previewLayer.connection != nil else { return }
+        switch aspectRatioMode {
+        case .lock:
+            let aspectRatio = self.aspectRatio
+            self.aspectRatio = aspectRatio
+        case .fullscreen:
+            let size = UIScreen.main.bounds.size
+            self.aspectRatio = CSAspectRatioMake(size.width, size.height)
+        case .sensor:
+            let unitRect = CGRect(x: 0, y: 0, width: 1, height: 1)
+            let size = previewView.previewLayer.layerRectConverted(fromMetadataOutputRect: unitRect).size
+            self.aspectRatio = CSAspectRatioMake(size.width, size.height)
         }
     }
     var volumeButtonHandler = JPSVolumeButtonHandler()
@@ -48,6 +68,7 @@ class CSController2: NSObject {
         typealias FocusModeBlock = (AVCaptureDevice.FocusMode) -> ()
         typealias ExposureModeBlock = (AVCaptureDevice.ExposureMode) -> ()
         typealias WhiteBalanceModeBlock = (AVCaptureDevice.WhiteBalanceMode) -> ()
+        typealias AspectRatioModeBlock = (CSAspectRatioMode) -> ()
         
         typealias AspectRatioBlock = (CSAspectRatio) -> ()
         
@@ -62,6 +83,7 @@ class CSController2: NSObject {
         var focusMode           = [ String : FocusModeBlock ]()
         var exposureMode        = [ String : ExposureModeBlock ]()
         var whiteBalanceMode    = [ String : WhiteBalanceModeBlock ]()
+        var aspectRatioMode     = [ String : AspectRatioModeBlock ]()
         
         var aspectRatio         = [ String : AspectRatioBlock ]()
         
@@ -96,7 +118,7 @@ class CSController2: NSObject {
             (granted) in
             if granted {
                 completionHandler()
-            }else{
+            } else {
                 self.notify(error: SessionError.cameraAccessDenied)
             }
         }

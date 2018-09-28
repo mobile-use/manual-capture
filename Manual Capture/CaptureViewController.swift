@@ -84,7 +84,6 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
         loadCameraRollAssets()
         guard let browser = MWPhotoBrowser(delegate: self) else {
             fatalError("couldn't load MWPhotoBrowser")
-            return
         }
         browser.startOnGrid = true
         browser.enableGrid = true
@@ -356,8 +355,6 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
                         
                     }
                 
-                let currentaspectRatio = self.controlView.sessionController.aspectRatio
-                
                     guard let previousOrient = self.previousOrient, orient != previousOrient else {
                     self.previousOrient = orient
                     return
@@ -385,8 +382,9 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
                         .controlPanel
                     ]
                 )
-            
-//            
+                
+//                let currentaspectRatio = self.controlView.sessionController.aspectRatio
+//
 //            let isTempAR = self.controlView.menuControl.alpha != 1 && self.controlView.layout.currentMode == .AspectRatio
 //            if isTempAR {
 //                self.controlView.switchToLayout(.Normal, 0)

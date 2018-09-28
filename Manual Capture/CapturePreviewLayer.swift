@@ -59,6 +59,10 @@ class CapturePreviewLayer: AVCaptureVideoPreviewLayer {
         }
     }
     
+    override init(layer: Any) {
+        super.init(layer: layer)
+    }
+    
     override init(session: AVCaptureSession) {
         super.init(session: session)
         didInit()

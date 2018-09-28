@@ -71,9 +71,9 @@ extension Style {
         guard let superview = toolbar.superview else { return [] }
         
         toolbar.translatesAutoresizingMaskIntoConstraints = false
-        //toolbar.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
+//        toolbar.backgroundColor = UIColor.black.withAlphaComponent(0.1)
 //        toolbar.layer.borderWidth = 1.0
-//        toolbar.layer.borderColor = UIColor.white.CGColor        
+//        toolbar.layer.borderColor = UIColor.white.cgColor
         
         let x = Constraint.constraints(withVisualFormat: "H:|[toolbar(40)]",
                                        options: [.alignAllCenterX, .alignAllCenterY],

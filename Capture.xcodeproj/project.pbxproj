@@ -47,6 +47,7 @@
 		3D7A9DE11C09DF09007C1445 /* TestFoot4.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D7A9DDD1C09DF09007C1445 /* TestFoot4.mov */; };
 		3D7FB63E1C214C85004D340C /* WarpSpeedDemo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D7FB63D1C214C85004D340C /* WarpSpeedDemo.mov */; };
 		3D7FB6401C214C9A004D340C /* AdvancedControlsDemo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D7FB63F1C214C9A004D340C /* AdvancedControlsDemo.mov */; };
+		3DA07FD5215DFAB600BC2C30 /* CaptureView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA07FD4215DFAB600BC2C30 /* CaptureView2.swift */; };
 		3DADC33C1BC4D4C000A74BC2 /* CaptureModeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */; };
 		3DADC33E1BC4D97D00A74BC2 /* ControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */; };
 		7D27C7ECEFE49BB316232FAF /* libPods-Manual Capture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E9FC9AD84EFA57481F6484 /* libPods-Manual Capture.a */; };
@@ -97,6 +98,7 @@
 		3D7A9DDD1C09DF09007C1445 /* TestFoot4.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = TestFoot4.mov; sourceTree = "<group>"; };
 		3D7FB63D1C214C85004D340C /* WarpSpeedDemo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = WarpSpeedDemo.mov; sourceTree = "<group>"; };
 		3D7FB63F1C214C9A004D340C /* AdvancedControlsDemo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = AdvancedControlsDemo.mov; sourceTree = "<group>"; };
+		3DA07FD4215DFAB600BC2C30 /* CaptureView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureView2.swift; sourceTree = "<group>"; };
 		3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureModeControl.swift; sourceTree = "<group>"; };
 		3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlPanel.swift; sourceTree = "<group>"; };
 		6394383D169B8EEAF441FD2B /* Pods-Manual Capture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture.release.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture.release.xcconfig"; sourceTree = "<group>"; };
@@ -124,7 +126,9 @@
 		0FB784171BA0229C00C7FDA7 /* UI Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3D3AD8451C01DF0A007583A7 /* CaptureConstraints.swift */,
 				0F2ED8D51BA92E1200F9332D /* CaptureView.swift */,
+				3DA07FD4215DFAB600BC2C30 /* CaptureView2.swift */,
 				0FC510E21BBD13EE00E4D0D8 /* CapturePreviewLayer.swift */,
 				3D3AD8471C037B12007583A7 /* CapturePreviewView.swift */,
 				3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */,
@@ -191,7 +195,6 @@
 				0F46E44B1B9DACAE000E32D1 /* CaptureViewController.swift */,
 				3D3AD8431C01DCBF007583A7 /* CaptureViewController2.swift */,
 				3D41A0A31C634B0900BF21D0 /* RotationContainer.swift */,
-				3D3AD8451C01DF0A007583A7 /* CaptureConstraints.swift */,
 				0F46E4471B9D7DD0000E32D1 /* CSController.swift */,
 				3D3AD8491C043389007583A7 /* CSController2.swift */,
 				3D5598FE1BFB070800C65CA6 /* VolumeButtonHandler.swift */,
@@ -388,6 +391,7 @@
 				0F46E44C1B9DACAE000E32D1 /* CaptureViewController.swift in Sources */,
 				0F46E4481B9D7DD0000E32D1 /* CSController.swift in Sources */,
 				3D3AD8441C01DCBF007583A7 /* CaptureViewController2.swift in Sources */,
+				3DA07FD5215DFAB600BC2C30 /* CaptureView2.swift in Sources */,
 				3D5598FF1BFB070800C65CA6 /* VolumeButtonHandler.swift in Sources */,
 				0FD828C81BB7A05F004162F0 /* ManualCaptureGlyph.swift in Sources */,
 				3D3AD84A1C043389007583A7 /* CSController2.swift in Sources */,

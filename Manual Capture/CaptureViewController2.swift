@@ -15,12 +15,16 @@ class CaptureViewController2: UIViewController {
     let steadyView = RotationContainer()
     // Continue
     var continueView = UIView()
-    var controlView = RotationContainer()
+    var controlView: CaptureView2!
+    var controlViewContainer = RotationContainer()
     var captureButton = UIButton.shutterButton()
     var captureButtonContainer: RotationContainer!
     var previewView: PreviewView!
     
+    
+    
     private var layout: Layout = []
+    
     func layout(layout: Layout, duration: TimeInterval = 0.3){
         let oldLayout = self.layout
         typealias Block = ()->()
@@ -39,35 +43,43 @@ class CaptureViewController2: UIViewController {
         var completions: [Block] = []
         
         
-        added(.Continue)? {
-            self.previewView = self.sessionController.previewView
+        added(.go)? {
+            self.previewView = self.controlView.sessionController.previewView
         }
-        removed(.Continue)? {
+        removed(.go)? {
             self.previewView = nil
         }
-        has(.Init)? {
+        has(.initial)? {
             print("hi")
         }
     }
     
-    var sessionController: CSController2!
+//    var sessionController: CSController2!
     
     override func viewDidLoad() {
         captureButtonContainer = RotationContainer(view: captureButton)
+        controlView = CaptureView2(frame: controlViewContainer.view.bounds)
         let toolbar = UIView()
         let capturebar = UIView()
-        sessionController = CSController2()
-        previewView = sessionController.previewView
+//        sessionController = CSController2()
+        previewView = controlView.sessionController.previewView
+        
+//        controlView.backgroundColor = .red
         
         view.layout(style: Style.FillSuperview, views: steadyView)
         steadyView.view.layout(style: Style.FillSuperview, views: previewView)
-        steadyView.view.addSubview(controlView)
+        
         steadyView.view.layout(style: Style.Capturebar, views: capturebar)
         steadyView.view.layout(style: Style.CaptureButtonContainer, views: captureButtonContainer)
         steadyView.view.layout(style: Style.Toolbar, views: toolbar)
         
-        layout = .Init
+        steadyView.view.layout(style: Style.FillSuperview, views: controlViewContainer)
         
+        controlViewContainer.view.layout(style: Style.FillSuperview, views: controlView)
+        view.backgroundColor = UIColor.black
+        
+        layout = .initial
+        layout.proceed(layouts: .shoot, .whiteBalance, .focus, .whiteBalance)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,30 +129,32 @@ class CaptureViewController2: UIViewController {
                 normal: {
                     self.captureButtonContainer.rotation = CGFloat(self.orientation.rotation)
                     
+                    let aspectRatioOrientationAgnostic = self.controlView.sessionController.aspectRatioMode != .fullscreen && self.controlView.sessionController.aspectRatioMode != .sensor
                     let heightAndWidthSwapped = self.orientation == .portrait || oldOrientation == .portrait
-                    if heightAndWidthSwapped {
+                    if heightAndWidthSwapped && aspectRatioOrientationAgnostic {
                         self.previewView.aspectRatio = 1 / self.previewView.aspectRatio
                     }
                 },
                 fade: {
                     var rect = self.steadyView.view.bounds
                     
-                    if self.orientation == .portrait {
-                        rect.size.width -= 40
-                    }
-                    self.controlView.frame = rect
-                    self.controlView.rotation = CGFloat(self.orientation.rotation)
+//                    if self.orientation == .portrait {
+//                        rect.size.width -= 40
+//                    }
+                    self.controlViewContainer.frame = rect
+                    self.controlViewContainer.rotation = CGFloat(self.orientation.rotation)
                 }
             )
             UIView.animate(withDuration: duration) { CATransaction.performBlock(duration: duration) {
                     animations.normal()
             }}
             UIView.animate(withDuration: duration,
-                animations: { self.controlView.alpha = 0.0 }, completion: { _ in
-                    CATransaction.disableActions {
-                        animations.fade()
-                    }
-                    UIView.animate(withDuration: duration) { self.controlView.alpha = 1.0 }
+                           animations: { self.controlViewContainer.alpha = 0.0 },
+                           completion: { _ in
+                CATransaction.disableActions {
+                    animations.fade()
+                }
+                UIView.animate(withDuration: duration) { self.controlViewContainer.alpha = 1.0 }
             })
         }
     }
@@ -159,43 +173,45 @@ class CaptureViewController2: UIViewController {
     struct Layout : OptionSet {
         let rawValue: UInt
         
-        static let Init = Layout(rawValue: 1)
+        static let initial = Layout(rawValue: 1)
         
         // Init
-        static let Continue = Layout(rawValue: 1 << 1)
-        static let Pause = Layout(rawValue: 1 << 2)
+        static let go = Layout(rawValue: 1 << 1)
+        static let pause = Layout(rawValue: 1 << 2)
         
         // Go
-        static let Shoot = Layout(rawValue: 1 << 3)
-        static let Options = Layout(rawValue: 1 << 4)
+        static let shoot = Layout(rawValue: 1 << 3)
+        static let options = Layout(rawValue: 1 << 4)
         
         // Pause
-        static let Error = Layout(rawValue: 1 << 5)
+        static let error = Layout(rawValue: 1 << 5)
         
         // Go, Pause
-        static let Help = Layout(rawValue: 1 << 6)
+        static let help = Layout(rawValue: 1 << 6)
         
         // Shoot, Options, Help
-        static let Focus = Layout(rawValue: 1 << 7)
-        static let Exposure = Layout(rawValue: 1 << 8)
-        static let WhiteBalance = Layout(rawValue: 1 << 9)
-        static let Zoom = Layout(rawValue: 1 << 10)
-        static let AspectRatio = Layout(rawValue: 1 << 11)
+        static let focus = Layout(rawValue: 1 << 7)
+        static let exposure = Layout(rawValue: 1 << 8)
+        static let whiteBalance = Layout(rawValue: 1 << 9)
+        static let zoom = Layout(rawValue: 1 << 10)
+        static let aspectRatio = Layout(rawValue: 1 << 11)
         
         //////
         
-        private var _OptionState: Group { return [.Focus, .Exposure, .WhiteBalance, .Zoom, .AspectRatio] }
-        private var _ContinueState: Group { return [.Shoot, .Options, .Help] }
+        private var _optionState: Group { return [.focus, .exposure, .whiteBalance, .zoom, .aspectRatio] }
+        private var _mainState: Group { return [.shoot, .options, .help] }
+        private var _sessionState: Group { return [.go, .pause] }
         
-        static let OptionState: Layout = [.Focus, .Exposure, .WhiteBalance, .Zoom, .AspectRatio]
-        static let ContinueState: Layout = [.Shoot, .Options, .Help]
+        static let optionState: Layout = [.focus, .exposure, .whiteBalance, .zoom, .aspectRatio]
+        static let mainState: Layout = [.shoot, .options, .help]
+        static let sessionState: Layout = [.go, .pause]
         
         typealias Group = [Component]
         typealias Component = Layout
         typealias Path = Layout
         typealias PartialPath = Layout
         
-        private func PathMake(component: Component, suspectHeritages: [Path?], componentGroup: Group = [], sisterGroups: [Group] = []) -> Path? {
+        private func path(component: Component, suspectHeritages: [Path?], componentGroup: Group = [], sisterGroups: [Group] = []) -> Path? {
             let suspectHeritages = suspectHeritages.reduce([Path]()) { return ($1 != nil) ? $0 + [$1!] : $0 }
             
             let currentSisters: PartialPath = sisterGroups.reduce(Component()) { (currentSisters, sisterGroup) -> Component in
@@ -240,38 +256,38 @@ class CaptureViewController2: UIViewController {
             return nil
         }
         
-        private func PathMakeOptionSate(_ component:Component) -> Path? {
-            return PathMake(component: component,
-                suspectHeritages: [ContinuePath()],
-                componentGroup: _OptionState,
-                sisterGroups: [_ContinueState])
+        private func optionStatePath(_ component:Component) -> Path? {
+            return path(component: component,
+                suspectHeritages: [goPath()],
+                componentGroup: _optionState,
+                sisterGroups: [_mainState])
         }
         
-        private func PathMakeGoState(_ component:Component) -> Path? {
-            return PathMake(component: component,
-                suspectHeritages: (component == .Help) ? [ContinuePath(), PausePath()] : [ContinuePath()],
-                componentGroup: _ContinueState,
-                sisterGroups: [_OptionState])
+        private func mainStatePath(_ component:Component) -> Path? {
+            return path(component: component,
+                suspectHeritages: (component == .help) ? [goPath(), pausePath()] : [goPath()],
+                componentGroup: _mainState,
+                sisterGroups: [_optionState])
         }
         
         
-        func InitPath() -> Path { return .Init }
+        func initialPath() -> Path { return .initial }
         // Init
-        func ContinuePath() -> Path { return [InitPath(), .Continue] }
-        func PausePath() -> Path { return [InitPath(), .Pause] }
+        func goPath() -> Path { return [initialPath(), .go] }
+        func pausePath() -> Path { return [initialPath(), .pause] }
         // Go
-        func FocusPath() -> Path? { return PathMakeOptionSate(.Focus) }
-        func ExposurePath() -> Path? { return PathMakeOptionSate(.Exposure) }
-        func WhiteBalancePath() -> Path? { return PathMakeOptionSate(.WhiteBalance) }
-        func ZoomPath() -> Path? { return PathMakeOptionSate(.Zoom) }
-        func AspectRatioPath() -> Path? { return PathMakeOptionSate(.AspectRatio) }
+        func focusPath() -> Path? { return optionStatePath(.focus) }
+        func exposurePath() -> Path? { return optionStatePath(.exposure) }
+        func whiteBalancePath() -> Path? { return optionStatePath(.whiteBalance) }
+        func zoomPath() -> Path? { return optionStatePath(.zoom) }
+        func aspectRatioPath() -> Path? { return optionStatePath(.aspectRatio) }
         // Pause
-        func ErrorPath() -> Path { return [PausePath(), .Error] }
+        func errorPath() -> Path { return [pausePath(), .error] }
         // Focus, Exposure, WhiteBalance ect..
-        func ShootPath() -> Path? { return PathMakeGoState(.Shoot) }
-        func OptionsPath() -> Path? { return PathMakeGoState(.Options) }
+        func shootPath() -> Path? { return mainStatePath(.shoot) }
+        func optionsPath() -> Path? { return mainStatePath(.options) }
         // Focus, Exposure, WhiteBalance ect.. + Pause
-        func HelpPath() -> Path? { return PathMakeGoState(.Help) }
+        func helpPath() -> Path? { return mainStatePath(.help) }
         
         
         mutating func proceed(layouts: Layout...) {
@@ -283,22 +299,22 @@ class CaptureViewController2: UIViewController {
                     return nil
                 }
                 
-                if let path = mutateFor(component: .Init)? (InitPath()) { self = path }
+                if let path = mutateFor(component: .initial)? (initialPath()) { self = path }
                 
-                if let path = mutateFor(component: .Pause)? (PausePath()) { self = path }
-                if let path = mutateFor(component: .Continue)? (ContinuePath()) { self = path }
+                if let path = mutateFor(component: .pause)? (pausePath()) { self = path }
+                if let path = mutateFor(component: .go)? (goPath()) { self = path }
                 
-                if let path = mutateFor(component: .Help)? (HelpPath()) { self = path }
-                if let path = mutateFor(component: .Options)? (OptionsPath()) { self = path }
-                if let path = mutateFor(component: .Shoot)? (ShootPath()) { self = path }
+                if let path = mutateFor(component: .help)? (helpPath()) { self = path }
+                if let path = mutateFor(component: .options)? (optionsPath()) { self = path }
+                if let path = mutateFor(component: .shoot)? (shootPath()) { self = path }
                 
-                if let path = mutateFor(component: .Error)? (ErrorPath()) { self = path }
+                if let path = mutateFor(component: .error)? (errorPath()) { self = path }
                 
-                if let path = mutateFor(component: .AspectRatio)? (AspectRatioPath()) { self = path }
-                if let path = mutateFor(component: .Zoom)? (ZoomPath()) { self = path }
-                if let path = mutateFor(component: .WhiteBalance)? (WhiteBalancePath()) { self = path }
-                if let path = mutateFor(component: .Exposure)? (ExposurePath()) { self = path }
-                if let path = mutateFor(component: .Focus)? (FocusPath()) { self = path }
+                if let path = mutateFor(component: .aspectRatio)? (aspectRatioPath()) { self = path }
+                if let path = mutateFor(component: .zoom)? (zoomPath()) { self = path }
+                if let path = mutateFor(component: .whiteBalance)? (whiteBalancePath()) { self = path }
+                if let path = mutateFor(component: .exposure)? (exposurePath()) { self = path }
+                if let path = mutateFor(component: .focus)? (focusPath()) { self = path }
                 
             }
             

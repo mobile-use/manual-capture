@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
+class SmartSlider<Value> : GenericSlider<Value, SmartSliderKnobLayer> {
     let line = SmartSliderLine()
     
     override var bounds: CGRect {
@@ -97,10 +97,10 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     }
     
     let labelTextMinWidth: CGFloat
-    var labelTextForValue: (V, Bool) -> String = { $0;$1;return "Slider" } {
+    var labelTextForValue: (Value, Bool) -> String = { $0;$1;return "Slider" } {
         didSet { updateLabelText() }
     }
-    override var vpHandler: VPHandler<V>? {
+    override var vpHandler: VPHandler<Value>? {
         didSet { updateLabelText() }
     }
     

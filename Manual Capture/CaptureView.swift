@@ -287,15 +287,6 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             )
             controlPanel.translatesAutoresizingMaskIntoConstraints = false
             controlPanel.alpha = 0.0
-//            CATransaction.disableActions{
-//                
-//                self.addSubview(controlPanel)
-//                
-//                self.currentControlPanel = controlPanel
-//                
-//                self.addConstraintsForKeys([.ControlPanel])
-//                
-//            }
             
             Layout.appendPerformer(&layout.entrancePerformer){
                 UIView.animate(withDuration: 0){
@@ -358,12 +349,70 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 menuControl.translatesAutoresizingMaskIntoConstraints = false
                 addSubview(menuControl)
                 
-                // MARK: Zoom Slider
-                sliders.zoom = SmartSlider<CGFloat>(
-                    glyph: ManualCaptureGlyph(type: .zoom),
-                    direction: .right,
-                    30
+                // MARK: init sliders
+                
+                sliders = (
+                    zoom: SmartSlider<CGFloat>(
+                        glyph: ManualCaptureGlyph(type: .zoom),
+                        direction: .right,
+                        30
+                    ),
+                    focus: SmartSlider<Float>(
+                        glyph: ManualCaptureGlyph(type: .focus),
+                        direction: .right,
+                        startBounds: {
+                            me.startBounds(
+                                forType: .rightAlongBottom,
+                                gestureView: me
+                            )
+                        },
+                        sliderBounds: nil
+                    ),
+                    temperature: SmartSlider<Float>(
+                        glyph: ManualCaptureGlyph(type: .temperature),
+                        direction: .right,
+                        startBounds: {
+                            me.startBounds(
+                                forType: .rightAlongTop,
+                                gestureView: self
+                            )
+                        },
+                        sliderBounds: nil
+                    ),
+                    tint: SmartSlider<Float>(
+                        glyph: ManualCaptureGlyph(type: .tint),
+                        direction: .right,
+                        25
+                    ),
+                    iso: SmartSlider<Float>(
+                        glyph: ManualCaptureGlyph(type: .iso),
+                        direction: .up,
+                        startBounds: {
+                            me.startBounds(forType: .upAlongLeft, gestureView: me)
+                        },
+                        sliderBounds: nil,
+                        25
+                    ),
+                    exposureDuration: SmartSlider <CMTime> (
+                        glyph: ManualCaptureGlyph( type: .exposureDuration ),
+                        direction: .up,
+                        startBounds: {
+                            me.startBounds (
+                                forType: .upAlongRight,
+                                gestureView: self
+                            )
+                        },
+                        sliderBounds: nil,
+                        42
+                    )
                 )
+                
+                // MARK: Zoom Slider
+//                sliders.zoom = SmartSlider<CGFloat>(
+//                    glyph: ManualCaptureGlyph(type: .zoom),
+//                    direction: .right,
+//                    30
+//                )
                 sliders.zoom.initialSensitivity = 0.4
                 sliders.zoom.labelTextForValue = { (value, shouldRound) in
                     let nearest: CGFloat = (shouldRound) ? 1 : 0.1
@@ -379,17 +428,17 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
                 // MARK: Focus Slider
                 
-                sliders.focus = SmartSlider<Float>(
-                    glyph: ManualCaptureGlyph(type: .focus),
-                    direction: .right,
-                    startBounds: {
-                        me.startBounds(
-                            forType: .rightAlongBottom,
-                            gestureView: me
-                        )
-                    },
-                    sliderBounds: nil
-                )
+//                sliders.focus = SmartSlider<Float>(
+//                    glyph: ManualCaptureGlyph(type: .focus),
+//                    direction: .right,
+//                    startBounds: {
+//                        me.startBounds(
+//                            forType: .rightAlongBottom,
+//                            gestureView: me
+//                        )
+//                    },
+//                    sliderBounds: nil
+//                )
                 sliders.focus.initialSensitivity = 0.75
                 sliders.focus.labelTextForValue = { (value, shouldRound) in
                     let percent = value * 100
@@ -415,17 +464,17 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
                 // MARK: temperature slider
                 
-                sliders.temperature = SmartSlider<Float>(
-                    glyph: ManualCaptureGlyph(type: .temperature),
-                    direction: .right,
-                    startBounds: {
-                        me.startBounds(
-                            forType: .rightAlongTop,
-                            gestureView: self
-                        )
-                    },
-                    sliderBounds: nil
-                )
+//                sliders.temperature = SmartSlider<Float>(
+//                    glyph: ManualCaptureGlyph(type: .temperature),
+//                    direction: .right,
+//                    startBounds: {
+//                        me.startBounds(
+//                            forType: .rightAlongTop,
+//                            gestureView: self
+//                        )
+//                    },
+//                    sliderBounds: nil
+//                )
                 sliders.temperature.initialSensitivity = 0.2
                 sliders.temperature.labelTextForValue = { (value, shouldRound) in
                     let nearest: Float = (shouldRound) ? 100 : 1
@@ -446,11 +495,11 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
                 // MARK: tint slider
                 
-                sliders.tint = SmartSlider<Float>(
-                    glyph: ManualCaptureGlyph(type: .tint),
-                    direction: .right,
-                    25
-                )
+//                sliders.tint = SmartSlider<Float>(
+//                    glyph: ManualCaptureGlyph(type: .tint),
+//                    direction: .right,
+//                    25
+//                )
                 sliders.tint.initialSensitivity = 0.2
                 sliders.tint.labelTextForValue = { (value, shouldRound) in
                     let nearest: Float = (shouldRound) ? 10 : 1
@@ -471,15 +520,15 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
                 // MARK: iso slider
                 
-                sliders.iso = SmartSlider<Float>(
-                    glyph: ManualCaptureGlyph(type: .iso),
-                    direction: .up,
-                    startBounds: {
-                        me.startBounds(forType: .upAlongLeft, gestureView: me)
-                    },
-                    sliderBounds: nil,
-                    25
-                )
+//                sliders.iso = SmartSlider<Float>(
+//                    glyph: ManualCaptureGlyph(type: .iso),
+//                    direction: .up,
+//                    startBounds: {
+//                        me.startBounds(forType: .upAlongLeft, gestureView: me)
+//                    },
+//                    sliderBounds: nil,
+//                    25
+//                )
                 sliders.iso.initialSensitivity = 0.4
                 sliders.iso.labelTextForValue = { (value, shouldRound) in
                     let nearest: Float = (shouldRound) ? 25 : 1
@@ -504,18 +553,18 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 
                 // MARK: exposure duration slider
                 
-                sliders.exposureDuration = SmartSlider <CMTime> (
-                    glyph: ManualCaptureGlyph( type: .exposureDuration ),
-                    direction: .up,
-                    startBounds: {
-                        me.startBounds (
-                            forType: .upAlongRight,
-                            gestureView: self
-                        )
-                    },
-                    sliderBounds: nil,
-                    42
-                )
+//                sliders.exposureDuration = SmartSlider <CMTime> (
+//                    glyph: ManualCaptureGlyph( type: .exposureDuration ),
+//                    direction: .up,
+//                    startBounds: {
+//                        me.startBounds (
+//                            forType: .upAlongRight,
+//                            gestureView: self
+//                        )
+//                    },
+//                    sliderBounds: nil,
+//                    42
+//                )
                 
                 sliders.exposureDuration.initialSensitivity = 0.2
                 sliders.exposureDuration.labelTextForValue = { (value, shouldRound) in
@@ -992,22 +1041,14 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
         guard layout.currentMode != layoutMode else {return}
         
         CATransaction.begin()
-        
         CATransaction.setDisableActions(false)
-        
         CATransaction.setAnimationDuration(duration)
-        
         UIView.animate(withDuration: duration,
             delay: 0.0,
             options: .beginFromCurrentState,
             animations: layout.exitPerformer,
             completion: layout.exitCompleter)
-        
-        
-        
         CATransaction.commit()
-        
-        
         
         setUpLayout(forMode:layoutMode)
         
@@ -1015,28 +1056,15 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             menuControl.selectedIndex = i
         }
         
-        
-        
         CATransaction.begin()
-        
         CATransaction.setDisableActions(false)
-        
         CATransaction.setAnimationDuration(duration)
-        
-        
-        
         UIView.animate(withDuration: duration,
             delay: 0.0,
             options: .beginFromCurrentState,
             animations: layout.entrancePerformer,
             completion: layout.entranceCompleter)
-        
-        
-        
         CATransaction.commit()
-        
-        
-        
         layout.entranceStarter()
         
     }
@@ -1097,45 +1125,23 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
     
     
     func createConstraints(forKey key:ConstraintKey) -> [NSLayoutConstraint] {
-        
         let orientation = UIApplication.shared.statusBarOrientation
-        
         var constraints: [NSLayoutConstraint] = []
-        
         let sDistance = kSliderKnobMargin + kSliderKnobRadius + 2
-        
-        
-        
         let xMargin: CGFloat = 15
-        
         let yMargin: CGFloat = (orientation == .portrait) ? 60 : 15
-        
         let mx = 2 * sDistance + xMargin
         let my = 2 * sDistance + yMargin
-        
-        
-        
         switch key {
-            
-            
-            
         case .menuControl: // MARK: MenuControl
-            
-            
-            
             let sHeight = (orientation != .portrait) ? my + 5 : 15//my + 5//35
-            
             let hConstraints = NSLayoutConstraint.constraints(
-                
                 withVisualFormat: "H:|->=M-[MC(==350@250)]->=M-|",
                 options: .directionLeftToRight,
                 metrics: ["M" : 0/*mx - 5*/],
                 views: ["MC" : menuControl]
-                
             )
-            
             let centerXConstraint = NSLayoutConstraint(
-                
                 item: menuControl,
                 attribute: .centerX,
                 relatedBy: .equal,
@@ -1144,11 +1150,8 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 attribute: .centerX,
                 multiplier: 1,
                 constant: 0
-            
             )
-            
             let yConstraint = NSLayoutConstraint(
-                
                 item: menuControl,
                 attribute: NSLayoutConstraint.Attribute.topMargin,
                 relatedBy: NSLayoutConstraint.Relation.equal,
@@ -1157,27 +1160,17 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 attribute: NSLayoutConstraint.Attribute.top,
                 multiplier: 1,
                 constant: sHeight
-            
             )
             
             constraints.append(contentsOf: hConstraints)
             constraints.append(centerXConstraint)
             constraints.append(yConstraint)
-            
-            
-            
         case .controlPanel: // MARK: ControlPanel
-            
-            
-            
             let sHeight = my
-            
             guard let controlPanel = currentControlPanel else {
                 break
             }
-            
             let centerXConstraint = NSLayoutConstraint(
-                
                 item: controlPanel,
                 attribute: .centerX,
                 relatedBy: .equal,
@@ -1186,11 +1179,8 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 attribute: .centerX,
                 multiplier: 1,
                 constant: 0
-            
             )
-            
             let yConstraint = NSLayoutConstraint(
-                
                 item: controlPanel,
                 attribute: .bottomMargin,
                 relatedBy: .equal,
@@ -1199,22 +1189,11 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 attribute: .bottomMargin,
                 multiplier: 1,
                 constant: -sHeight
-            
             )
-            
             constraints.append(centerXConstraint)
             constraints.append(yConstraint)
-            
-            
-            
-            
-            
         case .shutterButton: // MARK: ShutterButton
-            
-            
-            
 //            let sWidth = xMargin
-            
             let sideAttribute: NSLayoutConstraint.Attribute
             let sideMargin: CGFloat
             let centerAttribute: NSLayoutConstraint.Attribute
@@ -1233,24 +1212,15 @@ class CaptureView: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 sideMargin = -15
                 centerAttribute = .centerX
             }
-            
             let center = NSLayoutConstraint(item: shutterButton, attribute: centerAttribute,
                 relation: .equal,
                 toItem: self, attribute: centerAttribute)
-            
             let side = NSLayoutConstraint(item: shutterButton, attribute: sideAttribute,
                 relatedBy: .equal,
                 toItem: self, attribute: sideAttribute,
                 multiplier: 1, constant: sideMargin)
-            
             constraints += [side, center]
-            
-            
-            
-            
-            
         case .galleryButton: // MARK: GalleryButton
-
             let offsetAttribute: NSLayoutConstraint.Attribute
             let offsetToAttribute: NSLayoutConstraint.Attribute
             let offsetAmount: CGFloat

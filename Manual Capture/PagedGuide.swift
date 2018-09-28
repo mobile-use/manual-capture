@@ -19,7 +19,7 @@ class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     }
     
     typealias Content = (title: String, description: String, videoName: String)
-    typealias Page = PagedGuideContent
+//    typealias Page = PagedGuideContent
     
     @IBOutlet var pageContainer: UIView!
     @IBOutlet var closeButton: UIButton!
@@ -58,12 +58,12 @@ class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let referedPage = viewController as? Page else { return nil }
+        guard let referedPage = viewController as? PagedGuideContent else { return nil }
         return createPageViewController(atIndex: referedPage.index+1)
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let referedPage = viewController as? Page else { return nil }
+        guard let referedPage = viewController as? PagedGuideContent else { return nil }
         return createPageViewController(atIndex: referedPage.index-1)
     }
     
@@ -76,7 +76,7 @@ class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        guard let transitionPage = pendingViewControllers.first as? Page else { return }
+        guard let transitionPage = pendingViewControllers.first as? PagedGuideContent else { return }
         if transitionPage.index + 1 == contents.endIndex {
             closeButton.isEnabled = true
         }
@@ -85,7 +85,7 @@ class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     func createPageViewController(atIndex index: Int) -> UIViewController? {
         guard contents.indices ~= index else { return nil }
         
-        let page = storyboard?.instantiateViewController(withIdentifier: "PagedGuideContent") as! Page
+        guard let page = storyboard?.instantiateViewController(withIdentifier: "PagedGuideContent") as! PagedGuideContent? else { fatalError() }
         page.content = contents[index]
         page.index = index
         return page
