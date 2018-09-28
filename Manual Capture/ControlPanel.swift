@@ -17,11 +17,11 @@ class ControlPanel: UIView {
         super.init(frame: frame)
         
         let r: CGFloat = 10
-        layoutMargins = UIEdgeInsetsMake(0, r, 0, r)
+        layoutMargins = UIEdgeInsets(top: 0, left: r, bottom: 0, right: r)
         
         // Layer Appearance
         layer.borderWidth = 1
-        layer.borderColor = UIColor.whiteColor().CGColor
+        layer.borderColor = UIColor.white.cgColor
         layer.cornerRadius = r
         
         initRows()
@@ -29,20 +29,20 @@ class ControlPanel: UIView {
     
     private(set) var contentHeight: CGFloat = 0
     
-    override func intrinsicContentSize() -> CGSize {
-        return CGSizeMake(100, contentHeight + abs(layoutMargins.top) + abs(layoutMargins.bottom) )
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 100, height: contentHeight + abs(layoutMargins.top) + abs(layoutMargins.bottom) )
     }
     
-    override func contentCompressionResistancePriorityForAxis(axis: UILayoutConstraintAxis) -> UILayoutPriority {
+    override func contentCompressionResistancePriority(for axis: NSLayoutConstraint.Axis) -> UILayoutPriority {
         switch axis {
-        case .Horizontal: return UILayoutPriorityDefaultLow
-        case .Vertical: return UILayoutPriorityDefaultHigh
+        case .horizontal: return .defaultLow
+        case .vertical: return .defaultHigh
         }
     }
-    override func contentHuggingPriorityForAxis(axis: UILayoutConstraintAxis) -> UILayoutPriority {
+    override func contentHuggingPriority(for axis: NSLayoutConstraint.Axis) -> UILayoutPriority {
         switch axis {
-        case .Horizontal: return UILayoutPriorityDefaultLow
-        case .Vertical: return UILayoutPriorityDefaultHigh
+        case .horizontal: return .defaultLow
+        case .vertical: return .defaultHigh
         }
     }
     
@@ -51,16 +51,16 @@ class ControlPanel: UIView {
         var nextTopConstraint = { (row:Row) -> NSLayoutConstraint in
             return NSLayoutConstraint(
                 item: row.view,
-                    attribute: .Top, relatedBy: .Equal,
+                    attribute: .top, relatedBy: .equal,
                 toItem: self,
-                    attribute: .TopMargin, multiplier: 1, constant: 0
+                    attribute: .topMargin, multiplier: 1, constant: 0
             )
         }
         
         rows.forEach { (row) in
             
             // Add Row View
-            let rowFrame = CGRectMake(0, contentHeight, bounds.width, row.height)
+            let rowFrame = CGRect(x: 0, y: contentHeight, width: bounds.width, height: row.height)
             row.view.frame = rowFrame
             row.view.translatesAutoresizingMaskIntoConstraints = false
             //row.view.backgroundColor = UIColor.redColor()
@@ -71,21 +71,21 @@ class ControlPanel: UIView {
             let hFormat = row.hConstraintsFormat ?? "|-[Row]-|"
             let lowPriorityCenterXConstraint = NSLayoutConstraint(
                 item: row.view,
-                attribute: .CenterX, relatedBy: .Equal,
+                attribute: .centerX, relatedBy: .equal,
                 toItem: self,
-                attribute: .CenterX, multiplier: 1, constant: 0
+                attribute: .centerX, multiplier: 1, constant: 0
             )
-            lowPriorityCenterXConstraint.priority = UILayoutPriorityDefaultLow
-            let xConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-                 "H:\(hFormat)",
-                options: .DirectionLeftToRight,
+            lowPriorityCenterXConstraint.priority = UILayoutPriority.defaultLow
+            let xConstraints = NSLayoutConstraint.constraints(
+                withVisualFormat: "H:\(hFormat)",
+                options: .directionLeftToRight,
                 metrics: nil, views: ["Row" : row.view]
             )
             let heightConstraint = NSLayoutConstraint(
                 item: row.view,
-                    attribute: .Height, relatedBy: .Equal,
+                    attribute: .height, relatedBy: .equal,
                 toItem: nil,
-                    attribute: .NotAnAttribute, multiplier: 1, constant: row.height
+                attribute: .notAnAttribute, multiplier: 1, constant: row.height
             )
             let topConstraint = nextTopConstraint(row)
             
@@ -100,9 +100,9 @@ class ControlPanel: UIView {
             nextTopConstraint = { (nextRow: Row) -> NSLayoutConstraint in
                 return NSLayoutConstraint(
                     item: nextRow.view,
-                        attribute: .Top, relatedBy: .Equal,
+                        attribute: .top, relatedBy: .equal,
                     toItem: row.view,
-                        attribute: .Bottom, multiplier: 1, constant: 0
+                    attribute: .bottom, multiplier: 1, constant: 0
                 )
             }
         }
@@ -128,8 +128,8 @@ class ControlPanel: UIView {
             self.hConstraintsFormat = hConstraintsFormat
         }
         
-        init(view: UIView, type: Type){
-            let settings = ControlPanel.Row.settings(type)
+        init(view: UIView, type: ControlType){
+            let settings = ControlPanel.Row.settings(type: type)
             self.init(view: view,
                 height: settings.height,
                 hConstraintsFormat: settings.hConstraintsFormat)
@@ -149,11 +149,11 @@ class ControlPanel: UIView {
         
         typealias Settings = (height: CGFloat, hConstraintsFormat: String)
         
-        enum Type {
+        enum ControlType {
             case Slider, OptionControl, ModeControl
         }
         
-        private static func settings(type:Type) -> Settings {
+        private static func settings(type: ControlType) -> Settings {
             switch type {
             case .Slider:
                 return (40, "|-20-[Row(<=250)]-20-|")

@@ -10,7 +10,7 @@ import AVFoundation
 import MediaPlayer
 
 class VolumeButtonHandler: NSObject {
-    private let outputVolumeObserver: NSKeyValueObservation
+    private var outputVolumeObserver: NSKeyValueObservation!
     
     private let maxVolume: Float = 0.99999, minVolume: Float = 0.00001
     
@@ -60,7 +60,7 @@ class VolumeButtonHandler: NSObject {
         // Audio session is interrupted when you send the app to the background,
         // and needs to be set to active again when it goes to app goes back to the foreground
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(VolumeButtonHandler.audioSessionInterrupted),
+                                               selector: #selector(self.audioSessionInterrupted),
                                                name: AVAudioSession.interruptionNotification,
                                                object: nil)
         

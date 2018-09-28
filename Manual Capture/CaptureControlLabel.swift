@@ -23,23 +23,23 @@ class CaptureControlLabel: UILabel {
                 if showAndHideEnabeled {
                     delay(2){
                         // Subtract 1 from timer count
-                        self._delaysCount--
+                        self._delaysCount -= 1
                         if self._delaysCount == 0 {
                             let animation = CABasicAnimation(keyPath: "opacity")
                             animation.duration = 0.25
-                            self.layer.addAnimation(animation, forKey: "opacityAnimation")
+                            self.layer.add(animation, forKey: "opacityAnimation")
                             self.layer.opacity = 0
                         }
                     }
                     // Add 1 to timer count
-                    self._delaysCount++
+                    self._delaysCount += 1
                 }
             }
         }
     }
     
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         didInit()
     }
     
@@ -55,23 +55,23 @@ class CaptureControlLabel: UILabel {
     
     
     func didInit(){
-        textColor = UIColor.whiteColor()
-        layoutMargins = UIEdgeInsetsMake(-5, -5, -5, -5)
+        textColor = UIColor.white
+        layoutMargins = UIEdgeInsets(top: -5, left: -5, bottom: -5, right: -5)
         font = UIFont(name: "HelveticaNeue", size: 14)
-        textAlignment = NSTextAlignment.Center
+        textAlignment = NSTextAlignment.center
         //roundedRect.fillColor = kCaptureTintColor.CGColor
         self.backgroundColor = kCaptureTintColor
     }
     
-    override func intrinsicContentSize() -> CGSize {
-        let sContentSize = super.intrinsicContentSize()
-        return CGSizeMake(sContentSize.width+12, sContentSize.height+6)
+    override var intrinsicContentSize: CGSize {
+        let sContentSize = super.intrinsicContentSize
+        return CGSize(width: sContentSize.width+12, height: sContentSize.height+6)
     }
 
-    override func layoutSublayersOfLayer(layer: CALayer) {
-        super.layoutSublayersOfLayer(layer)
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: layer)
         guard layer.isEqual(self.layer) else{return}
-        roundedRect.path = UIBezierPath(roundedRect: bounds, cornerRadius: 3).CGPath
+        roundedRect.path = UIBezierPath(roundedRect: bounds, cornerRadius: 3).cgPath
         self.layer.mask = roundedRect
         //self.backgroundColor = kCaptureTintColor
     }

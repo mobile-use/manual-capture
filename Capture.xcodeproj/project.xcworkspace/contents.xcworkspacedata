@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/kobejean/Code/Xcode Projects/Manual Capture/Capture.xcodeproj">
+      location = "group:../Pods">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

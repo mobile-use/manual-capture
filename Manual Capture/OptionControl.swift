@@ -20,26 +20,26 @@ class OptionControl<V: Equatable>: Control {
     var items: [Item] {didSet{ setupItems() }}
     typealias Index = Int
     var selectedIndex: Index = -1 {
-        didSet{ selectionChanged(oldValue) }
+        didSet{ selectionChanged(oldIndex: oldValue) }
     }
     
-    class func indexOfItemWithValue(value: V, items:[Item]) -> Int? {
-        for (i, item) in items.enumerate() {
+    class func indexOfItem(with value: V, items:[Item]) -> Int? {
+        for (i, item) in items.enumerated() {
             if item.value == value {
                 return i
             }
         }
         return nil
     }
-    func itemWithValue(value: V) -> Item? {
-        guard let i = OptionControl<V>.indexOfItemWithValue(value, items: items) else {
+    func item(with value: V) -> Item? {
+        guard let i = OptionControl<V>.indexOfItem(with: value, items: items) else {
             return nil
         }
         return items[i]
     }
     
-    func selectItemWithValue(value:V) -> Void? {
-        selectedIndex = OptionControl.indexOfItemWithValue(value, items: items) ?? -1
+    func selectItem(with value:V) -> Void? {
+        selectedIndex = OptionControl.indexOfItem(with: value, items: items) ?? -1
         // return normally if found
         return (selectedIndex != -1) ? () : nil
     }
@@ -50,7 +50,7 @@ class OptionControl<V: Equatable>: Control {
         // reset old selected item
         if items.indices ~= oldIndex {
             let oldText = textLayers[oldIndex]
-            oldText.foregroundColor = UIColor.whiteColor().CGColor
+            oldText.foregroundColor = UIColor.white.cgColor
         }
         
         // fade away if out of range
@@ -69,13 +69,13 @@ class OptionControl<V: Equatable>: Control {
             // had no selection so dont animate movement
             CATransaction.disableActions {
                 self.layer.layoutIfNeeded()
-                text.foregroundColor = kCaptureTintColor.CGColor
+                text.foregroundColor = kCaptureTintColor.cgColor
             }
             selectionIndicator.opacity = 1.0
         }else{
             layer.layoutIfNeeded()
-            CATransaction.performBlock(CATransaction.animationDuration() * 2) {
-                text.foregroundColor = kCaptureTintColor.CGColor
+            CATransaction.performBlock(duration: CATransaction.animationDuration() * 2) {
+                text.foregroundColor = kCaptureTintColor.cgColor
             }
         }
         
@@ -86,9 +86,9 @@ class OptionControl<V: Equatable>: Control {
     
     private var touchBounds = [CGRect]()
     private let tapGesture = UITapGestureRecognizer()
-    func handleTapGesture(gesture: UITapGestureRecognizer){
-        let tapCoords = gesture.locationInView(self)
-        for (i, touchBound) in touchBounds.enumerate() {
+    @objc func handleTapGesture(gesture: UITapGestureRecognizer){
+        let tapCoords = gesture.location(in: self)
+        for (i, touchBound) in touchBounds.enumerated() {
             if touchBound.contains(tapCoords) {
                 selectedIndex = i
                 break
@@ -108,9 +108,9 @@ class OptionControl<V: Equatable>: Control {
             textLayer.string = item.title
             textLayer.font = UIFont(name: "HelveticaNeue", size: 12)
             textLayer.fontSize = 12
-            textLayer.foregroundColor = UIColor.whiteColor().CGColor
-            textLayer.contentsScale = UIScreen.mainScreen().scale
-            textLayer.alignmentMode = kCAAlignmentCenter
+            textLayer.foregroundColor = UIColor.white.cgColor
+            textLayer.contentsScale = UIScreen.main.scale
+            textLayer.alignmentMode = CATextLayerAlignmentMode.center
             
             textLayers.append(textLayer)
             layer.addSublayer(textLayer)
@@ -119,16 +119,16 @@ class OptionControl<V: Equatable>: Control {
     
     var minWidth: CGFloat = 10
     
-    override func intrinsicContentSize() -> CGSize {
+    override var intrinsicContentSize: CGSize {
         let minSpacing: CGFloat = 15.0
         let width = textLayers.reduce(minSpacing) { (widthSum, textLayer) -> CGFloat in
             return widthSum + max(textLayer.preferredFrameSize().width, minWidth) + minSpacing
         }
-        return CGSizeMake(width, 30.0)
+        return CGSize(width: width, height: 30.0)
     }
     
-    override func layoutSublayersOfLayer(layer: CALayer) {
-        super.layoutSublayersOfLayer(layer)
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: layer)
         let extraSpace = textLayers.reduce(bounds.width) {
             $0 - max($1.preferredFrameSize().width, minWidth)
         }
@@ -138,7 +138,7 @@ class OptionControl<V: Equatable>: Control {
         touchBounds = []
         
         textLayers.forEach { (textLayer) in
-            var textRect = CGRectZero
+            var textRect = CGRect.zero
             textRect.size = textLayer.preferredFrameSize()
             textRect.size.width = max(textRect.width, minWidth)
             textRect.origin.x = nextX
@@ -147,7 +147,7 @@ class OptionControl<V: Equatable>: Control {
             textLayer.frame = textRect
             
             nextX += textRect.width + space
-            var touchBound = CGRectInset(textRect, -(space / 2), 0)
+            var touchBound = textRect.insetBy(dx: -(space / 2), dy: 0)
             touchBound.origin.y = 0
             touchBound.size.height = bounds.height
             touchBounds.append(touchBound)
@@ -163,24 +163,24 @@ class OptionControl<V: Equatable>: Control {
         newSize.width += 10
         newSize.height = 20
         
-        let textCenterPoint = CGPointMake(
-            selectedTextLayer.frame.midX,
-            selectedTextLayer.frame.midY
+        let textCenterPoint = CGPoint(
+            x: selectedTextLayer.frame.midX,
+            y: selectedTextLayer.frame.midY
         )
         selectionIndicator.position = textCenterPoint
         selectionIndicator.bounds.size = newSize
     }
  
-    init(items:[Item], selectedIndex: Int = -1, frame: CGRect = CGRectMake(0, 0, 100, 30)) {
+    init(items:[Item], selectedIndex: Int = -1, frame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 30)) {
         self.items = items
         self.selectedIndex = selectedIndex
         super.init(frame: frame)
         
-        tapGesture.addTarget(self, action: "handleTapGesture:")
+        tapGesture.addTarget(self, action: #selector(self.handleTapGesture(gesture:)))
         addGestureRecognizer(tapGesture)
         
         selectionIndicator.opacity = 0.0
-        selectionIndicator.frame = CGRectMake(0, 0, 40, 20)
+        selectionIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 20)
         selectionIndicator.zPosition = -100
         layer.addSublayer(selectionIndicator)
         
@@ -189,25 +189,25 @@ class OptionControl<V: Equatable>: Control {
         let indexRange = items.startIndex ..< items.endIndex
         if(indexRange ~= selectedIndex){
             selectionIndicator.opacity = 1.0
-            selectionChanged(-1)
+            selectionChanged(oldIndex: -1)
         }
     }
-    convenience init(items:[Item], selectedValue: V, frame: CGRect = CGRectMake(0, 0, 50, 50)) {
-        let sIndex = OptionControl.indexOfItemWithValue(selectedValue, items: items) ?? -1
+    convenience init(items:[Item], selectedValue: V, frame: CGRect = CGRect(x: 0, y: 0, width: 50, height: 50)) {
+        let sIndex = OptionControl.indexOfItem(with: selectedValue, items: items) ?? -1
         self.init(items: items, selectedIndex: sIndex, frame: frame)
     }
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    override func contentCompressionResistancePriorityForAxis(axis: UILayoutConstraintAxis) -> UILayoutPriority {
+    override func contentCompressionResistancePriority(for axis: NSLayoutConstraint.Axis) -> UILayoutPriority {
         switch axis {
-        case .Horizontal: return UILayoutPriorityDefaultHigh
-        case .Vertical: return UILayoutPriorityDefaultHigh
+        case .horizontal: return UILayoutPriority.defaultHigh
+        case .vertical: return UILayoutPriority.defaultHigh
         }
     }
-    override func contentHuggingPriorityForAxis(axis: UILayoutConstraintAxis) -> UILayoutPriority {
+    override func contentHuggingPriority(for axis: NSLayoutConstraint.Axis) -> UILayoutPriority {
         switch axis {
-        case .Horizontal: return UILayoutPriorityDefaultLow
-        case .Vertical: return UILayoutPriorityDefaultHigh
+        case .horizontal: return UILayoutPriority.defaultLow
+        case .vertical: return UILayoutPriority.defaultHigh
         }
     }
 }
@@ -221,10 +221,10 @@ private class OptionControlSelectionIndicator : CALayer {
     
     override init() {
         super.init()
-        backgroundColor = UIColor.whiteColor().CGColor
+        backgroundColor = UIColor.white.cgColor
         updateRoundedRect()
     }
-    override init(layer: AnyObject) { super.init(layer: layer) }
+    override init(layer: Any) { super.init(layer: layer) }
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }
 

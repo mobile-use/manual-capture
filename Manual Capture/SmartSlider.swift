@@ -14,69 +14,69 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     override var bounds: CGRect {
         didSet {
             guard bounds != oldValue else { return }
-            line.regularLine.removeAnimationForKey("pathAnimation")
-            knobLayer.removeAnimationForKey("positionXAnimation")
-            knobLayer.removeAnimationForKey("positionYAnimation")
+            line.regularLine.removeAnimation(forKey: "pathAnimation")
+            knobLayer.removeAnimation(forKey: "positionXAnimation")
+            knobLayer.removeAnimation(forKey: "positionYAnimation")
             CATransaction.disableActions {
                 self.line.frame = self.bounds
-                self.layoutSublayersOfLayer(self.layer)
+                self.layoutSublayers(of: self.layer)
             }
         }
     }
     
     override func didChangeState(oldState: State) {
-        super.didChangeState(oldState)
-        let added = state.subtract(oldState)
-        let removed = oldState.subtract(state)
+        super.didChangeState(oldState: oldState)
+        let added = state.subtracting(oldState)
+        let removed = oldState.subtracting(state)
 
         var transitionScale: Float?
-        if !state.hasProperty(.ComputerControlled) {
-            if removed.hasProperty(.Active) { transitionScale = 0.0 }
+        if !state.hasProperty(.computerControlled) {
+            if removed.hasProperty(.active) { transitionScale = 0.0 }
             
-            if removed.hasProperty(.ComputerControlled) && !state.hasProperty(.Active) { transitionScale = 0.0 }
-        }else if added.hasProperty(.ComputerControlled) { transitionScale = 1.0 }
+            if removed.hasProperty(.computerControlled) && !state.hasProperty(.active) { transitionScale = 0.0 }
+        }else if added.hasProperty(.computerControlled) { transitionScale = 1.0 }
         
         if let tScale = transitionScale {
             line.updateLineApearance(initialSensitivity, tScale, travelDistance, fingerProgress, progress, totalDistance)
         }
     }
     
-    override func setProgress(progress: Float, animated:Bool) {
+    override func setProgress(_ progress: Float, animated:Bool) {
         // temporarily disable default animation
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
         
-        let laniAnimating = line.regularLine.animationForKey("pathAnimation") != nil
-        let sanixAnimating = lineLayer.animationForKey("positionXAnimation") != nil
-        let saniyAnimating = lineLayer.animationForKey("positionYAnimation") != nil
+        let laniAnimating = line.regularLine.animation(forKey: "pathAnimation") != nil
+        let sanixAnimating = lineLayer.animation(forKey: "positionXAnimation") != nil
+        let saniyAnimating = lineLayer.animation(forKey: "positionYAnimation") != nil
         if !animated {
             if laniAnimating || sanixAnimating || saniyAnimating {
-                line.regularLine.removeAnimationForKey("pathAnimation")
-                knobLayer.removeAnimationForKey("positionXAnimation")
-                knobLayer.removeAnimationForKey("positionYAnimation")
+                line.regularLine.removeAnimation(forKey: "pathAnimation")
+                knobLayer.removeAnimation(forKey: "positionXAnimation")
+                knobLayer.removeAnimation(forKey: "positionYAnimation")
             }
-        }else{
+        } else {
             let lani = CABasicAnimation(keyPath: "path")// line path animation
             let sanix = CABasicAnimation(keyPath: "position.x")// scrubber x animation
             let saniy = CABasicAnimation(keyPath: "position.y")// scrubber y animation
             let aniG = CAAnimationGroup()
             aniG.animations = [lani, sanix, saniy]
             aniG.duration = 0.25
-            aniG.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-            aniG.removedOnCompletion = true
+            aniG.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
+            aniG.isRemovedOnCompletion = true
             
             if laniAnimating && sanixAnimating && saniyAnimating {
-                if let pll = line.regularLine.presentationLayer() as? CAShapeLayer {
+                if let pll = line.regularLine.presentation() {
                     sanix.fromValue = pll.path
                 }
-                if let psl = knobLayer.presentationLayer() as? CALayer {
+                if let psl = knobLayer.presentation() {
                     sanix.fromValue = psl.position.x
                     saniy.fromValue = psl.position.y
                 }
             }
-            line.regularLine.addAnimation(lani, forKey: "pathAnimation")
-            knobLayer.addAnimation(sanix, forKey: "positionXAnimation")
-            knobLayer.addAnimation(saniy, forKey: "positionYAnimation")
+            line.regularLine.add(lani, forKey: "pathAnimation")
+            knobLayer.add(sanix, forKey: "positionXAnimation")
+            knobLayer.add(saniy, forKey: "positionYAnimation")
         }
         let inRangeValue = max(0, min(progress, 1))
         if inRangeValue != self.progress {
@@ -84,7 +84,7 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
             layer.layoutSublayers()
         }
         var shouldRound = false
-        if state.hasProperty(.Active) {
+        if state.hasProperty(.active) {
             line.updateLineApearance(initialSensitivity, transitionScale, travelDistance, fingerProgress, progress, totalDistance)
             shouldRound = (transitionScale == 1.0)
         }
@@ -104,7 +104,7 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
         didSet { updateLabelText() }
     }
     
-    func updateLabelText(){
+    func updateLabelText() {
         guard let v = value else { return }
         knobLayer.text = labelTextForValue(v, false)
     }
@@ -124,10 +124,10 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     /// displacement of progress so that the knob will position right under finger
     private var transitionDistance: CGFloat {
         if /*!warpSpeedReverses*/kIsVideoMode {
-            return (direction.axis == .Horizontal) ? 130.0 : 195
+            return (direction.axis == .horizontal) ? 130.0 : 195
             //return (direction.axis == .Horizontal) ? 50 : 75
         }else {
-            return (direction.axis == .Horizontal) ? 90.0 : 135.0
+            return (direction.axis == .horizontal) ? 90.0 : 135.0
             //return (direction.axis == .Horizontal) ? 50 : 75
         }
     }
@@ -145,25 +145,25 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
     
     private var startTravelDistance: CGFloat = 0
     
-    func handleSmartSliderGesture(sender:SmartSliderGesture) {
+    @objc func handleSmartSliderGesture(sender: SmartSliderGesture) {
         switch sender.state {
-        case .Began:
+        case .began:
             perpendicularDistance = _perpendicularDisplacementForPointTargetPoint(gesture.lastFingerLocation) // touch down location
             perpendicularStartDistance = abs(perpendicularDistance) + transitionStartDistance
             fingerProgress = 0
             accuracyProgress = progress
             //startTravelDistance = progress * totalDistance
             
-            if !state.hasProperty(.Active) {
+            if !state.hasProperty(.active) {
                 // first to activate
                 becomeCurrentControl()
-                state.getUpdateTransform(true, .Active)?(&state)
-                state.getUpdateTransform(false, .ComputerControlled)?(&state)
+                state.getUpdateTransform(true, .active)?(&state)
+                state.getUpdateTransform(false, .computerControlled)?(&state)
                 actionProgressStarted?(self)
                 actionStarted?()
             }
             
-        case .Changed:
+        case .changed:
             let oldPerpendicularDistance = perpendicularDistance
             perpendicularDistance = _perpendicularDisplacementForPointTargetPoint(sender.lastFingerLocation)
             
@@ -190,18 +190,18 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
             
             setProgress(newProgress, animated: false)
             actionProgressChanged?(self)
-        case .Possible: break
+        case .possible: break
         default:
             transitionScale = 0.0
             
-            if state.hasProperty(.Active) {
+            if state.hasProperty(.active) {
                 var active = false
                 for (_, pdh) in pdHandlers {
-                    if pdh.state.hasProperty(.Active) { active = true; break }
+                    if pdh.state.hasProperty(.active) { active = true; break }
                 }
                 if !active {
                     // last to deactivate
-                    state.subtractInPlace(.Active)
+                    state = state.subtracting(.active)
                     actionProgressEnded?(self)
                     actionEnded?()
                 }
@@ -209,53 +209,53 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
         }
     }
     
-    private func _perpendicularDisplacementForPointTargetPoint(var targetPoint:CGPoint) -> CGFloat {
-        targetPoint = convertPoint(targetPoint, fromView: superview!)
+    private func _perpendicularDisplacementForPointTargetPoint(_ targetPoint: CGPoint) -> CGFloat {
+        let targetPoint = convert(targetPoint, from: superview!)
         switch direction.axis {
-        case .Horizontal: return bounds.midY - targetPoint.y
-        case .Vertical: return bounds.midX - targetPoint.x
+            case .horizontal: return bounds.midY - targetPoint.y
+            case .vertical: return bounds.midX - targetPoint.x
         }
     }
     
-    private func _progressForTargetPoint(var targetPoint:CGPoint) -> Float {
-        targetPoint = convertPoint(targetPoint, fromView: superview!)
+    private func _progressForTargetPoint(_ targetPoint: CGPoint) -> Float {
+        let targetPoint = convert(targetPoint, from: superview!)
         let sMR = kSliderKnobMargin + kSliderKnobRadius
         switch direction {
-        case .Right:
+        case .right:
             let y = bounds.midY
             // travel
-            let tsp = CGPointMake(bounds.minX + sMR, y)
-            let tep = CGPointMake(bounds.maxX - sMR, y)
+            let tsp = CGPoint(x: bounds.minX + sMR, y: y)
+            let tep = CGPoint(x: bounds.maxX - sMR, y: y)
             
             let tp = targetPoint
             let td = tp.x - tsp.x
             let p = Float(td/(tep.x - tsp.x))
             return p
-        case .Left:
+        case .left:
             let y = bounds.midY
             // travel
-            let tsp = CGPointMake(bounds.maxX - sMR, y)
-            let tep = CGPointMake(bounds.minX + sMR, y)
+            let tsp = CGPoint(x: bounds.maxX - sMR, y: y)
+            let tep = CGPoint(x: bounds.minX + sMR, y: y)
             
             let tp = targetPoint
             let td = tp.x - tsp.x
             let p = Float(td/(tep.x - tsp.x))
             return p
-        case .Down:
+        case .down:
             let x = bounds.midX
             // travel
-            let tsp = CGPointMake(x, bounds.minY + sMR)
-            let tep = CGPointMake(x, bounds.maxY - sMR)
+            let tsp = CGPoint(x: x, y: bounds.minY + sMR)
+            let tep = CGPoint(x: x, y: bounds.maxY - sMR)
             
             let tp = targetPoint
             let td = tp.y - tsp.y
             let p = Float(td/(tep.y - tsp.y))
             return p
-        case .Up:
+        case .up:
             let x = bounds.midX
             // travel
-            let tsp = CGPointMake(x, bounds.maxY - sMR)
-            let tep = CGPointMake(x, bounds.minY + sMR)
+            let tsp = CGPoint(x: x, y: bounds.maxY - sMR)
+            let tep = CGPoint(x: x, y: bounds.minY + sMR)
             
             let tp = targetPoint
             let td = tp.y - tsp.y
@@ -282,7 +282,7 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
         
         knobLayer.labelTextMinWidth = labelTextMinWidth
         
-        gesture.addTarget(self, action: "handleSmartSliderGesture:")
+        gesture.addTarget(self, action: #selector(self.handleSmartSliderGesture(sender:)))
         
         lineLayer.removeFromSuperlayer()
         layer.addSublayer(line)
@@ -293,29 +293,23 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
             
             
             switch direction.axis {
-            case .Horizontal:
+            case .horizontal:
                 gesture.sliderBounds = {
-                    guard !me.hidden || me.layer.opacity != 0.0 else { return CGRectZero }
-                    return CGRectInset(
-                        me.convertRect(
-                            CGRectMake(0, me.knobLayer.frame.origin.y, me.bounds.width, me.knobLayer.bounds.height),
-                            toView: me.gesture.view
-                        ),
-                        0,
-                        min( me.knobLayer.bounds.height / 2 - 30, 0 )
+                    guard !me.isHidden || me.layer.opacity != 0.0 else { return CGRect.zero }
+                    let convertedRect = me.convert(
+                        CGRect(x: 0, y: me.knobLayer.frame.origin.y, width: me.bounds.width, height: me.knobLayer.bounds.height),
+                        to: me.gesture.view
                     )
+                    return convertedRect.insetBy(dx: 0, dy: min( me.knobLayer.bounds.height / 2 - 30, 0 ) )
                 }
-            case .Vertical:
+            case .vertical:
                 gesture.sliderBounds = {
-                    guard !me.hidden || me.layer.opacity != 0.0 else { return CGRectZero }
-                    return CGRectInset(
-                        me.convertRect(
-                            CGRectMake(me.knobLayer.frame.origin.x, 0, me.knobLayer.bounds.width, me.bounds.height),
-                            toView: me.gesture.view
-                        ),
-                        min( me.knobLayer.bounds.width / 2 - 30, 0),
-                        0
+                    guard !me.isHidden || me.layer.opacity != 0.0 else { return CGRect.zero }
+                    let convertedRect = me.convert(
+                        CGRect(x: me.knobLayer.frame.origin.x, y: 0, width: me.knobLayer.bounds.width, height: me.bounds.height),
+                        to: me.gesture.view
                     )
+                    return convertedRect.insetBy(dx: min( me.knobLayer.bounds.width / 2 - 30, 0), dy: 0)
                 }
             }
         }
@@ -325,21 +319,21 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
         if startBounds == nil {
             
             switch direction.axis {
-            case .Horizontal:
+            case .horizontal:
                 gesture.startBounds = {
-                    return CGRectInset(
-                        me.convertRect(
-                            CGRectMake(0, me.knobLayer.frame.origin.y, me.bounds.width, me.knobLayer.bounds.height),
-                            toView: me.gesture.view
-                        ), 0, min(me.knobLayer.bounds.height/2 - 30, 0))
+                    let convertedRect = me.convert(
+                        CGRect(x: 0, y: me.knobLayer.frame.origin.y, width: me.bounds.width, height: me.knobLayer.bounds.height),
+                        to: me.gesture.view
+                    )
+                    return convertedRect.insetBy(dx: 0, dy: min(me.knobLayer.bounds.height/2 - 30, 0))
                 }
-            case .Vertical:
+            case .vertical:
                 gesture.startBounds = {
-                    return CGRectInset(
-                        me.convertRect(
-                            CGRectMake(me.knobLayer.frame.origin.x, 0, me.knobLayer.bounds.width, me.bounds.height),
-                            toView: me.gesture.view
-                        ), min(me.knobLayer.bounds.width/2 - 30, 0), 0)
+                    let convertedRect = me.convert(
+                        CGRect(x: me.knobLayer.frame.origin.x, y: 0, width: me.knobLayer.bounds.width, height: me.bounds.height),
+                        to: me.gesture.view
+                    )
+                    return convertedRect.insetBy(dx: min(me.knobLayer.bounds.width/2 - 30, 0), dy: 0)
                 }
             }
         }
@@ -347,144 +341,155 @@ class SmartSlider<V> : GenericSlider<V, SmartSliderKnobLayer> {
             gesture.startBounds = startBounds
         }
     }
-
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func didMoveToSuperview() {
         guard let sv = superview else { return }
         sv.addGestureRecognizer(gesture)
     }
-    override func layoutSublayersOfLayer(layer: CALayer) {
-        guard self.layer.isEqual(layer) else{super.layoutSublayersOfLayer(layer);return}
+    override func layoutSublayers(of layer: CALayer) {
+        guard self.layer.isEqual(layer) else{ super.layoutSublayers(of: layer);return }
         
-        func setLinePathFor(sp:CGPoint, _ ep:CGPoint) {
-            let lp = CGPathCreateMutable()
-            CGPathMoveToPoint(lp, nil, sp.x, sp.y)
-            CGPathAddLineToPoint(lp, nil, ep.x, ep.y)
+        func setLinePathFor(_ sp: CGPoint, _ ep: CGPoint) {
+            let lp = CGMutablePath()
+            lp.move(to: sp)
+//            CGPathMoveToPoint(lp, nil, sp.x, sp.y)
+            lp.addLine(to: ep)
+//            CGPathAddLineToPoint(lp, nil, ep.x, ep.y)
             line.dashLineLayer1.path = lp
             line.dashLineLayer2.path = lp
         }
         
-        func setSplitLinePathFor(sp1:CGPoint, _ ep1:CGPoint, _ sp2:CGPoint, _ ep2:CGPoint) {
-            let lp1 = CGPathCreateMutable()
-            let lp2 = CGPathCreateMutable()
-            CGPathMoveToPoint(lp1, nil, sp1.x, sp1.y)
-            CGPathAddLineToPoint(lp1, nil, ep1.x, ep1.y)
-            CGPathMoveToPoint(lp2, nil, sp2.x, sp2.y)
-            CGPathAddLineToPoint(lp2, nil, ep2.x, ep2.y)
-            let combinedPath: CGMutablePathRef = CGPathCreateMutableCopy(lp1)!
-            CGPathAddPath(combinedPath, nil, lp2)
+        func setSplitLinePathFor(_ sp1:CGPoint, _ ep1:CGPoint, _ sp2:CGPoint, _ ep2:CGPoint) {
+            let lp1 = CGMutablePath()
+            let lp2 = CGMutablePath()
+            lp1.move(to: sp1)
+//            CGPathMoveToPoint(lp1, nil, sp1.x, sp1.y)
+            lp1.addLine(to: ep1)
+//            CGPathAddLineToPoint(lp1, nil, ep1.x, ep1.y)
+            lp2.move(to: sp2)
+//            CGPathMoveToPoint(lp2, nil, sp2.x, sp2.y)
+            lp2.addLine(to: ep2)
+//            CGPathAddLineToPoint(lp2, nil, ep2.x, ep2.y)
+            let combinedPath: CGMutablePath = lp1.mutableCopy()!
+            combinedPath.addPath(lp2)
+//            CGPathAddPath(combinedPath, nil, lp2)
             line.regularLine.path = combinedPath
         }
         
-        let sML = kSliderKnobMargin + ((direction.axis == .Horizontal) ? knobLayer.bounds.width : knobLayer.bounds.height )/2
+        let sML = kSliderKnobMargin + ((direction.axis == .horizontal) ? knobLayer.bounds.width : knobLayer.bounds.height )/2
         
         switch direction {
-        case .Right:
+        case .right:
             let y = bounds.midY
             
             // travel
-            let tsp = CGPointMake(bounds.minX + sML, y)
-            let tep = CGPointMake(bounds.maxX - sML, y)
+            let tsp = CGPoint(x: bounds.minX + sML, y: y)
+            let tep = CGPoint(x: bounds.maxX - sML, y: y)
             let td = (tep.x - tsp.x)*CGFloat(self.progress)
             travelDistance = td
             totalDistance = abs(tep.x - tsp.x)
             
             // travel point
-            let tp = CGPointMake(tsp.x + td, y)
+            let tp = CGPoint(x: tsp.x + td, y: y)
             
             // line points
-            let lsp = CGPointMake(bounds.minX, y)
-            let lep = CGPointMake(bounds.maxX, y)
+            let lsp = CGPoint(x: bounds.minX, y: y)
+            let lep = CGPoint(x: bounds.maxX, y: y)
             setLinePathFor(lsp, lep)
             
             // split line points
             let lsp1 = lsp
-            let lep1 = CGPointMake(tp.x - sML, y)
-            let lsp2 = CGPointMake(tp.x + sML, y)
+            let lep1 = CGPoint(x: tp.x - sML, y: y)
+            let lsp2 = CGPoint(x: tp.x + sML, y: y)
             let lep2 = lep
             setSplitLinePathFor(lsp1, lep1, lsp2, lep2)
             
             knobLayer.position = tp
-        case .Left:
+        case .left:
             let y = bounds.midY
             
             // travel
-            let tsp = CGPointMake(bounds.maxX - sML, y)
-            let tep = CGPointMake(bounds.minX + sML, y)
+            let tsp = CGPoint(x: bounds.maxX - sML, y: y)
+            let tep = CGPoint(x: bounds.minX + sML, y: y)
             let td = (tep.x - tsp.x)*CGFloat(self.progress)
             travelDistance = td
             totalDistance = abs(tep.x - tsp.x)
             
             // travel point
-            let tp = CGPointMake(tsp.x + td, y)
+            let tp = CGPoint(x: tsp.x + td, y: y)
             
             // line points
-            let lsp = CGPointMake(bounds.maxX, y)
-            let lep = CGPointMake(bounds.minX, y)
+            let lsp = CGPoint(x: bounds.maxX, y: y)
+            let lep = CGPoint(x: bounds.minX, y: y)
             setLinePathFor(lsp, lep)
             
             // split line points
             let lsp1 = lsp
-            let lep1 = CGPointMake(tp.x + sML, y)
-            let lsp2 = CGPointMake(tp.x - sML, y)
+            let lep1 = CGPoint(x: tp.x + sML, y: y)
+            let lsp2 = CGPoint(x: tp.x - sML, y: y)
             let lep2 = lep
             setSplitLinePathFor(lsp1, lep1, lsp2, lep2)
             
             knobLayer.position = tp
-        case .Down:
+        case .down:
             let x = bounds.midX
             // travel
-            let tsp = CGPointMake(x, bounds.minY + sML)
-            let tep = CGPointMake(x, bounds.maxY - sML)
+            let tsp = CGPoint(x: x, y: bounds.minY + sML)
+            let tep = CGPoint(x: x, y: bounds.maxY - sML)
             let td = (tep.y - tsp.y)*CGFloat(self.progress)
             travelDistance = td
             totalDistance = abs(tep.y - tsp.y)
             // travel point
-            let tp = CGPointMake(x, tsp.y + td)
+            let tp = CGPoint(x: x, y: tsp.y + td)
             // line points
-            let lsp = CGPointMake(x, bounds.minY)
-            let lep = CGPointMake(x, bounds.maxY)
+            let lsp = CGPoint(x: x, y: bounds.minY)
+            let lep = CGPoint(x: x, y: bounds.maxY)
             setLinePathFor(lsp, lep)
             
             // split line points
             let lsp1 = lsp
-            let lep1 = CGPointMake(x, tp.y - sML)
-            let lsp2 = CGPointMake(x, tp.y + sML)
+            let lep1 = CGPoint(x: x, y: tp.y - sML)
+            let lsp2 = CGPoint(x: x, y: tp.y + sML)
             let lep2 = lep
             setSplitLinePathFor(lsp1, lep1, lsp2, lep2)
             
             knobLayer.position = tp
-        case .Up:
+        case .up:
             let x = bounds.midX
             
             // travel
-            let tsp = CGPointMake(x, bounds.maxY - sML)
-            let tep = CGPointMake(x, bounds.minY + sML)
+            let tsp = CGPoint(x: x, y: bounds.maxY - sML)
+            let tep = CGPoint(x: x, y: bounds.minY + sML)
             let td = (tep.y - tsp.y)*CGFloat(self.progress)
             travelDistance = td
             totalDistance = abs(tep.y - tsp.y)
             
             // travel point
-            let tp = CGPointMake(x, tsp.y + td)
+            let tp = CGPoint(x: x, y: tsp.y + td)
             
             // line points
-            let lsp = CGPointMake(x, bounds.maxY)
-            let lep = CGPointMake(x, bounds.minX)
+            let lsp = CGPoint(x: x, y: bounds.maxY)
+            let lep = CGPoint(x: x, y: bounds.minX)
             setLinePathFor(lsp, lep)
             
             // line points
             let lsp1 = lsp
-            let lep1 = CGPointMake(x, tp.y + sML)
-            let lsp2 = CGPointMake(x, tp.y - sML)
+            let lep1 = CGPoint(x: x, y: tp.y + sML)
+            let lsp2 = CGPoint(x: x, y: tp.y - sML)
             let lep2 = lep
             setSplitLinePathFor(lsp1, lep1, lsp2, lep2)
             
             knobLayer.position = tp
         }
     }
-    override func intrinsicContentSize() -> CGSize {
+    override var intrinsicContentSize: CGSize {
         switch direction.axis {
-        case .Horizontal: return CGSizeMake(frame.width, 2 * (kSliderKnobMargin + kSliderKnobRadius))
-        case .Vertical: return CGSizeMake(2 * (kSliderKnobMargin + kSliderKnobRadius), frame.height)
+        case .horizontal: return CGSize(width: frame.width, height: 2 * (kSliderKnobMargin + kSliderKnobRadius))
+        case .vertical: return CGSize(width: 2 * (kSliderKnobMargin + kSliderKnobRadius), height: frame.height)
         }
     }
 }
@@ -501,14 +506,14 @@ class SmartSliderGesture: UIPanGestureRecognizer {
     var perpendicularDisplacement: CGFloat = 0
     var lastFingerLocation:CGPoint!
     
-    init(startBounds: (() -> CGRect), direction: Slider.Direction, target: AnyObject, action: Selector) {
+    init(startBounds: @escaping (() -> CGRect), direction: Slider.Direction, target: AnyObject, action: Selector) {
         self.startBounds = startBounds
         self.direction = direction
         super.init(target: target, action: action)
         didInit()
     }
     
-    init(startBounds: () -> CGRect, direction: Slider.Direction) {
+    init(startBounds: @escaping () -> CGRect, direction: Slider.Direction) {
         self.startBounds = startBounds
         self.direction = direction
         super.init(target: nil, action: nil)
@@ -529,50 +534,50 @@ class SmartSliderGesture: UIPanGestureRecognizer {
         self.delaysTouchesBegan = false
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent) {
-        super.touchesMoved(touches, withEvent: event)
-        let touchPoint = touches.first!.locationInView(view)
-        let prevTouchPoint = touches.first!.previousLocationInView(view)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesMoved(touches, with: event)
+        let touchPoint = touches.first!.location(in: view)
+        let prevTouchPoint = touches.first!.previousLocation(in: view)
         lastFingerLocation = touchPoint
-        began: if state == .Began {
-            if let sbiv = sliderBounds where CGRectContainsPoint(sbiv(), touchPoint) {
+        began: if state == .began {
+            if let sbiv = sliderBounds, sbiv().contains(touchPoint) {
                 view?.gestureRecognizers?.forEach({
                     if $0 != self && $0 is SmartSliderGesture {
-                        $0.state = .Cancelled
+                        $0.state = .cancelled
                     }
                 })
                 break began /* dont cancel */
             }
-            else if let sb = startBounds where !CGRectContainsPoint(sb(), touchPoint) { state = .Cancelled }
+            else if let sb = startBounds, !sb().contains(touchPoint) { state = .cancelled }
             
-            let velocity = velocityInView(view)
+            let vel = velocity(in: view)
             switch direction {
-            case .Right where fabs(velocity.y) > fabs(velocity.x), .Left where fabs(velocity.y) > fabs(velocity.x):
-                state = .Cancelled
-            case .Up where fabs(velocity.x) > fabs(velocity.y), .Down where fabs(velocity.x) > fabs(velocity.y):
-                state = .Cancelled
-            default:
-                break
+                case .right where abs(vel.y) > abs(vel.x), .left where abs(vel.y) > abs(vel.x):
+                    state = .cancelled
+                case .up where abs(vel.x) > abs(vel.y), .down where abs(vel.x) > abs(vel.y):
+                    state = .cancelled
+                default:
+                    break
             }
         }
         
-        if state == .Changed || state == .Began {
+        if state == .changed || state == .began {
             switch direction {
-            case .Right:
+            case .right:
                 change = touchPoint.x - prevTouchPoint.x
                 perpendicularDisplacement = touchPoint.y - prevTouchPoint.y
-            case .Left:
+            case .left:
                 change = prevTouchPoint.x - touchPoint.x
                 perpendicularDisplacement = touchPoint.y - prevTouchPoint.y
-            case .Down:
+            case .down:
                 change = touchPoint.y - prevTouchPoint.y
                 perpendicularDisplacement = touchPoint.x - prevTouchPoint.x
-            case .Up:
+            case .up:
                 change = prevTouchPoint.y - touchPoint.y
                 perpendicularDisplacement = touchPoint.x - prevTouchPoint.x
             }
-            let frame = (view != nil) ? view!.frame : UIScreen.mainScreen().bounds
-            let progressLength: CGFloat = (direction == .Right || direction == .Left) ? frame.width : frame.height
+            let frame = (view != nil) ? view!.frame : UIScreen.main.bounds
+            let progressLength: CGFloat = (direction == .right || direction == .left) ? frame.width : frame.height
             progressChange = Float( change / progressLength)
         }
     }

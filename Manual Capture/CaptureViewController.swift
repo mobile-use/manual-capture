@@ -55,15 +55,15 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
         UIView.animate(withDuration: 0){
             self.controlView.updateConstraints(
                 forKeys: [
-                    .Slider(.Top),
-                    .Slider(.Bottom),
-                    .Slider(.Left),
-                    .Slider(.Right),
-                    .ShutterButton,
-                    .MenuControl,
-                    .GalleryButton,
-                    .UndoButton,
-                    .ControlPanel
+                    .slider(.top),
+                    .slider(.bottom),
+                    .slider(.left),
+                    .slider(.right),
+                    .shutterButton,
+                    .menuControl,
+                    .galleryButton,
+                    .undoButton,
+                    .controlPanel
                 ]
             )
         }
@@ -137,13 +137,13 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
 //    - (void)showSquareImageForAsset:(PHAsset *)asset
 //    {
 //    NSInteger retinaScale = [UIScreen mainScreen].scale;
-//    CGSize retinaSquare = CGSizeMake(100*retinaScale, 100*retinaScale);
+//    CGSize retinaSquare = CGSize(100*retinaScale, 100*retinaScale);
 //    
 //    PHImageRequestOptions *cropToSquare = [[PHImageRequestOptions alloc] init];
 //    cropToSquare.resizeMode = PHImageRequestOptionsResizeModeExact;
 //    
 //    CGFloat cropSideLength = MIN(asset.pixelWidth, asset.pixelHeight);
-//    CGRect square = CGRectMake(0, 0, cropSideLength, cropSideLength);
+//    CGRect square = CGRect(0, 0, cropSideLength, cropSideLength);
 //    CGRect cropRect = CGRectApplyAffineTransform(square,
 //    CGAffineTransformMakeScale(1.0 / asset.pixelWidth,
 //    1.0 / asset.pixelHeight));
@@ -165,13 +165,13 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
 //        
 //        let oldAPoint = cView.layer.anchorPoint
 //        let aCoord = cView.convertPoint(controlView.shutterButton.center, fromView: controlView)
-//        let aPoint = CGPointMake(aCoord.x / cView.frame.width, aCoord.y / cView.frame.height)
+//        let aPoint = CGPoint(aCoord.x / cView.frame.width, aCoord.y / cView.frame.height)
 //        
 //        cView.layer.anchorPoint = aPoint
 //        
 //        let oldCenter = cView.center
 //        
-//        cView.center = CGPointMake( +aCoord.x, +aCoord.y)
+//        cView.center = CGPoint( +aCoord.x, +aCoord.y)
 //        
 //       let dur = coordinator.transitionDuration()
 //
@@ -181,7 +181,7 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
 //            self.controlView.sessionController.previewLayer.connection.videoOrientation = AVCaptureVideoOrientation(ui:orient)
 //            
 //            UIView.animateWithDuration(dur*0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { cView.alpha = 1.0 }) { (_) in
-//                UIView.animateWithDuration(dur*0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { cView.center = CGPointMake( +aCoord.x, +aCoord.y) }) { (_) in
+//                UIView.animateWithDuration(dur*0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { cView.center = CGPoint( +aCoord.x, +aCoord.y) }) { (_) in
 //                    cView.layer.anchorPoint = oldAPoint
 //                    cView.center = oldCenter
 //                }
@@ -191,10 +191,10 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
 //        
 //        
 //        coordinator.animateAlongsideTransition({(_) in
-//            cView.center = oldCenter // CGPointMake( oldCenter.x - aCoord.x / 2, oldCenter.y - aCoord.y / 2)
+//            cView.center = oldCenter // CGPoint( oldCenter.x - aCoord.x / 2, oldCenter.y - aCoord.y / 2)
 //            }, completion: { (_) in
 //                
-////                UIView.animateWithDuration(dur/2, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { CGPointMake( +aCoord.x, +aCoord.y) }) { (_) in
+////                UIView.animateWithDuration(dur/2, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { CGPoint( +aCoord.x, +aCoord.y) }) { (_) in
 ////                    cView.layer.anchorPoint = oldAPoint
 ////                    cView.center = oldCenter
 ////                }
@@ -366,23 +366,23 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
                 
                 CATransaction.disableActions {
                     self.controlView.sessionController.previewLayer.frame.size = self.controlView.bounds.size
-                    self.controlView.sessionController.previewLayer.position = CGPointMake(self.controlView.bounds.midX, self.controlView.bounds.midY)
+                    self.controlView.sessionController.previewLayer.position = CGPoint(x: self.controlView.bounds.midX, y: self.controlView.bounds.midY)
                     
                     self.controlView.sessionController.updateAspectRatio()
                     
                 }
                 
-                self.controlView.updateConstraintsForKeys(
+                self.controlView.updateConstraints(forKeys:
                     [
-                        .Slider(.Top),
-                        .Slider(.Bottom),
-                        .Slider(.Left),
-                        .Slider(.Right),
-                        .ShutterButton,
-                        .MenuControl,
-                        .GalleryButton,
-                        .UndoButton,
-                        .ControlPanel
+                        .slider(.top),
+                        .slider(.bottom),
+                        .slider(.left),
+                        .slider(.right),
+                        .shutterButton,
+                        .menuControl,
+                        .galleryButton,
+                        .undoButton,
+                        .controlPanel
                     ]
                 )
             
@@ -417,7 +417,7 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
 //            default: break
 //            }
     
-            UIView.animateWithDuration(fadeSpeed/2, delay: 0, options: options, animations: {
+                UIView.animate(withDuration: fadeSpeed/2, delay: 0, options: options, animations: {
                 self.controlView.subviews.forEach { subview in
                     subview.alpha = oldAlphas[subview.hash] ?? 1.0
                 }
@@ -464,11 +464,9 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
         
         
         
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        super.viewWillTransition(to: size, with: coordinator)
     }
 
-    
-    
-    override func prefersStatusBarHidden() -> Bool {return true}
+    override var prefersStatusBarHidden: Bool {return true}
     
 }

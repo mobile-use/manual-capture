@@ -10,24 +10,24 @@ import UIKit
 
 /// Abstract Progress Displacement Handler Class
 class PDHandler: NSObject {
-    struct State: OptionSetType {
+    struct State: OptionSet {
         let rawValue: Int
-        static var Normal = State(rawValue: 0)
-        static let Disabled = State(rawValue: 1 << 0)
-        static let Active = State(rawValue: 1 << 1)
-        func hasProperty(property: State) -> Bool {
+        static var normal = State(rawValue: 0)
+        static let disabled = State(rawValue: 1 << 0)
+        static let active = State(rawValue: 1 << 1)
+        func hasProperty(_ property: State) -> Bool {
             // Makes no sense to ask if state contains empty property
             if property.isEmpty {return self.isEmpty}
             return contains(property)
         }
         typealias StateTransForm = (inout State) -> Void
         /// returns nil if update is unneeded otherwise returns a inout closure that can do the job
-        func getUpdateTransform(shouldHave:Bool, _ change:State) -> StateTransForm? {
-            guard self.hasProperty(change) != shouldHave else {return nil/*no need to update*/ }
+        func getUpdateTransform(_ shouldHave:Bool, _ change:State) -> StateTransForm? {
+            guard self.hasProperty(change) != shouldHave else { return nil/*no need to update*/ }
             if shouldHave {
-                return { (inout state: State) in state.unionInPlace(change) }
-            }else {
-                return { (inout state: State) in state.subtractInPlace(change) }
+                return { ( state: inout State) in state = state.union(change) }
+            } else {
+                return { ( state: inout State) in state = state.subtracting(change) }
             }
         }
     }
@@ -37,13 +37,13 @@ class PDHandler: NSObject {
     var actionStateChanged: ((State) -> Void)?
     
     /// Ensures displacement actions won't get called when disabled
-    var enabled: Bool = true {didSet{ state.getUpdateTransform(!enabled, .Disabled)? (&state) }}
-    internal(set) var active: Bool = false {didSet{ state.getUpdateTransform(active, .Active)? (&state) }}
-    internal(set) var state: State = .Normal {didSet{ actionStateChanged?(state) }}
+    var enabled: Bool = true {didSet{ state.getUpdateTransform(!enabled, .disabled)? (&state) }}
+    internal(set) var active: Bool = false {didSet{ state.getUpdateTransform(active, .active)? (&state) }}
+    internal(set) var state: State = .normal {didSet{ actionStateChanged?(state) }}
 
     internal func shouldDisplace() -> Bool { return enabled }
     internal func startDisplacing() { active = shouldDisplace() }
-    internal func continueDisplacing(displacement:Float) {
+    internal func continueDisplacing(_ displacement:Float) {
         if shouldDisplace() {
             if !active { active = true }
             actionDisplace?(displacement)
@@ -57,8 +57,8 @@ class PDGestureBased<G:UIGestureRecognizer>: PDHandler {
     
     var gesture: G {
         didSet(oldGesture){
-            oldGesture.removeTarget(self, action: "gestureAction:")
-            gesture.addTarget(self, action: "gestureAction:")
+            oldGesture.removeTarget(self, action: #selector(self.gestureAction(sender:)))
+            gesture.addTarget(self, action: #selector(self.gestureAction(sender:)))
         }
     }
     
@@ -68,27 +68,27 @@ class PDGestureBased<G:UIGestureRecognizer>: PDHandler {
     
     /// Enable / disable gesture and ensures displacementAction{} won't get called when disabled
     override var enabled: Bool {
-        set{   gesture.enabled = newValue  }
-        get{   return gesture.enabled      }
+        set{   gesture.isEnabled = newValue  }
+        get{   return gesture.isEnabled      }
     }
     
-    init(gesture: G, gestureHandler: (gesture: G) -> Float){
+    init(gesture: G, gestureHandler: @escaping (_ gesture: G) -> Float){
         self.gestureChangeHandler = gestureHandler
         self.gesture = gesture
         super.init()
-        self.gesture.addTarget(self, action: "gestureAction:")
+        self.gesture.addTarget(self, action: #selector(self.gestureAction(sender:)))
     }
     
-    func gestureAction(sender:UIGestureRecognizer){
+    @objc func gestureAction(sender:UIGestureRecognizer){
         guard let gesture = sender as? G else {
-            fatalError("{[\(NSStringFromClass(self.dynamicType)).\(__FUNCTION__)} sender does not match type constraint.")
+            fatalError("{[\(NSStringFromClass(type(of: self))).\(#function)} sender does not match type constraint.")
         }
         switch gesture.state {
-        case .Began: startDisplacing()
-        case .Changed:
+        case .began: startDisplacing()
+        case .changed:
             let d = gestureChangeHandler(gesture)
             continueDisplacing(d)
-        case .Possible: break
+        case .possible: break
         default: stopDisplacing()
         }
     }
@@ -178,10 +178,10 @@ class PDScale: PDGestureBased<UIPinchGestureRecognizer> {
 //        let H = gestureView.frame.height
 //        let E = edgeDistance
 //        switch type.edge {
-//        case .AlongTop: return CGRectMake(0, 0, W, E)
-//        case .AlongRight: return CGRectMake(W - E, 0, E, H)
-//        case .AlongBottom: return CGRectMake(0, H - E, W, E)
-//        case .AlongLeft: return CGRectMake(0, 0, E, H)
+//        case .AlongTop: return CGRect(0, 0, W, E)
+//        case .AlongRight: return CGRect(W - E, 0, E, H)
+//        case .AlongBottom: return CGRect(0, H - E, W, E)
+//        case .AlongLeft: return CGRect(0, 0, E, H)
 //        }
 //    }
 //    

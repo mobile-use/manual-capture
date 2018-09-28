@@ -37,10 +37,10 @@ class SmartSliderLine: CALayer {
         }
     }
 
-    private class func splitPoints(progress progress: CGFloat, startPoint: CGPoint, endPoint: CGPoint, gapLength: CGFloat) -> (start: CGPoint, end: CGPoint) {
-        let d = CGSizeMake(
-            (endPoint.x - startPoint.x),
-            (endPoint.y - startPoint.y)
+    private class func splitPoints(progress: CGFloat, startPoint: CGPoint, endPoint: CGPoint, gapLength: CGFloat) -> (start: CGPoint, end: CGPoint) {
+        let d = CGSize(
+            width: (endPoint.x - startPoint.x),
+            height: (endPoint.y - startPoint.y)
         )
         
         let ht = sqrt(pow(d.width, 2) + pow(d.height, 2))
@@ -52,47 +52,47 @@ class SmartSliderLine: CALayer {
         let ycoef = sin(angle)
         let xcoef = cos(angle)
         
-        let sp = CGPointApplyAffineTransform(startPoint, CGAffineTransformMakeTranslation(hs * xcoef, hs * ycoef))
-        let ep = CGPointApplyAffineTransform(startPoint, CGAffineTransformMakeTranslation(he * xcoef, he * ycoef))
+        let sp = startPoint.applying(CGAffineTransform(translationX: hs * xcoef, y: hs * ycoef))
+        let ep = startPoint.applying(CGAffineTransform(translationX: he * xcoef, y: he * ycoef))
         return (start: sp, end: ep)
     }
     
-    override class func needsDisplayForKey(key: String) -> Bool{
+    override class func needsDisplay(forKey key: String) -> Bool{
         switch key {
         case "startPoint", "endPoint", "splitStartPoint", "splitEndPoint":
             return true
         default:
-            return super.needsDisplayForKey(key)
+            return super.needsDisplay(forKey: key)
         }
     }
     
     override init() {
         
-        self.startPoint = CGPointZero
-        self.endPoint = CGPointZero
+        self.startPoint = CGPoint.zero
+        self.endPoint = CGPoint.zero
         self.gapLength = 0.0
         
-        splitEndPoint = CGPointZero
-        splitStartPoint = CGPointZero
+        splitEndPoint = CGPoint.zero
+        splitStartPoint = CGPoint.zero
         
         super.init()
-        dashLineLayer1.strokeColor = UIColor.whiteColor().CGColor
+        dashLineLayer1.strokeColor = UIColor.white.cgColor
         dashLineLayer1.lineWidth = 5
-        dashLineLayer1.lineDashPattern = [(0.5), (dashSpace + 0.5)]
+        dashLineLayer1.lineDashPattern = [(0.5), (dashSpace + 0.5)] as [NSNumber]
         dashLineLayer1.opacity = 0
-        dashLineLayer1.hidden = true
+        dashLineLayer1.isHidden = true
         dashLineLayer1.zPosition = -1
         addSublayer(dashLineLayer1)
         
-        dashLineLayer2.strokeColor = UIColor.whiteColor().CGColor
+        dashLineLayer2.strokeColor = UIColor.white.cgColor
         dashLineLayer2.lineWidth = 10
-        dashLineLayer2.lineDashPattern = [(0.5), (0.5 + (dashSpace + 1) * 10 - 1)]
+        dashLineLayer2.lineDashPattern = [(0.5), (0.5 + (dashSpace + 1) * 10 - 1)] as [NSNumber]
         dashLineLayer2.opacity = 0
-        dashLineLayer2.hidden = true
+        dashLineLayer2.isHidden = true
         dashLineLayer2.zPosition = -1
         addSublayer(dashLineLayer2)
         
-        regularLine.strokeColor = UIColor.whiteColor().CGColor
+        regularLine.strokeColor = UIColor.white.cgColor
         regularLine.opacity = 1
         regularLine.lineWidth = 1
         addSublayer(regularLine)
@@ -117,23 +117,23 @@ class SmartSliderLine: CALayer {
         splitStartPoint = sps.start
         
         super.init()
-        dashLineLayer1.strokeColor = UIColor.whiteColor().CGColor
+        dashLineLayer1.strokeColor = UIColor.white.cgColor
         dashLineLayer1.lineWidth = 5
-        dashLineLayer1.lineDashPattern = [(0.5), (dashSpace + 0.5)]
+        dashLineLayer1.lineDashPattern = [(0.5), (dashSpace + 0.5)] as [NSNumber]
         dashLineLayer1.opacity = 0
-        dashLineLayer1.hidden = true
+        dashLineLayer1.isHidden = true
         dashLineLayer1.zPosition = -1
         addSublayer(dashLineLayer1)
         
-        dashLineLayer2.strokeColor = UIColor.whiteColor().CGColor
+        dashLineLayer2.strokeColor = UIColor.white.cgColor
         dashLineLayer2.lineWidth = 10
-        dashLineLayer2.lineDashPattern = [(0.5), (0.5 + (dashSpace + 1) * 10 - 1)]
+        dashLineLayer2.lineDashPattern = [(0.5), (0.5 + (dashSpace + 1) * 10 - 1)] as [NSNumber]
         dashLineLayer2.opacity = 0
-        dashLineLayer2.hidden = true
+        dashLineLayer2.isHidden = true
         dashLineLayer2.zPosition = -1
         addSublayer(dashLineLayer2)
         
-        regularLine.strokeColor = UIColor.whiteColor().CGColor
+        regularLine.strokeColor = UIColor.white.cgColor
         regularLine.opacity = 1
         regularLine.lineWidth = 1
         addSublayer(regularLine)
@@ -141,7 +141,7 @@ class SmartSliderLine: CALayer {
         //backgroundColor = UIColor.redColor().CGColor
     }
     
-    convenience override init(layer: AnyObject) {
+    convenience override init(layer: Any) {
         guard let sslLayer = layer as? SmartSliderLine else { fatalError() }
         self.init(
             startPoint: sslLayer.startPoint,
@@ -154,7 +154,7 @@ class SmartSliderLine: CALayer {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateLineApearance(initialSensitivity:CGFloat, _ transitionScale: Float, _ travelDistance:CGFloat, _ fingerProgress: Float, _ progress: Float, _ totalDistance: CGFloat) {
+    func updateLineApearance(_ initialSensitivity:CGFloat, _ transitionScale: Float, _ travelDistance:CGFloat, _ fingerProgress: Float, _ progress: Float, _ totalDistance: CGFloat) {
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
         
@@ -167,8 +167,8 @@ class SmartSliderLine: CALayer {
             let length = max(bounds.width, bounds.height)
             
             // retina round
-            func r(f:CGFloat) -> CGFloat {
-                let rs = UIScreen.mainScreen().nativeScale
+            func r(_ f:CGFloat) -> CGFloat {
+                let rs = UIScreen.main.nativeScale
                 return round(f * rs) / rs
             }
             
@@ -205,23 +205,23 @@ class SmartSliderLine: CALayer {
             let maxLeadingLength = length * (displayScale/initDisplayScale) * CGFloat(progressValue(transitionScale, 1.0, 1.0 / Float(initialSensitivity) ))
             let leadingLength = rsabsTD//, maxLeadingLength)// + scaleCenter //+ difT
             
-            dashLineLayer1.lineDashPattern = [lineWidth1, rsDS]
+            dashLineLayer1.lineDashPattern = [lineWidth1, rsDS] as [NSNumber]
             dashLineLayer1.lineDashPhase = CGFloat(-leadingLength)
             dashLineLayer1.opacity = 1 - Float(transitionScale)
             dashLineLayer1.lineWidth = CGFloat(5 - (4 * transitionScale))
             
-            dashLineLayer2.lineDashPattern = [lineWidth2, (dpl1 * 10 - lineWidth2)]
+            dashLineLayer2.lineDashPattern = [lineWidth2, (dpl1 * 10 - lineWidth2)] as [NSNumber]
             dashLineLayer2.lineDashPhase = CGFloat(-leadingLength)
             dashLineLayer2.opacity = 1 - Float(transitionScale)
             dashLineLayer2.lineWidth = CGFloat(10 - (9 * transitionScale))
         }
         
-        if dashLineLayer1.hidden != (transitionScale == 1.0) || dashLineLayer2.hidden != (transitionScale == 1.0) {
-            dashLineLayer1.hidden = (transitionScale == 1.0)
-            dashLineLayer2.hidden = (transitionScale == 1.0)
+        if dashLineLayer1.isHidden != (transitionScale == 1.0) || dashLineLayer2.isHidden != (transitionScale == 1.0) {
+            dashLineLayer1.isHidden = (transitionScale == 1.0)
+            dashLineLayer2.isHidden = (transitionScale == 1.0)
         }
-        if regularLine.hidden != (transitionScale == 0.0) {
-            regularLine.hidden = (transitionScale == 0.0)
+        if regularLine.isHidden != (transitionScale == 0.0) {
+            regularLine.isHidden = (transitionScale == 0.0)
         }
         regularLine.opacity = Float(transitionScale)
         CATransaction.commit()
@@ -290,7 +290,7 @@ class SmartSliderLine: CALayer {
     }
     regularLine.opacity = Float(transitionScale)
     
-    let dashedColor = UIColor.whiteColor().colorWithAlphaComponent(1 - transitionScale)
+    let dashedColor = UIColor.white.colorWithAlphaComponent(1 - transitionScale)
     
     CGContextSetLineDash(ctx, CGFloat(-leadingLength), [lineWidth1, rsDS], 2)
     CGContextSetStrokeColorWithColor(ctx, dashedColor)

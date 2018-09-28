@@ -43,7 +43,7 @@ class PagedGuideContent: UIViewController {
             mediaLayer.frame = mediaContainer.layer.bounds
             mediaContainer.layer.addSublayer(mediaLayer)
             
-            let selector = #selector(PagedGuideContent.playerItemDidReachEnd(notification:))
+            let selector = #selector(self.playerItemDidReachEnd(notification:))
             NotificationCenter.default.addObserver(self, selector: selector, name: .AVPlayerItemDidPlayToEndTime,
                                                    object: mediaPlayer.currentItem)
         } else {

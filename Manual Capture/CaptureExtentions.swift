@@ -142,12 +142,12 @@ func delay(_ delay:TimeInterval, closure:@escaping ()->()) {
     DispatchQueue.main.asyncAfter(deadline: .now() + delay * Double(NSEC_PER_SEC)) { closure() }
 }
 
-func progressValue(progress:CGFloat, _ start:CGFloat, _ end:CGFloat) -> CGFloat {
+func progressValue(_ progress:CGFloat, _ start:CGFloat, _ end:CGFloat) -> CGFloat {
     let d = end - start
     return start + d * progress
 }
 
-func progressValue(progress:Float, _ start:Float, _ end:Float) -> Float {
+func progressValue(_ progress:Float, _ start:Float, _ end:Float) -> Float {
     let d = end - start
     return start + d * progress
 }
@@ -189,7 +189,7 @@ func tempSetDo<T : Any>( set: inout T, to: T, action: () -> Void){
 //    }
 //}
 
-func roundExposureDurationStringFast(exposureDuration:CMTime) -> String {
+func roundExposureDurationStringFast(_ exposureDuration:CMTime) -> String {
     let doubleValue = CMTimeGetSeconds(exposureDuration)
     if ( doubleValue < 1 ) {
         //let digits = max( 0, 2 - floor(log10(doubleValue)))

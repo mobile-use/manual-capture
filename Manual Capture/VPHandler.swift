@@ -12,7 +12,7 @@ import UIKit
 class VPHandler<V> {
     var progressForValue:(V) -> Float
     var valueForProgress:(Float) -> V
-    init(pfv:(V)->Float, vfp:(Float)->V){
+    init(pfv:@escaping (V)->Float, vfp:@escaping (Float)->V){
         progressForValue = pfv
         valueForProgress = vfp
     }
@@ -22,7 +22,7 @@ class VPFloatHandler : VPHandler<Float> {
     var start: Float {didSet{updateConversion(start, end)}}
     var end: Float {didSet{updateConversion(start, end)}}
     
-    func updateConversion(start:Float, _ end:Float){
+    func updateConversion(_ start:Float, _ end:Float){
         progressForValue = {($0 - start)/(end - start)}
         valueForProgress = {(start + $0) * (end - start)}
     }
@@ -41,7 +41,7 @@ class VPExponentialCGFloatHandler : VPHandler<CGFloat> {
     var end: CGFloat {didSet{updateConversion(start, end)}}
     let power: CGFloat //didSet{updateConversion(start, end)}}
     
-    private func updateConversion(start:CGFloat, _ end:CGFloat){
+    private func updateConversion(_ start:CGFloat, _ end:CGFloat){
         let p = power
         progressForValue = { (start != end) ? Float(pow( (max(start, min(end, $0)) - start)/(end - start), 1 / p)) : 0 }
         valueForProgress = { start + (pow( CGFloat($0), p ) * (end - start)) }

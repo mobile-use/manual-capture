@@ -72,7 +72,7 @@ class CaptureViewController2: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-        let selector = #selector(CaptureViewController2.deviceOrientationChanged)
+        let selector = #selector(self.deviceOrientationChanged)
         NotificationCenter.default.addObserver(self, selector: selector,
                                                name:UIDevice.orientationDidChangeNotification , object: nil)
     }

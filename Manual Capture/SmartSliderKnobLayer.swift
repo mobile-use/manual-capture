@@ -10,7 +10,7 @@ import UIKit
 
 class SmartSliderKnobLayer: CAShapeLayer {
     enum PositionType {
-        case Center, Left, Right
+        case center, left, right
     }
     
     let labelTextLayer = CATextLayer()
@@ -26,7 +26,7 @@ class SmartSliderKnobLayer: CAShapeLayer {
         }
     }
     
-    var positionType: PositionType = .Center {
+    var positionType: PositionType = .center {
         didSet {
             guard oldValue != positionType else { return }
             updateAnchorPoint()
@@ -46,21 +46,21 @@ class SmartSliderKnobLayer: CAShapeLayer {
         glyph = g
         super.init()
         
-        fillColor = UIColor.whiteColor().CGColor
+        fillColor = UIColor.white.cgColor
         
         labelTextLayer.string = "?"
         labelTextLayer.font = UIFont(name: "HelveticaNeue", size: 12)
         labelTextLayer.fontSize = 12
-        labelTextLayer.foregroundColor = kCaptureTintColor.CGColor
-        labelTextLayer.contentsScale = UIScreen.mainScreen().scale
-        labelTextLayer.alignmentMode = kCAAlignmentRight
+        labelTextLayer.foregroundColor = kCaptureTintColor.cgColor
+        labelTextLayer.contentsScale = UIScreen.main.scale
+        labelTextLayer.alignmentMode = .right
         addSublayer(labelTextLayer)
         addSublayer(glyph)
         
         updateTextFrame()
     }
     
-    convenience override init(layer: AnyObject) {
+    convenience override init(layer: Any) {
         guard let sskLayer = layer as? SmartSliderKnobLayer else {fatalError()}
         self.init(glyph:CALayer(layer: sskLayer.glyph))
         positionType = sskLayer.positionType
@@ -73,31 +73,31 @@ class SmartSliderKnobLayer: CAShapeLayer {
     
     func updateAnchorPoint() {
         switch positionType {
-        case .Left:
+        case .left:
             let h = bounds.height, w = bounds.width
-            let aCoord = CGPointMake(h / 2, h / 2)
-            anchorPoint = CGPointMake(aCoord.x / w, aCoord.y / h)
-        case .Center: anchorPoint = CGPointMake(0.5, 0.5)
-        case .Right:
+            let aCoord = CGPoint(x: h / 2, y: h / 2)
+            anchorPoint = CGPoint(x: aCoord.x / w, y: aCoord.y / h)
+        case .center: anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        case .right:
             let h = bounds.height, w = bounds.width
-            let aCoord = CGPointMake(w - h / 2, h / 2)
-            anchorPoint = CGPointMake(aCoord.x / w, aCoord.y / h)
+            let aCoord = CGPoint(x: w - h / 2, y: h / 2)
+            anchorPoint = CGPoint(x: aCoord.x / w, y: aCoord.y / h)
         }
     }
     func updateRoundedRect(){
         let l = min(bounds.width, bounds.height)
         path = UIBezierPath(
             roundedRect: bounds,
-            byRoundingCorners: UIRectCorner.AllCorners,
-            cornerRadii: CGSizeMake((l / 2), (l / 2))
-            ).CGPath
+            byRoundingCorners: .allCorners,
+            cornerRadii: CGSize(width: (l / 2), height: (l / 2))
+        ).cgPath
     }
     func updateTextFrame(){
         let pSize = labelTextLayer.preferredFrameSize()
         let glyphDiameter: CGFloat = 22
         let w = max(labelTextMinWidth, pSize.width)
-        labelTextLayer.frame = CGRectMake(glyphDiameter, (glyphDiameter-pSize.height)/2, w, glyphDiameter)
-        bounds = CGRectMake(0, 0, glyphDiameter + w + 2 + glyphMargin , glyphDiameter)
-        glyph.frame = CGRectMake(glyphMargin, glyphMargin, glyph.frame.width, glyph.frame.height)
+        labelTextLayer.frame = CGRect(x: glyphDiameter, y: (glyphDiameter-pSize.height)/2, width: w, height: glyphDiameter)
+        bounds = CGRect(x: 0, y: 0, width: glyphDiameter + w + 2 + glyphMargin , height: glyphDiameter)
+        glyph.frame = CGRect(x: glyphMargin, y: glyphMargin, width: glyph.frame.width, height: glyph.frame.height)
     }
 }

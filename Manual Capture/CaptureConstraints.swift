@@ -73,7 +73,7 @@ extension Style {
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         //toolbar.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.1)
 //        toolbar.layer.borderWidth = 1.0
-//        toolbar.layer.borderColor = UIColor.whiteColor().CGColor        
+//        toolbar.layer.borderColor = UIColor.white.CGColor        
         
         let x = Constraint.constraints(withVisualFormat: "H:|[toolbar(40)]",
                                        options: [.alignAllCenterX, .alignAllCenterY],
@@ -91,7 +91,7 @@ extension Style {
         capturebar.translatesAutoresizingMaskIntoConstraints = false
         //capturebar.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
 //        capturebar.layer.borderWidth = 1.0
-//        capturebar.layer.borderColor = UIColor.whiteColor().CGColor
+//        capturebar.layer.borderColor = UIColor.white.CGColor
         
         let x = Constraint.constraints(withVisualFormat: "H:[capturebar(80)]|",
                                        options: [.alignAllCenterX, .alignAllCenterY],

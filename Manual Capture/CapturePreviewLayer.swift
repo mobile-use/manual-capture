@@ -11,15 +11,15 @@ import AVFoundation
 
 class CapturePreviewLayer: AVCaptureVideoPreviewLayer {
     var aspectRatio: CGFloat = 16 / 9 {
-        didSet { bounds = requestedBound ?? bounds.standardized /* recalculate*/}
+        didSet { bounds = requestedBound ?? bounds.standardized /* recalculate*/ }
     }
     
     override func preferredFrameSize() -> CGSize {
         let ratioW = bounds.height * aspectRatio
         let ratioH = bounds.width / aspectRatio
-        let pRect = CGRectInset(bounds,
-            max(bounds.width - ratioW, 0) / 2, // clipped
-            max(bounds.height - ratioH, 0) / 2 // clipped
+        let pRect = bounds.insetBy(
+            dx: max(bounds.width - ratioW, 0) / 2, // clipped
+            dy: max(bounds.height - ratioH, 0) / 2 // clipped
         )
         return pRect.size
     }
@@ -29,10 +29,10 @@ class CapturePreviewLayer: AVCaptureVideoPreviewLayer {
     override var frame: CGRect {
         willSet(newFrame) {
             if superlayer != nil {
-                requestedBound = self.convertRect(newFrame, fromLayer: self.superlayer)
+                requestedBound = self.convert(newFrame, from: self.superlayer)
             }else{
                 var newBound = newFrame
-                newBound.origin = CGPointZero
+                newBound.origin = CGPoint.zero
                 requestedBound = newBound
             }
         }
@@ -43,9 +43,9 @@ class CapturePreviewLayer: AVCaptureVideoPreviewLayer {
             let ratioW = newValue.height * aspectRatio
             let ratioH = newValue.width / aspectRatio
             
-            super.bounds = CGRectInset(newValue,
-                max(newValue.width - ratioW, 0) / 2, // clipped
-                max(newValue.height - ratioH, 0) / 2 // clipped
+            super.bounds = newValue.insetBy(
+                dx: max(newValue.width - ratioW, 0) / 2, // clipped
+                dy: max(newValue.height - ratioH, 0) / 2 // clipped
             )
         }
         get {
@@ -54,12 +54,12 @@ class CapturePreviewLayer: AVCaptureVideoPreviewLayer {
     }
     
     func didInit(){
-        if videoGravity != AVLayerVideoGravityResizeAspectFill {
-            videoGravity = AVLayerVideoGravityResizeAspectFill
+        if videoGravity != AVLayerVideoGravity.resizeAspectFill {
+            videoGravity = AVLayerVideoGravity.resizeAspectFill
         }
     }
     
-    override init!(session: AVCaptureSession!) {
+    override init(session: AVCaptureSession) {
         super.init(session: session)
         didInit()
     }
