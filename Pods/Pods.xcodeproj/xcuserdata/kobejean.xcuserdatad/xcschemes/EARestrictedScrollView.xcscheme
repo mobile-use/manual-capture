@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9C4BE7F6BB0651E20A99A923'
-               BlueprintName = 'EARestrictedScrollView'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libEARestrictedScrollView.a'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C8812C7FD4353101E9EDD0301B7F97DA"
+               BlueprintName = "EARestrictedScrollView"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "libEARestrictedScrollView.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

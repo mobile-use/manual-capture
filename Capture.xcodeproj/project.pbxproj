@@ -49,6 +49,7 @@
 		3D7FB6401C214C9A004D340C /* AdvancedControlsDemo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D7FB63F1C214C9A004D340C /* AdvancedControlsDemo.mov */; };
 		3DADC33C1BC4D4C000A74BC2 /* CaptureModeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */; };
 		3DADC33E1BC4D97D00A74BC2 /* ControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */; };
+		7D27C7ECEFE49BB316232FAF /* libPods-Manual Capture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E9FC9AD84EFA57481F6484 /* libPods-Manual Capture.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,9 @@
 		3D7FB63F1C214C9A004D340C /* AdvancedControlsDemo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = AdvancedControlsDemo.mov; sourceTree = "<group>"; };
 		3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureModeControl.swift; sourceTree = "<group>"; };
 		3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlPanel.swift; sourceTree = "<group>"; };
+		6394383D169B8EEAF441FD2B /* Pods-Manual Capture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture.release.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture.release.xcconfig"; sourceTree = "<group>"; };
+		845A00742B6D7055D3F3E02D /* Pods-Manual Capture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture.debug.xcconfig"; sourceTree = "<group>"; };
+		F2E9FC9AD84EFA57481F6484 /* libPods-Manual Capture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Manual Capture.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,7 @@
 				3D5111C91B7EC12F00FCF97F /* CoreGraphics.framework in Frameworks */,
 				3D5111C71B7E031000FCF97F /* QuartzCore.framework in Frameworks */,
 				0FC4DC561B95BD630009B4A7 /* StoreKit.framework in Frameworks */,
+				7D27C7ECEFE49BB316232FAF /* libPods-Manual Capture.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,12 +152,22 @@
 			name = Slider;
 			sourceTree = "<group>";
 		};
+		2CC5685E194947379CA14001 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				845A00742B6D7055D3F3E02D /* Pods-Manual Capture.debug.xcconfig */,
+				6394383D169B8EEAF441FD2B /* Pods-Manual Capture.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3D4F17961B73883500D4D74F = {
 			isa = PBXGroup;
 			children = (
 				3D4F17A11B73883500D4D74F /* Manual Capture */,
 				3D4F17A01B73883500D4D74F /* Products */,
 				8FFB1C14B6A6C64DF6AD76E4 /* Frameworks */,
+				2CC5685E194947379CA14001 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -205,6 +220,7 @@
 				0FEA847E1B944781002135DE /* AVFoundation.framework */,
 				3D5111C81B7EC12F00FCF97F /* CoreGraphics.framework */,
 				3D5111C61B7E031000FCF97F /* QuartzCore.framework */,
+				F2E9FC9AD84EFA57481F6484 /* libPods-Manual Capture.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -216,10 +232,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3D4F17C71B73883500D4D74F /* Build configuration list for PBXNativeTarget "Manual Capture" */;
 			buildPhases = (
+				F9C37A9CEDD006BF2A6F79AC /* [CP] Check Pods Manifest.lock */,
 				3D4F179B1B73883500D4D74F /* Sources */,
 				3D4F179C1B73883500D4D74F /* Frameworks */,
 				3D4F179D1B73883500D4D74F /* Resources */,
 				0FEA84801B944D6F002135DE /* ShellScript */,
+				162E673B2350E7EA94EF3F78 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -309,6 +327,50 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+		162E673B2350E7EA94EF3F78 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MWPhotoBrowser/MWPhotoBrowser.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MWPhotoBrowser.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9C37A9CEDD006BF2A6F79AC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Manual Capture-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -476,6 +538,7 @@
 		};
 		3D4F17C81B73883500D4D74F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 845A00742B6D7055D3F3E02D /* Pods-Manual Capture.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
@@ -483,6 +546,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = "";
+				HEADER_SEARCH_PATHS = "$(SOURCE_ROOT)/Pods/**";
 				INFOPLIST_FILE = "Manual Capture/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -497,6 +561,7 @@
 		};
 		3D4F17C91B73883500D4D74F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6394383D169B8EEAF441FD2B /* Pods-Manual Capture.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
@@ -504,6 +569,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = "";
+				HEADER_SEARCH_PATHS = "$(SOURCE_ROOT)/Pods/**";
 				INFOPLIST_FILE = "Manual Capture/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

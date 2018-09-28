@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'AF03CE7E4932702B5B89FEBC'
-               BlueprintName = 'Pods-Manual Capture'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libPods-Manual Capture.a'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC8DFF72898DC197B1A5A23CEAF5FB84"
+               BlueprintName = "Pods-Manual Capture"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "libPods-Manual Capture.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

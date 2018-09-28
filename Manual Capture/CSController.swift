@@ -194,7 +194,7 @@ class CSController: NSObject, AVCaptureFileOutputRecordingDelegate {
         super.init()
         
         unowned let me = self
-        volumeButtonHandler?.action = { me.captureStillPhoto() }
+        volumeButtonHandler?.downBlock = { me.captureStillPhoto() }
         if !kIsDemoMode {
             requestCameraAccess(){
                 self.startCamera()

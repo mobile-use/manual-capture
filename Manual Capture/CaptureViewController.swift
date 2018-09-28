@@ -51,7 +51,7 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        controlView.sessionController.volumeButtonHandler?.active = true
+        controlView.sessionController.volumeButtonHandler?.start(true)
         UIView.animate(withDuration: 0){
             self.controlView.updateConstraints(
                 forKeys: [
@@ -71,7 +71,7 @@ class CaptureViewController: UIViewController, MWPhotoBrowserDelegate, CaptureVi
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        controlView.sessionController.volumeButtonHandler?.active = false
+        controlView.sessionController.volumeButtonHandler?.stop()
     }
     
     

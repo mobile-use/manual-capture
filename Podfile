@@ -9,11 +9,3 @@ target 'Manual Capture' do
 
 end
 
-target 'Manual CaptureTests' do
-
-end
-
-target 'Manual CaptureUITests' do
-
-end
-

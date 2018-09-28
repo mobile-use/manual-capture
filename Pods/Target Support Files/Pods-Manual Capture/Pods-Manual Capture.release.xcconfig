@@ -1,5 +1,9 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/DACircularProgress" "${PODS_ROOT}/Headers/Public/EAIntroView" "${PODS_ROOT}/Headers/Public/EARestrictedScrollView" "${PODS_ROOT}/Headers/Public/JPSVolumeButtonHandler" "${PODS_ROOT}/Headers/Public/MBProgressHUD" "${PODS_ROOT}/Headers/Public/MWPhotoBrowser" "${PODS_ROOT}/Headers/Public/SDWebImage"
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/DACircularProgress" "${PODS_CONFIGURATION_BUILD_DIR}/EAIntroView" "${PODS_CONFIGURATION_BUILD_DIR}/EARestrictedScrollView" "${PODS_CONFIGURATION_BUILD_DIR}/JPSVolumeButtonHandler" "${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD" "${PODS_CONFIGURATION_BUILD_DIR}/MWPhotoBrowser" "${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage"
 OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/DACircularProgress" -isystem "${PODS_ROOT}/Headers/Public/EAIntroView" -isystem "${PODS_ROOT}/Headers/Public/EARestrictedScrollView" -isystem "${PODS_ROOT}/Headers/Public/JPSVolumeButtonHandler" -isystem "${PODS_ROOT}/Headers/Public/MBProgressHUD" -isystem "${PODS_ROOT}/Headers/Public/MWPhotoBrowser" -isystem "${PODS_ROOT}/Headers/Public/SDWebImage"
 OTHER_LDFLAGS = $(inherited) -ObjC -l"DACircularProgress" -l"EAIntroView" -l"EARestrictedScrollView" -l"JPSVolumeButtonHandler" -l"MBProgressHUD" -l"MWPhotoBrowser" -l"SDWebImage" -framework "AVFoundation" -framework "AssetsLibrary" -framework "CoreGraphics" -framework "ImageIO" -framework "MediaPlayer" -framework "QuartzCore" -weak_framework "Photos"
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
 PODS_ROOT = ${SRCROOT}/Pods

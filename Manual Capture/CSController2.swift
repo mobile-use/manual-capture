@@ -82,7 +82,7 @@ class CSController2: NSObject {
         super.init()
         
         unowned let me = self
-        volumeButtonHandler.action = { me.captureStillPhoto() }
+        volumeButtonHandler.downBlock = { me.captureStillPhoto() }
         
         
         requestCameraAccess(){
