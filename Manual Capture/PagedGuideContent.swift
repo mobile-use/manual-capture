@@ -22,10 +22,10 @@ class PagedGuideContent: UIViewController {
     
     var content: Content = ("Title", "Description.", "TestFoot1") {
         didSet {
-            titleLabel.text = content.title
-            descriptionTextView.text = content.description
-            let fixedWidth = descriptionTextView.frame.width
-            descriptionTextView.frame.size = descriptionTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+            titleLabel?.text = content.title
+            descriptionTextView?.text = content.description
+            let fixedWidth = descriptionTextView?.frame.width ?? 0
+            descriptionTextView?.frame.size = descriptionTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
         }
     }
     var index = -1

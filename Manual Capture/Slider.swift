@@ -16,9 +16,11 @@ class Control: UIView {
             currentControl?.isCurrentControl = true
         }
     }
-    var isCurrentControl:Bool = false {didSet{
-        state.getUpdateTransform(isCurrentControl, .current)?(&state)
-        }}
+    var isCurrentControl: Bool = false {
+        didSet {
+            state.getUpdateTransform(isCurrentControl, .current)?(&state)
+        }
+    }
     final func becomeCurrentControl(){
         guard Control.currentControl != self else {return}
         Control.currentControl = self

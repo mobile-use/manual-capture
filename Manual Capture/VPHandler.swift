@@ -43,6 +43,16 @@ class VPExponentialCGFloatHandler : VPHandler<CGFloat> {
     
     private func updateConversion(_ start:CGFloat, _ end:CGFloat){
         let p = power
+//        {
+//            if (start != end) {
+//                let bounded = max(start, min(end, $0))
+//                let normed = (bounded - start)/(end - start)
+//                let rooted = pow(normed, 1 / p)
+//                print()
+//                return Float(rooted)
+//            } else {
+//                return 0
+//            } }
         progressForValue = { (start != end) ? Float(pow( (max(start, min(end, $0)) - start)/(end - start), 1 / p)) : 0 }
         valueForProgress = { start + (pow( CGFloat($0), p ) * (end - start)) }
     }

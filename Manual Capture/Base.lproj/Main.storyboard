@@ -12,7 +12,7 @@
         <!--Capture View Controller2-->
         <scene sceneID="U6T-sg-XhH">
             <objects>
-                <viewController id="X3f-H9-9fG" customClass="CaptureViewController2" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Capture2" id="X3f-H9-9fG" customClass="CaptureViewController2" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="46T-tM-cxL"/>
                         <viewControllerLayoutGuide type="bottom" id="I9C-Ut-aSr"/>

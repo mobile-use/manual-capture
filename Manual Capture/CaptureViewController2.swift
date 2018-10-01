@@ -8,18 +8,30 @@
 
 import UIKit
 
-class CaptureViewController2: UIViewController {
+class CaptureViewController2: UIViewController, CaptureView2Delegate {
+    
 //    typealias Constraints = CaptureConstraint
     typealias PreviewView = CapturePreviewView
     
     let steadyView = RotationContainer()
     // Continue
     var continueView = UIView()
-    var controlView: CaptureView2!
     var controlViewContainer = RotationContainer()
+    var controlView: CaptureView2!
     var captureButton = UIButton.shutterButton()
     var captureButtonContainer: RotationContainer!
     var previewView: PreviewView!
+    var sessionController: CSController2!
+    
+    let menuControl = OptionControl<Layout>(items: [
+        ("Focus", .focus),
+        ("Zoom", .zoom),
+        ("Exposure", .exposure),
+        ("WB", .whiteBalance),
+        ("Aspect Ratio", .aspectRatio) ]
+    )
+    
+    private var currentControlPanel: ControlPanel?
     
     
     
@@ -44,7 +56,7 @@ class CaptureViewController2: UIViewController {
         
         
         added(.go)? {
-            self.previewView = self.controlView.sessionController.previewView
+            self.previewView = self.sessionController.previewView
         }
         removed(.go)? {
             self.previewView = nil
@@ -57,29 +69,28 @@ class CaptureViewController2: UIViewController {
 //    var sessionController: CSController2!
     
     override func viewDidLoad() {
-        captureButtonContainer = RotationContainer(view: captureButton)
-        controlView = CaptureView2(frame: controlViewContainer.view.bounds)
         let toolbar = UIView()
         let capturebar = UIView()
-//        sessionController = CSController2()
-        previewView = controlView.sessionController.previewView
-        
-//        controlView.backgroundColor = .red
+        captureButtonContainer = RotationContainer(view: captureButton)
+        sessionController = CSController2()
+        captureButton.addTarget(sessionController, action: #selector(sessionController.captureStillPhoto), for: .touchUpInside)
+        previewView = sessionController.previewView
+        controlView = CaptureView2(frame: controlViewContainer.view.bounds, sessionController: sessionController)
+        controlView.delegate = self
         
         view.layout(style: Style.FillSuperview, views: steadyView)
         steadyView.view.layout(style: Style.FillSuperview, views: previewView)
-        
         steadyView.view.layout(style: Style.Capturebar, views: capturebar)
-        steadyView.view.layout(style: Style.CaptureButtonContainer, views: captureButtonContainer)
         steadyView.view.layout(style: Style.Toolbar, views: toolbar)
-        
         steadyView.view.layout(style: Style.FillSuperview, views: controlViewContainer)
         
         controlViewContainer.view.layout(style: Style.FillSuperview, views: controlView)
         view.backgroundColor = UIColor.black
         
-        layout = .initial
-        layout.proceed(layouts: .shoot, .whiteBalance, .focus, .whiteBalance)
+        steadyView.view.layout(style: Style.CaptureButtonContainer, views: captureButtonContainer)
+//
+//        layout = .initial
+//        layout.proceed(layouts: .shoot, .whiteBalance, .focus, .whiteBalance)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,19 +140,19 @@ class CaptureViewController2: UIViewController {
                 normal: {
                     self.captureButtonContainer.rotation = CGFloat(self.orientation.rotation)
                     
-                    let aspectRatioOrientationAgnostic = self.controlView.sessionController.aspectRatioMode != .fullscreen && self.controlView.sessionController.aspectRatioMode != .sensor
+                    let aspectRatioOrientationAgnostic = self.sessionController.aspectRatioMode == .fullscreen || self.sessionController.aspectRatioMode == .sensor
                     let heightAndWidthSwapped = self.orientation == .portrait || oldOrientation == .portrait
-                    if heightAndWidthSwapped && aspectRatioOrientationAgnostic {
+                    if heightAndWidthSwapped && !aspectRatioOrientationAgnostic {
                         self.previewView.aspectRatio = 1 / self.previewView.aspectRatio
                     }
                 },
                 fade: {
-                    var rect = self.steadyView.view.bounds
+//                    var rect = self.steadyView.view.bounds
                     
 //                    if self.orientation == .portrait {
 //                        rect.size.width -= 40
 //                    }
-                    self.controlViewContainer.frame = rect
+//                    self.controlViewContainer.frame = rect
                     self.controlViewContainer.rotation = CGFloat(self.orientation.rotation)
                 }
             )
@@ -149,12 +160,22 @@ class CaptureViewController2: UIViewController {
                     animations.normal()
             }}
             UIView.animate(withDuration: duration,
-                           animations: { self.controlViewContainer.alpha = 0.0 },
-                           completion: { _ in
+                           animations: { [unowned self] in self.controlViewContainer.alpha = 0.0 },
+                           completion: { [unowned self] _ in
                 CATransaction.disableActions {
                     animations.fade()
+                    self.controlView.updateConstraints(forKeys:
+                        [
+                            .slider(.top),
+                            .slider(.bottom),
+                            .slider(.left),
+                            .slider(.right),
+                            .menuControl,
+                            .controlPanel
+                        ]
+                    )
                 }
-                UIView.animate(withDuration: duration) { self.controlViewContainer.alpha = 1.0 }
+                UIView.animate(withDuration: duration) { [unowned self] in self.controlViewContainer.alpha = 1.0 }
             })
         }
     }
@@ -169,6 +190,21 @@ class CaptureViewController2: UIViewController {
     }
     
     override var prefersStatusBarHidden: Bool { return true }
+    
+    func flashPreview() {
+        CATransaction.disableActions {
+            self.previewView.previewLayer.opacity = 0.0
+        }
+        CATransaction.performBlock(duration: 0.4) {
+            self.previewView.previewLayer.opacity = 1.0
+        }
+    }
+    
+    func shouldShowCaptureButton(show: Bool) {
+        UIView.animate(withDuration: 0.2, delay: 0, options: UIView.AnimationOptions.beginFromCurrentState, animations:  {
+            self.captureButton.alpha = (show) ? 1.0 : 0.0
+        }, completion: nil)
+    }
     
     struct Layout : OptionSet {
         let rawValue: UInt

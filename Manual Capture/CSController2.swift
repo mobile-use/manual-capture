@@ -24,8 +24,13 @@ class CSController2: NSObject {
     var photoOutput: AVCaptureStillImageOutput!
     var aspectRatio = CSAspectRatioMake(16,9) {
         didSet{
-            
-            previewView.aspectRatio = aspectRatio
+            if (aspectRatioMode == .lock) {
+                let orientation = UIApplication.shared.statusBarOrientation
+                let inverse = 1 / aspectRatio
+                previewView.aspectRatio = (orientation == .portrait) ? inverse : aspectRatio
+            } else {
+                previewView.aspectRatio = aspectRatio
+            }
             notify(change: .aspectRatio(aspectRatio) )
             
         }
@@ -43,8 +48,10 @@ class CSController2: NSObject {
             let aspectRatio = self.aspectRatio
             self.aspectRatio = aspectRatio
         case .fullscreen:
-            let size = UIScreen.main.bounds.size
-            self.aspectRatio = CSAspectRatioMake(size.width, size.height)
+            let orientation = UIApplication.shared.statusBarOrientation
+            let width = (orientation == .portrait) ? UIScreen.main.bounds.height : UIScreen.main.bounds.width
+            let height = (orientation == .portrait) ? UIScreen.main.bounds.width : UIScreen.main.bounds.height
+            self.aspectRatio = CSAspectRatioMake(width, height)
         case .sensor:
             let unitRect = CGRect(x: 0, y: 0, width: 1, height: 1)
             let size = previewView.previewLayer.layerRectConverted(fromMetadataOutputRect: unitRect).size
@@ -229,6 +236,7 @@ class CSController2: NSObject {
         case .focusMode(let v): self.voBlocks.focusMode.forEach { $1(v) }
         case .exposureMode(let v): self.voBlocks.exposureMode.forEach { $1(v) }
         case .whiteBalanceMode(let v): self.voBlocks.whiteBalanceMode.forEach { $1(v) }
+        case .aspectRatioMode(let v): self.voBlocks.aspectRatioMode.forEach { $1(v) }
             
         case .aspectRatio(let v): self.voBlocks.aspectRatio.forEach { $1(v) }
         default: break
@@ -364,12 +372,14 @@ class CSController2: NSObject {
                 self.camera.ramp(toVideoZoomFactor: zFactor, withRate: rate)
             }
         case .aspectRatio(let aspectRatio):
+            self.aspectRatioMode = .lock
             self.aspectRatio = aspectRatio
-        case .aspectRatioMode( _): break
+        case .aspectRatioMode(let aspectRatioMode):
+            self.aspectRatioMode = aspectRatioMode
         }
     }
     
-    func captureStillPhoto() {
+    @objc func captureStillPhoto() {
         
         sessionQueue.async(){
             

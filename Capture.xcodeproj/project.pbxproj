@@ -554,7 +554,7 @@
 				INFOPLIST_FILE = "Manual Capture/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kobejean.manual-camera3";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kobejean.manual-camera";
 				PRODUCT_NAME = Capture;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Manual Capture/ObjcBridgeHeader.h";
@@ -577,7 +577,7 @@
 				INFOPLIST_FILE = "Manual Capture/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kobejean.manual-camera3";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kobejean.manual-camera";
 				PRODUCT_NAME = Capture;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Manual Capture/ObjcBridgeHeader.h";

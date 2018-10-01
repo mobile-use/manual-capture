@@ -139,7 +139,7 @@ public extension UIDevice {
 }
 
 func delay(_ delay:TimeInterval, closure:@escaping ()->()) {
-    DispatchQueue.main.asyncAfter(deadline: .now() + delay * Double(NSEC_PER_SEC)) { closure() }
+    DispatchQueue.main.asyncAfter(deadline: .now() + delay) { closure() }
 }
 
 func progressValue(_ progress:CGFloat, _ start:CGFloat, _ end:CGFloat) -> CGFloat {

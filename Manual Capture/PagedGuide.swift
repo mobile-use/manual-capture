@@ -11,7 +11,7 @@ import UIKit
 class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     var allowPortrait = false
     override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
-        return (allowPortrait) ? [.landscape, .portrait] : .landscape
+        return .landscapeRight
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -27,10 +27,10 @@ class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     var pageViewController: UIPageViewController!
     let contents: [Content] = [
         (title: "Quick Adjustments",
-         description: "Get accustomed to using these quick gestures and you will be snaping quality shots with ease.",
+         description: "Swipe along the sides of the frame for quick adjustments. Get accustomed to using these quick gestures and you will be snapping quality shots with ease.",
          videoName: "FourCornerUI"),
         (title: "Warp Speed",
-         description: "Ramp up the traking speed by sliding away from the slider.",
+         description: "Ramp up the tracking speed by sliding away from the slider.",
          videoName: "WarpSpeedDemo"),
         (title: "Advanced Controls",
          description: "Tap the screen to hide or show advanced controls.",
@@ -67,11 +67,11 @@ class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
         return createPageViewController(atIndex: referedPage.index-1)
     }
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return contents.count
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
     }
     
@@ -92,7 +92,7 @@ class PagedGuide: UIViewController, UIPageViewControllerDataSource, UIPageViewCo
     }
     
     @IBAction func startApp(){
-        let capture = storyboard?.instantiateViewController(withIdentifier: "Capture")
+        let capture = storyboard?.instantiateViewController(withIdentifier: "Capture2")
         present(capture!, animated: true, completion: nil)
     }
 }
