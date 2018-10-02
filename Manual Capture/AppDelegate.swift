@@ -72,6 +72,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+//        if self.window?.rootViewController?.presentedViewController is UINavigationController {
+//            if let isBeingPresented = self.window?.rootViewController?.presentedViewController?.isBeingPresented, isBeingPresented {
+//                return [.landscape, .portrait]
+//            } else {
+//                return [.landscapeRight]
+//            }
+//        }
         return [.landscape, .portrait]
     }
     

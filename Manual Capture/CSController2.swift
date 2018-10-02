@@ -8,7 +8,7 @@
 
 import UIKit
 import AVFoundation
-import AssetsLibrary
+import Photos
 
 class CSController2: NSObject {
     
@@ -113,23 +113,35 @@ class CSController2: NSObject {
         unowned let me = self
         volumeButtonHandler.downBlock = { me.captureStillPhoto() }
         
-        
-        requestCameraAccess(){
-            self.startCamera()
-        }
+//        if !kIsDemoMode {
+            requestCameraAccess {
+                self.startCamera()
+            }
+            requestPhotoLibraryAccess {
+                // success
+            }
+//        }
     }
     
     private func requestCameraAccess(completionHandler:@escaping ()->Void) {
         
-        AVCaptureDevice.requestAccess( for: AVMediaType.video ) {
-            (granted) in
+        AVCaptureDevice.requestAccess( for: AVMediaType.video ) { granted in
             if granted {
                 completionHandler()
             } else {
                 self.notify(error: SessionError.cameraAccessDenied)
             }
         }
-        
+    }
+    
+    private func requestPhotoLibraryAccess(completionHandler:@escaping ()->Void) {
+        PHPhotoLibrary.requestAuthorization() { status in
+            if status == .authorized {
+                completionHandler()
+            } else {
+                self.notify(error: SessionError.photoLibraryAccessDenied)
+            }
+        }
     }
     
     func startCamera() {
@@ -323,6 +335,7 @@ class CSController2: NSObject {
     }
     
     func set(_ set:CSSet){
+//        guard !kIsDemoMode else { return }
         let cameraConfig = { (config: () -> Void) -> Void in
             do {
                 try self.camera.lockForConfiguration()
@@ -380,21 +393,19 @@ class CSController2: NSObject {
     }
     
     @objc func captureStillPhoto() {
+        let orientation = UIApplication.shared.statusBarOrientation
         
         sessionQueue.async(){
-            
             func captureError(errorText:String) {
-                
-                UIAlertView(title: "Capture Error", message: errorText, delegate: nil, cancelButtonTitle: "Dismiss").show()
-                
+                DispatchQueue.main.async {
+                    UIAlertView(title: "Capture Error", message: errorText, delegate: nil, cancelButtonTitle: "Dismiss").show()
+                }
             }
             
             // Update the orientation on the still image output video connection before capturing.
             guard let connection = self.photoOutput.connection(with: AVMediaType.video) else {
-                
                 captureError(errorText: "Output connection was bad. Try retaking photo.")
                 return
-                
             }
             connection.videoOrientation = self.previewView.previewLayer.connection?.videoOrientation ?? .landscapeRight
             
@@ -417,33 +428,10 @@ class CSController2: NSObject {
                     width: min( image.size.height * self.aspectRatio, image.size.width),
                     height: min( image.size.width / self.aspectRatio, image.size.height)
                 )
-                var cropRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height).insetBy(
+                let cropRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height).insetBy(
                     dx: (image.size.width - scaled.width) / 2 , // clipped width
                     dy: (image.size.height - scaled.height) / 2 // clipped height
                 )
-                
-                var cropTransForm: CGAffineTransform {
-                    func rad(deg:Double)-> CGFloat {
-                        return CGFloat(deg / 180.0 * Double.pi)
-                    }
-                    switch (image.imageOrientation)
-                    {
-                    case .left:
-                        let rotationTransform = CGAffineTransform(rotationAngle: rad(deg: 90))
-                        return rotationTransform.translatedBy(x: 0, y: -image.size.height)
-                    case .right:
-                        let rotationTransform = CGAffineTransform(rotationAngle: rad(deg: -90))
-                        return rotationTransform.translatedBy(x: -image.size.width, y: 0)
-                    case .down:
-                        let rotationTransform = CGAffineTransform(rotationAngle: rad(deg: -180))
-                        return rotationTransform.translatedBy(x: -image.size.width, y: -image.size.height)
-                    default:
-                        return CGAffineTransform.identity
-                    }
-                }
-                
-                cropRect = cropRect.applying(cropTransForm)
-                
                 guard let cgImage = image.cgImage else {
                     captureError(errorText: "Couldn't turn image into CGImage. Try retaking photo.")
                     return
@@ -452,23 +440,29 @@ class CSController2: NSObject {
                     captureError(errorText: "Couldn't crop image to apropriate size. Try retaking photo.")
                     return
                 }
-                let orientation = ALAssetOrientation(rawValue: image.imageOrientation.rawValue)!
-                
-                ALAssetsLibrary().writeImage(toSavedPhotosAlbum: croppedImage, orientation: orientation) {
-                    (path, error) in
-                    
-                    self.notify(notification: .photoSaved)
-                    
-                    guard error == nil else {
-                        
-                        captureError(errorText: "Couldn't save photo.\n Try going to Settings > Privacy > Photos\n Then switch \(kAppName) to On")
-                        return
-                        
+                var imageOrientation: UIImage.Orientation {
+                    switch orientation {
+                    case .landscapeRight: return .up
+                    case .portrait: return.right
+                    case .landscapeLeft: return .down
+                    case .portraitUpsideDown: return .left
+                    case .unknown: return .up
                     }
-                    
-                    // photo saved
-                    
                 }
+                let rotImage = UIImage(cgImage: croppedImage, scale: 1.0, orientation: imageOrientation)
+                
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAsset(from: rotImage)
+                }, completionHandler: { [unowned self] success, error in
+                    if success {
+                        self.notify(notification: .photoSaved)
+                    } else if let error = error {
+                        self.notify(error: error)
+                        captureError(errorText: "Couldn't save photo.\n Try going to Settings > Privacy > Photos\n Then switch \(kAppName) to On")
+                    } else {
+                        captureError(errorText: "Couldn't save photo.\n Try going to Settings > Privacy > Photos\n Then switch \(kAppName) to On")
+                    }
+                })
             }
         }
         
@@ -560,4 +554,5 @@ class CSController2: NSObject {
         let b = (1.0 <= gains.blueGain && gains.blueGain <= maxGain)
         return r && g && b
     }
+    
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CaptureViewController2: UIViewController, CaptureView2Delegate {
+class CaptureViewController2: UIViewController, CaptureView2Delegate, MWPhotoBrowserDelegate, UINavigationControllerDelegate {
     
 //    typealias Constraints = CaptureConstraint
     typealias PreviewView = CapturePreviewView
@@ -20,6 +20,8 @@ class CaptureViewController2: UIViewController, CaptureView2Delegate {
     var controlView: CaptureView2!
     var captureButton = UIButton.shutterButton()
     var captureButtonContainer: RotationContainer!
+    let galleryButton = UIButton.galleryButton()
+    var galleryButtonContainer: RotationContainer!
     var previewView: PreviewView!
     var sessionController: CSController2!
     
@@ -69,11 +71,16 @@ class CaptureViewController2: UIViewController, CaptureView2Delegate {
 //    var sessionController: CSController2!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         let toolbar = UIView()
         let capturebar = UIView()
         captureButtonContainer = RotationContainer(view: captureButton)
+        galleryButtonContainer = RotationContainer(view: galleryButton)
         sessionController = CSController2()
         captureButton.addTarget(sessionController, action: #selector(sessionController.captureStillPhoto), for: .touchUpInside)
+        galleryButton.addTarget(self, action: #selector(self.showPhotoBrowser),
+                                for: .touchUpInside)
+        galleryButton.alpha = 0.0
         previewView = sessionController.previewView
         controlView = CaptureView2(frame: controlViewContainer.view.bounds, sessionController: sessionController)
         controlView.delegate = self
@@ -88,19 +95,24 @@ class CaptureViewController2: UIViewController, CaptureView2Delegate {
         view.backgroundColor = UIColor.black
         
         steadyView.view.layout(style: Style.CaptureButtonContainer, views: captureButtonContainer)
+        steadyView.view.layout(style: Style.GalleryButtonContainer, views: galleryButtonContainer, captureButtonContainer)
 //
 //        layout = .initial
 //        layout.proceed(layouts: .shoot, .whiteBalance, .focus, .whiteBalance)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         let selector = #selector(self.deviceOrientationChanged)
         NotificationCenter.default.addObserver(self, selector: selector,
                                                name:UIDevice.orientationDidChangeNotification , object: nil)
+        updateRotation()
+//        UIViewController.attemptRotationToDeviceOrientation()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         UIDevice.current.endGeneratingDeviceOrientationNotifications()
         NotificationCenter.default.removeObserver(self)
     }
@@ -139,6 +151,7 @@ class CaptureViewController2: UIViewController, CaptureView2Delegate {
             let animations = (
                 normal: {
                     self.captureButtonContainer.rotation = CGFloat(self.orientation.rotation)
+                    self.galleryButtonContainer.rotation = CGFloat(self.orientation.rotation)
                     
                     let aspectRatioOrientationAgnostic = self.sessionController.aspectRatioMode == .fullscreen || self.sessionController.aspectRatioMode == .sensor
                     let heightAndWidthSwapped = self.orientation == .portrait || oldOrientation == .portrait
@@ -154,6 +167,7 @@ class CaptureViewController2: UIViewController, CaptureView2Delegate {
 //                    }
 //                    self.controlViewContainer.frame = rect
                     self.controlViewContainer.rotation = CGFloat(self.orientation.rotation)
+                    self.galleryButtonContainer.rotation = CGFloat(self.orientation.rotation)
                 }
             )
             UIView.animate(withDuration: duration) { CATransaction.performBlock(duration: duration) {
@@ -200,12 +214,103 @@ class CaptureViewController2: UIViewController, CaptureView2Delegate {
         }
     }
     
+    
+    func shouldShowGalleryButton(show: Bool) {
+        UIView.animate(withDuration: 0.2, delay: 0, options: UIView.AnimationOptions.beginFromCurrentState, animations:  {
+            self.galleryButton.alpha = (show) ? 1.0 : 0.0
+        }, completion: nil)
+    }
+    
     func shouldShowCaptureButton(show: Bool) {
         UIView.animate(withDuration: 0.2, delay: 0, options: UIView.AnimationOptions.beginFromCurrentState, animations:  {
             self.captureButton.alpha = (show) ? 1.0 : 0.0
         }, completion: nil)
     }
+
+    @objc func showPhotoBrowser() {
+        loadCameraRollAssets()
+        guard let browser = MWPhotoBrowser(delegate: self) else {
+            fatalError("couldn't load MWPhotoBrowser")
+        }
+        browser.startOnGrid = true
+        browser.enableGrid = true
+        browser.enableSwipeToDismiss = true
+        
+        let nav = UINavigationController(rootViewController: browser)
+        present(nav, animated: true, completion: nil)
+    }
     
+    var cameraRollAssets: PHFetchResult<PHAsset>!
+    
+    func loadCameraRollAssets() {
+        let result = PHAssetCollection.fetchAssetCollections(
+            with: PHAssetCollectionType.smartAlbum,
+            subtype: PHAssetCollectionSubtype.smartAlbumUserLibrary,
+            options: nil
+        )
+        guard let cameraRoll = result.firstObject else { print(result); return }
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        cameraRollAssets = PHAsset.fetchAssets(in: cameraRoll, options: fetchOptions)
+    }
+    
+    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
+        return UInt(cameraRollAssets.count)
+    }
+    
+    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
+        let asset = cameraRollAssets.object(at: Int(index))
+        //        let id = asset.localIdentifier[0..<36]
+        //        let url = NSURL(string: "assets-library://asset/asset.JPG?id=\(id)&ext=JPG")
+        //        print(url)
+        //        return MWPhoto(URL: url)
+        var size = CGSize(width: CGFloat(asset.pixelWidth), height: CGFloat(asset.pixelHeight))
+        let length = max(size.width, size.height)
+        let maxLength: CGFloat = 1920
+        let scaleDown = maxLength / max(length, maxLength)
+        size.width *= scaleDown
+        size.height *= scaleDown
+        return MWPhoto(asset: asset, targetSize: size)
+    }
+    
+    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, thumbPhotoAt index: UInt) -> MWPhotoProtocol! {
+        let asset = cameraRollAssets.object(at: Int(index))
+        let size = CGSize(width: 400, height: 400)
+        return MWPhoto(asset: asset, targetSize: size)
+    }
+    
+    func photoBrowserDidFinishModalPresentation(_ photoBrowser: MWPhotoBrowser!) {
+        // rotate back
+        delay(0.1) { [unowned self] in
+            self.updateRotation()
+        }
+        self.dismiss(animated: true) {
+        }
+    }
+    
+//    override func transition(from fromViewController: UIViewController, to toViewController: UIViewController, duration: TimeInterval, options: UIView.AnimationOptions = [], animations: (() -> Void)?, completion: ((Bool) -> Void)? = nil) {
+//        //
+//    }
+    
+    private func updateRotation() {
+        var newAngle: CGFloat = 0
+        switch UIApplication.shared.statusBarOrientation {
+        case .landscapeRight:
+            newAngle = 0
+//            orientation = .landscapeRight
+        case .portrait:
+            newAngle = CGFloat(Double.pi/2)
+//            orientation = .portrait
+        case .landscapeLeft:
+            newAngle = CGFloat(Double.pi)
+//            orientation = .landscapeLeft
+        default: break// should not happen
+        }
+        self.steadyView.rotation = newAngle
+        // update orientation
+    }
+
     struct Layout : OptionSet {
         let rawValue: UInt
         

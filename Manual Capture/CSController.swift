@@ -25,6 +25,7 @@ enum SessionError : Error {
     case cameraInputError(InputError)
     case audioInputError(InputError)
     case cameraAccessDenied
+    case photoLibraryAccessDenied
     case photoOutputError(OutputError)
     case videoOutputError(OutputError)
 }

@@ -24,7 +24,9 @@ private let kAspectRatiosControlItems: [OptionControl<CSAspectRatio>.Item] = [
 
 protocol CaptureView2Delegate {
     func flashPreview()
+    func shouldShowGalleryButton(show: Bool)
     func shouldShowCaptureButton(show: Bool)
+    func showPhotoBrowser()
 }
 
 class CaptureView2: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
@@ -104,7 +106,7 @@ class CaptureView2: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             i = (kAspectRatiosControlItems.indices ~= i) ? i : 0
             sessionController.set(.aspectRatio( kAspectRatiosControlItems[i].value ) )
             
-//        case 1 where tapGesture.numberOfTouchesRequired == 2 : delegate?.showPhotoBrowser()
+        case 1 where tapGesture.numberOfTouchesRequired == 2 : delegate?.showPhotoBrowser()
             
         default: break
         }
@@ -185,7 +187,13 @@ class CaptureView2: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             switchToLayout(.error)
             UIAlertView(
                 title: "I can't see anything :(",
-                message: "\(kAppName) was denied access to the camera. To fix it go to:\n\nSettings > Privacy > Camera\nThen switch \(kAppName) to On",
+                message: "\(kAppName) was denied access to the camera. To fix it go to:\n\nSettings > Privacy > Camera\nThen switch \(kAppName) to On.",
+                delegate: nil, cancelButtonTitle: nil
+                ).show()
+        case SessionError.photoLibraryAccessDenied:
+            UIAlertView(
+                title: "I can't save your photos :(",
+                message: "\(kAppName) was denied access to the photo library. To fix it go to:\n\nSettings > Privacy > Photos > \(kAppName) then select Read and Write.",
                 delegate: nil, cancelButtonTitle: nil
                 ).show()
             
@@ -210,11 +218,12 @@ class CaptureView2: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
             //break
             switchToLayout(.disassembleControls)
         case .photoSaved:
-            UIAlertView(
-                title: "Photo Saved",
-                message: "Your photo has been saved to your photo library.",
-                delegate: nil, cancelButtonTitle: "Ok"
-            ).show()
+            delegate?.shouldShowGalleryButton(show: true)
+//            UIAlertView(
+//                title: "Photo Saved",
+//                message: "Your photo has been saved to your photo library.",
+//                delegate: nil, cancelButtonTitle: "Ok"
+//            ).show()
             break
 //            UIView.animate(withDuration: 0.2,
 //                delay: 0.0,
@@ -735,7 +744,6 @@ class CaptureView2: UIView, CSControllerDelegate, UIGestureRecognizerDelegate {
                 sliders.tint.vpHandler = VPFloatHandler(start: -150, end: 150)
                 sliders.iso.vpHandler = VPFloatHandler(start: sessionController.camera?.activeFormat.minISO ?? 0, end: sessionController.camera?.activeFormat.maxISO ?? 0)
                 
-                guard !kIsDemoMode else { return }
                 
                 let vfp: (_ progress:Float) -> CMTime = {
                     let p = pow( Double($0), kExposureDurationPower ); // Apply power function to expand slider's low-end range

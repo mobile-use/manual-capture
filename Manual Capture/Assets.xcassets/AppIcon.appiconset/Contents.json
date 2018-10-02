@@ -1,13 +1,15 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "Icon iPhone Notification iOS 7-12 20pt@2x.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "Icon iPhone Notification iOS 7-12 20pt@3x.png",
       "scale" : "3x"
     },
     {
@@ -47,18 +49,21 @@
       "scale" : "3x"
     },
     {
-      "idiom" : "ipad",
       "size" : "20x20",
+      "idiom" : "ipad",
+      "filename" : "Icon iPad Notifications iOS 7-12 20pt.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "20x20",
+      "idiom" : "ipad",
+      "filename" : "Icon iPad Notifications iOS 7-12 20pt@2x.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "ipad",
       "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "Icon iPad Settings iOS 7-12 29pt.png",
       "scale" : "1x"
     },
     {
@@ -68,8 +73,9 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "ipad",
       "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "Icon iPad Spotlight iOS 7-12 40pt.png",
       "scale" : "1x"
     },
     {
@@ -91,13 +97,15 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "ipad",
       "size" : "83.5x83.5",
+      "idiom" : "ipad",
+      "filename" : "Icon iPad Pro App iOS 9-12 83.5pt@2x.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "ios-marketing",
       "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "Icon App Store iOS.png",
       "scale" : "1x"
     }
   ],

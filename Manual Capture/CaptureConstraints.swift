@@ -103,11 +103,33 @@ extension Style {
         return x + y
     }
     
+    static let GalleryButtonContainer = Style(){
+        let galleryButtonContainer = $0[0]
+        let shutterButtonContainer = $0[1]
+        guard let superview = galleryButtonContainer.superview else { return [] }
+        
+        galleryButtonContainer.translatesAutoresizingMaskIntoConstraints = false
+        
+        let centerY = Constraint(item: galleryButtonContainer, attribute: .centerY,
+                                 toItem: superview, attribute: .centerY, multiplier: 1.0, constant: 75)
+        let rightMargin = Constraint(item: galleryButtonContainer, attribute: .rightMargin,
+                                     toItem: superview, attribute: .rightMargin,
+                                     constant: -10)
+        let width = Constraint(item: galleryButtonContainer, attribute: .width, constant: 40)
+        let height = Constraint(item: galleryButtonContainer, attribute: .height, constant: 40)
+        
+        return [centerY, rightMargin, width, height]
+    }
+    
 }
 
 extension UIView {
     func layout(style: Style, views: UIView...){
-        views.forEach { view in addSubview(view) }
+        views.forEach { view in
+            if view.superview == nil {
+                addSubview(view)
+            }
+        }
         addConstraints(style.constraints(views))
     }
 }
