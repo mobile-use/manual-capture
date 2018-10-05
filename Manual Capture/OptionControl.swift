@@ -1,5 +1,5 @@
 //
-//  CaptureModeControl.swift
+//  OptionControl
 //  Capture
 //
 //  Created by Jean Flaherty on 10/7/15.

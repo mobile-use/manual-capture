@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Capture View Controller2-->
+        <!--Capture View Controller-->
         <scene sceneID="U6T-sg-XhH">
             <objects>
-                <viewController storyboardIdentifier="Capture2" id="X3f-H9-9fG" customClass="CaptureViewController2" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CaptureViewController" id="X3f-H9-9fG" customClass="CaptureViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="46T-tM-cxL"/>
                         <viewControllerLayoutGuide type="bottom" id="I9C-Ut-aSr"/>
@@ -33,12 +33,12 @@
                 <pageViewController storyboardIdentifier="PageController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="DIp-nM-WcM" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jdy-mI-yE9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1701" y="-313.5"/>
+            <point key="canvasLocation" x="1692" y="385"/>
         </scene>
-        <!--Paged Guide Content-->
+        <!--Paged Guide Content View Controller-->
         <scene sceneID="S78-aO-5v8">
             <objects>
-                <viewController storyboardIdentifier="PagedGuideContent" id="rcU-lb-izU" customClass="PagedGuideContent" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PagedGuideContent" id="rcU-lb-izU" customClass="PagedGuideContentViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HSx-wB-xq0"/>
                         <viewControllerLayoutGuide type="bottom" id="iVF-Rs-xXa"/>
@@ -195,30 +195,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="who-3G-zbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1701" y="387"/>
+            <point key="canvasLocation" x="2327" y="385"/>
         </scene>
-        <!--Capture View Controller-->
-        <scene sceneID="h8C-qC-McM">
-            <objects>
-                <viewController storyboardIdentifier="Capture" id="tCr-0b-Mul" customClass="CaptureViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="pkm-BU-cfk"/>
-                        <viewControllerLayoutGuide type="bottom" id="YIm-3O-x5D"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="fTY-EF-bYF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="geb-f3-mEc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1054" y="387"/>
-        </scene>
-        <!--Paged Guide-->
+        <!--Paged Guide View Controller-->
         <scene sceneID="ZRZ-IS-sEo">
             <objects>
-                <viewController storyboardIdentifier="PagedGuide" id="c3U-3S-Pgp" customClass="PagedGuide" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PagedGuide" id="c3U-3S-Pgp" customClass="PagedGuideViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BxZ-Um-AoY"/>
                         <viewControllerLayoutGuide type="bottom" id="0Av-Xl-LTU"/>
@@ -267,24 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cJp-Wp-1bq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1701" y="1080"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="8xq-xM-bhM">
-            <objects>
-                <viewController id="NxT-9R-H2t" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hlD-Y5-4PE"/>
-                        <viewControllerLayoutGuide type="bottom" id="YWD-Qy-ymT"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ZVt-M4-ikp">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ogG-eM-3VZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
+            <point key="canvasLocation" x="1054" y="386"/>
         </scene>
     </scenes>
 </document>

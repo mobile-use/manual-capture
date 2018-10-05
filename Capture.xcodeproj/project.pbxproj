@@ -8,39 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		0F10EDF21BA0EC49007E722A /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F10EDF11BA0EC49007E722A /* Slider.swift */; };
-		0F10EDF41BA1404B007E722A /* VPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F10EDF31BA1404B007E722A /* VPHandler.swift */; };
-		0F2ED8D61BA92E1200F9332D /* CaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2ED8D51BA92E1200F9332D /* CaptureView.swift */; };
-		0F3FC7BB1BABCA77004A350B /* SmartSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3FC7BA1BABCA77004A350B /* SmartSlider.swift */; };
-		0F46E4481B9D7DD0000E32D1 /* CSController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F46E4471B9D7DD0000E32D1 /* CSController.swift */; };
+		0F10EDF41BA1404B007E722A /* ValueProgressHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F10EDF31BA1404B007E722A /* ValueProgressHandler.swift */; };
+		0F3FC7BB1BABCA77004A350B /* WarpSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3FC7BA1BABCA77004A350B /* WarpSlider.swift */; };
 		0F46E44A1B9D84C7000E32D1 /* CaptureExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F46E4491B9D84C7000E32D1 /* CaptureExtentions.swift */; };
-		0F46E44C1B9DACAE000E32D1 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F46E44B1B9DACAE000E32D1 /* CaptureViewController.swift */; };
-		0FB784161B9ECFC300C7FDA7 /* PDHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB784151B9ECFC300C7FDA7 /* PDHandler.swift */; };
+		0FB784161B9ECFC300C7FDA7 /* ProgressDisplacementHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB784151B9ECFC300C7FDA7 /* ProgressDisplacementHandler.swift */; };
 		0FC4DC561B95BD630009B4A7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC4DC551B95BD630009B4A7 /* StoreKit.framework */; };
-		0FC510E31BBD13EE00E4D0D8 /* CapturePreviewLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC510E21BBD13EE00E4D0D8 /* CapturePreviewLayer.swift */; };
-		0FD828C81BB7A05F004162F0 /* ManualCaptureGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD828C71BB7A05F004162F0 /* ManualCaptureGlyph.swift */; };
-		0FD828CA1BB7C630004162F0 /* SmartSliderLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD828C91BB7C630004162F0 /* SmartSliderLine.swift */; };
-		0FE500B71BB50ECA00D5B13D /* SmartSliderKnobLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE500B61BB50ECA00D5B13D /* SmartSliderKnobLayer.swift */; };
+		0FD828C81BB7A05F004162F0 /* CaptureGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD828C71BB7A05F004162F0 /* CaptureGlyph.swift */; };
+		0FD828CA1BB7C630004162F0 /* WarpSliderLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD828C91BB7C630004162F0 /* WarpSliderLine.swift */; };
+		0FE500B71BB50ECA00D5B13D /* WarpSliderKnobLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE500B61BB50ECA00D5B13D /* WarpSliderKnobLayer.swift */; };
 		0FEA847F1B944781002135DE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FEA847E1B944781002135DE /* AVFoundation.framework */; };
 		3D17E4C321630ABC008AF466 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D17E4C221630ABC008AF466 /* Photos.framework */; };
 		3D3AA9CE1BCB5FAF00EF2B84 /* SampleImage.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */; };
-		3D3AD8441C01DCBF007583A7 /* CaptureViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8431C01DCBF007583A7 /* CaptureViewController2.swift */; };
+		3D3AD8441C01DCBF007583A7 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8431C01DCBF007583A7 /* CaptureViewController.swift */; };
 		3D3AD8461C01DF0A007583A7 /* CaptureConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8451C01DF0A007583A7 /* CaptureConstraints.swift */; };
-		3D3AD8481C037B12007583A7 /* CapturePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8471C037B12007583A7 /* CapturePreviewView.swift */; };
-		3D3AD84A1C043389007583A7 /* CSController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8491C043389007583A7 /* CSController2.swift */; };
-		3D41A0A41C634B0900BF21D0 /* RotationContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41A0A31C634B0900BF21D0 /* RotationContainer.swift */; };
-		3D4EAB191B8410CC00C2F110 /* CaptureControlLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4EAB181B8410CB00C2F110 /* CaptureControlLabel.swift */; };
+		3D3AD8481C037B12007583A7 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8471C037B12007583A7 /* PreviewView.swift */; };
+		3D3AD84A1C043389007583A7 /* CaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8491C043389007583A7 /* CaptureSession.swift */; };
+		3D41A0A41C634B0900BF21D0 /* RotationContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D41A0A31C634B0900BF21D0 /* RotationContainerView.swift */; };
+		3D4EAB191B8410CC00C2F110 /* ControlLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4EAB181B8410CB00C2F110 /* ControlLabel.swift */; };
 		3D4F17A31B73883500D4D74F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4F17A21B73883500D4D74F /* AppDelegate.swift */; };
 		3D4F17A81B73883500D4D74F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D4F17A61B73883500D4D74F /* Main.storyboard */; };
 		3D4F17AA1B73883500D4D74F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D4F17A91B73883500D4D74F /* Assets.xcassets */; };
 		3D4F17AD1B73883500D4D74F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D4F17AB1B73883500D4D74F /* LaunchScreen.storyboard */; };
+		3D5077F9216713ED00499E47 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5077F8216713ED00499E47 /* Control.swift */; };
 		3D5111C71B7E031000FCF97F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5111C61B7E031000FCF97F /* QuartzCore.framework */; };
 		3D5111C91B7EC12F00FCF97F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5111C81B7EC12F00FCF97F /* CoreGraphics.framework */; };
 		3D5416B81BC79EAE00922A2B /* OptionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5416B71BC79EAE00922A2B /* OptionControl.swift */; };
 		3D5598FF1BFB070800C65CA6 /* VolumeButtonHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5598FE1BFB070800C65CA6 /* VolumeButtonHandler.swift */; };
 		3D644FD01C199FA100A7C467 /* FourCornerUI.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D644FCF1C199FA100A7C467 /* FourCornerUI.mov */; };
-		3D70987A1B85502500AA49C2 /* CaptureShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7098791B85502500AA49C2 /* CaptureShutterButton.swift */; };
-		3D7A9DD11C08867C007C1445 /* PagedGuideContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7A9DD01C08867C007C1445 /* PagedGuideContent.swift */; };
-		3D7A9DD31C094E9E007C1445 /* PagedGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7A9DD21C094E9E007C1445 /* PagedGuide.swift */; };
+		3D70987A1B85502500AA49C2 /* ShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7098791B85502500AA49C2 /* ShutterButton.swift */; };
+		3D7A9DD11C08867C007C1445 /* PagedGuideContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7A9DD01C08867C007C1445 /* PagedGuideContentViewController.swift */; };
+		3D7A9DD31C094E9E007C1445 /* PagedGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7A9DD21C094E9E007C1445 /* PagedGuideViewController.swift */; };
 		3D7A9DD51C097CB3007C1445 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D7A9DD41C097CB3007C1445 /* MediaPlayer.framework */; };
 		3D7A9DDE1C09DF09007C1445 /* TestFoot1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D7A9DDA1C09DF09007C1445 /* TestFoot1.mov */; };
 		3D7A9DDF1C09DF09007C1445 /* TestFoot2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D7A9DDB1C09DF09007C1445 /* TestFoot2.mov */; };
@@ -48,51 +45,60 @@
 		3D7A9DE11C09DF09007C1445 /* TestFoot4.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D7A9DDD1C09DF09007C1445 /* TestFoot4.mov */; };
 		3D7FB63E1C214C85004D340C /* WarpSpeedDemo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D7FB63D1C214C85004D340C /* WarpSpeedDemo.mov */; };
 		3D7FB6401C214C9A004D340C /* AdvancedControlsDemo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 3D7FB63F1C214C9A004D340C /* AdvancedControlsDemo.mov */; };
-		3DA07FD5215DFAB600BC2C30 /* CaptureView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA07FD4215DFAB600BC2C30 /* CaptureView2.swift */; };
-		3DADC33C1BC4D4C000A74BC2 /* CaptureModeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */; };
+		3DA07FD5215DFAB600BC2C30 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA07FD4215DFAB600BC2C30 /* ControlsView.swift */; };
+		3DADC33C1BC4D4C000A74BC2 /* ModeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33B1BC4D4C000A74BC2 /* ModeControl.swift */; };
 		3DADC33E1BC4D97D00A74BC2 /* ControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */; };
+		3DC470112167024400D8B024 /* SmartSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC470102167024400D8B024 /* SmartSliderTests.swift */; };
 		7D27C7ECEFE49BB316232FAF /* libPods-Manual Capture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E9FC9AD84EFA57481F6484 /* libPods-Manual Capture.a */; };
+		B548A37310964F026D085663 /* libPods-Manual Capture Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5F7DF4209C4ED33A80937CC /* libPods-Manual Capture Tests.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3DC4700B2166FFD500D8B024 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3D4F17971B73883500D4D74F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D4F179E1B73883500D4D74F;
+			remoteInfo = "Manual Capture";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0F10EDF11BA0EC49007E722A /* Slider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Slider.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		0F10EDF31BA1404B007E722A /* VPHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPHandler.swift; sourceTree = "<group>"; };
-		0F2ED8D51BA92E1200F9332D /* CaptureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CaptureView.swift; sourceTree = "<group>"; };
-		0F3FC7BA1BABCA77004A350B /* SmartSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SmartSlider.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		0F46E4471B9D7DD0000E32D1 /* CSController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSController.swift; sourceTree = "<group>"; };
+		0F10EDF31BA1404B007E722A /* ValueProgressHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueProgressHandler.swift; sourceTree = "<group>"; };
+		0F3FC7BA1BABCA77004A350B /* WarpSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = WarpSlider.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0F46E4491B9D84C7000E32D1 /* CaptureExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureExtentions.swift; sourceTree = "<group>"; };
-		0F46E44B1B9DACAE000E32D1 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
-		0FB784151B9ECFC300C7FDA7 /* PDHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PDHandler.swift; path = "Manual Capture/PDHandler.swift"; sourceTree = SOURCE_ROOT; };
+		0FB784151B9ECFC300C7FDA7 /* ProgressDisplacementHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressDisplacementHandler.swift; path = "Manual Capture/ProgressDisplacementHandler.swift"; sourceTree = SOURCE_ROOT; };
 		0FC4DC541B95BBA40009B4A7 /* Capture.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Capture.entitlements; sourceTree = "<group>"; };
 		0FC4DC551B95BD630009B4A7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		0FC510E21BBD13EE00E4D0D8 /* CapturePreviewLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapturePreviewLayer.swift; sourceTree = "<group>"; };
-		0FD828C71BB7A05F004162F0 /* ManualCaptureGlyph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCaptureGlyph.swift; sourceTree = "<group>"; };
-		0FD828C91BB7C630004162F0 /* SmartSliderLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartSliderLine.swift; sourceTree = "<group>"; };
-		0FE500B61BB50ECA00D5B13D /* SmartSliderKnobLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartSliderKnobLayer.swift; sourceTree = "<group>"; };
+		0FD828C71BB7A05F004162F0 /* CaptureGlyph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureGlyph.swift; sourceTree = "<group>"; };
+		0FD828C91BB7C630004162F0 /* WarpSliderLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarpSliderLine.swift; sourceTree = "<group>"; };
+		0FE500B61BB50ECA00D5B13D /* WarpSliderKnobLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarpSliderKnobLayer.swift; sourceTree = "<group>"; };
 		0FEA847E1B944781002135DE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0FFFDDB11BA7F35A002432FB /* ObjcBridgeHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcBridgeHeader.h; sourceTree = "<group>"; };
 		3D17E4C221630ABC008AF466 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SampleImage.JPG; sourceTree = "<group>"; };
-		3D3AD8431C01DCBF007583A7 /* CaptureViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController2.swift; sourceTree = "<group>"; };
+		3D3AD8431C01DCBF007583A7 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		3D3AD8451C01DF0A007583A7 /* CaptureConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureConstraints.swift; sourceTree = "<group>"; };
-		3D3AD8471C037B12007583A7 /* CapturePreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapturePreviewView.swift; sourceTree = "<group>"; };
-		3D3AD8491C043389007583A7 /* CSController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSController2.swift; sourceTree = "<group>"; };
-		3D41A0A31C634B0900BF21D0 /* RotationContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationContainer.swift; sourceTree = "<group>"; };
-		3D4EAB181B8410CB00C2F110 /* CaptureControlLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CaptureControlLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		3D3AD8471C037B12007583A7 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		3D3AD8491C043389007583A7 /* CaptureSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureSession.swift; sourceTree = "<group>"; };
+		3D41A0A31C634B0900BF21D0 /* RotationContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationContainerView.swift; sourceTree = "<group>"; };
+		3D4EAB181B8410CB00C2F110 /* ControlLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ControlLabel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3D4F179F1B73883500D4D74F /* Capture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D4F17A21B73883500D4D74F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D4F17A71B73883500D4D74F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3D4F17A91B73883500D4D74F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D4F17AC1B73883500D4D74F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D4F17AE1B73883500D4D74F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D5077F8216713ED00499E47 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
 		3D5111C61B7E031000FCF97F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3D5111C81B7EC12F00FCF97F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3D5416B71BC79EAE00922A2B /* OptionControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionControl.swift; sourceTree = "<group>"; };
 		3D5598FE1BFB070800C65CA6 /* VolumeButtonHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeButtonHandler.swift; sourceTree = "<group>"; };
 		3D644FCF1C199FA100A7C467 /* FourCornerUI.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = FourCornerUI.mov; sourceTree = "<group>"; };
-		3D7098791B85502500AA49C2 /* CaptureShutterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureShutterButton.swift; sourceTree = "<group>"; };
-		3D7A9DD01C08867C007C1445 /* PagedGuideContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedGuideContent.swift; sourceTree = "<group>"; };
-		3D7A9DD21C094E9E007C1445 /* PagedGuide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedGuide.swift; sourceTree = "<group>"; };
+		3D7098791B85502500AA49C2 /* ShutterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShutterButton.swift; sourceTree = "<group>"; };
+		3D7A9DD01C08867C007C1445 /* PagedGuideContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedGuideContentViewController.swift; sourceTree = "<group>"; };
+		3D7A9DD21C094E9E007C1445 /* PagedGuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedGuideViewController.swift; sourceTree = "<group>"; };
 		3D7A9DD41C097CB3007C1445 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		3D7A9DDA1C09DF09007C1445 /* TestFoot1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = TestFoot1.mov; sourceTree = "<group>"; };
 		3D7A9DDB1C09DF09007C1445 /* TestFoot2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = TestFoot2.mov; sourceTree = "<group>"; };
@@ -100,11 +106,17 @@
 		3D7A9DDD1C09DF09007C1445 /* TestFoot4.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = TestFoot4.mov; sourceTree = "<group>"; };
 		3D7FB63D1C214C85004D340C /* WarpSpeedDemo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = WarpSpeedDemo.mov; sourceTree = "<group>"; };
 		3D7FB63F1C214C9A004D340C /* AdvancedControlsDemo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = AdvancedControlsDemo.mov; sourceTree = "<group>"; };
-		3DA07FD4215DFAB600BC2C30 /* CaptureView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureView2.swift; sourceTree = "<group>"; };
-		3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureModeControl.swift; sourceTree = "<group>"; };
+		3DA07FD4215DFAB600BC2C30 /* ControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
+		3DADC33B1BC4D4C000A74BC2 /* ModeControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModeControl.swift; sourceTree = "<group>"; };
 		3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlPanel.swift; sourceTree = "<group>"; };
+		3DC470062166FFD500D8B024 /* Manual Capture Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Manual Capture Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DC4700A2166FFD500D8B024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DC470102167024400D8B024 /* SmartSliderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartSliderTests.swift; sourceTree = "<group>"; };
 		6394383D169B8EEAF441FD2B /* Pods-Manual Capture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture.release.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture.release.xcconfig"; sourceTree = "<group>"; };
+		69520D82622BF711F1787AFB /* Pods-Manual Capture Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture Tests/Pods-Manual Capture Tests.release.xcconfig"; sourceTree = "<group>"; };
 		845A00742B6D7055D3F3E02D /* Pods-Manual Capture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture.debug.xcconfig"; sourceTree = "<group>"; };
+		AD246A49DECB9CD304932055 /* Pods-Manual Capture Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture Tests/Pods-Manual Capture Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		E5F7DF4209C4ED33A80937CC /* libPods-Manual Capture Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Manual Capture Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E9FC9AD84EFA57481F6484 /* libPods-Manual Capture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Manual Capture.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -123,25 +135,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3DC470032166FFD500D8B024 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B548A37310964F026D085663 /* libPods-Manual Capture Tests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0FB784171BA0229C00C7FDA7 /* UI Classes */ = {
+		0FB784171BA0229C00C7FDA7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				3D3AD8451C01DF0A007583A7 /* CaptureConstraints.swift */,
-				0F2ED8D51BA92E1200F9332D /* CaptureView.swift */,
-				3DA07FD4215DFAB600BC2C30 /* CaptureView2.swift */,
-				0FC510E21BBD13EE00E4D0D8 /* CapturePreviewLayer.swift */,
-				3D3AD8471C037B12007583A7 /* CapturePreviewView.swift */,
+				3D5077F8216713ED00499E47 /* Control.swift */,
+				0FD828C71BB7A05F004162F0 /* CaptureGlyph.swift */,
+				3D41A0A31C634B0900BF21D0 /* RotationContainerView.swift */,
+				3DA07FD4215DFAB600BC2C30 /* ControlsView.swift */,
+				3D3AD8471C037B12007583A7 /* PreviewView.swift */,
 				3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */,
-				3DADC33B1BC4D4C000A74BC2 /* CaptureModeControl.swift */,
+				3DADC33B1BC4D4C000A74BC2 /* ModeControl.swift */,
 				3D5416B71BC79EAE00922A2B /* OptionControl.swift */,
-				3D7098791B85502500AA49C2 /* CaptureShutterButton.swift */,
-				3D4EAB181B8410CB00C2F110 /* CaptureControlLabel.swift */,
+				3D7098791B85502500AA49C2 /* ShutterButton.swift */,
+				3D4EAB181B8410CB00C2F110 /* ControlLabel.swift */,
 				0FB784191BA0230600C7FDA7 /* Slider */,
 			);
-			name = "UI Classes";
+			name = UI;
 			path = "Manual Capture";
 			sourceTree = SOURCE_ROOT;
 		};
@@ -149,12 +169,11 @@
 			isa = PBXGroup;
 			children = (
 				0F10EDF11BA0EC49007E722A /* Slider.swift */,
-				0F3FC7BA1BABCA77004A350B /* SmartSlider.swift */,
-				0FE500B61BB50ECA00D5B13D /* SmartSliderKnobLayer.swift */,
-				0FD828C91BB7C630004162F0 /* SmartSliderLine.swift */,
-				0FD828C71BB7A05F004162F0 /* ManualCaptureGlyph.swift */,
-				0F10EDF31BA1404B007E722A /* VPHandler.swift */,
-				0FB784151B9ECFC300C7FDA7 /* PDHandler.swift */,
+				0F3FC7BA1BABCA77004A350B /* WarpSlider.swift */,
+				0FE500B61BB50ECA00D5B13D /* WarpSliderKnobLayer.swift */,
+				0FD828C91BB7C630004162F0 /* WarpSliderLine.swift */,
+				0F10EDF31BA1404B007E722A /* ValueProgressHandler.swift */,
+				0FB784151B9ECFC300C7FDA7 /* ProgressDisplacementHandler.swift */,
 			);
 			name = Slider;
 			sourceTree = "<group>";
@@ -164,6 +183,8 @@
 			children = (
 				845A00742B6D7055D3F3E02D /* Pods-Manual Capture.debug.xcconfig */,
 				6394383D169B8EEAF441FD2B /* Pods-Manual Capture.release.xcconfig */,
+				AD246A49DECB9CD304932055 /* Pods-Manual Capture Tests.debug.xcconfig */,
+				69520D82622BF711F1787AFB /* Pods-Manual Capture Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -172,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				3D4F17A11B73883500D4D74F /* Manual Capture */,
+				3DC470072166FFD500D8B024 /* Manual Capture Tests */,
 				3D4F17A01B73883500D4D74F /* Products */,
 				8FFB1C14B6A6C64DF6AD76E4 /* Frameworks */,
 				2CC5685E194947379CA14001 /* Pods */,
@@ -182,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				3D4F179F1B73883500D4D74F /* Capture.app */,
+				3DC470062166FFD500D8B024 /* Manual Capture Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -193,15 +216,33 @@
 				0FFFDDB11BA7F35A002432FB /* ObjcBridgeHeader.h */,
 				3D4F17A21B73883500D4D74F /* AppDelegate.swift */,
 				3D4F17A61B73883500D4D74F /* Main.storyboard */,
-				3D7A9DD01C08867C007C1445 /* PagedGuideContent.swift */,
-				3D7A9DD21C094E9E007C1445 /* PagedGuide.swift */,
-				0F46E44B1B9DACAE000E32D1 /* CaptureViewController.swift */,
-				3D3AD8431C01DCBF007583A7 /* CaptureViewController2.swift */,
-				3D41A0A31C634B0900BF21D0 /* RotationContainer.swift */,
-				0F46E4471B9D7DD0000E32D1 /* CSController.swift */,
-				3D3AD8491C043389007583A7 /* CSController2.swift */,
-				3D5598FE1BFB070800C65CA6 /* VolumeButtonHandler.swift */,
+				3D7A9DD01C08867C007C1445 /* PagedGuideContentViewController.swift */,
+				3D7A9DD21C094E9E007C1445 /* PagedGuideViewController.swift */,
+				3D3AD8431C01DCBF007583A7 /* CaptureViewController.swift */,
 				0F46E4491B9D84C7000E32D1 /* CaptureExtentions.swift */,
+				3D3AD8451C01DF0A007583A7 /* CaptureConstraints.swift */,
+				3D5077FB2167143700499E47 /* Media */,
+				3D5077F721670F5100499E47 /* IO Handlers */,
+				0FB784171BA0229C00C7FDA7 /* UI */,
+				3D4F17AB1B73883500D4D74F /* LaunchScreen.storyboard */,
+				3D4F17AE1B73883500D4D74F /* Info.plist */,
+			);
+			path = "Manual Capture";
+			sourceTree = "<group>";
+		};
+		3D5077F721670F5100499E47 /* IO Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				3D3AD8491C043389007583A7 /* CaptureSession.swift */,
+				3D5598FE1BFB070800C65CA6 /* VolumeButtonHandler.swift */,
+			);
+			name = "IO Handlers";
+			sourceTree = "<group>";
+		};
+		3D5077FB2167143700499E47 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				3D4F17A91B73883500D4D74F /* Assets.xcassets */,
 				3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */,
 				3D644FCF1C199FA100A7C467 /* FourCornerUI.mov */,
 				3D7FB63F1C214C9A004D340C /* AdvancedControlsDemo.mov */,
@@ -210,12 +251,17 @@
 				3D7A9DDB1C09DF09007C1445 /* TestFoot2.mov */,
 				3D7A9DDC1C09DF09007C1445 /* TestFoot3.mov */,
 				3D7A9DDD1C09DF09007C1445 /* TestFoot4.mov */,
-				0FB784171BA0229C00C7FDA7 /* UI Classes */,
-				3D4F17A91B73883500D4D74F /* Assets.xcassets */,
-				3D4F17AB1B73883500D4D74F /* LaunchScreen.storyboard */,
-				3D4F17AE1B73883500D4D74F /* Info.plist */,
 			);
-			path = "Manual Capture";
+			name = Media;
+			sourceTree = "<group>";
+		};
+		3DC470072166FFD500D8B024 /* Manual Capture Tests */ = {
+			isa = PBXGroup;
+			children = (
+				3DC470102167024400D8B024 /* SmartSliderTests.swift */,
+				3DC4700A2166FFD500D8B024 /* Info.plist */,
+			);
+			path = "Manual Capture Tests";
 			sourceTree = "<group>";
 		};
 		8FFB1C14B6A6C64DF6AD76E4 /* Frameworks */ = {
@@ -228,6 +274,7 @@
 				3D5111C81B7EC12F00FCF97F /* CoreGraphics.framework */,
 				3D5111C61B7E031000FCF97F /* QuartzCore.framework */,
 				F2E9FC9AD84EFA57481F6484 /* libPods-Manual Capture.a */,
+				E5F7DF4209C4ED33A80937CC /* libPods-Manual Capture Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -255,6 +302,26 @@
 			productReference = 3D4F179F1B73883500D4D74F /* Capture.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3DC470052166FFD500D8B024 /* Manual Capture Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DC4700D2166FFD500D8B024 /* Build configuration list for PBXNativeTarget "Manual Capture Tests" */;
+			buildPhases = (
+				D10AE1E8C476879706105CC1 /* [CP] Check Pods Manifest.lock */,
+				3DC470022166FFD500D8B024 /* Sources */,
+				3DC470032166FFD500D8B024 /* Frameworks */,
+				3DC470042166FFD500D8B024 /* Resources */,
+				3AD2775119E9677937A48BBB /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3DC4700C2166FFD500D8B024 /* PBXTargetDependency */,
+			);
+			name = "Manual Capture Tests";
+			productName = "Manual Capture Tests";
+			productReference = 3DC470062166FFD500D8B024 /* Manual Capture Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -262,6 +329,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = mobileuse;
 				TargetAttributes = {
@@ -280,6 +348,12 @@
 							};
 						};
 					};
+					3DC470052166FFD500D8B024 = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = Q74A2VY23K;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 3D4F179E1B73883500D4D74F;
+					};
 				};
 			};
 			buildConfigurationList = 3D4F179A1B73883500D4D74F /* Build configuration list for PBXProject "Capture" */;
@@ -296,6 +370,7 @@
 			projectRoot = "";
 			targets = (
 				3D4F179E1B73883500D4D74F /* Manual Capture */,
+				3DC470052166FFD500D8B024 /* Manual Capture Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -316,6 +391,13 @@
 				3D7A9DE01C09DF09007C1445 /* TestFoot3.mov in Resources */,
 				3D7A9DDF1C09DF09007C1445 /* TestFoot2.mov in Resources */,
 				3D7FB6401C214C9A004D340C /* AdvancedControlsDemo.mov in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DC470042166FFD500D8B024 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,7 +426,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/MWPhotoBrowser/MWPhotoBrowser.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MWPhotoBrowser-iOS8.1/MWPhotoBrowser.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
@@ -355,6 +437,50 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3AD2775119E9677937A48BBB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Manual Capture Tests/Pods-Manual Capture Tests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MWPhotoBrowser-iOS12.0/MWPhotoBrowser.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MWPhotoBrowser.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Manual Capture Tests/Pods-Manual Capture Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D10AE1E8C476879706105CC1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Manual Capture Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F9C37A9CEDD006BF2A6F79AC /* [CP] Check Pods Manifest.lock */ = {
@@ -386,37 +512,50 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FD828CA1BB7C630004162F0 /* SmartSliderLine.swift in Sources */,
-				0FB784161B9ECFC300C7FDA7 /* PDHandler.swift in Sources */,
-				0F2ED8D61BA92E1200F9332D /* CaptureView.swift in Sources */,
-				0F3FC7BB1BABCA77004A350B /* SmartSlider.swift in Sources */,
+				0FD828CA1BB7C630004162F0 /* WarpSliderLine.swift in Sources */,
+				0FB784161B9ECFC300C7FDA7 /* ProgressDisplacementHandler.swift in Sources */,
+				0F3FC7BB1BABCA77004A350B /* WarpSlider.swift in Sources */,
 				0F10EDF21BA0EC49007E722A /* Slider.swift in Sources */,
 				3D5416B81BC79EAE00922A2B /* OptionControl.swift in Sources */,
-				0F46E44C1B9DACAE000E32D1 /* CaptureViewController.swift in Sources */,
-				0F46E4481B9D7DD0000E32D1 /* CSController.swift in Sources */,
-				3D3AD8441C01DCBF007583A7 /* CaptureViewController2.swift in Sources */,
-				3DA07FD5215DFAB600BC2C30 /* CaptureView2.swift in Sources */,
+				3D3AD8441C01DCBF007583A7 /* CaptureViewController.swift in Sources */,
+				3DA07FD5215DFAB600BC2C30 /* ControlsView.swift in Sources */,
 				3D5598FF1BFB070800C65CA6 /* VolumeButtonHandler.swift in Sources */,
-				0FD828C81BB7A05F004162F0 /* ManualCaptureGlyph.swift in Sources */,
-				3D3AD84A1C043389007583A7 /* CSController2.swift in Sources */,
-				3D7A9DD11C08867C007C1445 /* PagedGuideContent.swift in Sources */,
-				0FE500B71BB50ECA00D5B13D /* SmartSliderKnobLayer.swift in Sources */,
+				0FD828C81BB7A05F004162F0 /* CaptureGlyph.swift in Sources */,
+				3D3AD84A1C043389007583A7 /* CaptureSession.swift in Sources */,
+				3D7A9DD11C08867C007C1445 /* PagedGuideContentViewController.swift in Sources */,
+				0FE500B71BB50ECA00D5B13D /* WarpSliderKnobLayer.swift in Sources */,
+				3D5077F9216713ED00499E47 /* Control.swift in Sources */,
 				3D3AD8461C01DF0A007583A7 /* CaptureConstraints.swift in Sources */,
-				3D70987A1B85502500AA49C2 /* CaptureShutterButton.swift in Sources */,
-				3D3AD8481C037B12007583A7 /* CapturePreviewView.swift in Sources */,
+				3D70987A1B85502500AA49C2 /* ShutterButton.swift in Sources */,
+				3D3AD8481C037B12007583A7 /* PreviewView.swift in Sources */,
 				0F46E44A1B9D84C7000E32D1 /* CaptureExtentions.swift in Sources */,
-				0F10EDF41BA1404B007E722A /* VPHandler.swift in Sources */,
-				3D41A0A41C634B0900BF21D0 /* RotationContainer.swift in Sources */,
-				3D4EAB191B8410CC00C2F110 /* CaptureControlLabel.swift in Sources */,
+				0F10EDF41BA1404B007E722A /* ValueProgressHandler.swift in Sources */,
+				3D41A0A41C634B0900BF21D0 /* RotationContainerView.swift in Sources */,
+				3D4EAB191B8410CC00C2F110 /* ControlLabel.swift in Sources */,
 				3DADC33E1BC4D97D00A74BC2 /* ControlPanel.swift in Sources */,
-				3DADC33C1BC4D4C000A74BC2 /* CaptureModeControl.swift in Sources */,
-				3D7A9DD31C094E9E007C1445 /* PagedGuide.swift in Sources */,
-				0FC510E31BBD13EE00E4D0D8 /* CapturePreviewLayer.swift in Sources */,
+				3DADC33C1BC4D4C000A74BC2 /* ModeControl.swift in Sources */,
+				3D7A9DD31C094E9E007C1445 /* PagedGuideViewController.swift in Sources */,
 				3D4F17A31B73883500D4D74F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3DC470022166FFD500D8B024 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DC470112167024400D8B024 /* SmartSliderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3DC4700C2166FFD500D8B024 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3D4F179E1B73883500D4D74F /* Manual Capture */;
+			targetProxy = 3DC4700B2166FFD500D8B024 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3D4F17A61B73883500D4D74F /* Main.storyboard */ = {
@@ -590,6 +729,63 @@
 			};
 			name = Release;
 		};
+		3DC4700E2166FFD500D8B024 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD246A49DECB9CD304932055 /* Pods-Manual Capture Tests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q74A2VY23K;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Manual Capture Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kobejean.Manual-Capture-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Capture.app/Capture";
+			};
+			name = Debug;
+		};
+		3DC4700F2166FFD500D8B024 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69520D82622BF711F1787AFB /* Pods-Manual Capture Tests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q74A2VY23K;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Manual Capture Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kobejean.Manual-Capture-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Capture.app/Capture";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -607,6 +803,15 @@
 			buildConfigurations = (
 				3D4F17C81B73883500D4D74F /* Debug */,
 				3D4F17C91B73883500D4D74F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3DC4700D2166FFD500D8B024 /* Build configuration list for PBXNativeTarget "Manual Capture Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DC4700E2166FFD500D8B024 /* Debug */,
+				3DC4700F2166FFD500D8B024 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -31,7 +31,7 @@ struct Style {
         self.constraints = constraints
     }
     
-    static let FillSuperview = Style { let view = $0[0]
+    static let fillSuperview = Style { let view = $0[0]
         guard let superview = view.superview else { return [] }
         
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -51,7 +51,7 @@ struct Style {
 
 extension Style {
     
-    static let CaptureButtonContainer = Style(){ let container = $0[0]
+    static let captureButtonContainer = Style(){ let container = $0[0]
         guard let superview = container.superview else { return [] }
         
         container.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +67,7 @@ extension Style {
         return [centerY, rightMargin, width, height]
     }
     
-    static let Toolbar = Style(){ let toolbar = $0[0]
+    static let toolbar = Style(){ let toolbar = $0[0]
         guard let superview = toolbar.superview else { return [] }
         
         toolbar.translatesAutoresizingMaskIntoConstraints = false
@@ -85,7 +85,7 @@ extension Style {
         return x + y
     }
     
-    static let Capturebar = Style(){ let capturebar = $0[0]
+    static let capturebar = Style(){ let capturebar = $0[0]
         guard let superview = capturebar.superview else { return [] }
         
         capturebar.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +103,7 @@ extension Style {
         return x + y
     }
     
-    static let GalleryButtonContainer = Style(){
+    static let galleryButtonContainer = Style(){
         let galleryButtonContainer = $0[0]
         let shutterButtonContainer = $0[1]
         guard let superview = galleryButtonContainer.superview else { return [] }

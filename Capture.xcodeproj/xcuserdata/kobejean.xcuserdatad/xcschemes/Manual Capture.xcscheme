@@ -48,6 +48,31 @@
                ReferencedContainer = "container:Capture.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3DC46FF72166F9EF00D8B024"
+               BuildableName = "CaptureTests.xctest"
+               BlueprintName = "CaptureTests"
+               ReferencedContainer = "container:Capture.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3DC470052166FFD500D8B024"
+               BuildableName = "Manual Capture Tests.xctest"
+               BlueprintName = "Manual Capture Tests"
+               ReferencedContainer = "container:Capture.xcodeproj">
+            </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "Manual_Capture_Tests">
+               </Test>
+            </SkippedTests>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

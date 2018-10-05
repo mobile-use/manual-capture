@@ -10,24 +10,24 @@
 import UIKit
 
 let kAppName = "Capture"
-var kIsDemoMode = false
-var kIsVideoMode = false
-var kIsTestingNoReverse = false
-var kIsTestingWalkthrough = false
-
+let kCaptureTintColor = UIColor(red: 221/255, green: 0/255, blue: 63/255, alpha: 1.0)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var needsIntro = true
-
+    var isDemoMode = false
+    var isVideoMode = false
+    var isTestingNoReverse = false
+    var isTestingWalkthrough = false
+    var needsPagedGuide = true
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         let walkthroughNumber = UserDefaults.standard.integer(forKey: "WalkthroughNumber")
-        if walkthroughNumber > 0 && !kIsTestingWalkthrough  {
+        if walkthroughNumber > 0 && !isTestingWalkthrough  {
             print("Not first launch.")
-            needsIntro = false
+            needsPagedGuide = false
         } else {
             print("First launch, setting UserDefault.")
             UserDefaults.standard.set(1, forKey: "WalkthroughNumber")
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let initialViewController: UIViewController
         
-        if needsIntro {
+        if needsPagedGuide {
             initialViewController = storyBoard.instantiateViewController(withIdentifier: "PagedGuide")
         } else {
             initialViewController = storyBoard.instantiateInitialViewController()!
@@ -87,12 +87,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         properties?.forEach { property in
             switch property {
             case "video":
-                kIsVideoMode = true
+                isVideoMode = true
             case "photo":
-                kIsVideoMode = false
-            case "demo": kIsDemoMode = true
-            case "no-reverse": kIsTestingNoReverse = true
-            case "walkthrough": needsIntro = true
+                isVideoMode = false
+            case "demo": isDemoMode = true
+            case "no-reverse": isTestingNoReverse = true
+            case "paged-guide": needsPagedGuide = true
             default: break
             }
         }

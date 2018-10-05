@@ -1,5 +1,5 @@
 //
-//  ControlPanel.swift
+//  CaptureControlPanel.swift
 //  Capture
 //
 //  Created by Jean Flaherty on 10/7/15.
@@ -135,7 +135,7 @@ class ControlPanel: UIView {
                 hConstraintsFormat: settings.hConstraintsFormat)
         }
         
-        init(_ modeControl: CaptureModeControl) {
+        init(_ modeControl: ModeControl) {
             self.init(view: modeControl, type: .ModeControl)
         }
         

@@ -165,38 +165,12 @@ func tempSetDo<T : Any>( set: inout T, to: T, action: () -> Void){
     set = oldValue
 }
 
-//func roundExposureDurationString(exposureDuration:CMTime) -> String {
-//    let doubleValue = CMTimeGetSeconds(exposureDuration)
-//    if ( doubleValue < 1 ) {
-//        let s = round(1 / doubleValue)
-//        var m:Double
-//        switch s {
-//        case 1:             return "1.0s"
-//        case 2...3: m = 1                       // 2, 3
-//        case 4...10: m = 2                      // 4, 8, 12
-//        case 11...34: m = 15                    // 15, 30
-//        case 35...94: m = 10                   // 40, 50, 60, 70, 80, 90
-//        default:
-//            let c: Double = (s >= 11.3137085 ) ? ((s >= 84.8528137) ? 125 : 15) : 1
-//            let rDouble = roundToLog(s, 2, c)
-//            return "1/\(Int(rDouble))s"
-//        }
-//            let r = round(round(s / m) * m)
-//            return "1/\(Int(r))s"
-//    }
-//    else {
-//        return String(format: "%.1fs", doubleValue)
-//    }
-//}
-
 func roundExposureDurationStringFast(_ exposureDuration:CMTime) -> String {
     let doubleValue = CMTimeGetSeconds(exposureDuration)
     if ( doubleValue < 1 ) {
-        //let digits = max( 0, 2 - floor(log10(doubleValue)))
         let d = floor(log10(1/doubleValue))
         let p = d > 1 ? d - 1 : 0
         let rDouble = pow(10, p) * round((1/doubleValue) / pow(10, p))
-        //print("\(p), \(rDouble)")
         return String(format: "1/%.*fs", 0, rDouble)
     }
     else {
@@ -217,21 +191,7 @@ func roundExposureDurationString(exposureDuration:CMTime) -> String {
     }
 }
 
-//func roundExposureDuration(exposureDuration:CMTime) -> CMTime {
-//    let doubleValue = CMTimeGetSeconds(exposureDuration)
-//    if ( doubleValue < 1 ) {
-//        let s = 1 / doubleValue
-//        let c: Double = (s >= 11 ) ? ((s >= 84) ? 125 : 15) : 1
-//        let rDouble = 1 / roundToLog(s, 2, c)
-//        return CMTime(seconds: rDouble, preferredTimescale: 1000*1000*1000)
-//    }
-//    else {
-//        return CMTime(seconds: round(doubleValue * 10) / 10 , preferredTimescale: 1000*1000*1000)
-//    }
-//}
-
 extension CGAffineTransform {
-    
     init(rotatingWithAngle angle: CGFloat) {
         let t = CGAffineTransform(rotationAngle: angle)
         self.init(a: t.a, b: t.b, c: t.c, d: t.d, tx: t.tx, ty: t.ty)
@@ -242,7 +202,6 @@ extension CGAffineTransform {
         self.init(a: t.a, b: t.b, c: t.c, d: t.d, tx: t.tx, ty: t.ty)
         
     }
-    
     func scale(sx: CGFloat, sy: CGFloat) -> CGAffineTransform {
         return self.scaledBy(x: sx, y: sy)
     }
