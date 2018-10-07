@@ -147,6 +147,17 @@ func progressValue(_ progress:CGFloat, _ start:CGFloat, _ end:CGFloat) -> CGFloa
     return start + d * progress
 }
 
+func bound<Value : Comparable> (_ value: Value, _ start: Value, _ end: Value) -> Value {
+    if (start < end) {
+        return max(start, min(end, value))
+    } else if (start > end) {
+        return max(end, min(start, value))
+    } else {
+        // start == end so only one possible bounded value
+        return start
+    }
+}
+
 func progressValue(_ progress:Float, _ start:Float, _ end:Float) -> Float {
     let d = end - start
     return start + d * progress

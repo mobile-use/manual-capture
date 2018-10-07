@@ -9,19 +9,6 @@
 import UIKit
 
 class CaptureViewController: UIViewController, CaptureControlsViewDelegate, MWPhotoBrowserDelegate, UINavigationControllerDelegate {
-    enum Orientation {
-        case landscapeRight
-        case portrait
-        case landscapeLeft
-        var rotation: Double {
-            switch self {
-            case .landscapeRight: return 0.00001-Double.pi
-            case .portrait: return -Double.pi/2
-            case .landscapeLeft: return 0
-            }
-        }
-    }
-    
     private let steadyView = RotationContainerView()
     private var controlViewContainer = RotationContainerView()
     private var controlView: ControlsView!
@@ -34,101 +21,115 @@ class CaptureViewController: UIViewController, CaptureControlsViewDelegate, MWPh
     private var cameraRollAssets: PHFetchResult<PHAsset>!
     
     override var prefersStatusBarHidden: Bool { return true }
+
+    enum Orientation {
+        case landscapeRight
+        case portrait
+        case landscapeLeft
+        var rotation: Double {
+            switch self {
+            case .landscapeRight: return 0.00001-Double.pi
+            case .portrait: return -Double.pi/2
+            case .landscapeLeft: return 0
+            }
+        }
+    }
+
     private var orientation: Orientation = .landscapeLeft {
         didSet(oldOrientation) {
             guard orientation != oldOrientation else { return }
             
             let duration: TimeInterval = 0.2
+            // normal animations include rotation animations
+            // fade animations are for rotations that cross-fade rather than continuous rotation
             let animations = (
                 normal: {
                     self.captureButtonContainer.rotation = CGFloat(self.orientation.rotation)
                     self.galleryButtonContainer.rotation = CGFloat(self.orientation.rotation)
-                    
-                    let aspectRatioOrientationAgnostic = self.captureSession.aspectRatioMode == .fullscreen || self.captureSession.aspectRatioMode == .sensor
+                    // if height and width are swapped and aspect ratio is locked, we need to set the
+                    // aspect ratio to the inverse in order to keep the same aspect ratio relative to
+                    // the current orientation.
+                    let aspectRatioIsLocked = self.captureSession.aspectRatioMode == .lock
                     let heightAndWidthSwapped = self.orientation == .portrait || oldOrientation == .portrait
-                    if heightAndWidthSwapped && !aspectRatioOrientationAgnostic {
+                    if heightAndWidthSwapped && aspectRatioIsLocked {
                         self.previewView.aspectRatio = 1 / self.previewView.aspectRatio
                     }
             },
                 fade: {
                     self.controlViewContainer.rotation = CGFloat(self.orientation.rotation)
-                    self.galleryButtonContainer.rotation = CGFloat(self.orientation.rotation)
-            }
-            )
+            })
             UIView.animate(withDuration: duration) { CATransaction.performBlock(duration: duration) {
                 animations.normal()
-                }}
+            }}
             UIView.animate(withDuration: duration,
                            animations: { [unowned self] in self.controlViewContainer.alpha = 0.0 },
                            completion: { [unowned self] _ in
-                            CATransaction.disableActions {
-                                animations.fade()
-                                self.controlView.updateConstraints(forKeys:
-                                    [
-                                        .slider(.top),
-                                        .slider(.bottom),
-                                        .slider(.left),
-                                        .slider(.right),
-                                        .menuControl,
-                                        .controlPanel
-                                    ]
-                                )
-                            }
-                            UIView.animate(withDuration: duration) { [unowned self] in self.controlViewContainer.alpha = 1.0 }
+                CATransaction.disableActions {
+                    animations.fade()
+                    // controlView will resize so update constraints
+                    self.controlView.updateConstraints(forKeys:
+                        [
+                            .slider(.top),
+                            .slider(.bottom),
+                            .slider(.left),
+                            .slider(.right),
+                            .menuControl,
+                            .controlPanel
+                        ]
+                    )
+                }
+                UIView.animate(withDuration: duration) { [unowned self] in self.controlViewContainer.alpha = 1.0 }
             })
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let toolbar = UIView()
-        let capturebar = UIView()
+        captureSession = CaptureSession()
         
         // UI initialization
         captureButtonContainer = RotationContainerView(view: captureButton)
         galleryButtonContainer = RotationContainerView(view: galleryButton)
-        captureSession = CaptureSession()
         captureButton.addTarget(captureSession, action: #selector(captureSession.captureStillPhoto), for: .touchUpInside)
         galleryButton.addTarget(self, action: #selector(self.showPhotoBrowser), for: .touchUpInside)
         galleryButton.alpha = 0.0
         previewView = captureSession.previewView
         controlView = ControlsView(frame: controlViewContainer.view.bounds, sessionController: captureSession)
         controlView.delegate = self
+        view.backgroundColor = UIColor.black
         
         // Layout, style and constraints
         view.layout(style: .fillSuperview, views: steadyView)
         steadyView.view.layout(style: .fillSuperview, views: previewView)
-        steadyView.view.layout(style: .capturebar, views: capturebar)
-        steadyView.view.layout(style: .toolbar, views: toolbar)
         steadyView.view.layout(style: .fillSuperview, views: controlViewContainer)
         controlViewContainer.view.layout(style: Style.fillSuperview, views: controlView)
-        view.backgroundColor = UIColor.black
         steadyView.view.layout(style: .captureButtonContainer, views: captureButtonContainer)
         steadyView.view.layout(style: .galleryButtonContainer, views: galleryButtonContainer, captureButtonContainer)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         let selector = #selector(self.deviceOrientationChanged)
         NotificationCenter.default.addObserver(self, selector: selector,
                                                name:UIDevice.orientationDidChangeNotification , object: nil)
-        updateRotation()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        UIDevice.current.endGeneratingDeviceOrientationNotifications()
-        NotificationCenter.default.removeObserver(self)
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        
+        // view layout gets messed up when user enters photo browser, changes orientation, then dismisses
+        // 0.0 delay does the trick for now
+        // Todo: Find a better solution. Maybe a different viewcontroller method will have better timing.
+        delay(0.0) { [unowned self] in
+            self.updateRotation()
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         let deltaTransform = coordinator.targetTransform
         let newAngle = self.steadyView.rotation - atan2(deltaTransform.b, deltaTransform.a)
         
         coordinator.animate(alongsideTransition: { coordinator in
-            // counter rotate
+            // counter clock-wise rotation requires + 0.0001
             self.steadyView.rotation = newAngle + 0.0001
         }, completion: { coordinator in
             // get rid of 0.0001
@@ -136,24 +137,30 @@ class CaptureViewController: UIViewController, CaptureControlsViewDelegate, MWPh
         })
     }
     
+    deinit {
+        UIDevice.current.endGeneratingDeviceOrientationNotifications()
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: -- Orientation related --
     
     @objc func deviceOrientationChanged() {
         switch UIDevice.current.orientation {
-            case .landscapeRight: orientation = .landscapeRight
-            case .portrait: orientation = .portrait
-            case .landscapeLeft: orientation = .landscapeLeft
-            default: return
+        case .landscapeRight: orientation = .landscapeRight
+        case .portrait: orientation = .portrait
+        case .landscapeLeft: orientation = .landscapeLeft
+        default: return
         }
     }
     
+    // Should be used when steadyView is or might be out of sync with current orientation
     private func updateRotation() {
         var newAngle: CGFloat = 0
         switch UIApplication.shared.statusBarOrientation {
         case .landscapeRight: newAngle = 0
         case .portrait: newAngle = CGFloat(Double.pi/2)
         case .landscapeLeft: newAngle = CGFloat(Double.pi)
-        default: break // should not happen
+        default: newAngle = 0
         }
         self.steadyView.rotation = newAngle
     }
@@ -175,6 +182,9 @@ class CaptureViewController: UIViewController, CaptureControlsViewDelegate, MWPh
     
     // MARK: -- Delegates --
     
+    // ControlView Delegate Methods
+    
+    // Used to signify camera shutter trigger by animating previewLayer
     func flashPreview() {
         CATransaction.disableActions {
             self.previewView.previewLayer.opacity = 0.0
@@ -184,18 +194,23 @@ class CaptureViewController: UIViewController, CaptureControlsViewDelegate, MWPh
         }
     }
     
+    // For showing/hiding the gallery button
     func shouldShowGalleryButton(show: Bool) {
         UIView.animate(withDuration: 0.2, delay: 0, options: UIView.AnimationOptions.beginFromCurrentState, animations:  {
             self.galleryButton.alpha = (show) ? 1.0 : 0.0
         }, completion: nil)
     }
     
+    // For showing/hiding the capture button
     func shouldShowCaptureButton(show: Bool) {
         UIView.animate(withDuration: 0.2, delay: 0, options: UIView.AnimationOptions.beginFromCurrentState, animations:  {
             self.captureButton.alpha = (show) ? 1.0 : 0.0
         }, completion: nil)
     }
     
+    // MWPhotoBrowser Delegate Methods
+    
+    // Loading the cameral roll images for the photo browser
     func loadCameraRollAssets() {
         let result = PHAssetCollection.fetchAssetCollections(
             with: PHAssetCollectionType.smartAlbum,
@@ -228,14 +243,5 @@ class CaptureViewController: UIViewController, CaptureControlsViewDelegate, MWPh
         let asset = cameraRollAssets.object(at: Int(index))
         let size = CGSize(width: 400, height: 400)
         return MWPhoto(asset: asset, targetSize: size)
-    }
-    
-    func photoBrowserDidFinishModalPresentation(_ photoBrowser: MWPhotoBrowser!) {
-        // rotate back
-        delay(0.1) { [unowned self] in
-            self.updateRotation()
-        }
-        self.dismiss(animated: true) {
-        }
     }
 }

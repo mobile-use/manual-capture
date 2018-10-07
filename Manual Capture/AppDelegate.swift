@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let initialViewController: UIViewController
         
         if needsPagedGuide {
-            initialViewController = storyBoard.instantiateViewController(withIdentifier: "PagedGuide")
+            initialViewController = storyBoard.instantiateViewController(withIdentifier: "PagedGuideViewController")
         } else {
             initialViewController = storyBoard.instantiateInitialViewController()!
         }
@@ -72,13 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-//        if self.window?.rootViewController?.presentedViewController is UINavigationController {
-//            if let isBeingPresented = self.window?.rootViewController?.presentedViewController?.isBeingPresented, isBeingPresented {
-//                return [.landscape, .portrait]
-//            } else {
-//                return [.landscapeRight]
-//            }
-//        }
         return [.landscape, .portrait]
     }
     
@@ -98,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let initialViewController = storyBoard.instantiateViewController(withIdentifier: "PagedGuide")
+        let initialViewController = storyBoard.instantiateViewController(withIdentifier: "PagedGuideViewController")
         window?.rootViewController = initialViewController
         window?.makeKeyAndVisible()
         

@@ -24,7 +24,7 @@ class VPFloatHandler : ValueProgressHandler<Float> {
     
     func updateConversion(_ start:Float, _ end:Float){
         progressForValue = {($0 - start)/(end - start)}
-        valueForProgress = {(start + $0) * (end - start)}
+        valueForProgress = {start + $0 * (end - start)}
     }
     
     init(start:Float, end:Float) {
@@ -39,30 +39,20 @@ class VPFloatHandler : ValueProgressHandler<Float> {
 class VPExponentialCGFloatHandler : ValueProgressHandler<CGFloat> {
     var start: CGFloat {didSet{updateConversion(start, end)}}
     var end: CGFloat {didSet{updateConversion(start, end)}}
-    let power: CGFloat //didSet{updateConversion(start, end)}}
+    var power: CGFloat {didSet{updateConversion(start, end)}}
     
     private func updateConversion(_ start:CGFloat, _ end:CGFloat){
-        let p = power
-//        {
-//            if (start != end) {
-//                let bounded = max(start, min(end, $0))
-//                let normed = (bounded - start)/(end - start)
-//                let rooted = pow(normed, 1 / p)
-//                print()
-//                return Float(rooted)
-//            } else {
-//                return 0
-//            } }
-        progressForValue = { (start != end) ? Float(pow( (max(start, min(end, $0)) - start)/(end - start), 1 / p)) : 0 }
-        valueForProgress = { start + (pow( CGFloat($0), p ) * (end - start)) }
+        let power = self.power
+        progressForValue = { (start != end) ? Float(pow( (bound($0, start, end) - start)/(end - start), 1 / power)) : 0 }
+        valueForProgress = { start + (pow( CGFloat($0), power) * (end - start)) }
     }
     
     init(start: CGFloat, end: CGFloat, power: CGFloat = 2) {
         self.start = start
         self.end = end
         self.power = power
-        let pfv = { Float(pow( (max(start, min(end, $0)) - start)/(end - start), 1 / power)) }
-        let vfp = { (p:Float) in  start + (pow( CGFloat(p), power ) * (end - start)) }
+        let pfv: (CGFloat) -> Float = { (start != end) ? Float(pow( (bound($0, start, end) - start)/(end - start), 1 / power)) : 0 }
+        let vfp: (Float) -> CGFloat = { start + (pow( CGFloat($0), power) * (end - start)) }
         super.init(pfv: pfv, vfp: vfp)
     }
 }

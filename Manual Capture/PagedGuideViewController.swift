@@ -9,32 +9,28 @@
 import UIKit
 
 class PagedGuideViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    var allowPortrait = false
+    // Overriding UIViewController dynamic properties
     override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
         return .landscapeRight
     }
-    
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
-    typealias Content = (title: String, description: String, videoName: String)
-//    typealias Page = PagedGuideContent
     
     @IBOutlet var pageContainer: UIView!
     @IBOutlet var closeButton: UIButton!
     
     var pageViewController: UIPageViewController!
-    let contents: [Content] = [
-        (title: "Quick Adjustments",
-         description: "Swipe along the sides of the frame for quick adjustments. Get accustomed to using these quick gestures and you will be snapping quality shots with ease.",
-         videoName: "FourCornerUI"),
-        (title: "Warp Speed",
-         description: "Ramp up the tracking speed by sliding away from the slider.",
-         videoName: "WarpSpeedDemo"),
-        (title: "Advanced Controls",
-         description: "Tap the screen to hide or show advanced controls.",
-         videoName: "AdvancedControlsDemo")
+    let contents: [PagedGuideContentModel] = [
+        PagedGuideContentModel(title: "Quick Adjustments",
+                               description: "Swipe along the sides of the frame for quick adjustments. Get accustomed to using these quick gestures and you will be snapping quality shots with ease.",
+                               videoName: "FourCornerUI"),
+        PagedGuideContentModel(title: "Warp Speed",
+                               description: "Ramp up the tracking speed by sliding away from the slider.",
+                               videoName: "WarpSpeedDemo"),
+        PagedGuideContentModel(title: "Advanced Controls",
+                               description: "Tap the screen to hide or show advanced controls.",
+                               videoName: "AdvancedControlsDemo")
     ]
     
     
@@ -49,13 +45,11 @@ class PagedGuideViewController: UIViewController, UIPageViewControllerDataSource
         
         guard let firstPage = createPageViewController(atIndex: 0) else { return }
         pageViewController.setViewControllers([firstPage], direction: .forward, animated: true, completion: nil)
-        
-        delay(2.4) {
-            self.allowPortrait = true
-            UIViewController.attemptRotationToDeviceOrientation()
-        }
-        
     }
+    
+    // MARK: Data Source Methods
+    
+    // UIPageViewControllerDataSource Methods
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let referedPage = viewController as? PagedGuideContentViewController else { return nil }
@@ -75,14 +69,7 @@ class PagedGuideViewController: UIViewController, UIPageViewControllerDataSource
         return 0
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        guard let transitionPage = pendingViewControllers.first as? PagedGuideContentViewController else { return }
-        if transitionPage.index + 1 == contents.endIndex {
-            closeButton.isEnabled = true
-        }
-    }
-    
-    func createPageViewController(atIndex index: Int) -> UIViewController? {
+    private func createPageViewController(atIndex index: Int) -> UIViewController? {
         guard contents.indices ~= index else { return nil }
         
         guard let page = storyboard?.instantiateViewController(withIdentifier: "PagedGuideContentViewController") as! PagedGuideContentViewController? else { fatalError() }
@@ -91,6 +78,20 @@ class PagedGuideViewController: UIViewController, UIPageViewControllerDataSource
         return page
     }
     
+    // MARK: Delegate Methods
+    
+    // UIPageViewControllerDelegate Methods
+    
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        guard let transitionPage = pendingViewControllers.first as? PagedGuideContentViewController else { return }
+        if transitionPage.index + 1 == contents.endIndex {
+            closeButton.isEnabled = true
+        }
+    }
+    
+    // MARK: Actions
+    
+    // Launch CaptureViewController
     @IBAction func startApp(){
         let capture = storyboard?.instantiateViewController(withIdentifier: "CaptureViewController")
         present(capture!, animated: true, completion: nil)

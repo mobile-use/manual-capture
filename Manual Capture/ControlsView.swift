@@ -412,9 +412,7 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
 //                )
                 sliders.zoom.initialSensitivity = 0.4
                 sliders.zoom.labelTextForValue = { (value, shouldRound) in
-//                    let nearest: CGFloat = (shouldRound) ? 1 : 0.1
                     let format = (shouldRound) ? "%.0f" : "%.1f"
-//                    let rounded = round( value / nearest ) * nearest
                     return String(format: format + "x", value)
                 }
                 sliders.zoom.actionProgressChanged = { (slider) in

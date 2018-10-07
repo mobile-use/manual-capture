@@ -17,6 +17,8 @@
 		0FD828CA1BB7C630004162F0 /* WarpSliderLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD828C91BB7C630004162F0 /* WarpSliderLine.swift */; };
 		0FE500B71BB50ECA00D5B13D /* WarpSliderKnobLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE500B61BB50ECA00D5B13D /* WarpSliderKnobLayer.swift */; };
 		0FEA847F1B944781002135DE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FEA847E1B944781002135DE /* AVFoundation.framework */; };
+		3D158DFA216A992A001285D0 /* PagedGuideContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D158DF9216A992A001285D0 /* PagedGuideContentModel.swift */; };
+		3D158DFC216AAB5B001285D0 /* ValueProgressHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D158DFB216AAB5B001285D0 /* ValueProgressHandlerTests.swift */; };
 		3D17E4C321630ABC008AF466 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D17E4C221630ABC008AF466 /* Photos.framework */; };
 		3D3AA9CE1BCB5FAF00EF2B84 /* SampleImage.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */; };
 		3D3AD8441C01DCBF007583A7 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8431C01DCBF007583A7 /* CaptureViewController.swift */; };
@@ -48,7 +50,7 @@
 		3DA07FD5215DFAB600BC2C30 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA07FD4215DFAB600BC2C30 /* ControlsView.swift */; };
 		3DADC33C1BC4D4C000A74BC2 /* ModeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33B1BC4D4C000A74BC2 /* ModeControl.swift */; };
 		3DADC33E1BC4D97D00A74BC2 /* ControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */; };
-		3DC470112167024400D8B024 /* SmartSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC470102167024400D8B024 /* SmartSliderTests.swift */; };
+		3DC470112167024400D8B024 /* WarpSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC470102167024400D8B024 /* WarpSliderTests.swift */; };
 		7D27C7ECEFE49BB316232FAF /* libPods-Manual Capture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E9FC9AD84EFA57481F6484 /* libPods-Manual Capture.a */; };
 		B548A37310964F026D085663 /* libPods-Manual Capture Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5F7DF4209C4ED33A80937CC /* libPods-Manual Capture Tests.a */; };
 /* End PBXBuildFile section */
@@ -76,6 +78,8 @@
 		0FE500B61BB50ECA00D5B13D /* WarpSliderKnobLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarpSliderKnobLayer.swift; sourceTree = "<group>"; };
 		0FEA847E1B944781002135DE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0FFFDDB11BA7F35A002432FB /* ObjcBridgeHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcBridgeHeader.h; sourceTree = "<group>"; };
+		3D158DF9216A992A001285D0 /* PagedGuideContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedGuideContentModel.swift; sourceTree = "<group>"; };
+		3D158DFB216AAB5B001285D0 /* ValueProgressHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueProgressHandlerTests.swift; sourceTree = "<group>"; };
 		3D17E4C221630ABC008AF466 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SampleImage.JPG; sourceTree = "<group>"; };
 		3D3AD8431C01DCBF007583A7 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
@@ -111,7 +115,7 @@
 		3DADC33D1BC4D97D00A74BC2 /* ControlPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlPanel.swift; sourceTree = "<group>"; };
 		3DC470062166FFD500D8B024 /* Manual Capture Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Manual Capture Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC4700A2166FFD500D8B024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3DC470102167024400D8B024 /* SmartSliderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartSliderTests.swift; sourceTree = "<group>"; };
+		3DC470102167024400D8B024 /* WarpSliderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarpSliderTests.swift; sourceTree = "<group>"; };
 		6394383D169B8EEAF441FD2B /* Pods-Manual Capture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture.release.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture.release.xcconfig"; sourceTree = "<group>"; };
 		69520D82622BF711F1787AFB /* Pods-Manual Capture Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture Tests/Pods-Manual Capture Tests.release.xcconfig"; sourceTree = "<group>"; };
 		845A00742B6D7055D3F3E02D /* Pods-Manual Capture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manual Capture.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Manual Capture/Pods-Manual Capture.debug.xcconfig"; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 				0FFFDDB11BA7F35A002432FB /* ObjcBridgeHeader.h */,
 				3D4F17A21B73883500D4D74F /* AppDelegate.swift */,
 				3D4F17A61B73883500D4D74F /* Main.storyboard */,
+				3D158DF9216A992A001285D0 /* PagedGuideContentModel.swift */,
 				3D7A9DD01C08867C007C1445 /* PagedGuideContentViewController.swift */,
 				3D7A9DD21C094E9E007C1445 /* PagedGuideViewController.swift */,
 				3D3AD8431C01DCBF007583A7 /* CaptureViewController.swift */,
@@ -258,7 +263,8 @@
 		3DC470072166FFD500D8B024 /* Manual Capture Tests */ = {
 			isa = PBXGroup;
 			children = (
-				3DC470102167024400D8B024 /* SmartSliderTests.swift */,
+				3D158DFB216AAB5B001285D0 /* ValueProgressHandlerTests.swift */,
+				3DC470102167024400D8B024 /* WarpSliderTests.swift */,
 				3DC4700A2166FFD500D8B024 /* Info.plist */,
 			);
 			path = "Manual Capture Tests";
@@ -513,6 +519,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FD828CA1BB7C630004162F0 /* WarpSliderLine.swift in Sources */,
+				3D158DFA216A992A001285D0 /* PagedGuideContentModel.swift in Sources */,
 				0FB784161B9ECFC300C7FDA7 /* ProgressDisplacementHandler.swift in Sources */,
 				0F3FC7BB1BABCA77004A350B /* WarpSlider.swift in Sources */,
 				0F10EDF21BA0EC49007E722A /* Slider.swift in Sources */,
@@ -543,7 +550,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DC470112167024400D8B024 /* SmartSliderTests.swift in Sources */,
+				3DC470112167024400D8B024 /* WarpSliderTests.swift in Sources */,
+				3D158DFC216AAB5B001285D0 /* ValueProgressHandlerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

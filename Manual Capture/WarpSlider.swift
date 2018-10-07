@@ -97,7 +97,7 @@ class WarpSlider<Value> : GenericSlider<Value, WarpSliderKnobLayer> {
     }
     
     let labelTextMinWidth: CGFloat
-    var labelTextForValue: (Value, Bool) -> String = { $0;$1;return "Slider" } {
+    var labelTextForValue: (Value, Bool) -> String = { _, _ in "Slider" } {
         didSet { updateLabelText() }
     }
     override var valueProgressHandler: ValueProgressHandler<Value>? {
@@ -121,7 +121,7 @@ class WarpSlider<Value> : GenericSlider<Value, WarpSliderKnobLayer> {
     private var transitionDistance: CGFloat {
         if warpSpeedReverses {
             return (direction.axis == .horizontal) ? 130.0 : 195.0
-        }else {
+        } else {
             return (direction.axis == .horizontal) ? 90.0 : 135.0
         }
     }
@@ -138,7 +138,7 @@ class WarpSlider<Value> : GenericSlider<Value, WarpSliderKnobLayer> {
     
     private var startTravelDistance: CGFloat = 0
     
-    @objc func handleSmartSliderGesture(sender: WarpSliderGesture) {
+    @objc func handleWarpSliderGesture(sender: WarpSliderGesture) {
         switch sender.state {
         case .began:
             perpendicularDistance = _perpendicularDisplacementForPointTargetPoint(gesture.lastFingerLocation) // touch down location
@@ -263,16 +263,12 @@ class WarpSlider<Value> : GenericSlider<Value, WarpSliderKnobLayer> {
     init(glyph: CALayer, direction:Direction, startBounds: (() -> CGRect)?, sliderBounds: (() -> CGRect)?, _ labelTextMinWidth:CGFloat = 35) {
         gesture = WarpSliderGesture(direction: direction)
         self.labelTextMinWidth = labelTextMinWidth
-        
         super.init(knobLayer: WarpSliderKnobLayer(glyph: glyph), direction: direction)
         
         /// prevent strong ownership in closures
         unowned let me = self
-        
         knobLayer.labelTextMinWidth = labelTextMinWidth
-        
-        gesture.addTarget(self, action: #selector(self.handleSmartSliderGesture(sender:)))
-        
+        gesture.addTarget(self, action: #selector(self.handleWarpSliderGesture(sender:)))
         lineLayer.removeFromSuperlayer()
         layer.addSublayer(line)
         if sliderBounds == nil {
@@ -334,6 +330,7 @@ class WarpSlider<Value> : GenericSlider<Value, WarpSliderKnobLayer> {
         guard let sv = superview else { return }
         sv.addGestureRecognizer(gesture)
     }
+    
     override func layoutSublayers(of layer: CALayer) {
         guard self.layer.isEqual(layer) else{ super.layoutSublayers(of: layer);return }
         
@@ -474,7 +471,6 @@ class WarpSlider<Value> : GenericSlider<Value, WarpSliderKnobLayer> {
 import UIKit.UIGestureRecognizerSubclass
 
 class WarpSliderGesture: UIPanGestureRecognizer {
-//    var sensitivity: CGFloat = 0.4
     var startBounds: (() -> CGRect)?
     var sliderBounds: (() -> CGRect)?
     var direction: Slider.Direction
@@ -504,8 +500,7 @@ class WarpSliderGesture: UIPanGestureRecognizer {
         didInit()
     }
     
-    func didInit() {
-        //self.delaysTouchesBegan = true
+    private func didInit() {
         self.maximumNumberOfTouches = 1
         self.minimumNumberOfTouches = 1
         self.delaysTouchesBegan = false

@@ -30,7 +30,7 @@
         <!--Page View Controller-->
         <scene sceneID="lkM-4m-wX9">
             <objects>
-                <pageViewController storyboardIdentifier="PageController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="DIp-nM-WcM" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="DIp-nM-WcM" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jdy-mI-yE9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1692" y="385"/>
@@ -38,7 +38,7 @@
         <!--Paged Guide Content View Controller-->
         <scene sceneID="S78-aO-5v8">
             <objects>
-                <viewController storyboardIdentifier="PagedGuideContent" id="rcU-lb-izU" customClass="PagedGuideContentViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PagedGuideContentViewController" id="rcU-lb-izU" customClass="PagedGuideContentViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HSx-wB-xq0"/>
                         <viewControllerLayoutGuide type="bottom" id="iVF-Rs-xXa"/>
@@ -200,7 +200,7 @@
         <!--Paged Guide View Controller-->
         <scene sceneID="ZRZ-IS-sEo">
             <objects>
-                <viewController storyboardIdentifier="PagedGuide" id="c3U-3S-Pgp" customClass="PagedGuideViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PagedGuideViewController" id="c3U-3S-Pgp" customClass="PagedGuideViewController" customModule="Capture" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BxZ-Um-AoY"/>
                         <viewControllerLayoutGuide type="bottom" id="0Av-Xl-LTU"/>
