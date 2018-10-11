@@ -36,14 +36,10 @@ class PreviewView: UIView {
             super.layoutSublayers(of: layer)
             return
         }
-//        let orientation = UIApplication.shared.statusBarOrientation
-        var ratio = (
+        let ratio = (
             width: layer.bounds.height * aspectRatio,
             height: layer.bounds.width / aspectRatio
         )
-//        if (orientation == .portrait) {
-//            ratio = (width: ratio.height, height: ratio.width)
-//        }
         previewLayer.frame = layer.bounds.insetBy(
             dx: max(layer.bounds.width - ratio.width, 0) / 2, // clipped
             dy: max(layer.bounds.height - ratio.height, 0) / 2 // clipped

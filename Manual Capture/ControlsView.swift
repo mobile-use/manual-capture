@@ -460,17 +460,6 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 
                 // MARK: temperature slider
                 
-//                sliders.temperature = WarpSlider<Float>(
-//                    glyph: ManualCaptureGlyph(type: .temperature),
-//                    direction: .right,
-//                    startBounds: {
-//                        me.startBounds(
-//                            forType: .rightAlongTop,
-//                            gestureView: self
-//                        )
-//                    },
-//                    sliderBounds: nil
-//                )
                 sliders.temperature.initialSensitivity = 0.2
                 sliders.temperature.labelTextForValue = { (value, shouldRound) in
                     let nearest: Float = (shouldRound) ? 100 : 1
@@ -491,11 +480,6 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 
                 // MARK: tint slider
                 
-//                sliders.tint = WarpSlider<Float>(
-//                    glyph: ManualCaptureGlyph(type: .tint),
-//                    direction: .right,
-//                    25
-//                )
                 sliders.tint.initialSensitivity = 0.2
                 sliders.tint.labelTextForValue = { (value, shouldRound) in
                     let nearest: Float = (shouldRound) ? 10 : 1
@@ -516,15 +500,6 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 
                 // MARK: iso slider
                 
-//                sliders.iso = WarpSlider<Float>(
-//                    glyph: ManualCaptureGlyph(type: .iso),
-//                    direction: .up,
-//                    startBounds: {
-//                        me.startBounds(forType: .upAlongLeft, gestureView: me)
-//                    },
-//                    sliderBounds: nil,
-//                    25
-//                )
                 sliders.iso.initialSensitivity = 0.4
                 sliders.iso.labelTextForValue = { (value, shouldRound) in
                     let nearest: Float = (shouldRound) ? 25 : 1
@@ -549,19 +524,6 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 
                 // MARK: exposure duration slider
                 
-//                sliders.exposureDuration = WarpSlider <CMTime> (
-//                    glyph: ManualCaptureGlyph( type: .exposureDuration ),
-//                    direction: .up,
-//                    startBounds: {
-//                        me.startBounds (
-//                            forType: .upAlongRight,
-//                            gestureView: self
-//                        )
-//                    },
-//                    sliderBounds: nil,
-//                    42
-//                )
-                
                 sliders.exposureDuration.initialSensitivity = 0.2
                 sliders.exposureDuration.labelTextForValue = { (value, shouldRound) in
                     return (shouldRound ? roundExposureDurationString : roundExposureDurationStringFast)(value)
@@ -580,12 +542,6 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 sliders.exposureDuration.actionProgressStarted = { (_) in
                     me.menuControl.selectItem(with: .exposure)
                 }
-//                sliders.exposureDuration.actionStarted = {
-//                    me.delegate?.shouldShowCaptureButton(show: false)
-//                }
-//                sliders.exposureDuration.actionEnded = {
-//                    me.delegate?.shouldShowCaptureButton(show: true)
-//                }
                 sliders.exposureDuration.knobLayer.positionType = .right
                 
                 // main sliders
@@ -641,9 +597,6 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                             UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions.beginFromCurrentState, animations:  {
                                 slider.alpha = 0.0
                             }, completion: nil)
-//                            UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions.beginFromCurrentState, animations: {
-////                                me.undoButton.alpha = 0.0
-//                            }, completion: nil)
                         }
                         
                     }
@@ -730,7 +683,7 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 let zVPHandler = VPExponentialCGFloatHandler(start: 1.0, end: zoomMax) as ValueProgressHandler<CGFloat>
                 sliders.zoom.valueProgressHandler = zVPHandler
                 
-                let pdscale = PDScale(self, vpHandler: zVPHandler)
+                let pdscale = PDScale(self, valueProgressHandler: zVPHandler)
                 /// prevent strong ownership in closures
                 unowned let me = self
                 pdscale.currentScale = { me.sessionController.camera?.videoZoomFactor ?? 1.0 }
@@ -745,8 +698,8 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 
                 let vfp: (_ progress:Float) -> CMTime = {
                     let p = pow( Double($0), kExposureDurationPower ); // Apply power function to expand slider's low-end range
-                    let minDurationSeconds = max(CMTimeGetSeconds(self.sessionController.camera.activeFormat.minExposureDuration), 1 / 16000 )
-                    let maxDurationSeconds = min(CMTimeGetSeconds( self.sessionController.camera.activeFormat.maxExposureDuration ), 1/5)
+                    let minDurationSeconds = max(CMTimeGetSeconds(self.sessionController.camera?.activeFormat.minExposureDuration ?? .zero), 1 / 16000 )
+                    let maxDurationSeconds = min(CMTimeGetSeconds( self.sessionController.camera?.activeFormat.maxExposureDuration ?? .zero), 1/5)
                     let newDurationSeconds = p * ( maxDurationSeconds - minDurationSeconds ) + minDurationSeconds // Scale from 0-1 slider range to actual duration
                     let t = CMTimeMakeWithSeconds( newDurationSeconds, preferredTimescale: 1000*1000*1000 )
                     return t
@@ -755,8 +708,8 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 let pfv: (CMTime) -> Float = {
                     let time: CMTime = $0
                     var doubleValue: Double = CMTimeGetSeconds(time)
-                    let minDurationSeconds = max(CMTimeGetSeconds(self.sessionController.camera.activeFormat.minExposureDuration), 1 / 16000 )
-                    let maxDurationSeconds = min(CMTimeGetSeconds( self.sessionController.camera.activeFormat.maxExposureDuration ), 1/5)
+                    let minDurationSeconds = max(CMTimeGetSeconds(self.sessionController.camera?.activeFormat.minExposureDuration ?? .zero), 1 / 16000 )
+                    let maxDurationSeconds = min(CMTimeGetSeconds( self.sessionController.camera?.activeFormat.maxExposureDuration ?? .zero), 1/5)
                     doubleValue = max(minDurationSeconds, min(doubleValue, maxDurationSeconds))
                     let p: Double = (doubleValue - minDurationSeconds ) / ( maxDurationSeconds - minDurationSeconds )// Scale to 0-1
                     return Float(pow( p, 1/kExposureDurationPower))
@@ -764,34 +717,34 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 
                 sliders.exposureDuration.valueProgressHandler = ValueProgressHandler(pfv: pfv, vfp: vfp)
                 
-                if sessionController.camera.videoZoomFactor > 1.0 {
+                if sessionController.camera?.videoZoomFactor ?? 0 > 1.0 {
                     sliders.zoom.value = sessionController.camera.videoZoomFactor
                     sliders.zoom.state.getUpdateTransform(false, .disabled)? (&sliders.zoom.state)
                 } else {
                     sliders.zoom.state.getUpdateTransform(true, .disabled)? (&sliders.zoom.state)
                 }
                 
-                sliders.focus.value = sessionController.camera.lensPosition
+                sliders.focus.value = sessionController.camera?.lensPosition ?? 1.0
                 
-                let tt = sessionController.camera.temperatureAndTintValues(for: sessionController.camera.deviceWhiteBalanceGains)
-                sliders.temperature.value = tt.temperature
-                sliders.tint.value = tt.tint
-                sliders.iso.value = sessionController.camera.iso
-                sliders.exposureDuration.value = sessionController.camera.exposureDuration
+                let tt = sessionController.camera?.temperatureAndTintValues(for: sessionController.camera.deviceWhiteBalanceGains)
+                sliders.temperature.value = tt?.temperature ?? 0.0
+                sliders.tint.value = tt?.tint ?? 0.0
+                sliders.iso.value = sessionController.camera?.iso ?? 0.0
+                sliders.exposureDuration.value = sessionController.camera?.exposureDuration ?? .zero
                 
                 
-                var focusVOE: Bool { return self.sessionController.camera.focusMode != .locked }
-                var exposureVOE: Bool { return self.sessionController.camera.exposureMode != .custom && self.sessionController.camera.exposureMode != .locked }
-                var whiteBalanceVOE: Bool { return self.sessionController.camera.whiteBalanceMode != .locked }
+                var focusVOE: Bool { return self.sessionController.camera?.focusMode != .locked }
+                var exposureVOE: Bool { return self.sessionController.camera?.exposureMode != .custom && self.sessionController.camera?.exposureMode != .locked }
+                var whiteBalanceVOE: Bool { return self.sessionController.camera?.whiteBalanceMode != .locked }
                 
                 sessionController.voBlocks.lensPosition["Slider"] = { (focusVOE) ? self.sliders.focus.value = $0 : () }
                 sessionController.voBlocks.iso["Slider"] = { (exposureVOE) ? self.sliders.iso.value = $0 : () }
                 sessionController.voBlocks.exposureDuration["Slider"] = { (exposureVOE) ? self.sliders.exposureDuration.value = $0 : () }
                 sessionController.voBlocks.whiteBalance["Slider"] = {
                     guard whiteBalanceVOE else { return }
-                    let temperatureAndTint = self.sessionController.camera.temperatureAndTintValues(for: $0)
-                    self.sliders.temperature.value = temperatureAndTint.temperature
-                    self.sliders.tint.value = temperatureAndTint.tint
+                    let temperatureAndTint = self.sessionController.camera?.temperatureAndTintValues(for: $0)
+                    self.sliders.temperature.value = temperatureAndTint?.temperature ?? 0.0
+                    self.sliders.tint.value = temperatureAndTint?.tint ?? 0.0
                 }
                 sessionController.voBlocks.focusMode["Slider"] = {
                     let cc = ($0 != .locked)
@@ -832,10 +785,10 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
             
 //            newLayout.exitPerformer = { }
             let showReset = (
-                sessionController.camera.focusMode == .locked ||
-                sessionController.camera.exposureMode == .locked ||
-                sessionController.camera.exposureMode == .custom ||
-                sessionController.camera.whiteBalanceMode == .locked
+                sessionController.camera?.focusMode == .locked ||
+                sessionController.camera?.exposureMode == .locked ||
+                sessionController.camera?.exposureMode == .custom ||
+                sessionController.camera?.whiteBalanceMode == .locked
             )
             showReset ? newLayout.tempShow(undoButton) : newLayout.tempHide(undoButton)
             
@@ -843,18 +796,13 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
         case .focus: // MARK: Focus
             
             newLayout.tempShow(sliders.focus)
-            //newLayout.tempShow(undoButton)
-            
-//            if UIApplication.sharedApplication().statusBarOrientation == .Portrait {
-//                newLayout.tempAlpha(galleryButton, 0.15)
-//            }
             
             let modeControl = OptionControl<AVCaptureDevice.FocusMode>(
                 items: [
                     ("Manual", .locked),
                     ("Auto", .continuousAutoFocus)
                 ],
-                selectedValue: sessionController.camera.focusMode
+                selectedValue: sessionController.camera?.focusMode ?? .continuousAutoFocus
             )
             
             let magSwitchControl = OptionControl<Bool>(
@@ -884,17 +832,12 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
             ], &newLayout)
             
         case .exposure: // MARK: Exposure
-//
-//            if UIApplication.shared.statusBarOrientation != .portrait {
-//                newLayout.tempAlpha(galleryButton, 0.15)
-//            }
             
             newLayout.tempShow(sliders.iso, sliders.exposureDuration)
-            //newLayout.tempShow(undoButton)
         
             let modeControl = OptionControl<AVCaptureDevice.ExposureMode>(
                 items: [ ("Manual", .custom), ("Auto", .continuousAutoExposure) ],
-                selectedValue: me.sessionController.camera.exposureMode
+                selectedValue: me.sessionController.camera?.exposureMode ?? .continuousAutoExposure
             )
             modeControl.setValueAction = { me.sessionController.set(.exposureMode($0)) }
             let voKey = "ExposureModeControl"
@@ -903,15 +846,13 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
             let rows: [ControlPanel.Row] = [
                 ControlPanel.Row(modeControl)
             ]
-            //guard menuControl.alpha > 0 else { break }
             setUpControlPanel(rows: rows, &newLayout)
             
         case .whiteBalance: // MARK: WhiteBalance
             newLayout.tempShow(sliders.temperature)
-            //newLayout.tempShow(undoButton)
             let modeControl = OptionControl<AVCaptureDevice.WhiteBalanceMode>(
                 items: [ ("Manual", .locked), ("Auto", .continuousAutoWhiteBalance) ],
-                selectedValue: sessionController.camera.whiteBalanceMode
+                selectedValue: sessionController.camera?.whiteBalanceMode ?? .continuousAutoWhiteBalance
             )
             modeControl.setValueAction = { me.sessionController.set(.whiteBalanceMode($0)) }
             let voKey = "WhiteBalanceModeControl"
@@ -964,17 +905,14 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
             me.sessionController.voBlocks.aspectRatio[voKey] = { optionControl.selectItem(with: $0) }
             me.sessionController.voBlocks.aspectRatioMode[voKey] = { modeControl.selectItem(with: $0) }
             
-//            newLayout.temp(&me.sessionController.voBlocks.aspectRatio[voKey])
-//            newLayout.temp(&me.sessionController.voBlocks.aspectRatioMode[voKey])
-//
             newLayout.temp(root: me, keyPath: \ControlsView.sessionController.voBlocks.aspectRatio, key: voKey)
             newLayout.temp(root: me, keyPath: \ControlsView.sessionController.voBlocks.aspectRatioMode, key: voKey)
             
             let showReset = (
-                sessionController.camera.focusMode == .locked ||
-                    sessionController.camera.exposureMode == .locked ||
-                    sessionController.camera.exposureMode == .custom ||
-                    sessionController.camera.whiteBalanceMode == .locked
+                sessionController.camera?.focusMode == .locked ||
+                    sessionController.camera?.exposureMode == .locked ||
+                    sessionController.camera?.exposureMode == .custom ||
+                    sessionController.camera?.whiteBalanceMode == .locked
             ) && isTemp
             
             showReset ? newLayout.tempShow(undoButton) : ()
@@ -983,12 +921,10 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
             let exp = newLayout.exitPerformer
             newLayout.entrancePerformer = {
                 ep()
-//                me.galleryButton.alpha = me.menuControl.alpha
             }
 
             newLayout.exitPerformer = {
                 exp()
-//                me.galleryButton.alpha = me.menuControl.alpha
             }
             
             setUpControlPanel(rows: [
@@ -1002,8 +938,6 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
             }
             newLayout.entrancePerformer = {
                 me.menuControl.alpha = 1.0
-//                me.galleryButton.alpha = 1.0
-//                me.galleryButton.isEnabled = true
             }
         case .shortcut: break
         case .fullscreen: break
@@ -1045,36 +979,6 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
         layout.entranceStarter()
         
     }
-
-    
-    
-    
-//    override var frame: CGRect {
-//        
-//        didSet {
-//            
-//            guard frame != oldValue else { return }
-//            
-//            //sessionController.previewLayer.frame = layer.bounds
-//            
-//            updateConstraintsForKeys(
-//                [
-//                    .Slider(.Top),
-//                    .Slider(.Bottom),
-//                    .Slider(.Left),
-//                    .Slider(.Right),
-//                    .ShutterButton,
-//                    .MenuControl,
-//                    .GalleryButton,
-//                    .ControlPanel
-//                ]
-//            )
-//            
-//        }
-//        
-//    }
-    
-    
     
     enum ConstraintKey : CustomStringConvertible {
         var description : String {
@@ -1087,8 +991,6 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 case .bottom: return "Slider(Bottom)"
                 case .left: return "Slider(Left)"
                 }
-//            case .shutterButton: return "ShutterButton"
-//            case .galleryButton: return "GalleryButton"
             case .undoButton: return "UndoButton"
             case .controlPanel: return "ControlPanel"
             case .menuControl: return "MenuControl"
@@ -1179,39 +1081,23 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
             
             
         case .undoButton: // MARK: UndoButton
-            
             let v = NSLayoutConstraint.constraints(withVisualFormat: "V:[U]-15-|", options: .directionLeftToRight, metrics: nil, views: ["U":undoButton])
-            
             let h = NSLayoutConstraint.constraints(withVisualFormat: "H:[U]-15-|", options: .directionLeftToRight, metrics: nil, views: ["U":undoButton])
-            
             constraints += h + v
-            
-            
-            
         case .slider(.left): // MARK: slider(.Left)
-            
-            
-            
             guard let slider = mainSliders[.left] else { break }
-            
             let hConstraints = NSLayoutConstraint.constraints(
-                
                 withVisualFormat: "H:|-x-[S]",
                 options: .directionLeftToRight,
                 metrics: [ "x" : leftMargin ],
                 views: [ "S" : slider ]
-                
             )
-            
             let vConstraints = NSLayoutConstraint.constraints(
-                
                 withVisualFormat: "V:|->=t-[S(>=300@750)]->=b-|",
                 options: .directionLeftToRight,
                 metrics: [ "t" : mt + 25, "b" : mb + 25 ],
                 views: [ "S" : slider ]
-            
             )
-            
             let lowPriorityCenterYConstraint = NSLayoutConstraint(
                 item: slider,
                 attribute: .centerY, relatedBy: .equal,
@@ -1219,21 +1105,11 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 attribute: .centerY, multiplier: 1, constant: 0
             )
             lowPriorityCenterYConstraint.priority = UILayoutPriority.defaultLow
-            
             constraints.append(lowPriorityCenterYConstraint)
             constraints.append(contentsOf: hConstraints)
             constraints.append(contentsOf: vConstraints)
-            
-            
-            
-            
-            
         case .slider(.right): // MARK: slider(.Right)
-            
-            
-            
             guard let slider = mainSliders[.right] else { break }
-            
             let hConstraints = NSLayoutConstraint.constraints(
                 
                 withVisualFormat: "H:[S]-x-|",
@@ -1242,16 +1118,12 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 views: [ "S" : slider ]
             
             )
-            
             let vConstraints = NSLayoutConstraint.constraints(
-                
                 withVisualFormat: "V:|->=t-[S(>=300@750)]->=b-|",
                 options: .directionLeftToRight,
                 metrics: [ "t" : mt + 25, "b" : mb + 25 ],
                 views: [ "S" : slider ]
-            
             )
-            
             let lowPriorityCenterYConstraint = NSLayoutConstraint(
                 item: slider,
                 attribute: .centerY, relatedBy: .equal,
@@ -1259,37 +1131,23 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 attribute: .centerY, multiplier: 1, constant: 0
             )
             lowPriorityCenterYConstraint.priority = UILayoutPriority.defaultLow
-            
             constraints.append(lowPriorityCenterYConstraint)
             constraints.append(contentsOf: hConstraints)
             constraints.append(contentsOf: vConstraints)
-            
-            
-            
-            
-            
         case .slider(.bottom): // MARK: slider(.Bottom)
-            
             guard let slider = mainSliders[.bottom] else { break }
-            
             let vConstraints = NSLayoutConstraint.constraints(
-                
                 withVisualFormat: "V:[S]-y-|",
                 options: .directionLeftToRight,
                 metrics: [ "y" : bottomMargin ],
                 views: [ "S" : slider ]
-            
             )
-            
             let hConstraints = NSLayoutConstraint.constraints(
-                
                 withVisualFormat: "H:|->=l-[S(>=300@750)]->=r-|",
                 options: .directionLeftToRight,
                 metrics: [ "l" : ml, "r" : mr ],
                 views: [ "S" : slider ]
-            
             )
-            
             let lowPriorityCenterXConstraint = NSLayoutConstraint(
                 item: slider,
                 attribute: .centerX, relatedBy: .equal,
@@ -1301,29 +1159,20 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
             constraints.append(lowPriorityCenterXConstraint)
             constraints.append(contentsOf: hConstraints)
             constraints.append(contentsOf: vConstraints)
-            
         case .slider(.top): // MARK: slider(.top)
-            
             guard let slider = mainSliders[.top] else { break }
-            
             let vConstraints = NSLayoutConstraint.constraints(
-                
                 withVisualFormat: "V:|-y-[S]",
                 options: .directionLeftToRight,
                 metrics: [ "y" : topMargin ],
                 views: [ "S":slider ]
-            
             )
-            
             let hConstraints = NSLayoutConstraint.constraints(
-                
                 withVisualFormat: "H:|->=l-[S(>=300@750)]->=r-|",
                 options: .directionLeftToRight,
                 metrics: ["l": ml, "r": mr],
                 views: ["S":slider]
-            
             )
-            
             let lowPriorityCenterXConstraint = NSLayoutConstraint(
                 item: slider,
                 attribute: .centerX, relatedBy: .equal,
@@ -1331,13 +1180,9 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 attribute: .centerX, multiplier: 1, constant: (leftMargin - rightMargin) / 2
             )
             lowPriorityCenterXConstraint.priority = UILayoutPriority.defaultLow
-            
             constraints.append(lowPriorityCenterXConstraint)
             constraints.append(contentsOf: hConstraints)
             constraints.append(contentsOf: vConstraints)
-         
-            
-            
         }
         for constraint in constraints {
             constraint.identifier = key.description
@@ -1345,13 +1190,11 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
         return constraints
     }
     
-    
     func addConstraints(forKeys keys: [ConstraintKey] ) {
         for key in keys {
             addConstraints( createConstraints(forKey: key ) )
         }
     }
-    
     
     func getConstraints(forKeys keys: [ConstraintKey] ) -> [NSLayoutConstraint] {
         let returnConstraints = constraints.filter { (constraint) in
@@ -1365,7 +1208,6 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
         }
         return returnConstraints
     }
-    
     
     func updateConstraints(forKeys keys:[ConstraintKey]) {
         removeConstraints( getConstraints(forKeys: keys) )
@@ -1467,9 +1309,9 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
         
         var entranceStarter: Init = {}
         var entrancePerformer: Performer = {}
-        var entranceCompleter: Completer = {$0}
+        var entranceCompleter: Completer = { _ in }
         var exitPerformer: Performer = {}
-        var exitCompleter: Completer = {$0}
+        var exitCompleter: Completer = { _ in }
         var savedMode: Mode = .focus
         var currentMode: Mode = .initial
         

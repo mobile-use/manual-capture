@@ -98,99 +98,25 @@ class PDScale: PDGestureBased<UIPinchGestureRecognizer> {
     private var lastScale: CGFloat = 1.0
     var currentScale: (() -> CGFloat)?
     var maxScale: CGFloat = 2.0
-    let vpHandler: ValueProgressHandler<CGFloat>
-    init(_ gestureView:UIView, vpHandler: ValueProgressHandler<CGFloat>) {
-        self.vpHandler = vpHandler
+    let valueProgressHandler: ValueProgressHandler<CGFloat>
+    init(_ gestureView:UIView, valueProgressHandler: ValueProgressHandler<CGFloat>) {
+        self.valueProgressHandler = valueProgressHandler
         let g = UIPinchGestureRecognizer()
         gestureView.addGestureRecognizer(g)
         super.init(gesture: g){ Float($0.scale - 1.0) }
         gestureChangeHandler = {
             let maxChange = self.maxScale - 1.0
             guard maxChange != 0 else { return 0 }
-            let scaleChange = vpHandler.progressForValue($0.scale) - vpHandler.progressForValue(self.lastScale)
+            let scaleChange = valueProgressHandler.progressForValue($0.scale) - valueProgressHandler.progressForValue(self.lastScale)
             self.lastScale = $0.scale
             return scaleChange
         }
     }
     
     override func startDisplacing() {
-        guard let cScale = currentScale?() else {return}
-            lastScale = cScale
-            gesture.scale = cScale
+        guard let currentScale = currentScale?() else {return}
+            lastScale = currentScale
+            gesture.scale = currentScale
     }
     
 }
-
-//class PDEdgeSlide: PDGestureBased<SlideFromBoundsGestureRecognizer> {
-//    enum Type : String {
-//        case RightAlongTop = "RightAlongTop",
-//        LeftAlongTop = "LeftAlongTop",
-//        UpAlongRight = "UpAlongRight",
-//        DownAlongRight = "DownAlongRight",
-//        LeftAlongBottom = "LeftAlongBottom",
-//        RightAlongBottom = "RightAlongBottom",
-//        DownAlongLeft = "DownAlongLeft",
-//        UpAlongLeft = "UpAlongLeft"
-//        
-//        enum Direction : String {
-//            case Right = "Right",
-//            Left = "Left",
-//            Up = "Up",
-//            Down = "Down"
-//        }
-//        enum Edge : String {
-//            case AlongTop = "AlongTop",
-//            AlongRight = "AlongRight",
-//            AlongBottom = "AlongBottom",
-//            AlongLeft = "AlongLeft"
-//        }
-//        var direction: Direction {
-//            switch self {
-//            case .UpAlongLeft, .UpAlongRight: return .Up
-//            case .RightAlongTop, .RightAlongBottom: return .Right
-//            case .DownAlongLeft, .DownAlongRight: return .Down
-//            case .LeftAlongBottom, .LeftAlongTop: return .Left
-//            }
-//        }
-//        var edge: Edge {
-//            switch self {
-//            case .RightAlongTop, .LeftAlongTop: return .AlongTop
-//            case .UpAlongRight, .DownAlongRight: return .AlongRight
-//            case .RightAlongBottom, .LeftAlongBottom: return .AlongBottom
-//            case .UpAlongLeft, .DownAlongLeft: return .AlongLeft
-//            }
-//        }
-//        func sfbDirection() -> SlideFromBoundsDirection {
-//            switch direction {
-//            case .Up: return .Up
-//            case .Right: return .Right
-//            case .Down: return .Down
-//            case .Left: return .Left
-//            }
-//        }
-//    }
-//    
-//    var type: Type
-//    var gestureView: UIView
-//    var edgeDistance: CGFloat = 160
-//    var startBounds: CGRect {
-//        let W = gestureView.frame.width
-//        let H = gestureView.frame.height
-//        let E = edgeDistance
-//        switch type.edge {
-//        case .AlongTop: return CGRect(0, 0, W, E)
-//        case .AlongRight: return CGRect(W - E, 0, E, H)
-//        case .AlongBottom: return CGRect(0, H - E, W, E)
-//        case .AlongLeft: return CGRect(0, 0, E, H)
-//        }
-//    }
-//    
-//    init(type:Type, gestureView:UIView) {
-//        self.type = type
-//        self.gestureView = gestureView
-//        let gesture = SlideFromBoundsGestureRecognizer(direction: type.sfbDirection())
-//        gestureView.addGestureRecognizer(gesture)
-//        super.init(gesture: gesture){ $0.progressChange }
-//        self.gesture.startBounds = { self.startBounds }
-//    }
-//}

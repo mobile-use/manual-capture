@@ -21,13 +21,17 @@ class Control: UIView {
             state.getUpdateTransform(isCurrentControl, .current)?(&state)
         }
     }
+    
     final func becomeCurrentControl(){
-        guard Control.currentControl != self else {return}
-        Control.currentControl = self
+        if Control.currentControl != self {
+            Control.currentControl = self
+        }
     }
+    
     final func resignCurrentControl(){
-        guard Control.currentControl == self else {return}
-        Control.currentControl = nil
+        if Control.currentControl == self {
+            Control.currentControl = nil
+        }
     }
     
     var actionDidStateChange: ((_ add: State, _ remove: State) -> Void)?
@@ -44,7 +48,7 @@ class Control: UIView {
         static let computerControlled = State(rawValue: 1 << 4)
         func hasProperty(_ property: State) -> Bool {
             // Makes no sense to ask if state contains empty property
-            if property.isEmpty {return self.isEmpty}
+            if property.isEmpty { return self.isEmpty }
             return contains(property)
         }
         
@@ -59,8 +63,9 @@ class Control: UIView {
             }
         }
     }
+    
     var state: State = .normal {
-        didSet{
+        didSet {
             guard state != oldValue else { return }
             didChangeState(oldState: oldValue)
             
@@ -69,7 +74,7 @@ class Control: UIView {
                 oldValue.subtracting(state)
             )
         }
-        willSet{
+        willSet {
             guard state != newValue else { return }
             willChangeState(newState: newValue)
             
@@ -79,6 +84,8 @@ class Control: UIView {
             )
         }
     }
+    
+    // Methods for subclasses to override
     func didChangeState(oldState:State){}
     func willChangeState(newState:State){}
 }

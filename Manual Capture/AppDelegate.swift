@@ -11,6 +11,12 @@ import UIKit
 
 let kAppName = "Capture"
 let kCaptureTintColor = UIColor(red: 221/255, green: 0/255, blue: 63/255, alpha: 1.0)
+#if targetEnvironment(simulator)
+let kIsSimulator = true
+#else
+let kIsSimulator = false
+#endif
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -31,6 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             print("First launch, setting UserDefault.")
             UserDefaults.standard.set(1, forKey: "WalkthroughNumber")
+        }
+        
+        if CommandLine.arguments.contains("--uitesting") {
+            print("--uitesting")
+            needsPagedGuide = false
+            isDemoMode = true
         }
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)

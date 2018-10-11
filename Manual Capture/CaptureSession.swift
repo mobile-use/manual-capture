@@ -180,7 +180,7 @@ class CaptureSession: NSObject {
         
     }
     var voBlocks = VOBlocks()
-    var observers = [NSKeyValueObservation]()
+    var observers = [NSKeyValueObservation?]()
     
     override init() {
         
@@ -196,9 +196,13 @@ class CaptureSession: NSObject {
         
         unowned let me = self
         volumeButtonHandler.downBlock = { me.captureStillPhoto() }
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let isDemoMode = appDelegate.isDemoMode
         
         requestCameraAccess {
-            self.startCamera()
+            if !isDemoMode && !kIsSimulator {
+                self.startCamera()
+            }
         }
         requestPhotoLibraryAccess {
             // success
@@ -343,35 +347,35 @@ class CaptureSession: NSObject {
                 [unowned self] photoOutput, _ in
                 self.notify(notification: .capturingPhoto(photoOutput.isCapturingStillImage) )
             }),
-            camera.observe(\AVCaptureDevice.focusMode, options: [.initial], changeHandler: {
+            camera?.observe(\AVCaptureDevice.focusMode, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .focusMode(camera.focusMode) )
             }),
-            camera.observe(\AVCaptureDevice.exposureMode, options: [.initial], changeHandler: {
+            camera?.observe(\AVCaptureDevice.exposureMode, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .exposureMode(camera.exposureMode) )
             }),
-            camera.observe(\AVCaptureDevice.whiteBalanceMode, options: [.initial], changeHandler: {
+            camera?.observe(\AVCaptureDevice.whiteBalanceMode, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .whiteBalanceMode(camera.whiteBalanceMode) )
             }),
-            camera.observe(\AVCaptureDevice.iso, options: [.initial], changeHandler: {
+            camera?.observe(\AVCaptureDevice.iso, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .exposure(.iso(camera.iso)) )
             }),
-            camera.observe(\AVCaptureDevice.exposureTargetOffset, options: [.initial], changeHandler: {
+            camera?.observe(\AVCaptureDevice.exposureTargetOffset, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .exposure(.targetOffset(camera.exposureTargetOffset)) )
             }),
-            camera.observe(\AVCaptureDevice.exposureDuration, options: [.initial], changeHandler: {
+            camera?.observe(\AVCaptureDevice.exposureDuration, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .exposure(.duration(camera.exposureDuration)) )
             }),
-            camera.observe(\AVCaptureDevice.deviceWhiteBalanceGains, options: [.initial], changeHandler: {
+            camera?.observe(\AVCaptureDevice.deviceWhiteBalanceGains, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .whiteBalanceGains(camera.deviceWhiteBalanceGains) )
             }),
-            camera.observe(\AVCaptureDevice.lensPosition, options: [.initial], changeHandler: {
+            camera?.observe(\AVCaptureDevice.lensPosition, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .lensPosition(camera.lensPosition) )
             }),
@@ -420,9 +424,9 @@ class CaptureSession: NSObject {
 //        guard !isDemoMode else { return }
         let cameraConfig = { (config: () -> Void) -> Void in
             do {
-                try self.camera.lockForConfiguration()
+                try self.camera?.lockForConfiguration()
                 config()
-                self.camera.unlockForConfiguration()
+                self.camera?.unlockForConfiguration()
             }
             catch {
                 print(error)
@@ -432,39 +436,39 @@ class CaptureSession: NSObject {
         switch set {
         case .focusMode( let focusMode ):
             cameraConfig(){
-                self.camera.focusMode = focusMode
+                self.camera?.focusMode = focusMode
             }
         case .exposureMode( let exposureMode ):
             cameraConfig(){
-                self.camera.exposureMode = exposureMode
+                self.camera?.exposureMode = exposureMode
             }
         case .whiteBalanceMode( let whiteBalanceMode ):
             cameraConfig(){
-                self.camera.whiteBalanceMode = whiteBalanceMode
+                self.camera?.whiteBalanceMode = whiteBalanceMode
             }
         case .exposure( .durationAndISO( let duration , let iso ) ):
             cameraConfig(){
-                self.camera.setExposureModeCustom(duration: duration, iso: iso, completionHandler: nil)
+                self.camera?.setExposureModeCustom(duration: duration, iso: iso, completionHandler: nil)
             }
         case .exposure( .bias( let bias ) ):
             cameraConfig(){
-                self.camera.setExposureTargetBias( bias, completionHandler: nil )
+                self.camera?.setExposureTargetBias( bias, completionHandler: nil )
             }
         case .lensPosition( let lensPosition ):
             cameraConfig(){
-                self.camera.setFocusModeLocked( lensPosition: lensPosition, completionHandler: nil )
+                self.camera?.setFocusModeLocked( lensPosition: lensPosition, completionHandler: nil )
             }
         case .whiteBalanceGains( let wbgains ):
             cameraConfig(){
-                self.camera.setWhiteBalanceModeLocked( with: wbgains, completionHandler: nil )
+                self.camera?.setWhiteBalanceModeLocked( with: wbgains, completionHandler: nil )
             }
         case .zoomFactor(let zFactor):
             cameraConfig(){
-                self.camera.videoZoomFactor = zFactor
+                self.camera?.videoZoomFactor = zFactor
             }
         case .zoomFactorRamp(let zFactor, let rate):
             cameraConfig(){
-                self.camera.ramp(toVideoZoomFactor: zFactor, withRate: rate)
+                self.camera?.ramp(toVideoZoomFactor: zFactor, withRate: rate)
             }
         case .aspectRatio(let aspectRatio):
             self.aspectRatioMode = .lock
@@ -554,9 +558,9 @@ class CaptureSession: NSObject {
     // MARK: Utilities
     
     
-    func _normalizeGains(_ g:AVCaptureDevice.WhiteBalanceGains) -> AVCaptureDevice.WhiteBalanceGains {
-        var g = g
-        let maxGain = camera.maxWhiteBalanceGain - 0.001
+    func _normalizeGains(_ g:AVCaptureDevice.WhiteBalanceGains?) -> AVCaptureDevice.WhiteBalanceGains {
+        guard var g = g else { return AVCaptureDevice.WhiteBalanceGains() }
+        let maxGain = camera?.maxWhiteBalanceGain ?? 0.0 - 0.001
         g.redGain = max( 1.0, g.redGain )
         
         g.greenGain = max( 1.0, g.greenGain )
@@ -574,7 +578,7 @@ class CaptureSession: NSObject {
     private var _ptt:AVCaptureDevice.WhiteBalanceTemperatureAndTintValues? = nil
     
     func _normalizeGainsForTemperatureAndTint(_ tt:AVCaptureDevice.WhiteBalanceTemperatureAndTintValues) -> AVCaptureDevice.WhiteBalanceGains{
-        var g = camera.deviceWhiteBalanceGains(for: tt)
+        var g = camera?.deviceWhiteBalanceGains(for: tt)
         if !_gainsInRange(gains: g){
             if _ptt != nil {
                 let dTemp = tt.temperature - _ptt!.temperature
@@ -582,13 +586,13 @@ class CaptureSession: NSObject {
                 var eTint = round(tt.tint)
                 var eTemperature = round(tt.temperature)
                 var i = 0
-                var eGains: AVCaptureDevice.WhiteBalanceGains = camera.deviceWhiteBalanceGains(for: tt)
+                var eGains: AVCaptureDevice.WhiteBalanceGains = camera?.deviceWhiteBalanceGains(for: tt) ?? AVCaptureDevice.WhiteBalanceGains()
                 
                 if abs(dTemp) > abs(dTint) {
                     while !_gainsInRange(gains: eGains) {
-                        let nTT = camera.temperatureAndTintValues(for: _normalizeGains(eGains))
-                        let eTintNew = round(nTT.tint)
-                        let eTemperatureNew = round(nTT.temperature)
+                        let nTT = camera?.temperatureAndTintValues(for: _normalizeGains(eGains))
+                        let eTintNew = round(nTT?.tint ?? 0.0)
+                        let eTemperatureNew = round(nTT?.temperature ?? 0.0)
                         //prioritize
                         if eTint != eTintNew {
                             eTint = eTintNew
@@ -599,16 +603,16 @@ class CaptureSession: NSObject {
                         if i > 3 || (eTint == eTintNew && eTemperature == eTemperatureNew) {
                             eGains = _normalizeGains(eGains)
                         }else{
-                            eGains = camera.deviceWhiteBalanceGains(for: AVCaptureDevice.WhiteBalanceTemperatureAndTintValues(temperature: eTemperature, tint: eTint))
+                            eGains = camera?.deviceWhiteBalanceGains(for: AVCaptureDevice.WhiteBalanceTemperatureAndTintValues(temperature: eTemperature, tint: eTint)) ?? AVCaptureDevice.WhiteBalanceGains()
                         }
                         i += 1
                     }
                     g = eGains
                 }else if abs(dTemp) < abs(dTint) {
                     while !_gainsInRange(gains: eGains) {
-                        let nTT = camera.temperatureAndTintValues(for: _normalizeGains(eGains))
-                        let eTintNew = round(nTT.tint)
-                        let eTemperatureNew = round(nTT.temperature)
+                        let nTT = camera?.temperatureAndTintValues(for: _normalizeGains(eGains))
+                        let eTintNew = round(nTT?.tint ?? 0.0)
+                        let eTemperatureNew = round(nTT?.temperature ?? 0.0)
                         if eTemperature != eTemperatureNew {
                             eTemperature = eTemperatureNew
                         } else if eTint != eTintNew {
@@ -617,7 +621,7 @@ class CaptureSession: NSObject {
                         if i > 3 || (eTint == eTintNew && eTemperature == eTemperatureNew) {
                             eGains = _normalizeGains(eGains)
                         } else {
-                            eGains = camera.deviceWhiteBalanceGains(for: AVCaptureDevice.WhiteBalanceTemperatureAndTintValues(temperature: eTemperature, tint: eTint))
+                            eGains = camera?.deviceWhiteBalanceGains(for: AVCaptureDevice.WhiteBalanceTemperatureAndTintValues(temperature: eTemperature, tint: eTint)) ?? AVCaptureDevice.WhiteBalanceGains()
                         }
                         i += 1
                     }
@@ -629,8 +633,9 @@ class CaptureSession: NSObject {
         return _normalizeGains(g)
     }
     
-    func _gainsInRange(gains:AVCaptureDevice.WhiteBalanceGains) -> Bool {
-        let maxGain = camera.maxWhiteBalanceGain
+    func _gainsInRange(gains:AVCaptureDevice.WhiteBalanceGains?) -> Bool {
+        guard let gains = gains else { return false }
+        let maxGain = camera?.maxWhiteBalanceGain ?? 0.0
         let r = (1.0 <= gains.redGain && gains.redGain <= maxGain)
         let g = (1.0 <= gains.greenGain && gains.greenGain <= maxGain)
         let b = (1.0 <= gains.blueGain && gains.blueGain <= maxGain)
