@@ -23,6 +23,10 @@
 		3D158E1A216AC346001285D0 /* WarpSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC470102167024400D8B024 /* WarpSliderTests.swift */; };
 		3D158E1C216BC60C001285D0 /* ControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D158E1B216BC60C001285D0 /* ControlTests.swift */; };
 		3D17E4C321630ABC008AF466 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D17E4C221630ABC008AF466 /* Photos.framework */; };
+		3D1B959E217009CC0081B6EA /* AVCaptureSessionDummie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1B959D217009CC0081B6EA /* AVCaptureSessionDummie.swift */; };
+		3D1B95A0217009F10081B6EA /* AVCaptureDeviceDummie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1B959F217009F10081B6EA /* AVCaptureDeviceDummie.swift */; };
+		3D1B95A221700A140081B6EA /* AVCaptureDeviceInputDummie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1B95A121700A140081B6EA /* AVCaptureDeviceInputDummie.swift */; };
+		3D1B95A421700A320081B6EA /* AVCaptureStillImageOutputDummie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1B95A321700A320081B6EA /* AVCaptureStillImageOutputDummie.swift */; };
 		3D3AA9CE1BCB5FAF00EF2B84 /* SampleImage.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */; };
 		3D3AD8441C01DCBF007583A7 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8431C01DCBF007583A7 /* CaptureViewController.swift */; };
 		3D3AD8461C01DF0A007583A7 /* CaptureConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D3AD8451C01DF0A007583A7 /* CaptureConstraints.swift */; };
@@ -95,6 +99,10 @@
 		3D158E13216AC32E001285D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D158E1B216BC60C001285D0 /* ControlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlTests.swift; sourceTree = "<group>"; };
 		3D17E4C221630ABC008AF466 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		3D1B959D217009CC0081B6EA /* AVCaptureSessionDummie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureSessionDummie.swift; sourceTree = "<group>"; };
+		3D1B959F217009F10081B6EA /* AVCaptureDeviceDummie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceDummie.swift; sourceTree = "<group>"; };
+		3D1B95A121700A140081B6EA /* AVCaptureDeviceInputDummie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureDeviceInputDummie.swift; sourceTree = "<group>"; };
+		3D1B95A321700A320081B6EA /* AVCaptureStillImageOutputDummie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureStillImageOutputDummie.swift; sourceTree = "<group>"; };
 		3D3AA9CD1BCB5FAF00EF2B84 /* SampleImage.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SampleImage.JPG; sourceTree = "<group>"; };
 		3D3AD8431C01DCBF007583A7 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		3D3AD8451C01DF0A007583A7 /* CaptureConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureConstraints.swift; sourceTree = "<group>"; };
@@ -232,6 +240,17 @@
 			path = CaptureTests;
 			sourceTree = "<group>";
 		};
+		3D1B959C217009820081B6EA /* Dummie IO */ = {
+			isa = PBXGroup;
+			children = (
+				3D1B959D217009CC0081B6EA /* AVCaptureSessionDummie.swift */,
+				3D1B959F217009F10081B6EA /* AVCaptureDeviceDummie.swift */,
+				3D1B95A321700A320081B6EA /* AVCaptureStillImageOutputDummie.swift */,
+				3D1B95A121700A140081B6EA /* AVCaptureDeviceInputDummie.swift */,
+			);
+			name = "Dummie IO";
+			sourceTree = "<group>";
+		};
 		3D4F17961B73883500D4D74F = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				3D3AD8491C043389007583A7 /* CaptureSession.swift */,
+				3D1B959C217009820081B6EA /* Dummie IO */,
 				3D5598FE1BFB070800C65CA6 /* VolumeButtonHandler.swift */,
 			);
 			name = "IO Handlers";
@@ -563,12 +583,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FD828CA1BB7C630004162F0 /* WarpSliderLine.swift in Sources */,
+				3D1B95A421700A320081B6EA /* AVCaptureStillImageOutputDummie.swift in Sources */,
 				3D158DFA216A992A001285D0 /* PagedGuideContentModel.swift in Sources */,
 				0FB784161B9ECFC300C7FDA7 /* ProgressDisplacementHandler.swift in Sources */,
 				0F3FC7BB1BABCA77004A350B /* WarpSlider.swift in Sources */,
 				0F10EDF21BA0EC49007E722A /* Slider.swift in Sources */,
 				3D5416B81BC79EAE00922A2B /* OptionControl.swift in Sources */,
+				3D1B95A221700A140081B6EA /* AVCaptureDeviceInputDummie.swift in Sources */,
 				3D3AD8441C01DCBF007583A7 /* CaptureViewController.swift in Sources */,
+				3D1B95A0217009F10081B6EA /* AVCaptureDeviceDummie.swift in Sources */,
 				3DA07FD5215DFAB600BC2C30 /* ControlsView.swift in Sources */,
 				3D5598FF1BFB070800C65CA6 /* VolumeButtonHandler.swift in Sources */,
 				0FD828C81BB7A05F004162F0 /* CaptureGlyph.swift in Sources */,
@@ -585,6 +608,7 @@
 				3D4EAB191B8410CC00C2F110 /* ControlLabel.swift in Sources */,
 				3DADC33E1BC4D97D00A74BC2 /* ControlPanel.swift in Sources */,
 				3DADC33C1BC4D4C000A74BC2 /* ModeControl.swift in Sources */,
+				3D1B959E217009CC0081B6EA /* AVCaptureSessionDummie.swift in Sources */,
 				3D7A9DD31C094E9E007C1445 /* PagedGuideViewController.swift in Sources */,
 				3D4F17A31B73883500D4D74F /* AppDelegate.swift in Sources */,
 			);

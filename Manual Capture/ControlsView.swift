@@ -424,17 +424,6 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 
                 // MARK: Focus Slider
                 
-//                sliders.focus = WarpSlider<Float>(
-//                    glyph: ManualCaptureGlyph(type: .focus),
-//                    direction: .right,
-//                    startBounds: {
-//                        me.startBounds(
-//                            forType: .rightAlongBottom,
-//                            gestureView: me
-//                        )
-//                    },
-//                    sliderBounds: nil
-//                )
                 sliders.focus.initialSensitivity = 0.75
                 sliders.focus.labelTextForValue = { (value, shouldRound) in
                     let percent = value * 100
@@ -679,7 +668,7 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
             
         case .assembleControls: // MARK: AssembleControls
             func assembleControls(){
-                let zoomMax = min(sessionController.camera?.activeFormat.videoMaxZoomFactor ?? 1, 25)
+                let zoomMax = min(sessionController.camera?.activeFormat.videoMaxZoomFactor ?? 25, 25)
                 let zVPHandler = VPExponentialCGFloatHandler(start: 1.0, end: zoomMax) as ValueProgressHandler<CGFloat>
                 sliders.zoom.valueProgressHandler = zVPHandler
                 
@@ -693,13 +682,17 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 sliders.focus.valueProgressHandler = VPFloatHandler(start: 0.0, end: 1.0)
                 sliders.temperature.valueProgressHandler = VPFloatHandler(start: 2000, end: 8000)
                 sliders.tint.valueProgressHandler = VPFloatHandler(start: -150, end: 150)
-                sliders.iso.valueProgressHandler = VPFloatHandler(start: sessionController.camera?.activeFormat.minISO ?? 0, end: sessionController.camera?.activeFormat.maxISO ?? 0)
+                let isoMin = (kIsSimulator) ? 200 : sessionController.camera?.activeFormat.minISO ?? 200
+                let isoMax = (kIsSimulator) ? 1000 : sessionController.camera?.activeFormat.maxISO ?? 1000
+                sliders.iso.valueProgressHandler = VPFloatHandler(start: isoMin, end: isoMax)
                 
                 
                 let vfp: (_ progress:Float) -> CMTime = {
                     let p = pow( Double($0), kExposureDurationPower ); // Apply power function to expand slider's low-end range
-                    let minDurationSeconds = max(CMTimeGetSeconds(self.sessionController.camera?.activeFormat.minExposureDuration ?? .zero), 1 / 16000 )
-                    let maxDurationSeconds = min(CMTimeGetSeconds( self.sessionController.camera?.activeFormat.maxExposureDuration ?? .zero), 1/5)
+                    let cmTimeMinDefault = CMTime(seconds: 1.0/16000.0, preferredTimescale: 16000)
+                    let minDurationSeconds = (kIsSimulator) ? 1.0/16000.0 : max(CMTimeGetSeconds(self.sessionController.camera?.activeFormat.minExposureDuration ?? cmTimeMinDefault), 1 / 16000 )
+                    let cmTimeMaxDefault = CMTime(seconds: 1.0/5.0, preferredTimescale: 5)
+                    let maxDurationSeconds = (kIsSimulator) ? 1.0/5.0 : min(CMTimeGetSeconds( self.sessionController.camera?.activeFormat.maxExposureDuration ?? cmTimeMaxDefault), 1/5)
                     let newDurationSeconds = p * ( maxDurationSeconds - minDurationSeconds ) + minDurationSeconds // Scale from 0-1 slider range to actual duration
                     let t = CMTimeMakeWithSeconds( newDurationSeconds, preferredTimescale: 1000*1000*1000 )
                     return t
@@ -708,8 +701,10 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 let pfv: (CMTime) -> Float = {
                     let time: CMTime = $0
                     var doubleValue: Double = CMTimeGetSeconds(time)
-                    let minDurationSeconds = max(CMTimeGetSeconds(self.sessionController.camera?.activeFormat.minExposureDuration ?? .zero), 1 / 16000 )
-                    let maxDurationSeconds = min(CMTimeGetSeconds( self.sessionController.camera?.activeFormat.maxExposureDuration ?? .zero), 1/5)
+                    let cmTimeMinDefault = CMTime(seconds: 1.0/16000.0, preferredTimescale: 16000)
+                    let minDurationSeconds = max(CMTimeGetSeconds(self.sessionController.camera?.activeFormat.minExposureDuration ?? cmTimeMinDefault), 1 / 16000 )
+                    let cmTimeMaxDefault = CMTime(seconds: 1.0/5.0, preferredTimescale: 5)
+                    let maxDurationSeconds = min(CMTimeGetSeconds( self.sessionController.camera?.activeFormat.maxExposureDuration ?? cmTimeMaxDefault), 1/5)
                     doubleValue = max(minDurationSeconds, min(doubleValue, maxDurationSeconds))
                     let p: Double = (doubleValue - minDurationSeconds ) / ( maxDurationSeconds - minDurationSeconds )// Scale to 0-1
                     return Float(pow( p, 1/kExposureDurationPower))
@@ -717,7 +712,7 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 
                 sliders.exposureDuration.valueProgressHandler = ValueProgressHandler(pfv: pfv, vfp: vfp)
                 
-                if sessionController.camera?.videoZoomFactor ?? 0 > 1.0 {
+                if sessionController.camera?.videoZoomFactor ?? 1.0 > 1.0 {
                     sliders.zoom.value = sessionController.camera.videoZoomFactor
                     sliders.zoom.state.getUpdateTransform(false, .disabled)? (&sliders.zoom.state)
                 } else {
@@ -727,10 +722,10 @@ class ControlsView: UIView, CaptureSessionControllerDelegate, UIGestureRecognize
                 sliders.focus.value = sessionController.camera?.lensPosition ?? 1.0
                 
                 let tt = sessionController.camera?.temperatureAndTintValues(for: sessionController.camera.deviceWhiteBalanceGains)
-                sliders.temperature.value = tt?.temperature ?? 0.0
+                sliders.temperature.value = tt?.temperature ?? 2000.0
                 sliders.tint.value = tt?.tint ?? 0.0
-                sliders.iso.value = sessionController.camera?.iso ?? 0.0
-                sliders.exposureDuration.value = sessionController.camera?.exposureDuration ?? .zero
+                sliders.iso.value = sessionController.camera?.iso ?? 200.0
+                sliders.exposureDuration.value = sessionController.camera?.exposureDuration ?? CMTime(seconds: 1.0/16000.0, preferredTimescale: 16000)
                 
                 
                 var focusVOE: Bool { return self.sessionController.camera?.focusMode != .locked }

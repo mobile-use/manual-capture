@@ -100,12 +100,12 @@ class CaptureSession: NSObject {
     typealias KVOContext = UInt8
     private var _context: [ String : KVOContext ] = [ : ]
     
-    let session: AVCaptureSession
+    let session: KAVCaptureSession
     let sessionQueue: DispatchQueue
     let previewView: PreviewView
-    var camera: AVCaptureDevice!
-    var cameraInput: AVCaptureDeviceInput!
-    var photoOutput: AVCaptureStillImageOutput!
+    var camera: KAVCaptureDevice!
+    var cameraInput: KAVCaptureDeviceInput!
+    var photoOutput: KAVCaptureStillImageOutput!
     var aspectRatio = CSAspectRatioMake(16,9) {
         didSet{
             if (aspectRatioMode == .lock) {
@@ -183,9 +183,8 @@ class CaptureSession: NSObject {
     var observers = [NSKeyValueObservation?]()
     
     override init() {
-        
-        session = AVCaptureSession()
-        session.sessionPreset = AVCaptureSession.Preset.photo
+        session = KAVCaptureSession.init()
+        session.sessionPreset = KAVCaptureSession.Preset.photo
         
         sessionQueue = DispatchQueue(label: "com.manual-camera.session")
         
@@ -196,13 +195,9 @@ class CaptureSession: NSObject {
         
         unowned let me = self
         volumeButtonHandler.downBlock = { me.captureStillPhoto() }
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        let isDemoMode = appDelegate.isDemoMode
         
         requestCameraAccess {
-            if !isDemoMode && !kIsSimulator {
                 self.startCamera()
-            }
         }
         requestPhotoLibraryAccess {
             // success
@@ -211,7 +206,7 @@ class CaptureSession: NSObject {
     
     private func requestCameraAccess(completionHandler:@escaping ()->Void) {
         
-        AVCaptureDevice.requestAccess( for: AVMediaType.video ) { granted in
+        KAVCaptureDevice.requestAccess( for: .video ) { granted in
             if granted {
                 completionHandler()
             } else {
@@ -233,18 +228,17 @@ class CaptureSession: NSObject {
     func startCamera() {
         
         func addDevicesIfNeeded(){
-            
             func addCameraFromPosition(position:AVCaptureDevice.Position) throws {
-                if #available(iOS 10.0, *), let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position)  {
+                if #available(iOS 10.0, *), let device = KAVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: position)  {
                     camera =  device
                     return
-                } else if let device = AVCaptureDevice.`default`(for: .video), device.position == position {
+                } else if let device = KAVCaptureDevice.default(for: .video), device.position == position {
                     camera =  device
                     return
                 } else {
-                    let devices = AVCaptureDevice.devices(for: .video).filter() { $0.position == position }
+                    let devices = KAVCaptureDevice.devices(for: .video).filter() { $0.position == position }
                     if !devices.isEmpty {
-                        camera =  devices[0]
+                        camera = (devices[0] as! KAVCaptureDevice)
                         return
                     }
                 }
@@ -253,7 +247,7 @@ class CaptureSession: NSObject {
             
             func addInputFromCamera(camera:AVCaptureDevice) throws {
                 do {
-                    cameraInput = try AVCaptureDeviceInput(device: camera)
+                    cameraInput = try KAVCaptureDeviceInput.init(device: camera)
                 }
                 catch {
                     throw CaptureSessionError.cameraInputError(.initFailed(error))
@@ -270,7 +264,7 @@ class CaptureSession: NSObject {
             }
             
             func addPhotoOutput() throws {
-                photoOutput = AVCaptureStillImageOutput()
+                photoOutput = KAVCaptureStillImageOutput.init()
                 guard session.canAddOutput(photoOutput) else {
                     throw CaptureSessionError.photoOutputError(.cannotAddToSession)
                 }
@@ -343,63 +337,68 @@ class CaptureSession: NSObject {
     
     private func addObservers() {
         self.observers = [
-            photoOutput.observe(\AVCaptureStillImageOutput.isCapturingStillImage, options: [.initial], changeHandler: {
-                [unowned self] photoOutput, _ in
-                self.notify(notification: .capturingPhoto(photoOutput.isCapturingStillImage) )
-            }),
-            camera?.observe(\AVCaptureDevice.focusMode, options: [.initial], changeHandler: {
+            camera?.observe(\KAVCaptureDevice.focusMode, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .focusMode(camera.focusMode) )
             }),
-            camera?.observe(\AVCaptureDevice.exposureMode, options: [.initial], changeHandler: {
+            camera?.observe(\KAVCaptureDevice.exposureMode, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .exposureMode(camera.exposureMode) )
             }),
-            camera?.observe(\AVCaptureDevice.whiteBalanceMode, options: [.initial], changeHandler: {
+            camera?.observe(\KAVCaptureDevice.whiteBalanceMode, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .whiteBalanceMode(camera.whiteBalanceMode) )
             }),
-            camera?.observe(\AVCaptureDevice.iso, options: [.initial], changeHandler: {
+            camera?.observe(\KAVCaptureDevice.iso, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .exposure(.iso(camera.iso)) )
             }),
-            camera?.observe(\AVCaptureDevice.exposureTargetOffset, options: [.initial], changeHandler: {
+            camera?.observe(\KAVCaptureDevice.exposureTargetOffset, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .exposure(.targetOffset(camera.exposureTargetOffset)) )
             }),
-            camera?.observe(\AVCaptureDevice.exposureDuration, options: [.initial], changeHandler: {
+            camera?.observe(\KAVCaptureDevice.exposureDuration, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .exposure(.duration(camera.exposureDuration)) )
             }),
-            camera?.observe(\AVCaptureDevice.deviceWhiteBalanceGains, options: [.initial], changeHandler: {
+            camera?.observe(\KAVCaptureDevice.deviceWhiteBalanceGains, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .whiteBalanceGains(camera.deviceWhiteBalanceGains) )
             }),
-            camera?.observe(\AVCaptureDevice.lensPosition, options: [.initial], changeHandler: {
+            camera?.observe(\KAVCaptureDevice.lensPosition, options: [.initial], changeHandler: {
                 [unowned self] camera, _ in
                 self.notify(change: .lensPosition(camera.lensPosition) )
             }),
         ]
         
-        _notifObservers["RuntimeError"] = NotificationCenter.default.addObserver(
-            forName: .AVCaptureSessionRuntimeError,
-            object: sessionQueue,
-            queue: OperationQueue.main,
-            using: { [unowned self] (_) in
-                self.sessionQueue.async() {
-                    self.session.startRunning()
-                }
-            }
-        )
+        if !kIsSimulator {
+            self.observers += [
+                photoOutput.observe(\KAVCaptureStillImageOutput.isCapturingStillImage, options: [.initial], changeHandler: {
+                    [unowned self] photoOutput, _ in
+                    self.notify(notification: .capturingPhoto(photoOutput.isCapturingStillImage) )
+                })
+            ]
         
-        _notifObservers["SubjectAreaChange"] = NotificationCenter.default.addObserver(
-            forName: .AVCaptureDeviceSubjectAreaDidChange,
-            object: camera,
-            queue: OperationQueue.main,
-            using: { [unowned self] (_) in
-                self.delegate?.captureSessionControllerNotification(notification: .subjectAreaChange)
-            }
-        )
+            _notifObservers["RuntimeError"] = NotificationCenter.default.addObserver(
+                forName: .AVCaptureSessionRuntimeError,
+                object: sessionQueue,
+                queue: OperationQueue.main,
+                using: { [unowned self] (_) in
+                    self.sessionQueue.async() {
+                        self.session.startRunning()
+                    }
+                }
+            )
+            
+            _notifObservers["SubjectAreaChange"] = NotificationCenter.default.addObserver(
+                forName: .AVCaptureDeviceSubjectAreaDidChange,
+                object: camera,
+                queue: OperationQueue.main,
+                using: { [unowned self] (_) in
+                    self.delegate?.captureSessionControllerNotification(notification: .subjectAreaChange)
+                }
+            )
+        }
         
         _notifObservers["SessionStarted"] = NotificationCenter.default.addObserver(
             forName: .AVCaptureSessionDidStartRunning,

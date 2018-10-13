@@ -13,8 +13,16 @@ let kAppName = "Capture"
 let kCaptureTintColor = UIColor(red: 221/255, green: 0/255, blue: 63/255, alpha: 1.0)
 #if targetEnvironment(simulator)
 let kIsSimulator = true
+typealias KAVCaptureSession = AVCaptureSessionDummie
+typealias KAVCaptureDevice = AVCaptureDeviceDummie
+typealias KAVCaptureStillImageOutput = AVCaptureStillImageOutputDummie
+typealias KAVCaptureDeviceInput = AVCaptureDeviceInputDummie
 #else
 let kIsSimulator = false
+typealias KAVCaptureSession = AVCaptureSession
+typealias KAVCaptureDevice = AVCaptureDevice
+typealias KAVCaptureStillImageOutput = AVCaptureStillImageOutput
+typealias KAVCaptureDeviceInput = AVCaptureDeviceInput
 #endif
 
 @UIApplicationMain
